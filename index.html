@@ -398,11 +398,8 @@
 
                 <!-- Footer Signage -->
                 <div class="w-full text-center mt-1 border-t border-retro-gold/20 pt-3 flex flex-col sm:flex-row justify-between items-center gap-1 text-[10px] text-gray-500 font-mono">
-                    <div>© CHEN JINGFEI • 1989-2026</div>
-                    <div class="flex gap-3">
-                        <span><i class="fa-solid fa-location-dot text-retro-neonred"></i> 中国巡演纪念</span>
-                        <span><i class="fa-solid fa-circle text-green-500 text-[6px] animate-pulse"></i> 营业中</span>
-                    </div>
+                    <div>© CHEN JINGFEI • SUNSET PLAYHOUSE</div>
+                    
                 </div>
 
             </div>
@@ -499,7 +496,7 @@
             <!-- ================= SUB-VIEW 0: TWO DOORS HALLWAY ================= -->
             <div id="lobbyHallway" class="flex-1 flex flex-col justify-center items-center relative p-4 bg-[#180e10]/80 backdrop-blur-sm border border-retro-gold/30 rounded overflow-y-auto">
                 <p class="text-[10px] md:text-xs text-retro-gold tracking-wider text-center max-w-md mb-4 leading-relaxed">
-                    大厅两侧各有一扇门，一边是粉丝自制的物料宝库，另一边是剧院纪念品商店。
+                    If you're looking for anything to happen,that was it.<br>Life,lived it.<br>Are you ready?
                 </p>
 
                 <!-- Two Doors Layout -->
@@ -860,8 +857,10 @@
                                     <i class="fa-regular fa-calendar-days text-retro-neonred"></i>
                                     <span id="screenDate">2026.04.18</span>
                                     <span class="mx-1">|</span>
-                                    <i class="fa-solid fa-location-arrow text-retro-neonred"></i>
-                                    <span id="screenVenue">北京・红霞剧场</span>
+                                    <i class="fa-solid fa-cloud-sun text-retro-neonred"></i>
+                                    <span id="screenSeasonWeather">冬 ・ 晴</span>
+                                    <span class="mx-1">|</span>
+                                    <span id="screenVersion" class="text-retro-gold/70 text-[9px] font-serif italic">典藏版</span>
                                 </div>
                                 <h3 class="text-lg md:text-xl text-white font-extrabold tracking-wide border-b border-retro-gold/10 pb-1" id="screenTitle">
                                     北京首站 · "红霞再现"
@@ -908,69 +907,19 @@
             <!-- ================= SUB-VIEW 0: THREE DOORS HALLWAY ================= -->
             <div id="deptHallway" class="flex-1 flex flex-col justify-center items-center relative p-4 bg-[#180e10]/80 backdrop-blur-sm border border-retro-gold/30 rounded overflow-y-auto">
                 <p class="text-[10px] md:text-xs text-retro-gold tracking-wider text-center max-w-md mb-4 leading-relaxed">
-                    长廊里的壁灯昏黄，三扇挂着黄铜门牌的厚重木门静静合拢。
+                    Hey，can you hear me？<br>It's just a play,and you are the director,writer and actor.
                 </p>
 
                 <!-- Three Elegant Doors Layout -->
                 <div class="grid grid-cols-3 gap-3 w-full max-w-lg">
                     
-                    <!-- Door 1: Rehearsal Room -->
-                    <div onclick="enterSubDept('rehearsal')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-                        <!-- Top Brass Plate header -->
-                        <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            REHEARSAL • 101
-                        </div>
-                        
-                        <!-- 3D Door Frame & Portal -->
-                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
-                            <!-- Glow Behind Door (Room interior lighting) -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
-                            </div>
-                            
-                            <!-- Detailed Door Leaf (the physical door swinging open) -->
-                            <div id="door-leaf-rehearsal" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
-                                <!-- Top Arch Glass Window -->
-                                <div class="w-full h-10 sm:h-12 rounded-t-full door-glass flex items-center justify-center relative mt-1 overflow-hidden">
-                                    <div class="absolute inset-x-0 bottom-0 h-[1px] bg-retro-gold/40"></div>
-                                    <!-- Vintage cross grid bars -->
-                                    <div class="absolute inset-y-0 left-1/2 w-[1px] bg-retro-gold/30"></div>
-                                    <div class="absolute inset-x-0 top-1/2 h-[1px] bg-retro-gold/30"></div>
-                                    <i class="fa-solid fa-music text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
-                                </div>
-                                
-                                <!-- Recessed Wood Moldings -->
-                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
-                                    <!-- Mid wood panel -->
-                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
-                                        🎬
-                                    </div>
-                                    <!-- Lower wood panel -->
-                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
-                                        <!-- Brass Kick Plate at bottom of door -->
-                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
-                                    </div>
-                                </div>
+                    
 
-                                <!-- Polished Brass Handle / Doorknob with keyhole -->
-                                <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
-                                    <!-- Backplate -->
-                                    <div class="w-1 h-3.5 bg-gradient-to-b from-[#e5c060] to-[#8f711c] border border-black/30 rounded-xs flex flex-col items-center justify-center">
-                                        <!-- Knob -->
-                                        <div class="w-1 h-1 rounded-full bg-retro-gold shadow border border-black/40"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">演员排练室</h4>
-                    </div>
-
-                    <!-- Door 2: Director's Lounge -->
+                    <!-- Door 1: Director's Lounge -->
                     <div onclick="enterSubDept('director')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            DIRECTOR • 102
+                            DIRECTOR • 101
                         </div>
                         
                         <!-- 3D Door Frame & Portal -->
@@ -1016,11 +965,11 @@
                         <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">导演休息室</h4>
                     </div>
 
-                    <!-- Door 3: Screenwriter's Studio -->
+                    <!-- Door 2: Screenwriter's Studio -->
                     <div onclick="enterSubDept('writer')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            WRITER • 103
+                            WRITER • 102
                         </div>
                         
                         <!-- 3D Door Frame & Portal -->
@@ -1064,6 +1013,57 @@
                         </div>
 
                         <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">编剧工作室</h4>
+                    </div>
+                    <!-- Door 1: Rehearsal Room -->
+                    <div onclick="enterSubDept('rehearsal')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                        <!-- Top Brass Plate header -->
+                        <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
+                            REHEARSAL • 103
+                        </div>
+                        
+                        <!-- 3D Door Frame & Portal -->
+                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                            <!-- Glow Behind Door (Room interior lighting) -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
+                            </div>
+                            
+                            <!-- Detailed Door Leaf (the physical door swinging open) -->
+                            <div id="door-leaf-rehearsal" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
+                                <!-- Top Arch Glass Window -->
+                                <div class="w-full h-10 sm:h-12 rounded-t-full door-glass flex items-center justify-center relative mt-1 overflow-hidden">
+                                    <div class="absolute inset-x-0 bottom-0 h-[1px] bg-retro-gold/40"></div>
+                                    <!-- Vintage cross grid bars -->
+                                    <div class="absolute inset-y-0 left-1/2 w-[1px] bg-retro-gold/30"></div>
+                                    <div class="absolute inset-x-0 top-1/2 h-[1px] bg-retro-gold/30"></div>
+                                    <i class="fa-solid fa-music text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
+                                </div>
+                                
+                                <!-- Recessed Wood Moldings -->
+                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
+                                    <!-- Mid wood panel -->
+                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
+                                        🎬
+                                    </div>
+                                    <!-- Lower wood panel -->
+                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
+                                        <!-- Brass Kick Plate at bottom of door -->
+                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Polished Brass Handle / Doorknob with keyhole -->
+                                <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
+                                    <!-- Backplate -->
+                                    <div class="w-1 h-3.5 bg-gradient-to-b from-[#e5c060] to-[#8f711c] border border-black/30 rounded-xs flex flex-col items-center justify-center">
+                                        <!-- Knob -->
+                                        <div class="w-1 h-1 rounded-full bg-retro-gold shadow border border-black/40"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">演员排练室</h4>
                     </div>
 
                 </div>
@@ -2577,7 +2577,9 @@
             document.getElementById('screenPosterImage').src = stop.poster;
             document.getElementById('screenBadge').innerText = stop.status;
             document.getElementById('screenDate').innerText = stop.date;
-            document.getElementById('screenVenue').innerText = stop.venue;
+            document.getElementById('screenSeasonWeather').innerText = stop.season + ' ・ ' + stop.weather;
+            const version = stop.id >= '260705' ? '夏日版' : '典藏版';
+            document.getElementById('screenVersion').innerText = version;
             document.getElementById('screenTitle').innerText = stop.city + " ・ " + stop.venue.split('・')[1];
 
             const highlightsContainer = document.getElementById('screenHighlights');
@@ -2808,10 +2810,11 @@
             const count = STATE.checkedCities.length;
             document.getElementById('ticketCountLabel').innerText = `${count} / ${TOUR_STOPS.length}`;
             
-            let badgeTitle = "初见观众";
-            if (count >= 5) badgeTitle = "🏮 影剧院终极主理人";
-            else if (count >= 3) badgeTitle = "🎟️ 资深放映迷";
-            else if (count >= 1) badgeTitle = "🎞️ 入场观众";
+            let badgeTitle = "未解锁";
+            if (count >= 7) badgeTitle = "❤️‍🔥 猩纯的红";
+            else if (count >= 5) badgeTitle = "🔮 自恋咒语";
+            else if (count >= 3) badgeTitle = "💋 别处烟火";
+            else if (count >= 1) badgeTitle = "🦋 孤独相认";
 
             document.getElementById('ticketStatusLabel').innerText = badgeTitle;
         }
