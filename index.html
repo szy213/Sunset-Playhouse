@@ -166,7 +166,7 @@
         <div id="bgmDropdown" class="hidden mr-3 bg-retro-darkwood/95 border border-retro-gold/60 p-2.5 rounded-lg shadow-[0_4px_25px_rgba(0,0,0,0.95)] backdrop-blur-md flex-col gap-2 min-w-[220px] max-w-[280px] animate-fade-in text-left">
             <div class="px-1 py-0.5 border-b border-retro-gold/20 flex justify-between items-center select-none">
                 <span class="text-[9px] text-retro-gold font-mono tracking-widest uppercase font-bold">
-                    红霞 电影原声歌单
+                    红霞影剧院 原声歌单
                 </span>
                 <span class="text-[8px] text-zinc-400 font-mono">5 TRACKS</span>
             </div>
@@ -234,7 +234,7 @@
         <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.png'); background-size: cover; background-position: center;">
             <div class="absolute bottom-[35%] left-1/2 -translate-x-1/2 text-center">
                 <button onclick="startImmersiveExperience()" class="text-lg font-bold tracking-[0.3em] active:scale-95 transition-all duration-300 animate-neon-flicker">
-                    <i class="fa-solid fa-ticket"></i> 进入剧场
+                    <i class="fa-solid fa-ticket"></i> 进入剧院
                 </button>
             </div>
         </div>
@@ -304,11 +304,11 @@
                                     <i class="fa-solid fa-images text-retro-neonred"></i> 一楼大厅
                                 </h3>
                                 <p class="text-[9px] sm:text-[11px] text-gray-400 mt-0.5 sm:mt-1 leading-snug sm:leading-relaxed">
-                                    物料陈列。展示专属手幅、自制画报、饭制周边的布告板。
+                                    物料交换角 & 纪念品商店。粉丝自制布告板与剧院周边好物。
                                 </p>
                             </div>
                             <div class="mt-1 sm:mt-2 text-[8px] sm:text-[9px] text-retro-gold font-mono tracking-wider flex items-center gap-1 group-hover:underline">
-                                进入物料大厅 <i class="fa-solid fa-arrow-right text-[7px]"></i>
+                                进入大厅 <i class="fa-solid fa-arrow-right text-[7px]"></i>
                             </div>
                         </div>
 
@@ -483,21 +483,125 @@
         </section>
 
         <!-- ============================================== -->
-        <!-- AREA 2: MAIN LOBBY (一楼大厅 - 物料展示)         -->
+        <!-- AREA 2: MAIN LOBBY (一楼大厅 - 物料角落 & 纪念品商店) -->
         <!-- ============================================== -->
         <section id="lobby" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.png');">
             <div class="flex justify-between items-center mb-3 pb-2">
-                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+                <button id="lobbyBackBtn" onclick="handleLobbyBack()" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">🖼️ 剧院一楼大厅</h2>
-                    <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow">Exhibition Board</p>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg" id="lobbyTitleText">🖼️ 剧院一楼大厅</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow" id="lobbySubText">Grand Lobby</p>
                 </div>
             </div>
 
-            <!-- Dashboard/Layout of crafts board -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
+            <!-- ================= SUB-VIEW 0: TWO DOORS HALLWAY ================= -->
+            <div id="lobbyHallway" class="flex-1 flex flex-col justify-center items-center relative p-4 bg-[#180e10]/80 backdrop-blur-sm border border-retro-gold/30 rounded overflow-y-auto">
+                <p class="text-[10px] md:text-xs text-retro-gold tracking-wider text-center max-w-md mb-4 leading-relaxed">
+                    大厅两侧各有一扇门，一边是粉丝自制的物料宝库，另一边是剧院纪念品商店。
+                </p>
+
+                <!-- Two Doors Layout -->
+                <div class="grid grid-cols-2 gap-6 w-full max-w-sm">
+
+                    <!-- Door 1: Materials Corner (物料角落) -->
+                    <div onclick="enterLobbyRoom('materials')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                        <!-- Top Brass Plate header -->
+                        <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
+                            MATERIALS • A01
+                        </div>
+
+                        <!-- Door Frame & Portal -->
+                        <div class="w-16 sm:w-20 h-32 sm:h-36 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
+                            </div>
+
+                            <!-- Door Leaf -->
+                            <div id="door-leaf-lobby-materials" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
+                                <!-- Top Arch Glass Window -->
+                                <div class="w-full h-12 sm:h-14 rounded-t-full door-glass flex items-center justify-center relative mt-1 overflow-hidden">
+                                    <div class="absolute inset-x-0 bottom-0 h-[1px] bg-retro-gold/40"></div>
+                                    <div class="absolute inset-y-0 left-1/2 w-[1px] bg-retro-gold/30"></div>
+                                    <div class="absolute inset-x-0 top-1/2 h-[1px] bg-retro-gold/30"></div>
+                                    <i class="fa-solid fa-palette text-xs sm:text-sm text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
+                                </div>
+
+                                <!-- Recessed Wood Moldings -->
+                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
+                                    <div class="w-full h-6 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[8px] text-retro-gold/40 select-none">
+                                        🎨
+                                    </div>
+                                    <div class="w-full h-8 rounded border border-black/40 bg-[#2d1114] door-panel relative">
+                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Brass Handle -->
+                                <div class="absolute top-[52%] right-1.5 flex flex-col items-center z-20">
+                                    <div class="w-1 h-4 bg-gradient-to-b from-[#e5c060] to-[#8f711c] border border-black/30 rounded-xs flex flex-col items-center justify-center">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-retro-gold shadow border border-black/40"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">物料交换角</h4>
+                        <p class="text-[8px] text-gray-500 mt-0.5">粉丝自制 · 布告板</p>
+                    </div>
+
+                    <!-- Door 2: Souvenir Shop (纪念品商店) -->
+                    <div onclick="enterLobbyRoom('shop')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                        <!-- Top Brass Plate header -->
+                        <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
+                            SHOP • A02
+                        </div>
+
+                        <!-- Door Frame & Portal -->
+                        <div class="w-16 sm:w-20 h-32 sm:h-36 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
+                            </div>
+
+                            <!-- Door Leaf -->
+                            <div id="door-leaf-lobby-shop" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
+                                <!-- Top Arch Glass Window -->
+                                <div class="w-full h-12 sm:h-14 rounded-t-full door-glass flex items-center justify-center relative mt-1 overflow-hidden">
+                                    <div class="absolute inset-x-0 bottom-0 h-[1px] bg-retro-gold/40"></div>
+                                    <div class="absolute inset-y-0 left-1/2 w-[1px] bg-retro-gold/30"></div>
+                                    <div class="absolute inset-x-0 top-1/2 h-[1px] bg-retro-gold/30"></div>
+                                    <i class="fa-solid fa-gift text-xs sm:text-sm text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
+                                </div>
+
+                                <!-- Recessed Wood Moldings -->
+                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
+                                    <div class="w-full h-6 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[8px] text-retro-gold/40 select-none">
+                                        🛍️
+                                    </div>
+                                    <div class="w-full h-8 rounded border border-black/40 bg-[#2d1114] door-panel relative">
+                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Brass Handle -->
+                                <div class="absolute top-[52%] right-1.5 flex flex-col items-center z-20">
+                                    <div class="w-1 h-4 bg-gradient-to-b from-[#e5c060] to-[#8f711c] border border-black/30 rounded-xs flex flex-col items-center justify-center">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-retro-gold shadow border border-black/40"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">纪念品商店</h4>
+                        <p class="text-[8px] text-gray-500 mt-0.5">剧院周边 · 好物架</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= SUB-VIEW 1: MATERIALS CORNER (物料角落) ================= -->
+            <div id="lobbyMaterials" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
                 <!-- Submit Material Left -->
                 <div class="md:col-span-4 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
@@ -537,6 +641,181 @@
                     <div id="craftsContainer" class="flex-1 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pr-1">
                         <!-- JS dynamic insertion of crafts -->
                     </div>
+                </div>
+            </div>
+
+            <!-- ================= SUB-VIEW 2: SOUVENIR SHOP (纪念品商店) ================= -->
+            <div id="lobbyShop" class="hidden flex-1 overflow-y-auto bg-[#180e10]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4">
+                <div class="text-center mb-4">
+                    <p class="text-[10px] text-retro-gold tracking-wider leading-relaxed">
+                        暖黄灯光洒在古旧的木质货架上，每一件小物都在诉说红霞的故事。
+                    </p>
+                </div>
+
+                <!-- Wooden Shelf Unit -->
+                <div class="space-y-6">
+
+                    <!-- Shelf Row 1 -->
+                    <div class="relative bg-gradient-to-b from-[#3d1a14] to-[#2a100b] border-2 border-[#5c3320] rounded-lg shadow-[0_6px_20px_rgba(0,0,0,0.7),inset_0_2px_4px_rgba(255,255,255,0.03)] p-3">
+                        <!-- Shelf board top -->
+                        <div class="absolute top-0 left-2 right-2 h-1.5 bg-gradient-to-b from-[#6b3a24] to-[#4a2215] rounded-b border-b border-[#7a4a30]/40"></div>
+                        <!-- Shelf label -->
+                        <div class="flex items-center gap-2 mb-3 mt-1">
+                            <span class="px-2 py-0.5 bg-retro-gold/20 border border-retro-gold/40 text-retro-gold text-[9px] font-mono rounded tracking-wider">SHELF 01</span>
+                            <span class="text-[10px] text-gray-400 font-serif">官方周边</span>
+                        </div>
+                        <!-- Products on shelf -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <!-- Card 1 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                    
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">纪念帆布包</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥168.0</p>
+                                </div>
+                            </a>
+                            <!-- Card 2 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">纪念贴纸组</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥36.0</p>
+                                </div>
+                            </a>
+                            <!-- Card 3 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">猩红logo棒球帽</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥99.0</p>
+                                </div>
+                            </a>
+                            <!-- Card 4 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">红霞影剧院slogan棒球帽</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥99.0</p>
+                                </div>
+                            </a>
+                            <!-- Card 5 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">猩红纪念T恤</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥169.0</p>
+                                </div>
+                            </a>
+                            <!-- Card 6 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">红霞影剧院纪念T恤</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥198.0</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Shelf Row 2 -->
+                    <div class="relative bg-gradient-to-b from-[#3d1a14] to-[#2a100b] border-2 border-[#5c3320] rounded-lg shadow-[0_6px_20px_rgba(0,0,0,0.7),inset_0_2px_4px_rgba(255,255,255,0.03)] p-3">
+                        <!-- Shelf board top -->
+                        <div class="absolute top-0 left-2 right-2 h-1.5 bg-gradient-to-b from-[#6b3a24] to-[#4a2215] rounded-b border-b border-[#7a4a30]/40"></div>
+                        <!-- Shelf label -->
+                        <div class="flex items-center gap-2 mb-3 mt-1">
+                            <span class="px-2 py-0.5 bg-retro-gold/20 border border-retro-gold/40 text-retro-gold text-[9px] font-mono rounded tracking-wider">SHELF 02</span>
+                            <span class="text-[10px] text-gray-400 font-serif">现场香氛</span>
+                        </div>
+                        <!-- Products on shelf -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <!-- Card 7 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">气剧·行至天光</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥598.0</p>
+                                </div>
+                            </a>
+                            <!-- Card 8 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">气剧·重返扉页</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">无货</p>
+                                </div>
+                            </a>
+                            <!-- Card 9 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">甚至日光·褪色幻想</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">售罄</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Shelf Row 3: 主题文创 (2 cards) -->
+                    <div class="relative bg-gradient-to-b from-[#3d1a14] to-[#2a100b] border-2 border-[#5c3320] rounded-lg shadow-[0_6px_20px_rgba(0,0,0,0.7),inset_0_2px_4px_rgba(255,255,255,0.03)] p-3">
+                        <div class="absolute top-0 left-2 right-2 h-1.5 bg-gradient-to-b from-[#6b3a24] to-[#4a2215] rounded-b border-b border-[#7a4a30]/40"></div>
+                        <div class="flex items-center gap-2 mb-3 mt-1">
+                            <span class="px-2 py-0.5 bg-retro-gold/20 border border-retro-gold/40 text-retro-gold text-[9px] font-mono rounded tracking-wider">SHELF 03</span>
+                            <span class="text-[10px] text-gray-400 font-serif">主题文创</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Card 10 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">巡演纪念定制笔</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥19.9</p>
+                                </div>
+                            </a>
+                            <!-- Card 11 -->
+                            <a href="#" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
+                                <div class="aspect-[1/1] bg-[#120708] flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                    <i class="fa-solid fa-image text-3xl text-retro-gold/20 group-hover/shop:text-retro-gold/50 transition-colors"></i>
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">巡演联动款定制笔记本</p>
+                                    <p class="text-[8px] text-gray-500 mt-0.5">¥49.9</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -1261,6 +1540,7 @@
             checkedCities: [0, 1, 2], // Default check-ins
             activeScreen: "intro",
             activeDeptSubView: "hallway",
+            activeLobbySubView: "hallway",
             currentShowcaseStop: 0,
             musicPlaying: false,
             currentSongIndex: 0,
@@ -1433,18 +1713,18 @@
                 date: "2026.08.16",
                 season: "夏",
                 weather: "",
-                venue: "合肥",
+                venue: "合肥 ・ 场地待定",
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
                 status: "待开演",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
             },
             {
                 id: "260830",
-                city: "沈阳",
+                city: "沈阳 ",
                 date: "2026.08.30",
                 season: "秋",
                 weather: "",
-                venue: "沈阳 ",
+                venue: "沈阳 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1a2a/D4AF37?text=Shenyang+0830",
                 status: "待开演",
                 highlights: ["初秋凉风", "工业诗意", "深情演绎"]
@@ -1455,7 +1735,7 @@
                 date: "2026.09.11",
                 season: "秋",
                 weather: "",
-                venue: "武汉",
+                venue: "武汉 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"]
@@ -1466,7 +1746,7 @@
                 date: "coming soon",
                 season: "秋",
                 weather: "",
-                venue: "济南",
+                venue: "济南 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Jinan",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"]
@@ -1477,7 +1757,7 @@
                 date: "coming soon",
                 season: "秋",
                 weather: "",
-                venue: "南昌",
+                venue: "南昌 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Nanchang",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"]
@@ -1669,6 +1949,7 @@
                 renderPigeonholes();
             } else if (screenId === 'lobby') {
                 document.getElementById('lobby').style.display = 'flex';
+                showLobbySubView('hallway');
                 renderCrafts();
             } else if (screenId === 'grand-cinema') {
                 document.getElementById('grand-cinema').style.display = 'flex';
@@ -1688,6 +1969,62 @@
                 showDeptSubView('hallway');
             } else {
                 navigateTo('main-map');
+            }
+        }
+
+        // ===================== LOBBY NAVIGATION (一楼大厅双门) =====================
+        function handleLobbyBack() {
+            if (STATE.activeLobbySubView !== 'hallway') {
+                showLobbySubView('hallway');
+            } else {
+                navigateTo('main-map');
+            }
+        }
+
+        function showLobbySubView(subId) {
+            document.getElementById('lobbyHallway').style.display = 'none';
+            document.getElementById('lobbyMaterials').style.display = 'none';
+            document.getElementById('lobbyShop').style.display = 'none';
+
+            STATE.activeLobbySubView = subId;
+
+            const lobbyTitleText = document.getElementById('lobbyTitleText');
+            const lobbySubText = document.getElementById('lobbySubText');
+            const lobbyBackBtn = document.getElementById('lobbyBackBtn');
+
+            if (subId === 'hallway') {
+                document.getElementById('lobbyHallway').style.display = 'flex';
+                lobbyTitleText.innerText = '🖼️ 剧院一楼大厅';
+                lobbySubText.innerText = 'Grand Lobby';
+                lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回主图`;
+            } else if (subId === 'materials') {
+                document.getElementById('lobbyMaterials').style.display = 'grid';
+                lobbyTitleText.innerText = '🎨 物料交换角';
+                lobbySubText.innerText = 'Fan-Made Corner';
+                lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回大厅`;
+            } else if (subId === 'shop') {
+                document.getElementById('lobbyShop').style.display = 'block';
+                lobbyTitleText.innerText = '🛍️ 纪念品商店';
+                lobbySubText.innerText = 'Souvenir Shop';
+                lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回大厅`;
+            }
+        }
+
+        function enterLobbyRoom(roomId) {
+            const leaf = document.getElementById(`door-leaf-lobby-${roomId}`);
+            if (leaf) {
+                leaf.classList.add('open');
+                playShortBeep(280, 0.15);
+                setTimeout(() => playShortBeep(420, 0.12), 100);
+                setTimeout(() => playShortBeep(560, 0.20), 220);
+
+                setTimeout(() => {
+                    showLobbySubView(roomId);
+                    leaf.classList.remove('open');
+                }, 800);
+            } else {
+                showLobbySubView(roomId);
+                playShortBeep(600, 0.05);
             }
         }
 
