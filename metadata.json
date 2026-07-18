@@ -1,0 +1,6 @@
+{
+  "name": "红霞影剧院",
+  "description": "陈婧霏巡演打卡纪念馆，复古胶片与音乐戏剧体验空间",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

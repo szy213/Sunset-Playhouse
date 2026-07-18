@@ -1,0 +1,2581 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>红霞影剧院 - 陈婧霏巡演打卡纪念馆</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Retro Vibes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Noto+Serif+SC:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Custom Retro Themes and Layout Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Noto Serif SC', 'serif'],
+                        display: ['Cinzel', 'serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                    },
+                    colors: {
+                        retro: {
+                            gold: '#D4AF37',
+                            neonred: '#FF3131',
+                            neonamber: '#FFBF00',
+                            burgundy: '#58111A',
+                            darkwood: '#1F1113',
+                            paper: '#EED9C4',
+                            velvet: '#800020'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom retro styles & animations optimized for mobile smooth scrolling */
+        html, body {
+            height: 100%;
+            -webkit-overflow-scrolling: touch;
+            touch-action: manipulation;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1F1113;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #58111A;
+            border-radius: 4px;
+            border: 1px solid #D4AF37;
+        }
+        
+        .vintage-grain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .crt-scanline {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+            background-size: 100% 3px, 5px 100%;
+        }
+
+        .neon-glow-red {
+            text-shadow: 0 0 4px #FF3131, 0 0 10px #FF3131, 0 0 20px #FF3131;
+        }
+        .neon-glow-gold {
+            text-shadow: 0 0 4px #D4AF37, 0 0 10px #D4AF37;
+        }
+        .neon-border-red {
+            box-shadow: 0 0 4px #FF3131, inset 0 0 4px #FF3131;
+        }
+        .neon-border-gold {
+            box-shadow: 0 0 4px #D4AF37, inset 0 0 4px #D4AF37;
+        }
+
+        @keyframes spin-vinyl {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin-anim {
+            animation: spin-vinyl 15s linear infinite;
+        }
+        .spin-paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.8; }
+        }
+        .flicker-anim {
+            animation: flicker 4s infinite alternate;
+        }
+        
+        /* Eliminate tap highlight color on mobile */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Retro Theater Doors & Opening Animation Styles */
+        .door-perspective {
+            perspective: 800px;
+        }
+        .door-frame-bg {
+            background: radial-gradient(circle at center, #421115 0%, #0d0405 100%);
+        }
+        .door-leaf {
+            transform-origin: left center;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1), box-shadow 0.8s ease;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+        .door-leaf.open {
+            transform: rotateY(-115deg);
+            box-shadow: 12px 0 24px rgba(0, 0, 0, 0.8);
+        }
+        .door-glass {
+            background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.03) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+        }
+        .door-panel {
+            box-shadow: inset 1px 1px 3px rgba(0,0,0,0.7), inset -1px -1px 3px rgba(255,255,255,0.03);
+        }
+        @keyframes spin-retro {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-retro {
+            display: inline-block;
+            animation: spin-retro 3s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-200 h-full overflow-hidden font-serif selection:bg-retro-burgundy selection:text-retro-gold relative flex flex-col">
+
+    <!-- Vintage Noise overlay -->
+    <div class="vintage-grain"></div>
+
+    <!-- Global BGM Floating Audio Player (Bottom Right) -->
+    <div id="bgmPlayerWidget" class="fixed bottom-4 right-4 z-50 flex items-center transition-all duration-300">
+        <!-- Dropdown Song List (Appears to the left of the play button when clicked) -->
+        <div id="bgmDropdown" class="hidden mr-3 bg-retro-darkwood/95 border border-retro-gold/60 p-2.5 rounded-lg shadow-[0_4px_25px_rgba(0,0,0,0.95)] backdrop-blur-md flex-col gap-2 min-w-[220px] max-w-[280px] animate-fade-in text-left">
+            <div class="px-1 py-0.5 border-b border-retro-gold/20 flex justify-between items-center select-none">
+                <span class="text-[9px] text-retro-gold font-mono tracking-widest uppercase font-bold">
+                    红霞 电影原声歌单
+                </span>
+                <span class="text-[8px] text-zinc-400 font-mono">4 TRACKS</span>
+            </div>
+            
+            <!-- Song selection rows -->
+            <div class="flex flex-col gap-1 max-h-[180px] overflow-y-auto pr-0.5" id="bgmSongsContainer">
+                <!-- Track 1 -->
+                <div onclick="selectBgmTrack(0)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-0">
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-0">1.</span>
+                        <span class="truncate" id="bgm-title-0">红霞暖歌 (bgm1.mp3)</span>
+                    </div>
+                </div>
+                <!-- Track 2 -->
+                <div onclick="selectBgmTrack(1)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-1">
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-1">2.</span>
+                        <span class="truncate" id="bgm-title-1">斑驳影记忆 (bgm2.mp3)</span>
+                    </div>
+                </div>
+                <!-- Track 2 (Index 2) -->
+                <div onclick="selectBgmTrack(2)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-2">
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-2">3.</span>
+                        <span class="truncate" id="bgm-title-2">深夜放映机 (bgm3.mp3)</span>
+                    </div>
+                </div>
+                <!-- Track 3 (Index 3) -->
+                <div onclick="selectBgmTrack(3)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-3">
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-3">4.</span>
+                        <span class="truncate" id="bgm-title-3">梦境留声机 (bgm4.mp3)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mini metadata status panel inside dropdown -->
+            <div class="px-1 pt-1.5 border-t border-retro-gold/15 flex justify-between items-center text-[8px] text-zinc-400 font-mono select-none">
+                <span id="bgmDropdownStatus" class="uppercase">已暂停</span>
+                <span id="bgmDropdownSource" class="bg-black/60 px-1 py-0.5 rounded border border-white/5 uppercase text-retro-gold">
+                    未加载
+                </span>
+            </div>
+        </div>
+
+        <!-- The main play button (Only element visible when not clicked) -->
+        <button onclick="toggleBgmDropdown(event)" id="bgmMainButton" class="w-12 h-12 rounded-full bg-retro-darkwood/95 border-2 border-retro-gold hover:border-retro-neonred text-retro-gold flex items-center justify-center shadow-[0_4px_15px_rgba(0,0,0,0.8)] hover:scale-105 active:scale-95 transition-all duration-300 relative z-10 cursor-pointer" title="点击展开音乐播放列表 & 播放/暂停">
+            <!-- Rotating/Static Status Emoji -->
+            <div id="bgmStatusIcon" class="text-xl select-none leading-none flex items-center justify-center transition-transform duration-300">
+                🔇
+            </div>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <div id="appContainer" class="w-full flex-1 relative flex flex-col items-center justify-center bg-[#0d0708] overflow-hidden">
+        
+        <!-- Cinematic Intro Overlayer (Simulated film start) -->
+        <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('/src/assets/images/intro_bg_1784342859924.jpg'); background-size: cover; background-position: center;">
+            <div class="absolute bottom-[25%] left-1/2 -translate-x-1/2 text-center">
+                <button onclick="startImmersiveExperience()" class="px-8 py-3.5 bg-retro-burgundy/90 hover:bg-retro-gold border-2 border-retro-gold text-retro-gold hover:text-retro-burgundy text-sm font-bold tracking-widest active:scale-95 transition-all duration-300 rounded shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center gap-2.5 backdrop-blur-xs whitespace-nowrap">
+                    <i class="fa-solid fa-ticket animate-pulse"></i> 检票入场
+                </button>
+            </div>
+        </div>
+
+        <!-- TOP STATUS MARQUEE -->
+        <header id="theaterHeader" class="hidden w-full bg-retro-darkwood/95 border-b border-retro-gold/40 py-2.5 px-4 z-40 relative flex justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+            </div>
+        </header>
+
+        <!-- THEATER BUILDING OVERVIEW (THE MAP VIEW) -->
+        <main id="mainMapScreen" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col justify-center items-center overflow-y-auto">
+            
+            <div class="text-center my-2">
+                <h2 class="text-retro-gold text-base md:text-lg tracking-[0.2em] font-bold uppercase">剧院全景俯瞰图</h2>
+                <p class="text-[10px] text-gray-500 mt-0.5">请轻触下方影剧院各功能分区进行探索与打卡</p>
+            </div>
+
+            <!-- The Beautiful Interactive Architectural Facade Diagram -->
+            <div class="w-full bg-[#140b0d] border border-retro-gold p-4 rounded shadow-2xl relative overflow-hidden flex flex-col gap-3">
+                
+                <!-- CRT styling on theater overview -->
+                <div class="absolute inset-0 crt-scanline pointer-events-none opacity-20"></div>
+
+                <!-- Upper Marquee -->
+                <div class="w-full bg-[#270308] border border-retro-neonred/60 py-2.5 px-3 rounded text-center relative">
+                    <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-[#140b0d] px-2 text-[9px] text-retro-gold tracking-widest font-mono">
+                        RED GLOW CINEMA & CONCERT HALL
+                    </div>
+                    <div class="flex justify-center gap-1 my-0.5">
+                        <span class="w-1.5 h-1.5 rounded-full bg-retro-neonred animate-ping"></span>
+                        <span class="text-base sm:text-2xl font-display font-black text-retro-neonred neon-glow-red tracking-wider">
+                            HONG XIA YING JU YUAN
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Architectural Grid / Interactive Floor Plan -->
+                <div class="grid grid-cols-12 gap-1.5 sm:gap-3 mt-1">
+                    
+                    <!-- Left Column: Service Units -->
+                    <div class="col-span-4 flex flex-col gap-1.5 sm:gap-3">
+                        
+                        <!-- 1. MAILROOM (收发室) -->
+                        <div onclick="navigateTo('mailroom')" class="group relative bg-[#2a1317] hover:bg-retro-burgundy/60 border border-retro-gold/40 hover:border-retro-gold active:scale-[0.98] p-2.5 sm:p-4 rounded cursor-pointer transition-all duration-200 shadow flex flex-col justify-between min-h-[90px] sm:min-h-[110px]">
+                            <div class="absolute top-1.5 right-1.5 text-retro-gold/30 font-mono text-[7px] sm:text-[9px]">
+                                01 / RM
+                            </div>
+                            <div>
+                                <h3 class="text-retro-gold text-[11px] sm:text-sm font-bold flex items-center gap-1 sm:gap-1.5">
+                                    <i class="fa-solid fa-envelope-open-text text-retro-neonred"></i> 收发室
+                                </h3>
+                                <p class="text-[9px] sm:text-[11px] text-gray-400 mt-0.5 sm:mt-1 leading-snug sm:leading-relaxed">
+                                    寄投您的明信片与红霞呓语，查阅保管箱中的回响。
+                                </p>
+                            </div>
+                            <div class="mt-1 sm:mt-2 text-[8px] sm:text-[9px] text-retro-gold font-mono tracking-wider flex items-center gap-1 group-hover:underline">
+                                进入投递/查阅 <i class="fa-solid fa-arrow-right text-[7px]"></i>
+                            </div>
+                        </div>
+
+                        <!-- 2. LOBBY (一楼大厅) -->
+                        <div onclick="navigateTo('lobby')" class="group relative bg-[#2a1317] hover:bg-retro-burgundy/60 border border-retro-gold/40 hover:border-retro-gold active:scale-[0.98] p-2.5 sm:p-4 rounded cursor-pointer transition-all duration-200 shadow flex flex-col justify-between flex-1">
+                            <div class="absolute top-1.5 right-1.5 text-retro-gold/30 font-mono text-[7px] sm:text-[9px]">
+                                02 / LBY
+                            </div>
+                            <div>
+                                <h3 class="text-retro-gold text-[11px] sm:text-sm font-bold flex items-center gap-1 sm:gap-1.5">
+                                    <i class="fa-solid fa-images text-retro-neonred"></i> 一楼大厅
+                                </h3>
+                                <p class="text-[9px] sm:text-[11px] text-gray-400 mt-0.5 sm:mt-1 leading-snug sm:leading-relaxed">
+                                    物料陈列。展示专属手幅、自制画报、饭制周边的布告板。
+                                </p>
+                            </div>
+                            <div class="mt-1 sm:mt-2 text-[8px] sm:text-[9px] text-retro-gold font-mono tracking-wider flex items-center gap-1 group-hover:underline">
+                                进入物料大厅 <i class="fa-solid fa-arrow-right text-[7px]"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Center Column: Main Screenings -->
+                    <div class="col-span-5 flex flex-col gap-1.5 sm:gap-3">
+                        
+                        <!-- 3. GRAND CINEMA (豪华影厅) -->
+                        <div onclick="navigateTo('grand-cinema')" class="group relative bg-[#310b10] hover:bg-retro-burgundy border border-retro-neonred/60 hover:border-retro-neonred active:scale-[0.98] p-3 sm:p-5 rounded cursor-pointer transition-all duration-200 shadow-lg flex-1 flex flex-col justify-between min-h-[190px] sm:min-h-[220px]">
+                            
+                            <!-- Projector Cone Decorative Effect -->
+                            <div class="absolute inset-0 bg-gradient-to-b from-retro-neonred/5 via-transparent to-transparent pointer-events-none"></div>
+                            
+                            <div class="absolute top-1.5 right-2 text-retro-neonred/50 font-mono text-[7px] sm:text-[9px]">
+                                SCREENING ROOM
+                            </div>
+                            
+                            <div class="space-y-1.5 sm:space-y-3">
+                                <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-retro-velvet border border-retro-gold/40 flex items-center justify-center text-retro-gold shadow">
+                                    <i class="fa-solid fa-film text-xs sm:text-sm animate-spin-slow"></i>
+                                </div>
+                                <h3 class="text-retro-neonred text-xs sm:text-base font-bold tracking-wider neon-glow-red font-serif">
+                                    🎬 豪华大影厅
+                                </h3>
+                                <p class="text-[9px] sm:text-[11px] text-gray-300 leading-snug sm:leading-relaxed font-serif">
+                                    放映巡演专属纪实。收录全国各场演出的绝美现场画卷、曲目亮点与独家海报。
+                                </p>
+                            </div>
+
+                            <div class="border-t border-retro-gold/20 pt-1.5 mt-1.5 sm:pt-3 sm:mt-3">
+                                <div class="flex items-center justify-between text-[8px] sm:text-[10px] text-retro-gold">
+                                    <span class="hidden sm:inline">目前进度:</span>
+                                    <span class="inline sm:hidden">进度:</span>
+                                    <span class="font-mono text-retro-neonred">巡演全开盘</span>
+                                </div>
+                                <div class="mt-1 sm:mt-2 text-[8px] sm:text-[10px] font-mono tracking-wider text-retro-gold flex items-center gap-1 group-hover:underline">
+                                    入场观看 <i class="fa-solid fa-circle-play text-retro-neonred text-[10px] sm:text-xs animate-pulse"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column: Box Office & Admin -->
+                    <div class="col-span-3 flex flex-col gap-1.5 sm:gap-3">
+                        
+                        <!-- 4. BOX OFFICE (售票处) -->
+                        <div onclick="navigateTo('box-office')" class="group relative bg-[#2a1317] hover:bg-retro-burgundy/60 border border-retro-gold/40 hover:border-retro-gold active:scale-[0.98] p-2.5 sm:p-4 rounded cursor-pointer transition-all duration-200 shadow flex flex-col justify-between min-h-[90px] sm:min-h-[110px]">
+                            <div class="absolute top-1.5 right-1.5 text-retro-gold/30 font-mono text-[7px] sm:text-[9px]">
+                                03 / TKT
+                            </div>
+                            <div>
+                                <h3 class="text-retro-gold text-[11px] sm:text-sm font-bold flex items-center gap-1 sm:gap-1.5">
+                                    <i class="fa-solid fa-receipt text-retro-neonred"></i> 售票处
+                                </h3>
+                                <p class="text-[9px] sm:text-[11px] text-gray-400 mt-0.5 sm:mt-1 leading-snug sm:leading-relaxed">
+                                    生成您与陈婧霏的纸质纪念票根，亮起巡演打卡印记。
+                                </p>
+                            </div>
+                            <div class="mt-1 sm:mt-2 text-[8px] sm:text-[9px] text-retro-gold font-mono tracking-wider flex items-center gap-1 group-hover:underline">
+                                办理纪念票根 <i class="fa-solid fa-arrow-right text-[7px]"></i>
+                            </div>
+                        </div>
+
+                        <!-- 5. BUSINESS DEPARTMENT (业务部) -->
+                        <div onclick="navigateTo('business-dept')" class="group relative bg-[#2a1317] hover:bg-retro-burgundy/60 border border-retro-gold/40 hover:border-retro-gold active:scale-[0.98] p-2.5 sm:p-4 rounded cursor-pointer transition-all duration-200 shadow flex flex-col justify-between flex-1">
+                            <div class="absolute top-1.5 right-1.5 text-retro-gold/30 font-mono text-[7px] sm:text-[9px]">
+                                04 / ADM
+                            </div>
+                            <div>
+                                <h3 class="text-retro-gold text-[11px] sm:text-sm font-bold flex items-center gap-1 sm:gap-1.5">
+                                    <i class="fa-solid fa-briefcase text-retro-neonred"></i> 业务部
+                                </h3>
+                                <p class="text-[9px] sm:text-[11px] text-gray-400 mt-0.5 sm:mt-1 leading-snug sm:leading-relaxed">
+                                    演员排练、官方影像与深夜播客深度归档。
+                                </p>
+                            </div>
+                            <div class="mt-1 sm:mt-2 text-[8px] sm:text-[9px] text-retro-gold font-mono tracking-wider flex items-center gap-1 group-hover:underline">
+                                进入深廊 <i class="fa-solid fa-arrow-right text-[7px]"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Footer Signage -->
+                <div class="w-full text-center mt-1 border-t border-retro-gold/20 pt-3 flex flex-col sm:flex-row justify-between items-center gap-1 text-[10px] text-gray-500 font-mono">
+                    <div>© CHEN JINGFEI • 1989-2026</div>
+                    <div class="flex gap-3">
+                        <span><i class="fa-solid fa-location-dot text-retro-neonred"></i> 中国巡演纪念</span>
+                        <span><i class="fa-solid fa-circle text-green-500 text-[6px] animate-pulse"></i> 营业中</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        
+        <!-- ============================================== -->
+        <!-- AREA 1: MAILROOM (收发室)                       -->
+        <!-- ============================================== -->
+        <section id="mailroom" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
+            <!-- Nav Row -->
+            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+                    <i class="fa-solid fa-arrow-left"></i> 返回主图
+                </button>
+                <div class="text-right">
+                    <h2 class="text-retro-neonred text-base font-bold font-serif">📪 红霞收发室</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono">Pigeonholes</p>
+                </div>
+            </div>
+
+            <!-- Content Split -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
+                <!-- Left: Write message Form -->
+                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex items-center gap-1.5">
+                            <i class="fa-solid fa-pen-nib"></i> 投递一封明信片
+                        </h3>
+                        <form id="mailForm" onsubmit="handleSendMail(event)" class="space-y-3 text-xs">
+                            <div>
+                                <label class="block text-gray-400 mb-1">观众化名 / 寄件人:</label>
+                                <input type="text" id="mailSender" required placeholder="例如: 坐在六排九座的流浪汉" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">选择纪念邮票:</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <label class="border border-retro-gold/30 rounded p-1.5 text-center cursor-pointer block hover:bg-retro-burgundy/40" id="stamp1Label">
+                                        <input type="radio" name="stamp" value="stamp-hxia" checked class="hidden">
+                                        <div class="text-base">🌇</div>
+                                        <div class="text-[8px] mt-0.5 text-retro-gold">红霞歌女</div>
+                                    </label>
+                                    <label class="border border-retro-gold/30 rounded p-1.5 text-center cursor-pointer block hover:bg-retro-burgundy/40" id="stamp2Label">
+                                        <input type="radio" name="stamp" value="stamp-film" class="hidden">
+                                        <div class="text-base">🎞️</div>
+                                        <div class="text-[8px] mt-0.5 text-retro-gold">胶片显影</div>
+                                    </label>
+                                    <label class="border border-retro-gold/30 rounded p-1.5 text-center cursor-pointer block hover:bg-retro-burgundy/40" id="stamp3Label">
+                                        <input type="radio" name="stamp" value="stamp-cherry" class="hidden">
+                                        <div class="text-base">🍒</div>
+                                        <div class="text-[8px] mt-0.5 text-retro-gold">蓝莓夜</div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">红霞呓语 (限150字):</label>
+                                <textarea id="mailBody" required rows="3" placeholder="谢谢你在红霞里收留了那些不肯天亮的灵魂..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif leading-relaxed"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-2 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold hover:text-white border border-retro-gold rounded font-bold uppercase text-[10px] active:scale-95 transition-all">
+                                <i class="fa-solid fa-paper-plane"></i> 投放至信箱
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right: Mailboxes Pigeons list -->
+                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
+                    <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex justify-between items-center">
+                        <span><i class="fa-solid fa-boxes-stacked"></i> 明信片架 (点击可阅读)</span>
+                        <span class="text-[9px] font-mono text-gray-500">Pigeonholes</span>
+                    </h3>
+                    
+                    <div id="pigeonholeContainer" class="flex-1 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-3 pr-1">
+                        <!-- JS dynamic letters injection -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- AREA 2: MAIN LOBBY (一楼大厅 - 物料展示)         -->
+        <!-- ============================================== -->
+        <section id="lobby" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+                    <i class="fa-solid fa-arrow-left"></i> 返回主图
+                </button>
+                <div class="text-right">
+                    <h2 class="text-retro-neonred text-base font-bold font-serif">🖼️ 剧院一楼大厅</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono">Exhibition Board</p>
+                </div>
+            </div>
+
+            <!-- Dashboard/Layout of crafts board -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
+                <!-- Submit Material Left -->
+                <div class="md:col-span-4 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex items-center gap-1.5 uppercase">
+                            <i class="fa-solid fa-file-arrow-up"></i> 登记饭制物料
+                        </h3>
+                        <form id="merchForm" onsubmit="handleSendMerch(event)" class="space-y-3 text-xs">
+                            <div>
+                                <label class="block text-gray-400 mb-1">制作者昵称:</label>
+                                <input type="text" id="merchAuthor" required placeholder="如: 拾荒歌姬" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">物料名称 / 媒介形式:</label>
+                                <input type="text" id="merchTitle" required placeholder="如: 《红霞》自制海报A款" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">物料图片链接 (可空):</label>
+                                <input type="url" id="merchImgUrl" placeholder="https://..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-gray-400 mb-1">领取方式及物料简述:</label>
+                                <textarea id="merchDesc" required rows="2" placeholder="在场外红玫瑰打卡板附近发放手幅，凭票根免费领取..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-2 bg-retro-burgundy hover:bg-retro-gold hover:text-black text-retro-gold text-[10px] font-bold rounded uppercase active:scale-95 transition-all">
+                                <i class="fa-solid fa-stamp"></i> 贴上布告板
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Showcase Board Right -->
+                <div class="md:col-span-8 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
+                    <div class="flex justify-between items-center border-b border-retro-gold/20 pb-1.5 mb-3">
+                        <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-clipboard-list"></i> 大厅物料交流栏</span>
+                    </div>
+
+                    <div id="craftsContainer" class="flex-1 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pr-1">
+                        <!-- JS dynamic insertion of crafts -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- AREA 3: GRAND CINEMA (豪华影厅 - 巡演城市档案)     -->
+        <!-- ============================================== -->
+        <section id="grand-cinema" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+                    <i class="fa-solid fa-arrow-left"></i> 返回主图
+                </button>
+                <div class="text-right">
+                    <h2 class="text-retro-neonred text-base font-bold font-serif">🎬 豪华大影厅</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono">Screening Stops</p>
+                </div>
+            </div>
+
+            <!-- Projector Screen and Carousel Interface -->
+            <div class="flex-1 flex flex-col justify-between items-center bg-[#070304] border border-retro-gold/30 rounded p-4 relative overflow-y-auto">
+                
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-gradient-to-b from-retro-gold/10 via-transparent to-transparent blur-3xl pointer-events-none"></div>
+
+                <!-- Dynamic Projector Screen Area -->
+                <div id="projectorScreen" class="w-full max-w-2xl bg-black border-[4px] border-retro-darkwood rounded shadow-2xl relative overflow-hidden flex items-center justify-center">
+                    
+                    <div class="absolute inset-0 crt-scanline pointer-events-none opacity-30 z-10"></div>
+
+                    <!-- Dynamic Film Poster image or text -->
+                    <div class="w-full bg-[#120708] flex flex-col md:flex-row min-h-[300px]">
+                        <!-- Film Poster image -->
+                        <div class="w-full md:w-2/5 aspect-[4/3] md:aspect-auto relative overflow-hidden bg-black flex items-center justify-center">
+                            <img id="screenPosterImage" src="https://placehold.co/600x800/221115/D4AF37?text=Red+Glow" alt="城市海报" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+                            <!-- Marquee badge -->
+                            <div class="absolute top-2 left-2 bg-retro-burgundy/90 border border-retro-gold px-1.5 py-0.5 rounded text-[8px] text-retro-gold tracking-widest font-mono uppercase" id="screenBadge">
+                                SOLD OUT
+                            </div>
+                        </div>
+
+                        <!-- Film narrative/details -->
+                        <div class="w-full md:w-3/5 p-4 flex flex-col justify-between text-left bg-gradient-to-b from-[#250f13] to-[#0d0507]">
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-1.5 text-retro-gold font-mono text-[9px]">
+                                    <i class="fa-regular fa-calendar-days text-retro-neonred"></i>
+                                    <span id="screenDate">2026.04.18</span>
+                                    <span class="mx-1">|</span>
+                                    <i class="fa-solid fa-location-arrow text-retro-neonred"></i>
+                                    <span id="screenVenue">北京・红霞剧场</span>
+                                </div>
+                                <h3 class="text-lg md:text-xl text-white font-extrabold tracking-wide border-b border-retro-gold/10 pb-1" id="screenTitle">
+                                    北京首站 · “红霞再现”
+                                </h3>
+                                <p class="text-[11px] text-gray-300 leading-relaxed font-serif" id="screenNarrative">
+                                    陈婧霏身骑复古骏马，拉开这出永不落幕电影的序幕。
+                                </p>
+                            </div>
+
+                            <!-- Highlights section -->
+                            <div class="mt-3 border-t border-retro-gold/15 pt-2 space-y-1.5">
+                                <div class="text-[8px] text-retro-gold font-mono uppercase tracking-widest">
+                                    演出特设歌单 / 高光 HIGHLIGHTS
+                                </div>
+                                <div class="flex flex-wrap gap-1.5" id="screenHighlights">
+                                    <!-- Dynamic elements -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Slide Navigation -->
+                <div class="w-full max-w-md mt-4 flex justify-between items-center gap-2">
+                    <button onclick="changeShowcaseStop(-1)" class="w-9 h-9 rounded-full border border-retro-gold text-retro-gold hover:bg-retro-gold hover:text-black active:scale-90 transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </button>
+                    <div class="text-center">
+                        <div class="text-[9px] text-retro-gold tracking-widest uppercase font-mono mb-0.5">SELECTING STOP</div>
+                        <div class="font-bold text-xs tracking-wider text-white">
+                            <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> : 
+                            <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
+                        </div>
+                    </div>
+                    <button onclick="changeShowcaseStop(1)" class="w-9 h-9 rounded-full border border-retro-gold text-retro-gold hover:bg-retro-gold hover:text-black active:scale-90 transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- AREA 4: BUSINESS DEPARTMENT (业务部 - 3大分支)  -->
+        <!-- ============================================== -->
+        <section id="business-dept" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
+                <button id="deptBackBtn" onclick="handleDeptBack()" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+                    <i class="fa-solid fa-arrow-left"></i> 返回主图
+                </button>
+                <div class="text-right">
+                    <h2 class="text-retro-neonred text-base font-bold font-serif" id="deptTitleText">🏢 剧院业务部</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono" id="deptSubText">Internal Wing</p>
+                </div>
+            </div>
+
+            <!-- ================= SUB-VIEW 0: THREE DOORS HALLWAY ================= -->
+            <div id="deptHallway" class="flex-1 flex flex-col justify-center items-center relative p-4 bg-[#180e10] border border-retro-gold/30 rounded overflow-y-auto">
+                <p class="text-[10px] md:text-xs text-retro-gold tracking-wider text-center max-w-md mb-4 leading-relaxed">
+                    长廊里的壁灯昏黄，三扇挂着黄铜门牌的厚重木门静静合拢。
+                </p>
+
+                <!-- Three Elegant Doors Layout -->
+                <div class="grid grid-cols-3 gap-3 w-full max-w-lg">
+                    
+                    <!-- Door 1: Rehearsal Room -->
+                    <div onclick="enterSubDept('rehearsal')" class="group relative flex flex-col items-center bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                        <!-- Top Brass Plate header -->
+                        <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
+                            REHEARSAL • 101
+                        </div>
+                        
+                        <!-- 3D Door Frame & Portal -->
+                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                            <!-- Glow Behind Door (Room interior lighting) -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
+                            </div>
+                            
+                            <!-- Detailed Door Leaf (the physical door swinging open) -->
+                            <div id="door-leaf-rehearsal" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
+                                <!-- Top Arch Glass Window -->
+                                <div class="w-full h-10 sm:h-12 rounded-t-full door-glass flex items-center justify-center relative mt-1 overflow-hidden">
+                                    <div class="absolute inset-x-0 bottom-0 h-[1px] bg-retro-gold/40"></div>
+                                    <!-- Vintage cross grid bars -->
+                                    <div class="absolute inset-y-0 left-1/2 w-[1px] bg-retro-gold/30"></div>
+                                    <div class="absolute inset-x-0 top-1/2 h-[1px] bg-retro-gold/30"></div>
+                                    <i class="fa-solid fa-music text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
+                                </div>
+                                
+                                <!-- Recessed Wood Moldings -->
+                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
+                                    <!-- Mid wood panel -->
+                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
+                                        🎬
+                                    </div>
+                                    <!-- Lower wood panel -->
+                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
+                                        <!-- Brass Kick Plate at bottom of door -->
+                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Polished Brass Handle / Doorknob with keyhole -->
+                                <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
+                                    <!-- Backplate -->
+                                    <div class="w-1 h-3.5 bg-gradient-to-b from-[#e5c060] to-[#8f711c] border border-black/30 rounded-xs flex flex-col items-center justify-center">
+                                        <!-- Knob -->
+                                        <div class="w-1 h-1 rounded-full bg-retro-gold shadow border border-black/40"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">演员排练</h4>
+                    </div>
+
+                    <!-- Door 2: Director's Lounge -->
+                    <div onclick="enterSubDept('director')" class="group relative flex flex-col items-center bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                        <!-- Top Brass Plate header -->
+                        <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
+                            DIRECTOR • 102
+                        </div>
+                        
+                        <!-- 3D Door Frame & Portal -->
+                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                            <!-- Glow Behind Door (Room interior lighting) -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
+                            </div>
+                            
+                            <!-- Detailed Door Leaf -->
+                            <div id="door-leaf-director" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
+                                <!-- Top Arch Glass Window -->
+                                <div class="w-full h-10 sm:h-12 rounded-t-full door-glass flex items-center justify-center relative mt-1 overflow-hidden">
+                                    <div class="absolute inset-x-0 bottom-0 h-[1px] bg-retro-gold/40"></div>
+                                    <!-- Vintage cross grid bars -->
+                                    <div class="absolute inset-y-0 left-1/2 w-[1px] bg-retro-gold/30"></div>
+                                    <div class="absolute inset-x-0 top-1/2 h-[1px] bg-retro-gold/30"></div>
+                                    <i class="fa-solid fa-video text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
+                                </div>
+                                
+                                <!-- Recessed Wood Moldings -->
+                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
+                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
+                                        📽️
+                                    </div>
+                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
+                                        <!-- Brass Kick Plate at bottom of door -->
+                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Polished Brass Handle / Doorknob with keyhole -->
+                                <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
+                                    <!-- Backplate -->
+                                    <div class="w-1 h-3.5 bg-gradient-to-b from-[#e5c060] to-[#8f711c] border border-black/30 rounded-xs flex flex-col items-center justify-center">
+                                        <!-- Knob -->
+                                        <div class="w-1 h-1 rounded-full bg-retro-gold shadow border border-black/40"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">导演休息</h4>
+                    </div>
+
+                    <!-- Door 3: Screenwriter's Studio -->
+                    <div onclick="enterSubDept('writer')" class="group relative flex flex-col items-center bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                        <!-- Top Brass Plate header -->
+                        <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
+                            WRITER • 103
+                        </div>
+                        
+                        <!-- 3D Door Frame & Portal -->
+                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                            <!-- Glow Behind Door (Room interior lighting) -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
+                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
+                            </div>
+                            
+                            <!-- Detailed Door Leaf -->
+                            <div id="door-leaf-writer" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
+                                <!-- Top Arch Glass Window -->
+                                <div class="w-full h-10 sm:h-12 rounded-t-full door-glass flex items-center justify-center relative mt-1 overflow-hidden">
+                                    <div class="absolute inset-x-0 bottom-0 h-[1px] bg-retro-gold/40"></div>
+                                    <!-- Vintage cross grid bars -->
+                                    <div class="absolute inset-y-0 left-1/2 w-[1px] bg-retro-gold/30"></div>
+                                    <div class="absolute inset-x-0 top-1/2 h-[1px] bg-retro-gold/30"></div>
+                                    <i class="fa-solid fa-microphone-lines text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
+                                </div>
+                                
+                                <!-- Recessed Wood Moldings -->
+                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
+                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
+                                        ✍️
+                                    </div>
+                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
+                                        <!-- Brass Kick Plate at bottom of door -->
+                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Polished Brass Handle / Doorknob with keyhole -->
+                                <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
+                                    <!-- Backplate -->
+                                    <div class="w-1 h-3.5 bg-gradient-to-b from-[#e5c060] to-[#8f711c] border border-black/30 rounded-xs flex flex-col items-center justify-center">
+                                        <!-- Knob -->
+                                        <div class="w-1 h-1 rounded-full bg-retro-gold shadow border border-black/40"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">编剧工作</h4>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= SUB-VIEW 1: REHEARSAL ROOM (演员排练室) ================= -->
+            <div id="subDeptRehearsal" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
+                <!-- Music Player left -->
+                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
+                    
+                    <div class="space-y-1">
+                        <span class="px-1.5 py-0.5 bg-retro-gold text-black font-mono text-[8px] rounded font-bold uppercase">
+                            NOW REHEARSING
+                        </span>
+                        <h3 class="text-base font-bold text-white tracking-wide font-serif" id="rehearsalSongTitle">
+                            蓝莓夜 (Blueberry Nights)
+                        </h3>
+                        <p class="text-[10px] text-retro-gold" id="rehearsalSongArtist">陈婧霏</p>
+                    </div>
+
+                    <!-- Spinning Vinyl Record (Scaled down for mobile screens) -->
+                    <div class="relative w-36 h-36 my-3 select-none">
+                        <div id="vinylDisk" class="w-full h-full rounded-full bg-black border-2 border-retro-darkwood spin-anim flex items-center justify-center relative shadow-xl">
+                            <div class="absolute inset-2 rounded-full border border-gray-900/60"></div>
+                            <div class="absolute inset-4 rounded-full border border-gray-900/40"></div>
+                            <div class="absolute inset-6 rounded-full border border-gray-900/20"></div>
+                            
+                            <!-- Vinyl Center Artwork -->
+                            <div class="w-12 h-12 rounded-full bg-retro-burgundy border border-retro-gold/40 flex items-center justify-center relative overflow-hidden">
+                                <div class="text-[8px] font-mono text-retro-gold text-center leading-none">
+                                    红霞<br>1989
+                                </div>
+                                <div class="absolute w-2 h-2 rounded-full bg-black border border-retro-gold/20"></div>
+                            </div>
+                        </div>
+                        <!-- Playing arm needle -->
+                        <div id="vinylNeedle" class="absolute top-1 right-2 w-8 h-14 origin-top-right transform rotate-12 transition-transform duration-500 pointer-events-none">
+                            <svg class="w-full h-full" viewBox="0 0 50 100" fill="none">
+                                <path d="M45,10 L15,10 L10,60 L20,85 L18,95" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="45" cy="10" r="4" fill="#800020"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Custom Player Controller -->
+                    <div class="w-full space-y-3">
+                        <div class="flex justify-center items-center gap-4">
+                            <button onclick="changeTrack(-1)" class="w-8 h-8 rounded-full border border-retro-gold text-retro-gold active:scale-90 flex items-center justify-center text-xs">
+                                <i class="fa-solid fa-backward-step"></i>
+                            </button>
+                            <button onclick="toggleMusicPlayback()" id="playPauseBtn" class="w-10 h-10 rounded-full bg-retro-gold text-black active:scale-95 flex items-center justify-center shadow">
+                                <i class="fa-solid fa-play text-sm" id="playPauseIcon"></i>
+                            </button>
+                            <button onclick="changeTrack(1)" class="w-8 h-8 rounded-full border border-retro-gold text-retro-gold active:scale-90 flex items-center justify-center text-xs">
+                                <i class="fa-solid fa-forward-step"></i>
+                            </button>
+                        </div>
+                        <div class="text-[8px] text-gray-500">
+                            * 音乐源自浏览器模拟电子唱针发声
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Lyric board right -->
+                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-between overflow-hidden">
+                    <div class="border-b border-retro-gold/15 pb-2 mb-3 flex justify-between items-center">
+                        <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-paragraph"></i> 歌词纸笺</span>
+                    </div>
+
+                    <!-- Lyric text scroller -->
+                    <div id="lyricScroller" class="flex-1 min-h-[120px] overflow-y-auto space-y-3 pr-1 text-center flex flex-col justify-center select-none font-serif text-xs leading-loose text-gray-400">
+                        <!-- JS Dynamic lyric line injection -->
+                    </div>
+
+                    <div class="mt-3 pt-2 border-t border-retro-gold/15 flex flex-wrap gap-1">
+                        <span class="text-[9px] text-gray-500">切歌：</span>
+                        <button onclick="selectSpecificSong(0)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">蓝莓夜</button>
+                        <button onclick="selectSpecificSong(1)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">生活在别处</button>
+                        <button onclick="selectSpecificSong(2)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">深歌</button>
+                        <button onclick="selectSpecificSong(3)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">红霞</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SUB-VIEW 2: DIRECTOR'S LOUNGE (导演休息室) ================= -->
+            <div id="subDeptDirector" class="hidden flex-1 flex flex-col gap-3 overflow-y-auto bg-[#140b0d] border border-retro-gold/30 rounded p-4">
+                <div class="border-b border-retro-gold/15 pb-1.5 mb-2 flex justify-between items-center">
+                    <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-video"></i> 官方纪录影像</span>
+                </div>
+
+                <!-- CRT Video Showcase Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    
+                    <a href="https://www.bilibili.com/video/BV1f5411L7vj" target="_blank" class="group relative bg-retro-darkwood border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
+                        <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
+                            <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
+                            <img src="https://placehold.co/640x360/310b10/D4AF37?text=Blueberry+Nights" alt="蓝莓夜MV" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+                                <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-white text-xs font-bold mt-2 font-serif">《蓝莓夜》官方正式MV</h4>
+                        <p class="text-[10px] text-gray-400 mt-1">黑色电影梦幻短片，重塑八九十年代光影之美。</p>
+                        <div class="mt-3 border-t border-retro-gold/10 pt-1.5 flex justify-between text-[8px] text-retro-gold font-mono">
+                            <span>04:12</span>
+                            <span class="underline">观看演出视频</span>
+                        </div>
+                    </a>
+
+                    <a href="https://www.bilibili.com/video/BV1Lg4y1q7zQ" target="_blank" class="group relative bg-retro-darkwood border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
+                        <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
+                            <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
+                            <img src="https://placehold.co/640x360/1a2130/D4AF37?text=Red+Glow+Concert+Live" alt="上海巡演现场" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+                                <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-white text-xs font-bold mt-2 font-serif">《红霞影剧院》上海站精选纪录</h4>
+                        <p class="text-[10px] text-gray-400 mt-1">巡演首轮高光城市画卷收录，极尽复古梦幻色彩。</p>
+                        <div class="mt-3 border-t border-retro-gold/10 pt-1.5 flex justify-between text-[8px] text-retro-gold font-mono">
+                            <span>12:45</span>
+                            <span class="underline">观看演出视频</span>
+                        </div>
+                    </a>
+
+                    <a href="https://www.bilibili.com/video/BV1R5411Y75f" target="_blank" class="group relative bg-retro-darkwood border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
+                        <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
+                            <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
+                            <img src="https://placehold.co/640x360/141020/D4AF37?text=Interview+with+Jingfei" alt="采访" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/40">
+                                <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
+                            </div>
+                        </div>
+                        <h4 class="text-white text-xs font-bold mt-2 font-serif">美学解析访谈录</h4>
+                        <p class="text-[10px] text-gray-400 mt-1">揭秘如何将旧胶片与戏剧叙事融入演唱会现场。</p>
+                        <div class="mt-3 border-t border-retro-gold/10 pt-1.5 flex justify-between text-[8px] text-retro-gold font-mono">
+                            <span>18:30</span>
+                            <span class="underline">观看演出视频</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- ================= SUB-VIEW 3: WRITER'S STUDIO (编剧工作室) ================= -->
+            <div id="subDeptWriter" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
+                
+                <!-- Cassette Deck Left -->
+                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
+                    <div class="space-y-0.5">
+                        <span class="text-retro-gold text-[8px] font-mono tracking-widest uppercase">
+                            🎙️ CASSETTE PLAYER
+                        </span>
+                        <h3 class="text-sm font-bold text-white font-serif">声音档案馆</h3>
+                        <p class="text-[10px] text-gray-400">陈婧霏幕后访谈及故事录音带</p>
+                    </div>
+
+                    <div class="text-[9px] text-gray-400">
+                        在这里探寻陈婧霏巡回演唱会的精神脚本
+                    </div>
+                </div>
+
+                <!-- Podcast List Right -->
+                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
+                    <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-2 mb-3">
+                        <i class="fa-solid fa-microphone"></i> 巡演播客收录
+                    </h3>
+
+                    <!-- List of podcasts -->
+                    <div class="space-y-3 text-xs">
+                        
+                        <div class="bg-retro-darkwood border border-retro-gold/20 p-3 rounded">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-retro-gold font-bold font-serif text-xs">【泡泡骚电台】NO.34</span>
+                                <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">2024.11</span>
+                            </div>
+                            <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                深入聊到旧书、王家卫美学以及如何构筑让人疗愈跳舞的“影剧院”。
+                            </p>
+                            <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                <span class="text-gray-500">时长: 54分</span>
+                                <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    小宇宙FM <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood border border-retro-gold/20 p-3 rounded">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-retro-gold font-bold font-serif text-xs">【大内密谈】舞台戏剧与音乐叙事</span>
+                                <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">2025.02</span>
+                            </div>
+                            <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                聊到歌词脚本的初稿：每一首歌就是一部未上映老电影的分镜头。
+                            </p>
+                            <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                <span class="text-gray-500">时长: 78分</span>
+                                <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- AREA 5: BOX OFFICE (售票处 - 打卡与纪念票生成)   -->
+        <!-- ============================================== -->
+        <section id="box-office" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+                    <i class="fa-solid fa-arrow-left"></i> 返回主图
+                </button>
+                <div class="text-right">
+                    <h2 class="text-retro-neonred text-base font-bold font-serif">🎫 影剧院售票处</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono">Box Office</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
+                
+                <!-- Left: Profile & Check-in check -->
+                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-start space-y-4">
+                    <!-- User profile registration -->
+                    <div class="bg-black/50 border border-retro-gold/20 p-3 rounded text-xs space-y-2">
+                        <div class="flex items-center gap-1.5 text-retro-gold font-bold">
+                            <i class="fa-solid fa-address-card"></i> 登记打卡影院护照
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" id="usernameInput" placeholder="输入您的观众代号/昵称" class="flex-1 bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            <button onclick="saveUserProfile()" class="px-3 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all">
+                                确定
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tour Stop checklist and Achievement counts -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center text-retro-gold font-bold">
+                            <span class="text-xs"><i class="fa-solid fa-location-dot"></i> 签到已到场场次</span>
+                            <span class="font-mono text-[9px] text-gray-500">Stops</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2" id="ticketChecklist">
+                            <!-- Dynamic check-in checklist cards -->
+                        </div>
+
+                        <!-- Statistics badge & Timer -->
+                        <div class="bg-[#1a0f11] border border-retro-gold/20 p-3 rounded space-y-1.5 text-xs">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">已打卡城市数:</span>
+                                <span class="font-bold font-mono text-retro-gold" id="ticketCountLabel">0 / 5</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">观众荣誉称号:</span>
+                                <span class="font-bold text-retro-neonred text-[11px]" id="ticketStatusLabel">未观影新人</span>
+                            </div>
+                            <div class="h-[1px] bg-retro-gold/15 my-2"></div>
+                            <!-- Countdown placeholder -->
+                            <div class="text-[9px] font-mono text-center">
+                                <span class="text-gray-500 uppercase">红霞剧院下轮开盘倒计时:</span>
+                                <div id="countdownTimer" class="text-retro-neonred font-bold text-xs mt-1 flicker-anim">
+                                    00天 12小时 34分 56秒
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements Wall (New Feature) -->
+                        <div class="bg-[#1a0f11] border border-retro-gold/20 p-3 rounded space-y-2">
+                            <div class="flex justify-between items-center text-retro-gold font-bold">
+                                <span class="text-[10px] sm:text-[11px] flex items-center gap-1">
+                                    <i class="fa-solid fa-trophy text-retro-gold animate-pulse"></i> 红霞荣誉馆
+                                </span>
+                                <span class="font-mono text-[9px] text-retro-neonred font-bold" id="achievementProgress">0 / 7</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-1.5" id="achievementGrid">
+                                <!-- Dynamic achievements injected here -->
+                            </div>
+                        </div>
+
+                        <!-- Generate Custom Ticket button -->
+                        <button onclick="triggerTicketGeneration()" class="w-full py-2.5 bg-retro-velvet border border-retro-gold text-retro-gold hover:bg-retro-gold hover:text-black font-bold uppercase tracking-widest text-[10px] rounded active:scale-95 transition-all flex items-center justify-center gap-1.5 shadow-lg">
+                            <i class="fa-solid fa-print"></i> 打印红霞纸质纪念票根
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: China Map SVG (Touch area enlarged for mobile) -->
+                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-between items-center relative overflow-hidden">
+                    
+                    <div class="w-full flex-1 flex flex-col justify-center items-center min-h-[250px] md:min-h-0">
+                        <div id="mapContainer" class="w-full h-full flex flex-col justify-center items-center relative">
+                            <!-- High-fidelity custom inline SVG of China Map -->
+                            <svg class="w-full max-w-sm text-retro-gold/20 opacity-90" viewBox="0 0 800 600" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M120,450 C180,480 250,550 320,530 C390,510 420,580 480,560 C540,540 600,560 650,500 C700,440 780,420 740,350 C700,280 720,200 660,180 C600,160 550,120 480,140 C410,160 380,80 300,100 C220,120 180,220 150,280 C120,340 80,390 120,450 Z" stroke-dasharray="5 5"/>
+                                <path d="M660,180 C680,250 640,350 630,420" stroke-width="1"/>
+                                
+                                <!-- Optimized big transparent touch zones for mobile maps -->
+                                <!-- Beijing stop -->
+                                <g id="mapDot-0" class="cursor-pointer" onclick="toggleMapCheckin(0)">
+                                    <circle cx="480" cy="200" r="32" fill="transparent"/>
+                                    <circle cx="480" cy="200" r="16" fill="red" opacity="0.1" class="animate-ping"/>
+                                    <circle cx="480" cy="200" r="6" fill="#D4AF37" id="dotDot-0"/>
+                                    <text x="495" y="205" fill="#EED9C4" font-size="14" font-family="Noto Serif SC">北京</text>
+                                </g>
+                                
+                                <!-- Shanghai stop -->
+                                <g id="mapDot-1" class="cursor-pointer" onclick="toggleMapCheckin(1)">
+                                    <circle cx="580" cy="340" r="32" fill="transparent"/>
+                                    <circle cx="580" cy="340" r="16" fill="red" opacity="0.1" class="animate-ping"/>
+                                    <circle cx="580" cy="340" r="6" fill="#D4AF37" id="dotDot-1"/>
+                                    <text x="595" y="345" fill="#EED9C4" font-size="14" font-family="Noto Serif SC">上海</text>
+                                </g>
+
+                                <!-- Guangzhou stop -->
+                                <g id="mapDot-2" class="cursor-pointer" onclick="toggleMapCheckin(2)">
+                                    <circle cx="510" cy="480" r="32" fill="transparent"/>
+                                    <circle cx="510" cy="480" r="16" fill="red" opacity="0.1" class="animate-ping"/>
+                                    <circle cx="510" cy="480" r="6" fill="#D4AF37" id="dotDot-2"/>
+                                    <text x="525" y="485" fill="#EED9C4" font-size="14" font-family="Noto Serif SC">广州</text>
+                                </g>
+
+                                <!-- Chengdu stop -->
+                                <g id="mapDot-3" class="cursor-pointer" onclick="toggleMapCheckin(3)">
+                                    <circle cx="340" cy="380" r="32" fill="transparent"/>
+                                    <circle cx="340" cy="380" r="16" fill="red" opacity="0.1" class="animate-ping"/>
+                                    <circle cx="340" cy="380" r="6" fill="#D4AF37" id="dotDot-3"/>
+                                    <text x="290" y="385" fill="#EED9C4" font-size="14" font-family="Noto Serif SC">成都</text>
+                                </g>
+
+                                <!-- Xi'an stop -->
+                                <g id="mapDot-4" class="cursor-pointer" onclick="toggleMapCheckin(4)">
+                                    <circle cx="420" cy="310" r="32" fill="transparent"/>
+                                    <circle cx="420" cy="310" r="16" fill="red" opacity="0.1" class="animate-ping"/>
+                                    <circle cx="420" cy="310" r="6" fill="#D4AF37" id="dotDot-4"/>
+                                    <text x="435" y="315" fill="#EED9C4" font-size="14" font-family="Noto Serif SC">西安</text>
+                                </g>
+                            </svg>
+                            <span class="text-[9px] text-gray-500 absolute bottom-1 text-center font-mono w-full">轻触中国地图中的发光城市地标即可完成打卡</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ============================================== -->
+    <!-- OVERLAY: THE PRINTED VINTAGE TICKET STUB MODAL  -->
+    <!-- ============================================== -->
+    <div id="ticketModal" class="hidden fixed inset-0 bg-black/90 z-[110] flex items-center justify-center p-3 overflow-y-auto">
+        <div class="relative w-full max-w-md bg-retro-darkwood border border-retro-gold p-4 rounded shadow-2xl flex flex-col justify-between space-y-4 my-auto">
+            
+            <button onclick="closeTicketModal()" class="absolute top-3 right-3 text-retro-gold hover:text-white text-base">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center">
+                <h3 class="text-retro-neonred text-sm font-bold font-serif tracking-widest neon-glow-red">🎟️ “红霞影剧院”入场凭证已生成</h3>
+                <p class="text-[10px] text-gray-400 mt-0.5">请长按或截图下方精致纪念票根保存</p>
+            </div>
+
+            <!-- TICKET BODY (Fully restructured vertical layout for seamless mobile screen width) -->
+            <div id="ticketPrintArea" class="w-full bg-[#faedd9] text-retro-darkwood p-4 rounded border-2 border-dashed border-[#58111A] relative flex flex-col justify-between gap-4 overflow-hidden shadow-inner">
+                
+                <!-- Ticket Main Portion -->
+                <div class="space-y-3 relative pb-3 border-b border-dashed border-[#58111A]/40">
+                    
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[8px] font-mono tracking-widest uppercase text-retro-burgundy/60">EST. 1989 / MEMORIAL TICKET</span>
+                            <h4 class="text-lg font-black tracking-widest font-serif text-retro-burgundy leading-tight">红霞影剧院</h4>
+                            <p class="text-[8px] text-[#58111A]/80 font-serif">陈婧霏「红霞影剧院」巡回打卡纪念</p>
+                        </div>
+                        <span class="px-1.5 py-0.5 bg-retro-burgundy text-retro-gold font-mono text-[8px] font-bold tracking-widest uppercase rounded">
+                            ADMIT ONE
+                        </span>
+                    </div>
+
+                    <!-- Details grid -->
+                    <div class="grid grid-cols-2 gap-2 text-[10px] font-serif">
+                        <div>
+                            <span class="text-[8px] text-[#58111A]/60 block font-mono">SPECTATOR / 观影人</span>
+                            <span class="font-bold text-[#2a1317]" id="ticketSpecName">陈婧霏的歌迷</span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] text-[#58111A]/60 block font-mono">SEAT / 专属座位</span>
+                            <span class="font-bold text-[#2a1317]" id="ticketSeatNum">6排9座</span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] text-[#58111A]/60 block font-mono">STOPS / 打卡足迹</span>
+                            <span class="font-bold text-[#2a1317]" id="ticketStopsCount">3 / 5 城市</span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] text-[#58111A]/60 block font-mono">SERIAL / 票根序列</span>
+                            <span class="font-bold font-mono text-retro-burgundy" id="ticketSerialNum">HX-8941-8849</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-1">
+                        <p class="text-[8px] italic text-[#58111A]/80 font-serif leading-relaxed">
+                            “在这座虚幻的电影院里，所有迟到的人都有座位。” —《红霞》
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Ticket Stub Portion (Stacked beautifully below) -->
+                <div class="flex items-center justify-between gap-2 pt-1">
+                    
+                    <div class="text-left space-y-0.5">
+                        <span class="text-[8px] text-[#58111A]/60 block font-mono">STUB COUPON</span>
+                        <div class="text-sm font-bold font-serif text-retro-burgundy tracking-wide">
+                            红霞再现
+                        </div>
+                        <span class="text-[8px] text-[#58111A]/60 block font-mono" id="ticketPrintDate">DATE: 2026/07/17</span>
+                    </div>
+
+                    <!-- Decorative barcode -->
+                    <div class="flex flex-col items-center">
+                        <div class="flex gap-0.5 justify-center h-8 w-28 overflow-hidden bg-[#faedd9]" id="barcodeDisplay">
+                            <!-- JS lines -->
+                        </div>
+                        <span class="text-[7px] font-mono tracking-widest text-[#58111A]/80 mt-1">890123 456789</span>
+                    </div>
+
+                </div>
+
+                <!-- Circular side cutouts adapted vertically for mobile -->
+                <div class="absolute -left-2 top-2/3 -translate-y-1/2 w-4 h-4 rounded-full bg-retro-darkwood"></div>
+                <div class="absolute -right-2 top-2/3 -translate-y-1/2 w-4 h-4 rounded-full bg-retro-darkwood"></div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <button onclick="copyTicketRawText()" class="w-full py-2 border border-retro-gold text-retro-gold hover:bg-retro-gold hover:text-black font-sans font-bold text-xs rounded active:scale-95 transition-all flex items-center justify-center gap-1.5">
+                    <i class="fa-regular fa-clipboard"></i> 复制打卡代码
+                </button>
+                <button onclick="closeTicketModal()" class="w-full py-2 bg-retro-burgundy border border-retro-gold text-retro-gold font-sans font-bold text-xs rounded hover:bg-retro-gold hover:text-black transition-all">
+                    返回售票处
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- CUSTOM DIALOGUE MESSAGE OVERLAY BOX            -->
+    <!-- ============================================== -->
+    <div id="retroMessageModal" class="hidden fixed inset-0 bg-black/80 z-[120] flex items-center justify-center p-4">
+        <div class="w-full max-w-xs bg-[#1a0f11] border border-retro-gold p-4 rounded shadow-2xl relative text-center space-y-3">
+            <div class="text-retro-gold text-[10px] font-mono uppercase tracking-widest">红霞通知 MESSAGE</div>
+            <p id="retroMessageText" class="text-xs text-white font-serif leading-relaxed px-2">
+                通知内容
+            </p>
+            <button onclick="closeRetroMessage()" class="px-5 py-1 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all">
+                好的 OK
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- APPLICATION JAVASCRIPT STATE & LOGIC            -->
+    <!-- ============================================== -->
+    <script>
+        // App Core State
+        const STATE = {
+            currentUser: "红霞漫步人",
+            checkedCities: [0, 1, 2], // Default check-ins
+            activeScreen: "intro",
+            activeDeptSubView: "hallway",
+            currentShowcaseStop: 0,
+            musicPlaying: false,
+            currentSongIndex: 0,
+            ambientPlaying: false,
+            currentBgmIndex: 0,
+            bgmPlaying: false,
+            viewedStops: [0], // Start with first stop viewed
+            hasPlayedMusic: false,
+            hasSentPostcard: false,
+            hasPostedCraft: false,
+            unlockedAchievements: []
+        };
+
+        const BGM_LIST = [
+            { name: "红霞暖歌 (bgm1.mp3)", file: "bgm/bgm1.mp3" },
+            { name: "斑驳影记忆 (bgm2.mp3)", file: "bgm/bgm2.mp3" },
+            { name: "深夜放映机 (bgm3.mp3)", file: "bgm/bgm3.mp3" },
+            { name: "梦境留声机 (bgm4.mp3)", file: "bgm/bgm4.mp3" }
+        ];
+
+        let bgmAudio = null;
+
+        const ACHIEVEMENTS = [
+            { id: "reg_passport", title: "红霞漫步人", desc: "在售票处成功登记专属影院护照", quote: "“在这座虚幻的电影院里，所有迟到的人都有座位。” —《红霞》", icon: "👤" },
+            { id: "read_stops", title: "放映室来客", desc: "完整浏览过全部5个城市的放映纪实", quote: "“放映机里不知疲倦转着的，是整个时代的红霞。”", icon: "🎬" },
+            { id: "play_vinyl", title: "留声机侍者", desc: "在演员排练室里启动留声机播放现场乐曲", quote: "“留声机转动着，那些未曾开口的温柔。” —《蓝莓夜》", icon: "🎵" },
+            { id: "send_postcard", title: "深夜寄信人", desc: "在红霞收发室成功投递了一封明信片呓语", quote: "“把明信片投入红霞里，查收来自远方的回响。”", icon: "✉️" },
+            { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款专属饭制周边", quote: "“物料上的每一次折痕，都是热爱发出的低鸣。”", icon: "🎨" },
+            { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成全部五座巡演城市", quote: "“红霞退去，留下的每一站，都是漫漫星火。”", icon: "🌇" },
+            { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，听到温热声浪", quote: "“在这温热的声浪里，听见胶片滚动的呼吸。”", icon: "📻" }
+        ];
+
+        const TOUR_STOPS = [
+            {
+                city: "北京 BEIJING",
+                date: "2026.04.18",
+                venue: "北京 ・ 红霞大剧场",
+                narrative: "作为巡回演出的浩大开篇。陈婧霏在如梦似幻的巨幅落幕胶片中升起，整场演出充满了八九十年代沙龙歌剧的戏剧仪式感，北京观众在第一首《蓝莓夜》奏响时，眼眶便已被红霞侵染。",
+                poster: "https://placehold.co/600x800/290c0f/D4AF37?text=Beijing+Stop",
+                status: "售罄 SOLD OUT",
+                highlights: ["经典重现", "开场胶片", "管弦乐团"]
+            },
+            {
+                city: "上海 SHANGHAI",
+                date: "2026.05.02",
+                venue: "上海 ・ 兰心大戏院",
+                narrative: "复古剧院与老上海建筑美学的完美共鸣。在经典的法租界剧院内，陈婧霏特别翻唱了怀旧金曲，全场在深秋的冷风与室内温热的梦境中交互交叠，仿佛是一场穿越回1930和1980年代的蒙太奇旅程。",
+                poster: "https://placehold.co/600x800/151f2e/D4AF37?text=Shanghai+Stop",
+                status: "售罄 SOLD OUT",
+                highlights: ["萨克斯独奏", "百乐门布景", "怀旧金曲"]
+            },
+            {
+                city: "广州 GUANGZHOU",
+                date: "2026.05.16",
+                venue: "广州 ・ 大剧院放映厅",
+                narrative: "岭南湿润的雨夜化作影剧院中流淌的蓝色。陈婧霏手持麦克风，在摇曳的红光与深蓝的舞台布景中交替倾诉。《生活在别处》的变奏版本在这场演出中散发出了奇妙的海洋潮湿感。",
+                poster: "https://placehold.co/600x800/0d1f1c/D4AF37?text=Guangzhou+Stop",
+                status: "售罄 SOLD OUT",
+                highlights: ["玫瑰花瓣", "粤语念白", "别处变奏"]
+            },
+            {
+                city: "成都 CHENGDU",
+                date: "2026.05.30",
+                venue: "成都 ・ 锦江剧场",
+                narrative: "川蜀不夜城的松弛感注入红霞剧场。演出氛围极其自由而热烈，陈婧霏与观众近距离席地对谈，就像是在一个深夜的老式咖啡馆，每个人都卸下了伪装，伴着手风琴声和昏黄光芒，沉沦在音乐中。",
+                poster: "https://placehold.co/600x800/221528/D4AF37?text=Chengdu+Stop",
+                status: "售罄 SOLD OUT",
+                highlights: ["手风琴重奏", "观众点歌", "寄语纸飞机"]
+            },
+            {
+                city: "西安 XI'AN",
+                date: "2026.06.13",
+                venue: "西安 ・ 易俗大剧院",
+                narrative: "在古老浑厚的大地上投映最现代的梦。陈婧霏在终点之站展现了极强的叙事张力。她将自己过往几年的手稿与胶片，直接在古老的戏院幕布上投影，重演一幕幕红霞电影诞生始末。",
+                poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+Stop",
+                status: "售罄 SOLD OUT",
+                highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
+            }
+        ];
+
+        const REHEARSAL_TRACKS = [
+            {
+                title: "蓝莓夜",
+                artist: "陈婧霏",
+                lyrics: [
+                    "我想进入这蓝莓色的夜里",
+                    "把霓虹和孤独都吞进腹中",
+                    "留声机转动着 那些未曾开口的温柔",
+                    "在红霞退去之前 陪我跳完这最后一支舞",
+                    "噢 亲爱的 所有的迟到者其实都有座位",
+                    "在这斑驳的暗影里 歌声永不荒芜..."
+                ]
+            },
+            {
+                title: "生活在别处",
+                artist: "陈婧霏",
+                lyrics: [
+                    "我们总是在寻找 另一个遥远的港湾",
+                    "却忘记了 此时此刻脚下的红色泥土",
+                    "汽笛声在旷野里 拖曳出漫长的告别",
+                    "陈旧的明信片上 字迹早已模糊不清",
+                    "走吧 走吧 生活本就不在这里",
+                    "生活 永远在迷人的别处..."
+                ]
+            },
+            {
+                title: "深歌",
+                artist: "陈婧霏",
+                lyrics: [
+                    "用最低沉的声线 唱一首无人的歌",
+                    "像黑白默片里 缓缓飘落的细雨",
+                    "你的目光是旧影院里 唯一的探照灯",
+                    "穿透我胸膛中 那些堆积尘封的旧账",
+                    "让我们在歌声深处 再次沉沦",
+                    "直到微光 抚平所有的创伤..."
+                ]
+            },
+            {
+                title: "红霞",
+                artist: "陈婧霏",
+                lyrics: [
+                    "当落日熔金 铺满整个无边的天际",
+                    "那是影剧院 亮起的最华丽的幕布",
+                    "我们用一生 等待这一抹绚烂的落幕",
+                    "把眼泪 融进这烧透了的霞光里",
+                    "不要流泪 这是胶片中最完美的终局",
+                    "红霞散去 我们的歌仍在回荡..."
+                ]
+            }
+        ];
+
+        const SEEDED_MAILS = [
+            { id: 1, sender: "胶片收集癖", stamp: "stamp-film", content: "陈婧霏北京站的红海亮起的一瞬间，我好像真的回到了黑白默片的年代，那种美太震撼了，感谢你给我的梦。", date: "2026/07/15" },
+            { id: 2, sender: "深陷蓝莓夜", stamp: "stamp-cherry", content: "上海站兰心大戏院的萨克斯吹得我心碎。感觉自己就是王家卫镜头里那个在走廊尽头等人的孤独角色。", date: "2026/07/16" },
+            { id: 3, sender: "流浪玫瑰", stamp: "stamp-hxia", content: "今晚在红霞影剧院里，我哭得像个小孩。感觉所有的疲惫 and 伪装都被你的声音轻轻拂去了。谢谢你婧霏！", date: "2026/07/17" }
+        ];
+
+        const SEEDED_CRAFTS = [
+            { id: 1, author: "星海手作社", title: "复古红手幅 - 迟到者皆有座", desc: "在广州站场外发放，烫金字体，高克重卡纸。现场凭票根领完即止。", img: "" },
+            { id: 2, author: "电影院幽灵", title: "胶片风打卡自制画报", desc: "上海站专供。融入老唱片和红霞色彩，可用于现场合影打卡。附赠迷你玫瑰贴纸。", img: "" }
+        ];
+
+        let audioCtx = null;
+        let ambientOsc = null;
+        let musicOsc = null;
+
+        window.onload = function() {
+            // Load user state from local storage if available
+            const savedUser = localStorage.getItem('hongxia_username');
+            if (savedUser) {
+                STATE.currentUser = savedUser;
+                const usernameInput = document.getElementById('usernameInput');
+                if (usernameInput) usernameInput.value = savedUser;
+                updateHeaderUserDisplay();
+            }
+
+            const savedChecks = localStorage.getItem('hongxia_checks');
+            if (savedChecks) {
+                try {
+                    STATE.checkedCities = JSON.parse(savedChecks);
+                } catch(e) {
+                    STATE.checkedCities = [0, 1, 2];
+                }
+            }
+
+            // Load Viewed Stops
+            const savedViewed = localStorage.getItem('hongxia_viewed_stops');
+            if (savedViewed) {
+                try {
+                    STATE.viewedStops = JSON.parse(savedViewed);
+                } catch(e) {
+                    STATE.viewedStops = [0];
+                }
+            } else {
+                STATE.viewedStops = [0];
+            }
+
+            // Load interaction booleans
+            STATE.hasPlayedMusic = localStorage.getItem('hongxia_played_music') === 'true';
+            STATE.hasSentPostcard = localStorage.getItem('hongxia_sent_postcard') === 'true';
+            STATE.hasPostedCraft = localStorage.getItem('hongxia_posted_craft') === 'true';
+
+            // Load achievements
+            const savedAch = localStorage.getItem('hongxia_achievements');
+            if (savedAch) {
+                try {
+                    STATE.unlockedAchievements = JSON.parse(savedAch);
+                } catch(e) {
+                    STATE.unlockedAchievements = [];
+                }
+            } else {
+                STATE.unlockedAchievements = [];
+            }
+
+            initInteractiveDBs();
+            setInterval(updateClock, 1000);
+            setInterval(updateTourCountdown, 1000);
+            updateTourCountdown();
+
+            syncMapDotsVisuals();
+            syncChecklistVisuals();
+            renderPigeonholes();
+            renderCrafts();
+            renderProjectorStop();
+            renderSongLyric();
+            generateBarcode();
+            
+            // Check & render achievements
+            checkAchievements();
+        };
+
+        function initInteractiveDBs() {
+            if (!localStorage.getItem('hongxia_mails')) {
+                localStorage.setItem('hongxia_mails', JSON.stringify(SEEDED_MAILS));
+            }
+            if (!localStorage.getItem('hongxia_crafts')) {
+                localStorage.setItem('hongxia_crafts', JSON.stringify(SEEDED_CRAFTS));
+            }
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            const clockEl = document.getElementById('headerClock');
+            if (clockEl) clockEl.innerText = timeStr;
+        }
+
+        function updateTourCountdown() {
+            const targetDate = new Date("December 12, 2026 19:30:00").getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const timerEl = document.getElementById('countdownTimer');
+            if (difference < 0) {
+                timerEl.innerText = "红霞影院，正式营业中";
+                return;
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            timerEl.innerText = `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+        }
+
+        function navigateTo(screenId) {
+            document.getElementById('mainMapScreen').style.display = 'none';
+            document.getElementById('mailroom').style.display = 'none';
+            document.getElementById('lobby').style.display = 'none';
+            document.getElementById('grand-cinema').style.display = 'none';
+            document.getElementById('business-dept').style.display = 'none';
+            const boxOfficeEl = document.getElementById('box-office');
+            if (boxOfficeEl) boxOfficeEl.style.display = 'none';
+
+            STATE.activeScreen = screenId;
+
+            if (screenId === 'main-map') {
+                document.getElementById('mainMapScreen').style.display = 'flex';
+                syncMapDotsVisuals();
+            } else if (screenId === 'mailroom') {
+                document.getElementById('mailroom').style.display = 'flex';
+                renderPigeonholes();
+            } else if (screenId === 'lobby') {
+                document.getElementById('lobby').style.display = 'flex';
+                renderCrafts();
+            } else if (screenId === 'grand-cinema') {
+                document.getElementById('grand-cinema').style.display = 'flex';
+                renderProjectorStop();
+            } else if (screenId === 'business-dept') {
+                document.getElementById('business-dept').style.display = 'flex';
+                showDeptSubView('hallway');
+            } else if (screenId === 'box-office') {
+                if (boxOfficeEl) boxOfficeEl.style.display = 'flex';
+                syncChecklistVisuals();
+                syncMapDotsVisuals();
+            }
+        }
+
+        function handleDeptBack() {
+            if (STATE.activeDeptSubView !== 'hallway') {
+                showDeptSubView('hallway');
+            } else {
+                navigateTo('main-map');
+            }
+        }
+
+        function showDeptSubView(subId) {
+            document.getElementById('deptHallway').style.display = 'none';
+            document.getElementById('subDeptRehearsal').style.display = 'none';
+            document.getElementById('subDeptDirector').style.display = 'none';
+            document.getElementById('subDeptWriter').style.display = 'none';
+
+            STATE.activeDeptSubView = subId;
+
+            const deptTitleText = document.getElementById('deptTitleText');
+            const deptSubText = document.getElementById('deptSubText');
+            const deptBackBtn = document.getElementById('deptBackBtn');
+
+            if (subId === 'hallway') {
+                document.getElementById('deptHallway').style.display = 'flex';
+                deptTitleText.innerText = "🏢 剧院业务部";
+                deptSubText.innerText = "Internal Wing";
+                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回主图`;
+                stopMusic();
+            } else if (subId === 'rehearsal') {
+                document.getElementById('subDeptRehearsal').style.display = 'grid';
+                deptTitleText.innerText = "🎙️ 演员排练室";
+                deptSubText.innerText = "RM 101 - Rehearsal Studio";
+                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出排练`;
+                renderSongLyric();
+            } else if (subId === 'director') {
+                document.getElementById('subDeptDirector').style.display = 'flex';
+                deptTitleText.innerText = "🎬 导演休息室";
+                deptSubText.innerText = "RM 102 - Director's Room";
+                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出休息`;
+            } else if (subId === 'writer') {
+                document.getElementById('subDeptWriter').style.display = 'grid';
+                deptTitleText.innerText = "✍️ 编剧工作室";
+                deptSubText.innerText = "RM 103 - Writer's Room";
+                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出工作室`;
+            }
+        }
+
+        // Play audio feedback for a given frequency and duration
+        function playShortBeep(freq, dur) {
+            if (!audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.value = freq;
+                osc.type = 'triangle';
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+                osc.start();
+                osc.stop(audioCtx.currentTime + dur);
+            } catch(e){}
+        }
+
+        function enterSubDept(subId) {
+            const leaf = document.getElementById(`door-leaf-${subId}`);
+            if (leaf) {
+                leaf.classList.add('open');
+                // Play a rich retro door-creak / opening chime melody
+                playShortBeep(280, 0.15);
+                setTimeout(() => playShortBeep(420, 0.12), 100);
+                setTimeout(() => playShortBeep(560, 0.20), 220);
+                
+                // Wait for the swing-open animation to complete before changing subviews
+                setTimeout(() => {
+                    showDeptSubView(subId);
+                    leaf.classList.remove('open');
+                }, 800);
+            } else {
+                showDeptSubView(subId);
+                playShortBeep(600, 0.05);
+            }
+        }
+
+        function startImmersiveExperience() {
+            const intro = document.getElementById('introScreen');
+            intro.style.transition = 'opacity 0.6s ease';
+            intro.style.opacity = '0';
+            setTimeout(() => {
+                intro.style.display = 'none';
+                document.getElementById('theaterHeader').style.display = 'flex';
+                document.getElementById('mainMapScreen').style.display = 'flex';
+            }, 600);
+
+            setTimeout(() => {
+                try {
+                    initAudioContext();
+                    // Autostart BGM (and fallback gracefully to ambient hum if files aren't uploaded yet)
+                    STATE.bgmPlaying = true;
+                    playBgm(0);
+                } catch(e) {
+                    console.log("Audio autostart blocked");
+                }
+            }, 300);
+        }
+
+        function initAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // Initialize BGM HTML5 Audio elements
+        function initBgmPlayer() {
+            if (!bgmAudio) {
+                bgmAudio = new Audio();
+                bgmAudio.addEventListener('ended', function() {
+                    nextBgm();
+                });
+                bgmAudio.addEventListener('error', function(e) {
+                    console.log("BGM file failed to load. Playing ambient projector noise as retro fallback.", e);
+                    // Mark as fallback source type on UI
+                    const dropdownSource = document.getElementById('bgmDropdownSource');
+                    if (dropdownSource) dropdownSource.innerText = "备用放映声";
+                    
+                    // Fallback to synthetic projection room hum
+                    if (STATE.bgmPlaying && !STATE.ambientPlaying) {
+                        startAmbientHum();
+                    }
+                    updateBgmUI();
+                });
+            }
+        }
+
+        // Toggle BGM dropdown visibility
+        function toggleBgmDropdown(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            initBgmPlayer();
+            initAudioContext();
+            
+            const dropdown = document.getElementById('bgmDropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('hidden');
+                dropdown.classList.toggle('flex');
+            }
+            playShortBeep(600, 0.05);
+        }
+
+        // Setup global click outside handler to close BGM dropdown
+        document.addEventListener('click', function(event) {
+            const widget = document.getElementById('bgmPlayerWidget');
+            const dropdown = document.getElementById('bgmDropdown');
+            if (widget && dropdown && !widget.contains(event.target)) {
+                dropdown.classList.add('hidden');
+                dropdown.classList.remove('flex');
+            }
+        });
+
+        // Sync state to BGM widget UI
+        function updateBgmUI() {
+            const statusIcon = document.getElementById('bgmStatusIcon');
+            const dropdownStatus = document.getElementById('bgmDropdownStatus');
+            const dropdownSource = document.getElementById('bgmDropdownSource');
+
+            // 1. Update Play Button Icon (Spinning note or static mute symbol)
+            if (statusIcon) {
+                if (STATE.bgmPlaying) {
+                    statusIcon.innerHTML = `<span class="animate-spin-retro">🎵</span>`;
+                } else {
+                    statusIcon.innerHTML = `🔇`;
+                }
+            }
+
+            // 2. Update status text inside dropdown
+            if (dropdownStatus) {
+                if (STATE.bgmPlaying) {
+                    dropdownStatus.innerText = STATE.ambientPlaying ? "备用声播放中" : "原声播放中";
+                    dropdownStatus.className = "uppercase text-green-400 font-bold";
+                } else {
+                    dropdownStatus.innerText = "已暂停";
+                    dropdownStatus.className = "uppercase text-zinc-400";
+                }
+            }
+
+            if (dropdownSource) {
+                if (STATE.bgmPlaying) {
+                    dropdownSource.innerText = STATE.ambientPlaying ? "备用声" : "MP3源";
+                } else {
+                    dropdownSource.innerText = "未激活";
+                }
+            }
+
+            // 3. Highlight the active song and display appropriate icon next to it
+            for (let i = 0; i < BGM_LIST.length; i++) {
+                const trackEl = document.getElementById(`bgm-track-${i}`);
+                const indicatorEl = document.getElementById(`bgm-indicator-${i}`);
+                const titleEl = document.getElementById(`bgm-title-${i}`);
+                
+                if (trackEl && indicatorEl && titleEl) {
+                    if (i === STATE.currentBgmIndex) {
+                        trackEl.className = "px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer bg-retro-burgundy/60 text-retro-gold border border-retro-gold/60 flex items-center justify-between select-none font-bold";
+                        
+                        if (STATE.bgmPlaying) {
+                            indicatorEl.innerHTML = `▶ <span class="animate-spin-retro text-[10px]">🎵</span>`;
+                        } else {
+                            indicatorEl.innerHTML = `⏸ 🔇`;
+                        }
+                    } else {
+                        trackEl.className = "px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/40 text-zinc-300 border border-transparent hover:border-retro-gold/30 flex items-center justify-between select-none";
+                        indicatorEl.innerText = `${i + 1}.`;
+                    }
+                }
+            }
+        }
+
+        // Play specific BGM track
+        function playBgm(index) {
+            initBgmPlayer();
+
+            // Handle cycle index wrapping
+            if (index < 0) index = BGM_LIST.length - 1;
+            if (index >= BGM_LIST.length) index = 0;
+            STATE.currentBgmIndex = index;
+
+            const currentTrack = BGM_LIST[index];
+
+            if (STATE.bgmPlaying) {
+                // Stop any running synthetic hum first to avoid blending
+                stopAmbientHum();
+
+                bgmAudio.src = currentTrack.file;
+                bgmAudio.load();
+
+                bgmAudio.play()
+                    .then(() => {
+                        console.log("Playing BGM track successfully:", currentTrack.file);
+                        updateBgmUI();
+                    })
+                    .catch(err => {
+                        console.log("MP3 play failed, falling back to ambient projector hum.", err);
+                        startAmbientHum();
+                        updateBgmUI();
+                    });
+            } else {
+                bgmAudio.pause();
+                stopAmbientHum();
+                updateBgmUI();
+            }
+        }
+
+        // Toggle BGM playback
+        function toggleBgm() {
+            initBgmPlayer();
+            initAudioContext();
+            
+            STATE.bgmPlaying = !STATE.bgmPlaying;
+            if (STATE.bgmPlaying) {
+                playBgm(STATE.currentBgmIndex);
+            } else {
+                bgmAudio.pause();
+                stopAmbientHum();
+                updateBgmUI();
+            }
+            playShortBeep(620, 0.05);
+        }
+
+        // Directly select and play/pause a BGM track from dropdown
+        function selectBgmTrack(index) {
+            initBgmPlayer();
+            initAudioContext();
+
+            if (STATE.currentBgmIndex === index) {
+                // Toggle playback if clicking current active track
+                toggleBgm();
+            } else {
+                // Play different track immediately
+                STATE.bgmPlaying = true;
+                playBgm(index);
+                playShortBeep(650, 0.06);
+            }
+        }
+
+        // Skip to next BGM track
+        function nextBgm() {
+            STATE.bgmPlaying = true;
+            playBgm((STATE.currentBgmIndex + 1) % BGM_LIST.length);
+            playShortBeep(720, 0.08);
+        }
+
+        // Skip to previous BGM track
+        function prevBgm() {
+            STATE.bgmPlaying = true;
+            playBgm((STATE.currentBgmIndex - 1 + BGM_LIST.length) % BGM_LIST.length);
+            playShortBeep(580, 0.08);
+        }
+
+        // Deprecated top-right compatible mapping
+        function toggleAmbientHum() {
+            toggleBgm();
+        }
+
+        function startAmbientHum() {
+            if (STATE.ambientPlaying) return;
+            try {
+                initAudioContext();
+                const bufferSize = 2 * audioCtx.sampleRate;
+                const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const whiteNoise = audioCtx.createBufferSource();
+                whiteNoise.buffer = noiseBuffer;
+                whiteNoise.loop = true;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 180;
+
+                const gainNode = audioCtx.createGain();
+                gainNode.gain.value = 0.06;
+
+                whiteNoise.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                whiteNoise.start();
+                ambientOsc = { source: whiteNoise, gain: gainNode };
+                STATE.ambientPlaying = true;
+                
+                // Check achievement for ambient trigger
+                checkAchievements();
+            } catch(e) {
+                console.error("Failed to play ambient fallback hum", e);
+            }
+        }
+
+        function stopAmbientHum() {
+            if (ambientOsc) {
+                try {
+                    ambientOsc.source.stop();
+                } catch(e){}
+                ambientOsc = null;
+            }
+            STATE.ambientPlaying = false;
+        }
+
+        function renderPigeonholes() {
+            const container = document.getElementById('pigeonholeContainer');
+            container.innerHTML = "";
+            const mails = JSON.parse(localStorage.getItem('hongxia_mails')) || SEEDED_MAILS;
+
+            mails.slice().reverse().forEach(mail => {
+                let stampIcon = "🌇";
+                if (mail.stamp === "stamp-film") stampIcon = "🎞️";
+                else if (mail.stamp === "stamp-cherry") stampIcon = "🍒";
+
+                const item = document.createElement('div');
+                item.className = "bg-retro-darkwood border border-retro-gold/20 p-3 rounded relative cursor-pointer active:scale-95 transition-all flex flex-col justify-between";
+                item.onclick = () => showLetterModal(mail);
+
+                item.innerHTML = `
+                    <div class="flex justify-between items-start mb-1.5">
+                        <div class="space-y-0.5">
+                            <span class="text-[8px] text-gray-500 font-mono">${mail.date}</span>
+                            <h4 class="text-xs font-bold text-retro-gold font-serif">${mail.sender}</h4>
+                        </div>
+                        <span class="text-base">${stampIcon}</span>
+                    </div>
+                    <p class="text-[11px] text-gray-300 leading-relaxed font-serif line-clamp-2">
+                        ${mail.content}
+                    </p>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function handleSendMail(e) {
+            e.preventDefault();
+            const sender = document.getElementById('mailSender').value.trim();
+            const stamp = document.querySelector('input[name="stamp"]:checked').value;
+            const content = document.getElementById('mailBody').value.trim();
+
+            if (!sender || !content) return;
+
+            const mails = JSON.parse(localStorage.getItem('hongxia_mails')) || SEEDED_MAILS;
+            const dateStr = new Date().toLocaleDateString('zh-CN');
+
+            const newMail = {
+                id: Date.now(),
+                sender: sender,
+                stamp: stamp,
+                content: content,
+                date: dateStr
+            };
+
+            mails.push(newMail);
+            localStorage.setItem('hongxia_mails', JSON.stringify(mails));
+
+            // Record postcard sent achievement
+            if (!STATE.hasSentPostcard) {
+                STATE.hasSentPostcard = true;
+                localStorage.setItem('hongxia_sent_postcard', 'true');
+            }
+
+            document.getElementById('mailForm').reset();
+            playShortBeep(880, 0.1);
+
+            renderPigeonholes();
+            showRetroMessage(`💌 明信片投递成功！已挂至收发室的保管架上。`);
+            checkAchievements();
+        }
+
+        function showLetterModal(mail) {
+            let stampIcon = "🌇";
+            if (mail.stamp === "stamp-film") stampIcon = "🎞️";
+            else if (mail.stamp === "stamp-cherry") stampIcon = "🍒";
+
+            showRetroMessage(`
+                <div class="text-left space-y-3">
+                    <div class="flex justify-between items-start border-b border-retro-gold/20 pb-1.5">
+                        <div>
+                            <span class="text-[8px] text-gray-500 font-mono">${mail.date}</span>
+                            <div class="text-xs font-bold text-retro-gold">寄信人: ${mail.sender}</div>
+                        </div>
+                        <span class="text-base">${stampIcon}</span>
+                    </div>
+                    <p class="text-[11px] text-gray-200 leading-relaxed font-serif whitespace-pre-wrap">
+                        ${mail.content}
+                    </p>
+                </div>
+            `);
+        }
+
+        function renderCrafts() {
+            const container = document.getElementById('craftsContainer');
+            container.innerHTML = "";
+            const crafts = JSON.parse(localStorage.getItem('hongxia_crafts')) || SEEDED_CRAFTS;
+
+            crafts.slice().reverse().forEach(craft => {
+                const item = document.createElement('div');
+                item.className = "bg-retro-darkwood border border-retro-gold/20 rounded overflow-hidden flex flex-col justify-between p-2.5 space-y-2";
+
+                const imgSrc = craft.img || `https://placehold.co/400x300/271114/D4AF37?text=%E9%A5%AD%E5%88%B6%E7%89%A9%E6%96%99`;
+
+                item.innerHTML = `
+                    <div class="relative aspect-video w-full bg-black rounded overflow-hidden">
+                        <img src="${imgSrc}" alt="${craft.title}" class="w-full h-full object-cover">
+                        <div class="absolute bottom-1 left-1 bg-retro-burgundy/80 border border-retro-gold text-retro-gold text-[8px] px-1 py-0.5 rounded font-mono">
+                            BY: ${craft.author}
+                        </div>
+                    </div>
+                    <div class="space-y-0.5">
+                        <h4 class="text-white text-xs font-bold font-serif line-clamp-1">${craft.title}</h4>
+                        <p class="text-[10px] text-gray-400 leading-normal font-serif line-clamp-2">
+                            ${craft.desc}
+                        </p>
+                    </div>
+                    <button onclick="viewCraftDetails('${craft.author}', '${craft.title}', '${craft.desc}', '${imgSrc}')" class="w-full py-1 bg-[#140b0d] border border-retro-gold/20 text-retro-gold text-[9px] font-bold rounded active:scale-95 transition-all">
+                        查看完整布告说明
+                    </button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function handleSendMerch(e) {
+            e.preventDefault();
+            const author = document.getElementById('merchAuthor').value.trim();
+            const title = document.getElementById('merchTitle').value.trim();
+            const imgUrl = document.getElementById('merchImgUrl').value.trim();
+            const desc = document.getElementById('merchDesc').value.trim();
+
+            if (!author || !title || !desc) return;
+
+            const crafts = JSON.parse(localStorage.getItem('hongxia_crafts')) || SEEDED_CRAFTS;
+
+            const newCraft = {
+                id: Date.now(),
+                author: author,
+                title: title,
+                img: imgUrl,
+                desc: desc
+            };
+
+            crafts.push(newCraft);
+            localStorage.setItem('hongxia_crafts', JSON.stringify(crafts));
+
+            // Record craft posted achievement
+            if (!STATE.hasPostedCraft) {
+                STATE.hasPostedCraft = true;
+                localStorage.setItem('hongxia_posted_craft', 'true');
+            }
+
+            document.getElementById('merchForm').reset();
+            playShortBeep(700, 0.1);
+
+            renderCrafts();
+            showRetroMessage(`🎨 登记成功！已为您挂到一楼布告栏。`);
+            checkAchievements();
+        }
+
+        function viewCraftDetails(author, title, desc, img) {
+            showRetroMessage(`
+                <div class="text-left space-y-3">
+                    <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-retro-gold/15">
+                        <img src="${img}" alt="${title}" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white font-serif">${title}</h4>
+                        <span class="text-[10px] text-gray-400 font-serif">制作者: ${author}</span>
+                    </div>
+                    <div class="h-[1px] bg-retro-gold/15"></div>
+                    <p class="text-[11px] text-gray-300 leading-relaxed font-serif">
+                        ${desc}
+                    </p>
+                </div>
+            `);
+        }
+
+        function renderProjectorStop() {
+            const stop = TOUR_STOPS[STATE.currentShowcaseStop];
+            
+            // Record viewed stop to unlock "read_stops" achievement
+            if (STATE.viewedStops && !STATE.viewedStops.includes(STATE.currentShowcaseStop)) {
+                STATE.viewedStops.push(STATE.currentShowcaseStop);
+                localStorage.setItem('hongxia_viewed_stops', JSON.stringify(STATE.viewedStops));
+                checkAchievements();
+            }
+
+            document.getElementById('screenPosterImage').src = stop.poster;
+            document.getElementById('screenBadge').innerText = stop.status;
+            document.getElementById('screenDate').innerText = stop.date;
+            document.getElementById('screenVenue').innerText = stop.venue;
+            document.getElementById('screenTitle').innerText = stop.city + " ・ " + stop.venue.split('・')[1];
+            document.getElementById('screenNarrative').innerText = stop.narrative;
+
+            const highlightsContainer = document.getElementById('screenHighlights');
+            highlightsContainer.innerHTML = "";
+            stop.highlights.forEach(tag => {
+                const badge = document.createElement('span');
+                badge.className = "text-[9px] px-1.5 py-0.5 bg-retro-burgundy border border-retro-gold/35 text-retro-gold rounded font-serif";
+                badge.innerText = tag;
+                highlightsContainer.appendChild(badge);
+            });
+
+            document.getElementById('carouselIndexDisplay').innerText = STATE.currentShowcaseStop + 1;
+            document.getElementById('carouselTotalDisplay').innerText = TOUR_STOPS.length;
+            document.getElementById('carouselCurrentCity').innerText = stop.city;
+        }
+
+        function changeShowcaseStop(dir) {
+            STATE.currentShowcaseStop += dir;
+            if (STATE.currentShowcaseStop < 0) {
+                STATE.currentShowcaseStop = TOUR_STOPS.length - 1;
+            } else if (STATE.currentShowcaseStop >= TOUR_STOPS.length) {
+                STATE.currentShowcaseStop = 0;
+            }
+            playShortBeep(520, 0.05);
+            renderProjectorStop();
+        }
+
+        function renderSongLyric() {
+            const track = REHEARSAL_TRACKS[STATE.currentSongIndex];
+            document.getElementById('rehearsalSongTitle').innerText = track.title;
+            document.getElementById('rehearsalSongArtist').innerText = `陈婧霏 ・ 巡演经典现场`;
+
+            const scroller = document.getElementById('lyricScroller');
+            scroller.innerHTML = "";
+
+            track.lyrics.forEach((line, i) => {
+                const p = document.createElement('p');
+                p.className = `transition-all duration-300 font-serif leading-relaxed ${i === 2 ? 'text-retro-gold text-xs font-bold' : 'text-gray-400 text-[10px]'}`;
+                p.innerText = line;
+                scroller.appendChild(p);
+            });
+        }
+
+        function toggleMusicPlayback() {
+            const playIcon = document.getElementById('playPauseIcon');
+            const vinyl = document.getElementById('vinylDisk');
+            const needle = document.getElementById('vinylNeedle');
+
+            initAudioContext();
+
+            if (STATE.musicPlaying) {
+                stopMusic();
+                playIcon.className = "fa-solid fa-play text-xs";
+                vinyl.classList.add('spin-paused');
+                needle.style.transform = "rotate(12deg)";
+            } else {
+                startMusic();
+                playIcon.className = "fa-solid fa-pause text-xs";
+                vinyl.classList.remove('spin-paused');
+                needle.style.transform = "rotate(-5deg)";
+            }
+        }
+
+        function startMusic() {
+            if (STATE.musicPlaying) return;
+            try {
+                // Record play state for "play_vinyl" achievement
+                if (!STATE.hasPlayedMusic) {
+                    STATE.hasPlayedMusic = true;
+                    localStorage.setItem('hongxia_played_music', 'true');
+                    checkAchievements();
+                }
+
+                const melodies = [
+                    [261.63, 293.66, 329.63, 349.23, 392.00], 
+                    [329.63, 392.00, 440.00, 523.25, 587.33], 
+                    [220.00, 261.63, 293.66, 329.63, 440.00], 
+                    [392.00, 349.23, 329.63, 293.66, 261.63]  
+                ];
+
+                const notes = melodies[STATE.currentSongIndex];
+                let noteIndex = 0;
+
+                musicOsc = setInterval(() => {
+                    if (!audioCtx) return;
+                    try {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.type = 'sine';
+                        osc.frequency.value = notes[noteIndex];
+                        
+                        gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+                        
+                        osc.start();
+                        osc.stop(audioCtx.currentTime + 1.4);
+
+                        noteIndex = (noteIndex + 1) % notes.length;
+                    } catch(e){}
+                }, 800);
+
+                STATE.musicPlaying = true;
+            } catch(e){
+                console.error("Audio sequence failed", e);
+            }
+        }
+
+        function stopMusic() {
+            if (musicOsc) {
+                clearInterval(musicOsc);
+                musicOsc = null;
+            }
+            STATE.musicPlaying = false;
+        }
+
+        function changeTrack(dir) {
+            STATE.currentSongIndex += dir;
+            if (STATE.currentSongIndex < 0) {
+                STATE.currentSongIndex = REHEARSAL_TRACKS.length - 1;
+            } else if (STATE.currentSongIndex >= REHEARSAL_TRACKS.length) {
+                STATE.currentSongIndex = 0;
+            }
+            
+            const wasPlaying = STATE.musicPlaying;
+            if (wasPlaying) {
+                toggleMusicPlayback();
+            }
+            renderSongLyric();
+            if (wasPlaying) {
+                toggleMusicPlayback();
+            } else {
+                playShortBeep(650, 0.08);
+            }
+        }
+
+        function selectSpecificSong(idx) {
+            STATE.currentSongIndex = idx;
+            const wasPlaying = STATE.musicPlaying;
+            if (wasPlaying) {
+                toggleMusicPlayback();
+            }
+            renderSongLyric();
+            if (wasPlaying) {
+                toggleMusicPlayback();
+            } else {
+                playShortBeep(650, 0.08);
+            }
+        }
+
+        function syncMapDotsVisuals() {
+            TOUR_STOPS.forEach((stop, i) => {
+                const dot = document.getElementById(`dotDot-${i}`);
+                if (!dot) return;
+
+                if (STATE.checkedCities.includes(i)) {
+                    dot.setAttribute('fill', '#FF3131');
+                    dot.setAttribute('stroke', '#D4AF37');
+                    dot.setAttribute('stroke-width', '1.5');
+                } else {
+                    dot.setAttribute('fill', '#D4AF37');
+                    dot.setAttribute('stroke', 'none');
+                }
+            });
+        }
+
+        function syncChecklistVisuals() {
+            const container = document.getElementById('ticketChecklist');
+            container.innerHTML = "";
+
+            TOUR_STOPS.forEach((stop, i) => {
+                const isChecked = STATE.checkedCities.includes(i);
+                const cityShortName = stop.city.split(' ')[0];
+
+                const card = document.createElement('div');
+                card.onclick = () => toggleCheckinStop(i);
+                card.className = `border p-2 rounded cursor-pointer transition-all flex items-center justify-between active:scale-95 ${
+                    isChecked 
+                    ? 'bg-retro-burgundy/40 border-retro-neonred text-retro-neonred' 
+                    : 'bg-[#120708] border-retro-gold/15 text-gray-500'
+                }`;
+
+                card.innerHTML = `
+                    <div class="space-y-0.5">
+                        <span class="font-bold text-[11px] block text-white font-serif">${cityShortName}</span>
+                        <span class="text-[8px] block text-gray-400 font-mono">${stop.date}</span>
+                    </div>
+                    <div class="w-4.5 h-4.5 rounded-full border flex items-center justify-center ${
+                        isChecked ? 'border-retro-neonred bg-retro-neonred text-white' : 'border-retro-gold/20 text-transparent'
+                    }">
+                        <i class="fa-solid fa-check text-[8px]"></i>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            const count = STATE.checkedCities.length;
+            document.getElementById('ticketCountLabel').innerText = `${count} / ${TOUR_STOPS.length}`;
+            
+            let badgeTitle = "初见观众";
+            if (count >= 5) badgeTitle = "🏮 影剧院终极主理人";
+            else if (count >= 3) badgeTitle = "🎟️ 资深放映迷";
+            else if (count >= 1) badgeTitle = "🎞️ 入场观众";
+
+            document.getElementById('ticketStatusLabel').innerText = badgeTitle;
+        }
+
+        function toggleCheckinStop(idx) {
+            const index = STATE.checkedCities.indexOf(idx);
+            if (index > -1) {
+                STATE.checkedCities.splice(index, 1);
+            } else {
+                STATE.checkedCities.push(idx);
+            }
+            playShortBeep(620, 0.05);
+            localStorage.setItem('hongxia_checks', JSON.stringify(STATE.checkedCities));
+            syncChecklistVisuals();
+            syncMapDotsVisuals();
+            checkAchievements();
+        }
+
+        function toggleMapCheckin(idx) {
+            toggleCheckinStop(idx);
+            const cityShortName = TOUR_STOPS[idx].city.split(' ')[0];
+            const isChecked = STATE.checkedCities.includes(idx);
+            
+            showRetroMessage(
+                isChecked 
+                ? `🎟️ 打卡「${cityShortName}站」成功！地图地标已点亮。`
+                : `🎟️ 取消「${cityShortName}站」打卡。`
+            );
+        }
+
+        function saveUserProfile() {
+            const raw = document.getElementById('usernameInput').value.trim();
+            if (!raw) return;
+
+            STATE.currentUser = raw;
+            localStorage.setItem('hongxia_username', raw);
+            updateHeaderUserDisplay();
+            playShortBeep(720, 0.08);
+
+            showRetroMessage(`👤 护照登记完毕，代号: ${raw}`);
+            checkAchievements();
+        }
+
+        function updateHeaderUserDisplay() {
+            const userEl = document.getElementById('headerUserName');
+            if (userEl) userEl.innerText = STATE.currentUser;
+        }
+
+        function triggerTicketGeneration() {
+            if (!STATE.currentUser || STATE.currentUser === "未检票观众" || STATE.currentUser === "红霞漫步人") {
+                showRetroMessage(`⚠️ 打印纪念票根前，请先在「打卡影院护照」处保存您的昵称。`);
+                return;
+            }
+
+            document.getElementById('ticketSpecName').innerText = STATE.currentUser;
+            document.getElementById('ticketStopsCount').innerText = `${STATE.checkedCities.length} / ${TOUR_STOPS.length} 城市`;
+            
+            const row = Math.floor(Math.random() * 12) + 1;
+            const col = Math.floor(Math.random() * 24) + 1;
+            document.getElementById('ticketSeatNum').innerText = `${row}排${col}座`;
+
+            const serial = `HX-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`;
+            document.getElementById('ticketSerialNum').innerText = serial;
+
+            generateBarcode();
+
+            const today = new Date();
+            document.getElementById('ticketPrintDate').innerText = `DATE: ${today.toLocaleDateString('zh-CN')}`;
+
+            playShortBeep(1000, 0.04);
+            setTimeout(() => playShortBeep(1000, 0.04), 80);
+
+            document.getElementById('ticketModal').classList.remove('hidden');
+        }
+
+        function generateBarcode() {
+            const container = document.getElementById('barcodeDisplay');
+            if (!container) return;
+            container.innerHTML = "";
+
+            for (let i = 0; i < 24; i++) {
+                const bar = document.createElement('div');
+                const width = Math.random() > 0.4 ? 'w-[1.5px]' : 'w-[3px]';
+                const opacity = Math.random() > 0.15 ? 'bg-[#58111A]' : 'bg-transparent';
+                bar.className = `${width} h-full ${opacity}`;
+                container.appendChild(bar);
+            }
+        }
+
+        function closeTicketModal() {
+            document.getElementById('ticketModal').classList.add('hidden');
+        }
+
+        function copyTicketRawText() {
+            const summaryText = `[红霞影剧院] 我已集齐陈婧霏巡演 ${STATE.checkedCities.length} 站打卡足迹！我的纪念座位: ${document.getElementById('ticketSeatNum').innerText}。打卡序列: ${document.getElementById('ticketSerialNum').innerText}。`;
+            
+            const dummy = document.createElement('textarea');
+            dummy.value = summaryText;
+            document.body.appendChild(dummy);
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            showRetroMessage(`📋 打卡纪念代码已复制到剪贴板，快分享给同伴吧！`);
+        }
+
+        function showRetroMessage(text) {
+            document.getElementById('retroMessageText').innerHTML = text;
+            document.getElementById('retroMessageModal').classList.remove('hidden');
+            playShortBeep(780, 0.05);
+        }
+
+        function closeRetroMessage() {
+            document.getElementById('retroMessageModal').classList.add('hidden');
+        }
+
+        // ==============================================
+        // RED GLOW THEATER ACHIEVEMENTS SYSTEM
+        // ==============================================
+        function checkAchievements() {
+            let unlockedAny = false;
+            
+            // 1. Passport (Registered and name has changed from default)
+            const hasReg = STATE.currentUser && STATE.currentUser !== "未检票观众" && STATE.currentUser !== "红霞漫步人" && STATE.currentUser.trim() !== "";
+            if (hasReg) {
+                unlockedAny = unlockedAny || unlockSingle("reg_passport");
+            }
+
+            // 2. Viewed stops (All 5 tour stops viewed)
+            if (STATE.viewedStops && STATE.viewedStops.length >= 5) {
+                unlockedAny = unlockedAny || unlockSingle("read_stops");
+            }
+
+            // 3. Play music in rehearsal room
+            if (STATE.hasPlayedMusic) {
+                unlockedAny = unlockedAny || unlockSingle("play_vinyl");
+            }
+
+            // 4. Send postcard in mailroom
+            if (STATE.hasSentPostcard) {
+                unlockedAny = unlockedAny || unlockSingle("send_postcard");
+            }
+
+            // 5. Post a craft to一楼布告板
+            if (STATE.hasPostedCraft) {
+                unlockedAny = unlockedAny || unlockSingle("post_craft");
+            }
+
+            // 6. Check all cities in map/ticket office checklist
+            if (STATE.checkedCities && STATE.checkedCities.length === 5) {
+                unlockedAny = unlockedAny || unlockSingle("all_stops");
+            }
+
+            // 7. Background Ambient Hum active
+            if (STATE.ambientPlaying) {
+                unlockedAny = unlockedAny || unlockSingle("ambient_on");
+            }
+
+            // Sync with DOM
+            syncAchievements();
+        }
+
+        function unlockSingle(id) {
+            if (!STATE.unlockedAchievements) {
+                STATE.unlockedAchievements = [];
+            }
+            if (!STATE.unlockedAchievements.includes(id)) {
+                STATE.unlockedAchievements.push(id);
+                localStorage.setItem('hongxia_achievements', JSON.stringify(STATE.unlockedAchievements));
+                
+                const achievement = ACHIEVEMENTS.find(a => a.id === id);
+                if (achievement) {
+                    setTimeout(() => {
+                        showAchievementToast(achievement);
+                    }, 500);
+                }
+                return true;
+            }
+            return false;
+        }
+
+        function showAchievementToast(ach) {
+            let toastContainer = document.getElementById('achievementToastContainer');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.id = 'achievementToastContainer';
+                toastContainer.className = "fixed bottom-24 right-5 z-[200] flex flex-col gap-2 pointer-events-none max-w-sm w-full px-4 sm:px-0";
+                document.body.appendChild(toastContainer);
+            }
+
+            const toast = document.createElement('div');
+            toast.className = "bg-[#200e11] border border-retro-gold p-3.5 rounded shadow-2xl flex items-center gap-3 transition-all duration-500 ease-out translate-y-10 opacity-0 pointer-events-auto cursor-pointer";
+            toast.style.boxShadow = "0 0 15px rgba(212, 175, 55, 0.25)";
+            
+            toast.innerHTML = `
+                <div class="w-10 h-10 rounded-full bg-retro-gold/10 border border-retro-gold flex items-center justify-center text-xl shrink-0 animate-pulse">
+                    ${ach.icon}
+                </div>
+                <div class="flex-1">
+                    <div class="text-[9px] text-retro-gold uppercase tracking-widest font-mono font-bold">🎉 恭喜解锁红霞成就！</div>
+                    <div class="text-white font-bold font-serif text-xs mt-0.5">${ach.title}</div>
+                    <div class="text-[10px] text-gray-400 mt-0.5">${ach.desc}</div>
+                </div>
+            `;
+
+            toast.onclick = () => {
+                showAchievementDetail(ach.id);
+                toast.remove();
+            };
+
+            toastContainer.appendChild(toast);
+
+            // Play celebratory sound feedback
+            playShortBeep(650, 0.1);
+            setTimeout(() => playShortBeep(850, 0.15), 100);
+
+            // Animate entry
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 10);
+
+            // Auto fadeout/remove
+            setTimeout(() => {
+                toast.classList.add('translate-y-[-10px]', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 500);
+            }, 4500);
+        }
+
+        function syncAchievements() {
+            const grid = document.getElementById('achievementGrid');
+            if (!grid) return;
+            grid.innerHTML = "";
+
+            ACHIEVEMENTS.forEach(ach => {
+                const isUnlocked = STATE.unlockedAchievements && STATE.unlockedAchievements.includes(ach.id);
+                const card = document.createElement('div');
+                card.onclick = () => showAchievementDetail(ach.id);
+                card.className = `relative aspect-square rounded border flex flex-col items-center justify-center cursor-pointer transition-all duration-200 p-1 ${
+                    isUnlocked 
+                    ? 'bg-retro-burgundy/40 border-retro-gold text-retro-gold shadow-[0_0_8px_rgba(212,175,55,0.15)] hover:scale-[1.05]' 
+                    : 'bg-[#100607] border-retro-gold/10 text-gray-600 opacity-40 hover:opacity-60'
+                }`;
+
+                card.innerHTML = `
+                    <span class="text-lg ${isUnlocked ? 'filter-none' : 'grayscale'}">${ach.icon}</span>
+                    <span class="text-[8px] font-serif text-center mt-1 truncate w-full px-0.5 ${isUnlocked ? 'text-retro-gold font-semibold' : 'text-gray-500'}">${ach.title}</span>
+                    ${isUnlocked ? '<div class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-retro-neonred animate-pulse"></div>' : ''}
+                `;
+                grid.appendChild(card);
+            });
+
+            const unlockedCount = STATE.unlockedAchievements ? STATE.unlockedAchievements.length : 0;
+            const progressEl = document.getElementById('achievementProgress');
+            if (progressEl) {
+                progressEl.innerText = `${unlockedCount} / ${ACHIEVEMENTS.length}`;
+            }
+        }
+
+        function showAchievementDetail(id) {
+            const ach = ACHIEVEMENTS.find(a => a.id === id);
+            if (!ach) return;
+
+            const isUnlocked = STATE.unlockedAchievements && STATE.unlockedAchievements.includes(id);
+            playShortBeep(580, 0.05);
+
+            showRetroMessage(`
+                <div class="text-center space-y-3.5 py-1">
+                    <div class="w-14 h-14 rounded-full mx-auto flex items-center justify-center text-3xl border-2 ${
+                        isUnlocked 
+                        ? 'bg-retro-gold/10 border-retro-gold text-3xl animate-pulse' 
+                        : 'bg-black/50 border-gray-700 text-gray-600 grayscale'
+                    }">
+                        ${ach.icon}
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-retro-gold font-serif">${ach.title}</h4>
+                        <p class="text-[9px] text-gray-500 uppercase tracking-wider font-mono mt-0.5">
+                            ${isUnlocked ? '✦ 已解锁 ACHIEVED ✦' : '🔒 未解锁 LOCKED'}
+                        </p>
+                    </div>
+                    <div class="bg-black/30 border border-retro-gold/10 p-2.5 rounded text-[11px] text-gray-300 font-serif leading-relaxed text-left">
+                        <span class="text-gray-400 block mb-1 text-[10px] font-sans">解锁条件：</span>
+                        ${ach.desc}
+                    </div>
+                    ${isUnlocked ? `
+                        <div class="pt-1.5 border-t border-retro-gold/10">
+                            <p class="text-[11px] italic text-retro-neonred font-serif leading-relaxed px-1">
+                                ${ach.quote}
+                            </p>
+                        </div>
+                    ` : ''}
+                </div>
+            `);
+        }
+    </script>
+</body>
+</html>
