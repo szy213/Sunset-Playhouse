@@ -842,9 +842,9 @@
 
                     <div class="w-full bg-[#120708]/90 flex flex-col md:flex-row min-h-[280px]">
                         <!-- Film Poster image -->
-                        <div class="w-full md:w-2/5 relative overflow-hidden bg-black flex items-center justify-center">
-                            <img id="screenPosterImage" src="https://placehold.co/600x800/221115/D4AF37?text=Red+Glow" alt="城市海报" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+                        <div class="w-full md:w-2/5 relative overflow-hidden bg-black flex items-center justify-center" style="min-height:280px;">
+                            <div id="screenPosterContainer" class="w-full h-full"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
                             <div class="absolute top-2 left-2 bg-retro-burgundy/90 border border-retro-gold px-2 py-0.5 rounded text-[9px] text-retro-gold tracking-widest font-mono uppercase" id="screenBadge">
                                 SOLD OUT
                             </div>
@@ -2574,7 +2574,105 @@
                 checkAchievements();
             }
 
-            document.getElementById('screenPosterImage').src = stop.poster;
+            // Build poster area: gallery for past shows, single poster for upcoming
+            const posterContainer = document.getElementById('screenPosterContainer');
+            posterContainer.innerHTML = '';
+
+            if (stop.status === '已结束') {
+                // Horizontal scroll gallery of real photos
+                const scrollWrap = document.createElement('div');
+                scrollWrap.className = 'w-full h-full overflow-x-auto flex snap-x snap-mandatory scrollbar-hide';
+                scrollWrap.style.scrollbarWidth = 'none';
+                scrollWrap.style.msOverflowStyle = 'none';
+
+                let imgIndex = 1;
+                const maxImages = 25;
+                let hasLoadedAny = false;
+
+                const tryLoadNext = () => {
+                    if (imgIndex > maxImages) {
+                        if (!hasLoadedAny) showFallbackPoster();
+                        return;
+                    }
+                    const img = document.createElement('img');
+                    img.src = `images/tourpics/${stop.id} ${imgIndex}.webp`;
+                    img.alt = `${stop.city} ${imgIndex}`;
+                    img.className = 'h-full w-auto flex-shrink-0 snap-center object-contain';
+                    img.loading = 'lazy';
+
+                    img.onload = () => {
+                        hasLoadedAny = true;
+                        scrollWrap.appendChild(img);
+                        imgIndex++;
+                        tryLoadNext();
+                    };
+                    img.onerror = () => {
+                        if (!hasLoadedAny) showFallbackPoster();
+                    };
+                };
+
+                const showFallbackPoster = () => {
+                    const fb = document.createElement('img');
+                    fb.src = stop.poster;
+                    fb.alt = stop.city;
+                    fb.className = 'w-full h-full object-contain';
+                    posterContainer.innerHTML = '';
+                    posterContainer.appendChild(fb);
+                };
+
+                // Add scroll hint arrows (clean up old ones first)
+                const parentEl = posterContainer.parentElement;
+                parentEl.querySelectorAll('#galleryLeftArrow, #galleryRightArrow').forEach(el => el.remove());
+
+                const leftArrow = document.createElement('div');
+                leftArrow.className = 'absolute left-1 top-1/2 -translate-y-1/2 z-20 text-white/50 hover:text-white text-xs cursor-pointer transition-all duration-200 hover:scale-110';
+                leftArrow.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+                leftArrow.id = 'galleryLeftArrow';
+                leftArrow.title = '上一张';
+                leftArrow.onclick = (e) => {
+                    e.stopPropagation();
+                    const imgWidth = scrollWrap.querySelector('img')?.clientWidth || scrollWrap.clientWidth * 0.8;
+                    scrollWrap.scrollBy({ left: -imgWidth, behavior: 'smooth' });
+                };
+                parentEl.appendChild(leftArrow);
+
+                const rightArrow = document.createElement('div');
+                rightArrow.className = 'absolute right-1 top-1/2 -translate-y-1/2 z-20 text-white/50 hover:text-white text-xs cursor-pointer transition-all duration-200 hover:scale-110';
+                rightArrow.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+                rightArrow.id = 'galleryRightArrow';
+                rightArrow.title = '下一张';
+                rightArrow.onclick = (e) => {
+                    e.stopPropagation();
+                    const imgWidth = scrollWrap.querySelector('img')?.clientWidth || scrollWrap.clientWidth * 0.8;
+                    scrollWrap.scrollBy({ left: imgWidth, behavior: 'smooth' });
+                };
+                parentEl.appendChild(rightArrow);
+
+                // Update arrow visibility on scroll
+                const updateArrows = () => {
+                    const atStart = scrollWrap.scrollLeft <= 2;
+                    const atEnd = scrollWrap.scrollLeft + scrollWrap.clientWidth >= scrollWrap.scrollWidth - 2;
+                    const leftEl = document.getElementById('galleryLeftArrow');
+                    const rightEl = document.getElementById('galleryRightArrow');
+                    if (leftEl) leftEl.style.opacity = atStart ? '0.2' : '1';
+                    if (rightEl) rightEl.style.opacity = atEnd ? '0.2' : '1';
+                };
+                scrollWrap.addEventListener('scroll', updateArrows, { passive: true });
+                // Initial arrow state after images load
+                setTimeout(updateArrows, 300);
+                setTimeout(updateArrows, 1000);
+
+                posterContainer.appendChild(scrollWrap);
+                tryLoadNext();
+            } else {
+                // Upcoming show: single poster
+                const img = document.createElement('img');
+                img.src = stop.poster;
+                img.alt = stop.city;
+                img.className = 'w-full h-full object-contain';
+                posterContainer.appendChild(img);
+            }
+
             document.getElementById('screenBadge').innerText = stop.status;
             document.getElementById('screenDate').innerText = stop.date;
             document.getElementById('screenSeasonWeather').innerText = stop.season + ' ・ ' + stop.weather;
