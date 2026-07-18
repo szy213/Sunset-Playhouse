@@ -149,14 +149,14 @@
     <div class="vintage-grain"></div>
 
     <!-- Global BGM Floating Audio Player (Bottom Right) -->
-    <div id="bgmPlayerWidget" class="fixed bottom-4 right-4 z-50 flex items-center transition-all duration-300">
+    <div id="bgmPlayerWidget" class="hidden fixed bottom-4 right-4 z-50 flex items-center transition-all duration-300">
         <!-- Dropdown Song List (Appears to the left of the play button when clicked) -->
         <div id="bgmDropdown" class="hidden mr-3 bg-retro-darkwood/95 border border-retro-gold/60 p-2.5 rounded-lg shadow-[0_4px_25px_rgba(0,0,0,0.95)] backdrop-blur-md flex-col gap-2 min-w-[220px] max-w-[280px] animate-fade-in text-left">
             <div class="px-1 py-0.5 border-b border-retro-gold/20 flex justify-between items-center select-none">
                 <span class="text-[9px] text-retro-gold font-mono tracking-widest uppercase font-bold">
                     红霞 电影原声歌单
                 </span>
-                <span class="text-[8px] text-zinc-400 font-mono">4 TRACKS</span>
+                <span class="text-[8px] text-zinc-400 font-mono">5 TRACKS</span>
             </div>
             
             <!-- Song selection rows -->
@@ -165,28 +165,34 @@
                 <div onclick="selectBgmTrack(0)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-0">
                     <div class="flex items-center gap-2 truncate">
                         <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-0">1.</span>
-                        <span class="truncate" id="bgm-title-0">红霞暖歌 (bgm1.mp3)</span>
+                        <span class="truncate" id="bgm-title-0">红霞剧场</span>
                     </div>
                 </div>
                 <!-- Track 2 -->
                 <div onclick="selectBgmTrack(1)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-1">
                     <div class="flex items-center gap-2 truncate">
                         <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-1">2.</span>
-                        <span class="truncate" id="bgm-title-1">斑驳影记忆 (bgm2.mp3)</span>
+                        <span class="truncate" id="bgm-title-1">她不再幻想<span>
                     </div>
                 </div>
                 <!-- Track 2 (Index 2) -->
                 <div onclick="selectBgmTrack(2)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-2">
                     <div class="flex items-center gap-2 truncate">
                         <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-2">3.</span>
-                        <span class="truncate" id="bgm-title-2">深夜放映机 (bgm3.mp3)</span>
+                        <span class="truncate" id="bgm-title-2">光芒</span>
                     </div>
                 </div>
                 <!-- Track 3 (Index 3) -->
                 <div onclick="selectBgmTrack(3)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-3">
                     <div class="flex items-center gap-2 truncate">
                         <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-3">4.</span>
-                        <span class="truncate" id="bgm-title-3">梦境留声机 (bgm4.mp3)</span>
+                        <span class="truncate" id="bgm-title-3">今晚</span>
+                    </div>
+                </div>
+                <div onclick="selectBgmTrack(4)" class="px-2 py-1.5 rounded text-[11px] font-serif transition-all duration-200 cursor-pointer hover:bg-retro-burgundy/50 hover:text-white flex items-center justify-between select-none border border-transparent hover:border-retro-gold/30" id="bgm-track-4">
+                    <div class="flex items-center gap-2 truncate">
+                        <span class="text-retro-gold font-mono text-[9px]" id="bgm-indicator-4">5.</span>
+                        <span class="truncate" id="bgm-title-4">北海</span>
                     </div>
                 </div>
             </div>
@@ -213,7 +219,7 @@
     <div id="appContainer" class="w-full flex-1 relative flex flex-col items-center justify-center bg-[#0d0708] overflow-hidden">
         
         <!-- Cinematic Intro Overlayer (Simulated film start) -->
-        <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('/src/assets/images/intro_bg_1784342859924.jpg'); background-size: cover; background-position: center;">
+        <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.png'); background-size: cover; background-position: center;">
             <div class="absolute bottom-[25%] left-1/2 -translate-x-1/2 text-center">
                 <button onclick="startImmersiveExperience()" class="px-8 py-3.5 bg-retro-burgundy/90 hover:bg-retro-gold border-2 border-retro-gold text-retro-gold hover:text-retro-burgundy text-sm font-bold tracking-widest active:scale-95 transition-all duration-300 rounded shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center gap-2.5 backdrop-blur-xs whitespace-nowrap">
                     <i class="fa-solid fa-ticket animate-pulse"></i> 检票入场
@@ -228,7 +234,7 @@
         </header>
 
         <!-- THEATER BUILDING OVERVIEW (THE MAP VIEW) -->
-        <main id="mainMapScreen" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col justify-center items-center overflow-y-auto">
+        <main id="mainMapScreen" class="hidden w-full max-w-4xl mx-auto p-3 flex flex-col items-center overflow-y-auto" style="height: 70vh;">
             
             <div class="text-center my-2">
                 <h2 class="text-retro-gold text-base md:text-lg tracking-[0.2em] font-bold uppercase">剧院全景俯瞰图</h2>
@@ -243,13 +249,11 @@
 
                 <!-- Upper Marquee -->
                 <div class="w-full bg-[#270308] border border-retro-neonred/60 py-2.5 px-3 rounded text-center relative">
-                    <div class="absolute -top-1.5 left-1/2 -translate-x-1/2 bg-[#140b0d] px-2 text-[9px] text-retro-gold tracking-widest font-mono">
-                        RED GLOW CINEMA & CONCERT HALL
-                    </div>
+                    
                     <div class="flex justify-center gap-1 my-0.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-retro-neonred animate-ping"></span>
                         <span class="text-base sm:text-2xl font-display font-black text-retro-neonred neon-glow-red tracking-wider">
-                            HONG XIA YING JU YUAN
+                            红霞影剧院
                         </span>
                     </div>
                 </div>
@@ -1275,10 +1279,11 @@
         };
 
         const BGM_LIST = [
-            { name: "红霞暖歌 (bgm1.mp3)", file: "bgm/bgm1.mp3" },
-            { name: "斑驳影记忆 (bgm2.mp3)", file: "bgm/bgm2.mp3" },
-            { name: "深夜放映机 (bgm3.mp3)", file: "bgm/bgm3.mp3" },
-            { name: "梦境留声机 (bgm4.mp3)", file: "bgm/bgm4.mp3" }
+            { name: "红霞剧场", file: "bgm/bgm1.mp3" },
+            { name: "她不再幻想", file: "bgm/bgm2.mp3" },
+            { name: "光芒", file: "bgm/bgm3.mp3" },
+            { name: "今晚", file: "bgm/bgm4.mp3" },
+            { name: "北海", file: "bgm/bgm5.mp3" }
         ];
 
         let bgmAudio = null;
@@ -1295,49 +1300,160 @@
 
         const TOUR_STOPS = [
             {
-                city: "北京 BEIJING",
-                date: "2026.04.18",
+                id: "251206",
+                city: "北京",
+                date: "2025.12.06",
+                season: "冬",
+                weather: "晴",
                 venue: "北京 ・ 红霞大剧场",
-                narrative: "作为巡回演出的浩大开篇。陈婧霏在如梦似幻的巨幅落幕胶片中升起，整场演出充满了八九十年代沙龙歌剧的戏剧仪式感，北京观众在第一首《蓝莓夜》奏响时，眼眶便已被红霞侵染。",
-                poster: "https://placehold.co/600x800/290c0f/D4AF37?text=Beijing+Stop",
+                narrative: "冬日的北京，晴空万里。陈婧霏在红霞大剧场以《蓝莓夜》开场，清冷的空气与剧场内的暖光交织，观众在金色的夕阳余晖中步入这场跨越时空的音乐旅程。",
+                poster: "https://placehold.co/600x800/290c0f/D4AF37?text=Beijing+1206",
                 status: "售罄 SOLD OUT",
-                highlights: ["经典重现", "开场胶片", "管弦乐团"]
+                highlights: ["冬日序曲", "金色夕阳", "管弦乐团"]
             },
             {
-                city: "上海 SHANGHAI",
-                date: "2026.05.02",
+                id: "251207",
+                city: "北京",
+                date: "2025.12.07",
+                season: "冬",
+                weather: "多云",
+                venue: "北京 ・ 红霞大剧场",
+                narrative: "北京第二夜，多云的天幕为演出增添了几分厚重。陈婧霏以更加深沉的声线演绎《深歌》，多云的天空仿佛也在低语，与台上的歌声形成了奇妙的共鸣。",
+                poster: "https://placehold.co/600x800/3a1a1a/D4AF37?text=Beijing+1207",
+                status: "售罄 SOLD OUT",
+                highlights: ["深歌变奏", "多云天幕", "双城连演"]
+            },
+            {
+                id: "251212",
+                city: "上海",
+                date: "2025.12.12",
+                season: "冬",
+                weather: "阴",
                 venue: "上海 ・ 兰心大戏院",
-                narrative: "复古剧院与老上海建筑美学的完美共鸣。在经典的法租界剧院内，陈婧霏特别翻唱了怀旧金曲，全场在深秋的冷风与室内温热的梦境中交互交叠，仿佛是一场穿越回1930和1980年代的蒙太奇旅程。",
-                poster: "https://placehold.co/600x800/151f2e/D4AF37?text=Shanghai+Stop",
+                narrative: "阴天的上海，兰心大戏院内却温暖如春。复古的法租界剧院里，陈婧霏翻唱了怀旧金曲，阴天的柔光透过彩窗洒在舞台上，仿佛穿越回1930年代的蒙太奇旅程。",
+                poster: "https://placehold.co/600x800/151f2e/D4AF37?text=Shanghai+1212",
                 status: "售罄 SOLD OUT",
                 highlights: ["萨克斯独奏", "百乐门布景", "怀旧金曲"]
             },
             {
-                city: "广州 GUANGZHOU",
-                date: "2026.05.16",
+                id: "260305",
+                city: "广州",
+                date: "2026.03.05",
+                season: "春",
+                weather: "多云",
                 venue: "广州 ・ 大剧院放映厅",
-                narrative: "岭南湿润的雨夜化作影剧院中流淌的蓝色。陈婧霏手持麦克风，在摇曳的红光与深蓝的舞台布景中交替倾诉。《生活在别处》的变奏版本在这场演出中散发出了奇妙的海洋潮湿感。",
-                poster: "https://placehold.co/600x800/0d1f1c/D4AF37?text=Guangzhou+Stop",
+                narrative: "春日的广州，多云的天空下岭南暖风轻拂。陈婧霏在摇曳的红光与深蓝舞台间交替倾诉，《生活在别处》的变奏散发出海洋潮湿感，为春天注入了第一缕诗意。",
+                poster: "https://placehold.co/600x800/0d1f1c/D4AF37?text=Guangzhou+0305",
                 status: "售罄 SOLD OUT",
-                highlights: ["玫瑰花瓣", "粤语念白", "别处变奏"]
+                highlights: ["玫瑰花瓣", "粤语念白", "春日暖风"]
             },
             {
-                city: "成都 CHENGDU",
-                date: "2026.05.30",
+                id: "260308",
+                city: "深圳",
+                date: "2026.03.08",
+                season: "春",
+                weather: "多云",
+                venue: "深圳 ・ 滨海艺术中心",
+                narrative: "深圳的春日多云，滨海艺术中心内光影流动。陈婧霏以极具现代感的编排重新诠释经典，年轻的城市与复古的旋律碰撞出全新的火花，让人沉醉在这座不夜城的梦境里。",
+                poster: "https://placehold.co/600x800/1a2a1a/D4AF37?text=Shenzhen+0308",
+                status: "售罄 SOLD OUT",
+                highlights: ["现代编排", "滨海光影", "复古新声"]
+            },
+            {
+                id: "260314",
+                city: "杭州",
+                date: "2026.03.14",
+                season: "春",
+                weather: "晴",
+                venue: "杭州 ・ 西湖文化剧场",
+                narrative: "晴天的杭州，西湖边的剧场沐浴在春光里。陈婧霏在舞台上轻吟浅唱，窗外的湖光山色与台上的红霞光影交相辉映，整个夜晚都沉浸在江南独有的温柔中。",
+                poster: "https://placehold.co/600x800/1a2e1a/D4AF37?text=Hangzhou+0314",
+                status: "售罄 SOLD OUT",
+                highlights: ["西湖春色", "江南韵味", "光影交织"]
+            },
+            {
+                id: "260321",
+                city: "长沙",
+                date: "2026.03.21",
+                season: "春",
+                weather: "雨",
+                venue: "长沙 ・ 梅溪湖大剧院",
+                narrative: "春雨绵绵的长沙，梅溪湖畔的剧院里热情不减。陈婧霏在雨中吟唱，雨水敲打屋顶的节奏仿佛天然的和声，整个夜晚充满了湘江之畔独有的热烈与诗意。",
+                poster: "https://placehold.co/600x800/1a1515/D4AF37?text=Changsha+0321",
+                status: "售罄 SOLD OUT",
+                highlights: ["春雨和声", "湘江夜话", "热烈诗意"]
+            },
+            {
+                id: "260406",
+                city: "南京",
+                date: "2026.04.06",
+                season: "春",
+                weather: "多云",
+                venue: "南京 ・ 江苏大剧院",
+                narrative: "多云的南京，梧桐新绿。陈婧霏在江苏大剧院以沉稳的叙事感贯穿全场，六朝古都的底蕴与红霞的胶片质感完美融合，仿佛每一首歌都是一封写给旧时光的信。",
+                poster: "https://placehold.co/600x800/1e1a1a/D4AF37?text=Nanjing+0406",
+                status: "售罄 SOLD OUT",
+                highlights: ["梧桐新绿", "古都回响", "时光信笺"]
+            },
+            {
+                id: "260411",
+                city: "成都",
+                date: "2026.04.11",
+                season: "春",
+                weather: "雨",
                 venue: "成都 ・ 锦江剧场",
-                narrative: "川蜀不夜城的松弛感注入红霞剧场。演出氛围极其自由而热烈，陈婧霏与观众近距离席地对谈，就像是在一个深夜的老式咖啡馆，每个人都卸下了伪装，伴着手风琴声和昏黄光芒，沉沦在音乐中。",
-                poster: "https://placehold.co/600x800/221528/D4AF37?text=Chengdu+Stop",
+                narrative: "春雨中的成都，锦江剧场内松弛而自由。陈婧霏与观众近距离席地对谈，雨水轻敲瓦檐，手风琴声伴着昏黄光芒，每个人都卸下伪装，沉沦在这场不夜城的音乐中。",
+                poster: "https://placehold.co/600x800/221528/D4AF37?text=Chengdu+0411",
                 status: "售罄 SOLD OUT",
-                highlights: ["手风琴重奏", "观众点歌", "寄语纸飞机"]
+                highlights: ["手风琴重奏", "春雨瓦檐", "寄语纸飞机"]
             },
             {
-                city: "西安 XI'AN",
-                date: "2026.06.13",
+                id: "260705",
+                city: "郑州",
+                date: "2026.07.05",
+                season: "夏",
+                weather: "晴",
+                venue: "郑州 ・ 河南艺术中心",
+                narrative: "盛夏的郑州，晴空炽热。陈婧霏在河南艺术中心以饱满的热情点燃全场，中原大地的厚重与红霞的热烈交叠，夏日的高温仿佛也被音乐化作了一缕金色的光。",
+                poster: "https://placehold.co/600x800/2a1a0a/D4AF37?text=Zhengzhou+0705",
+                status: "售罄 SOLD OUT",
+                highlights: ["盛夏炽热", "中原回响", "金色光芒"]
+            },
+            {
+                id: "260726",
+                city: "西安",
+                date: "2026.07.26",
+                season: "夏",
+                weather: "",
                 venue: "西安 ・ 易俗大剧院",
-                narrative: "在古老浑厚的大地上投映最现代的梦。陈婧霏在终点之站展现了极强的叙事张力。她将自己过往几年的手稿与胶片，直接在古老的戏院幕布上投影，重演一幕幕红霞电影诞生始末。",
-                poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+Stop",
+                narrative: "夏日的西安，古老浑厚的大地投映最现代的梦。陈婧霏在易俗大剧院展现极强的叙事张力，将自己过往几年的手稿与胶片投影在古老戏院的幕布上，重演红霞电影的诞生始末。",
+                poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
                 status: "售罄 SOLD OUT",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
+            },
+            {
+                id: "260830",
+                city: "沈阳",
+                date: "2026.08.30",
+                season: "秋",
+                weather: "",
+                venue: "沈阳 ・ 盛京大剧院",
+                narrative: "初秋的沈阳，凉风送爽。陈婧霏在盛京大剧院以深情的演绎为东北注入红霞的暖色，工业城市的硬朗线条与柔美的旋律形成了独特张力，让人久久难忘。",
+                poster: "https://placehold.co/600x800/1a1a2a/D4AF37?text=Shenyang+0830",
+                status: "售罄 SOLD OUT",
+                highlights: ["初秋凉风", "工业诗意", "深情演绎"]
+            },
+            {
+                id: "260911",
+                city: "武汉",
+                date: "2026.09.11",
+                season: "秋",
+                weather: "",
+                venue: "武汉 ・ 琴台大剧院",
+                narrative: "秋日的武汉，琴台大剧院灯火辉煌。陈婧霏以巡演收官之站倾尽所有情感，江城的热忱与红霞的余晖交汇，为这段跨越四季的旅程画上了最动人的句号。",
+                poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
+                status: "售罄 SOLD OUT",
+                highlights: ["收官之夜", "江城余晖", "四季终章"]
             }
         ];
 
@@ -1630,6 +1746,7 @@
                 intro.style.display = 'none';
                 document.getElementById('theaterHeader').style.display = 'flex';
                 document.getElementById('mainMapScreen').style.display = 'flex';
+                document.getElementById('bgmPlayerWidget').style.display = 'flex';
             }, 600);
 
             setTimeout(() => {
@@ -1679,11 +1796,33 @@
             }
             initBgmPlayer();
             initAudioContext();
-            
+
             const dropdown = document.getElementById('bgmDropdown');
-            if (dropdown) {
-                dropdown.classList.toggle('hidden');
-                dropdown.classList.toggle('flex');
+
+            if (STATE.bgmPlaying) {
+                // First click: pause music and show playlist
+                STATE.bgmPlaying = false;
+                bgmAudio.pause();
+                stopAmbientHum();
+                updateBgmUI();
+                if (dropdown) {
+                    dropdown.classList.remove('hidden');
+                    dropdown.classList.add('flex');
+                }
+            } else {
+                // Second click: resume music from where it paused, hide playlist
+                STATE.bgmPlaying = true;
+                bgmAudio.play().catch(err => {
+                    // If resume fails (e.g. no src loaded yet), fall back to playBgm
+                    console.log("Resume failed, loading track from start.", err);
+                    playBgm(STATE.currentBgmIndex);
+                });
+                stopAmbientHum();
+                updateBgmUI();
+                if (dropdown) {
+                    dropdown.classList.add('hidden');
+                    dropdown.classList.remove('flex');
+                }
             }
             playShortBeep(600, 0.05);
         }
@@ -2429,7 +2568,7 @@
             }
 
             // 6. Check all cities in map/ticket office checklist
-            if (STATE.checkedCities && STATE.checkedCities.length === 5) {
+            if (STATE.checkedCities && STATE.checkedCities.length === TOUR_STOPS.length) {
                 unlockedAny = unlockedAny || unlockSingle("all_stops");
             }
 
