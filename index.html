@@ -545,12 +545,12 @@
 
             <!-- Projector Screen and Carousel Interface -->
             <div class="flex-1 flex flex-col justify-between items-center bg-[#070304] border border-retro-gold/30 rounded p-4 relative overflow-y-auto">
-                
+
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-gradient-to-b from-retro-gold/10 via-transparent to-transparent blur-3xl pointer-events-none"></div>
 
                 <!-- Dynamic Projector Screen Area -->
                 <div id="projectorScreen" class="w-full max-w-2xl bg-black border-[4px] border-retro-darkwood rounded shadow-2xl relative overflow-hidden flex items-center justify-center">
-                    
+
                     <div class="absolute inset-0 crt-scanline pointer-events-none opacity-30 z-10"></div>
 
                     <!-- Dynamic Film Poster image or text -->
@@ -576,11 +576,8 @@
                                     <span id="screenVenue">北京・红霞剧场</span>
                                 </div>
                                 <h3 class="text-lg md:text-xl text-white font-extrabold tracking-wide border-b border-retro-gold/10 pb-1" id="screenTitle">
-                                    北京首站 · “红霞再现”
+                                    北京首站 · "红霞再现"
                                 </h3>
-                                <p class="text-[11px] text-gray-300 leading-relaxed font-serif" id="screenNarrative">
-                                    陈婧霏身骑复古骏马，拉开这出永不落幕电影的序幕。
-                                </p>
                             </div>
 
                             <!-- Highlights section -->
@@ -596,21 +593,13 @@
                     </div>
                 </div>
 
-                <!-- Carousel Slide Navigation -->
-                <div class="w-full max-w-md mt-4 flex justify-between items-center gap-2">
-                    <button onclick="changeShowcaseStop(-1)" class="w-9 h-9 rounded-full border border-retro-gold text-retro-gold hover:bg-retro-gold hover:text-black active:scale-90 transition-all flex items-center justify-center">
-                        <i class="fa-solid fa-chevron-left text-sm"></i>
-                    </button>
-                    <div class="text-center">
-                        <div class="text-[9px] text-retro-gold tracking-widest uppercase font-mono mb-0.5">SELECTING STOP</div>
-                        <div class="font-bold text-xs tracking-wider text-white">
-                            <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> : 
-                            <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
-                        </div>
+                <!-- Swipe Indicator -->
+                <div class="w-full max-w-md mt-4 text-center">
+                    <div class="text-[9px] text-retro-gold tracking-widest uppercase font-mono mb-0.5">↑ 上下滑动切换 ↑</div>
+                    <div class="font-bold text-xs tracking-wider text-white">
+                        <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> :
+                        <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
                     </div>
-                    <button onclick="changeShowcaseStop(1)" class="w-9 h-9 rounded-full border border-retro-gold text-retro-gold hover:bg-retro-gold hover:text-black active:scale-90 transition-all flex items-center justify-center">
-                        <i class="fa-solid fa-chevron-right text-sm"></i>
-                    </button>
                 </div>
 
             </div>
@@ -967,7 +956,7 @@
                                 <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">2024.11</span>
                             </div>
                             <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                深入聊到旧书、王家卫美学以及如何构筑让人疗愈跳舞的“影剧院”。
+                                深入聊到旧书、王家卫美学以及如何构筑让人疗愈跳舞的"影剧院"。
                             </p>
                             <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
                                 <span class="text-gray-500">时长: 54分</span>
@@ -1154,7 +1143,7 @@
             </button>
 
             <div class="text-center">
-                <h3 class="text-retro-neonred text-sm font-bold font-serif tracking-widest neon-glow-red">🎟️ “红霞影剧院”入场凭证已生成</h3>
+                <h3 class="text-retro-neonred text-sm font-bold font-serif tracking-widest neon-glow-red">🎟️ "红霞影剧院"入场凭证已生成</h3>
                 <p class="text-[10px] text-gray-400 mt-0.5">请长按或截图下方精致纪念票根保存</p>
             </div>
 
@@ -1197,7 +1186,7 @@
 
                     <div class="pt-1">
                         <p class="text-[8px] italic text-[#58111A]/80 font-serif leading-relaxed">
-                            “在这座虚幻的电影院里，所有迟到的人都有座位。” —《红霞》
+                            "在这座虚幻的电影院里，所有迟到的人都有座位。" —《红霞》
                         </p>
                     </div>
 
@@ -1289,13 +1278,13 @@
         let bgmAudio = null;
 
         const ACHIEVEMENTS = [
-            { id: "reg_passport", title: "红霞漫步人", desc: "在售票处成功登记专属影院护照", quote: "“在这座虚幻的电影院里，所有迟到的人都有座位。” —《红霞》", icon: "👤" },
-            { id: "read_stops", title: "放映室来客", desc: "完整浏览过全部5个城市的放映纪实", quote: "“放映机里不知疲倦转着的，是整个时代的红霞。”", icon: "🎬" },
-            { id: "play_vinyl", title: "留声机侍者", desc: "在演员排练室里启动留声机播放现场乐曲", quote: "“留声机转动着，那些未曾开口的温柔。” —《蓝莓夜》", icon: "🎵" },
-            { id: "send_postcard", title: "深夜寄信人", desc: "在红霞收发室成功投递了一封明信片呓语", quote: "“把明信片投入红霞里，查收来自远方的回响。”", icon: "✉️" },
-            { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款专属饭制周边", quote: "“物料上的每一次折痕，都是热爱发出的低鸣。”", icon: "🎨" },
-            { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成全部五座巡演城市", quote: "“红霞退去，留下的每一站，都是漫漫星火。”", icon: "🌇" },
-            { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，听到温热声浪", quote: "“在这温热的声浪里，听见胶片滚动的呼吸。”", icon: "📻" }
+            { id: "reg_passport", title: "红霞漫步人", desc: "在售票处成功登记专属影院护照", quote: "「在这座虚幻的电影院里，所有迟到的人都有座位。」 —《红霞》", icon: "👤" },
+            { id: "read_stops", title: "放映室来客", desc: "完整浏览过全部5个城市的放映纪实", quote: "「放映机里不知疲倦转着的，是整个时代的红霞。」", icon: "🎬" },
+            { id: "play_vinyl", title: "留声机侍者", desc: "在演员排练室里启动留声机播放现场乐曲", quote: "「留声机转动着，那些未曾开口的温柔。」 —《蓝莓夜》", icon: "🎵" },
+            { id: "send_postcard", title: "深夜寄信人", desc: "在红霞收发室成功投递了一封明信片呓语", quote: "「把明信片投入红霞里，查收来自远方的回响。」", icon: "✉️" },
+            { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款专属饭制周边", quote: "「物料上的每一次折痕，都是热爱发出的低鸣。」", icon: "🎨" },
+            { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成全部五座巡演城市", quote: "「红霞退去，留下的每一站，都是漫漫星火。」", icon: "🌇" },
+            { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，听到温热声浪", quote: "「在这温热的声浪里，听见胶片滚动的呼吸。」", icon: "📻" }
         ];
 
         const TOUR_STOPS = [
@@ -1306,7 +1295,6 @@
                 season: "冬",
                 weather: "晴",
                 venue: "北京 ・ 红霞大剧场",
-                narrative: "冬日的北京，晴空万里。陈婧霏在红霞大剧场以《蓝莓夜》开场，清冷的空气与剧场内的暖光交织，观众在金色的夕阳余晖中步入这场跨越时空的音乐旅程。",
                 poster: "https://placehold.co/600x800/290c0f/D4AF37?text=Beijing+1206",
                 status: "售罄 SOLD OUT",
                 highlights: ["冬日序曲", "金色夕阳", "管弦乐团"]
@@ -1318,7 +1306,6 @@
                 season: "冬",
                 weather: "多云",
                 venue: "北京 ・ 红霞大剧场",
-                narrative: "北京第二夜，多云的天幕为演出增添了几分厚重。陈婧霏以更加深沉的声线演绎《深歌》，多云的天空仿佛也在低语，与台上的歌声形成了奇妙的共鸣。",
                 poster: "https://placehold.co/600x800/3a1a1a/D4AF37?text=Beijing+1207",
                 status: "售罄 SOLD OUT",
                 highlights: ["深歌变奏", "多云天幕", "双城连演"]
@@ -1330,7 +1317,6 @@
                 season: "冬",
                 weather: "阴",
                 venue: "上海 ・ 兰心大戏院",
-                narrative: "阴天的上海，兰心大戏院内却温暖如春。复古的法租界剧院里，陈婧霏翻唱了怀旧金曲，阴天的柔光透过彩窗洒在舞台上，仿佛穿越回1930年代的蒙太奇旅程。",
                 poster: "https://placehold.co/600x800/151f2e/D4AF37?text=Shanghai+1212",
                 status: "售罄 SOLD OUT",
                 highlights: ["萨克斯独奏", "百乐门布景", "怀旧金曲"]
@@ -1342,7 +1328,6 @@
                 season: "春",
                 weather: "多云",
                 venue: "广州 ・ 大剧院放映厅",
-                narrative: "春日的广州，多云的天空下岭南暖风轻拂。陈婧霏在摇曳的红光与深蓝舞台间交替倾诉，《生活在别处》的变奏散发出海洋潮湿感，为春天注入了第一缕诗意。",
                 poster: "https://placehold.co/600x800/0d1f1c/D4AF37?text=Guangzhou+0305",
                 status: "售罄 SOLD OUT",
                 highlights: ["玫瑰花瓣", "粤语念白", "春日暖风"]
@@ -1354,7 +1339,6 @@
                 season: "春",
                 weather: "多云",
                 venue: "深圳 ・ 滨海艺术中心",
-                narrative: "深圳的春日多云，滨海艺术中心内光影流动。陈婧霏以极具现代感的编排重新诠释经典，年轻的城市与复古的旋律碰撞出全新的火花，让人沉醉在这座不夜城的梦境里。",
                 poster: "https://placehold.co/600x800/1a2a1a/D4AF37?text=Shenzhen+0308",
                 status: "售罄 SOLD OUT",
                 highlights: ["现代编排", "滨海光影", "复古新声"]
@@ -1366,7 +1350,6 @@
                 season: "春",
                 weather: "晴",
                 venue: "杭州 ・ 西湖文化剧场",
-                narrative: "晴天的杭州，西湖边的剧场沐浴在春光里。陈婧霏在舞台上轻吟浅唱，窗外的湖光山色与台上的红霞光影交相辉映，整个夜晚都沉浸在江南独有的温柔中。",
                 poster: "https://placehold.co/600x800/1a2e1a/D4AF37?text=Hangzhou+0314",
                 status: "售罄 SOLD OUT",
                 highlights: ["西湖春色", "江南韵味", "光影交织"]
@@ -1378,7 +1361,6 @@
                 season: "春",
                 weather: "雨",
                 venue: "长沙 ・ 梅溪湖大剧院",
-                narrative: "春雨绵绵的长沙，梅溪湖畔的剧院里热情不减。陈婧霏在雨中吟唱，雨水敲打屋顶的节奏仿佛天然的和声，整个夜晚充满了湘江之畔独有的热烈与诗意。",
                 poster: "https://placehold.co/600x800/1a1515/D4AF37?text=Changsha+0321",
                 status: "售罄 SOLD OUT",
                 highlights: ["春雨和声", "湘江夜话", "热烈诗意"]
@@ -1390,7 +1372,6 @@
                 season: "春",
                 weather: "多云",
                 venue: "南京 ・ 江苏大剧院",
-                narrative: "多云的南京，梧桐新绿。陈婧霏在江苏大剧院以沉稳的叙事感贯穿全场，六朝古都的底蕴与红霞的胶片质感完美融合，仿佛每一首歌都是一封写给旧时光的信。",
                 poster: "https://placehold.co/600x800/1e1a1a/D4AF37?text=Nanjing+0406",
                 status: "售罄 SOLD OUT",
                 highlights: ["梧桐新绿", "古都回响", "时光信笺"]
@@ -1402,7 +1383,6 @@
                 season: "春",
                 weather: "雨",
                 venue: "成都 ・ 锦江剧场",
-                narrative: "春雨中的成都，锦江剧场内松弛而自由。陈婧霏与观众近距离席地对谈，雨水轻敲瓦檐，手风琴声伴着昏黄光芒，每个人都卸下伪装，沉沦在这场不夜城的音乐中。",
                 poster: "https://placehold.co/600x800/221528/D4AF37?text=Chengdu+0411",
                 status: "售罄 SOLD OUT",
                 highlights: ["手风琴重奏", "春雨瓦檐", "寄语纸飞机"]
@@ -1414,7 +1394,6 @@
                 season: "夏",
                 weather: "晴",
                 venue: "郑州 ・ 河南艺术中心",
-                narrative: "盛夏的郑州，晴空炽热。陈婧霏在河南艺术中心以饱满的热情点燃全场，中原大地的厚重与红霞的热烈交叠，夏日的高温仿佛也被音乐化作了一缕金色的光。",
                 poster: "https://placehold.co/600x800/2a1a0a/D4AF37?text=Zhengzhou+0705",
                 status: "售罄 SOLD OUT",
                 highlights: ["盛夏炽热", "中原回响", "金色光芒"]
@@ -1426,7 +1405,6 @@
                 season: "夏",
                 weather: "",
                 venue: "西安 ・ 易俗大剧院",
-                narrative: "夏日的西安，古老浑厚的大地投映最现代的梦。陈婧霏在易俗大剧院展现极强的叙事张力，将自己过往几年的手稿与胶片投影在古老戏院的幕布上，重演红霞电影的诞生始末。",
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
                 status: "售罄 SOLD OUT",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
@@ -1438,7 +1416,6 @@
                 season: "秋",
                 weather: "",
                 venue: "沈阳 ・ 盛京大剧院",
-                narrative: "初秋的沈阳，凉风送爽。陈婧霏在盛京大剧院以深情的演绎为东北注入红霞的暖色，工业城市的硬朗线条与柔美的旋律形成了独特张力，让人久久难忘。",
                 poster: "https://placehold.co/600x800/1a1a2a/D4AF37?text=Shenyang+0830",
                 status: "售罄 SOLD OUT",
                 highlights: ["初秋凉风", "工业诗意", "深情演绎"]
@@ -1450,7 +1427,6 @@
                 season: "秋",
                 weather: "",
                 venue: "武汉 ・ 琴台大剧院",
-                narrative: "秋日的武汉，琴台大剧院灯火辉煌。陈婧霏以巡演收官之站倾尽所有情感，江城的热忱与红霞的余晖交汇，为这段跨越四季的旅程画上了最动人的句号。",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
                 status: "售罄 SOLD OUT",
                 highlights: ["收官之夜", "江城余晖", "四季终章"]
@@ -2202,7 +2178,7 @@
 
         function renderProjectorStop() {
             const stop = TOUR_STOPS[STATE.currentShowcaseStop];
-            
+
             // Record viewed stop to unlock "read_stops" achievement
             if (STATE.viewedStops && !STATE.viewedStops.includes(STATE.currentShowcaseStop)) {
                 STATE.viewedStops.push(STATE.currentShowcaseStop);
@@ -2215,7 +2191,6 @@
             document.getElementById('screenDate').innerText = stop.date;
             document.getElementById('screenVenue').innerText = stop.venue;
             document.getElementById('screenTitle').innerText = stop.city + " ・ " + stop.venue.split('・')[1];
-            document.getElementById('screenNarrative').innerText = stop.narrative;
 
             const highlightsContainer = document.getElementById('screenHighlights');
             highlightsContainer.innerHTML = "";
@@ -2241,6 +2216,22 @@
             playShortBeep(520, 0.05);
             renderProjectorStop();
         }
+
+        // Touch swipe for projector screen
+        (function initProjectorSwipe() {
+            let touchStartY = 0;
+            const el = document.getElementById('projectorScreen');
+            if (!el) return;
+            el.addEventListener('touchstart', function(e) {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            el.addEventListener('touchend', function(e) {
+                const dy = e.changedTouches[0].clientY - touchStartY;
+                if (Math.abs(dy) > 50) {
+                    changeShowcaseStop(dy > 0 ? -1 : 1);
+                }
+            });
+        })();
 
         function renderSongLyric() {
             const track = REHEARSAL_TRACKS[STATE.currentSongIndex];
