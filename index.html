@@ -141,6 +141,18 @@
             display: inline-block;
             animation: spin-retro 3s linear infinite;
         }
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0.75;
+            }
+        }
+        .animate-neon-flicker {
+            animation: neon-flicker 4s infinite;
+            display: inline-block;
+        }
     </style>
 </head>
 <body class="bg-black text-gray-200 h-full overflow-hidden font-serif selection:bg-retro-burgundy selection:text-retro-gold relative flex flex-col">
@@ -220,9 +232,9 @@
         
         <!-- Cinematic Intro Overlayer (Simulated film start) -->
         <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.png'); background-size: cover; background-position: center;">
-            <div class="absolute bottom-[25%] left-1/2 -translate-x-1/2 text-center">
-                <button onclick="startImmersiveExperience()" class="px-8 py-3.5 bg-retro-burgundy/90 hover:bg-retro-gold border-2 border-retro-gold text-retro-gold hover:text-retro-burgundy text-sm font-bold tracking-widest active:scale-95 transition-all duration-300 rounded shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center gap-2.5 backdrop-blur-xs whitespace-nowrap">
-                    <i class="fa-solid fa-ticket animate-pulse"></i> 检票入场
+            <div class="absolute bottom-[35%] left-1/2 -translate-x-1/2 text-center">
+                <button onclick="startImmersiveExperience()" class="text-lg font-bold tracking-[0.3em] active:scale-95 transition-all duration-300 animate-neon-flicker">
+                    <i class="fa-solid fa-ticket"></i> 进入剧场
                 </button>
             </div>
         </div>
@@ -252,7 +264,7 @@
                     
                     <div class="flex justify-center gap-1 my-0.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-retro-neonred animate-ping"></span>
-                        <span class="text-base sm:text-2xl font-display font-black text-retro-neonred neon-glow-red tracking-wider">
+                        <span class="text-xl sm:text-3xl font-display font-black text-retro-gold tracking-wider animate-neon-flicker" style="text-shadow: 0 0 4px #D4AF37, 0 0 8px #b8860b;">
                             红霞影剧院
                         </span>
                     </div>
@@ -1289,9 +1301,9 @@
                 date: "2025.12.06",
                 season: "冬",
                 weather: "晴",
-                venue: "北京 ・ 红霞大剧场",
+                venue: "北京 ・ 1919 LIVEHOUSE",
                 poster: "https://placehold.co/600x800/290c0f/D4AF37?text=Beijing+1206",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["冬日序曲", "金色夕阳", "管弦乐团"]
             },
             {
@@ -1300,9 +1312,9 @@
                 date: "2025.12.07",
                 season: "冬",
                 weather: "多云",
-                venue: "北京 ・ 红霞大剧场",
+                venue: "北京 ・ 1919 LIVEHOUSE",
                 poster: "https://placehold.co/600x800/3a1a1a/D4AF37?text=Beijing+1207",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["深歌变奏", "多云天幕", "双城连演"]
             },
             {
@@ -1311,9 +1323,9 @@
                 date: "2025.12.12",
                 season: "冬",
                 weather: "阴",
-                venue: "上海 ・ 兰心大戏院",
+                venue: "上海 ・ 回响之地 Music Park",
                 poster: "https://placehold.co/600x800/151f2e/D4AF37?text=Shanghai+1212",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["萨克斯独奏", "百乐门布景", "怀旧金曲"]
             },
             {
@@ -1322,9 +1334,9 @@
                 date: "2026.03.05",
                 season: "春",
                 weather: "多云",
-                venue: "广州 ・ 大剧院放映厅",
+                venue: "广州 ・ 声音共和 LIVEHOUSE",
                 poster: "https://placehold.co/600x800/0d1f1c/D4AF37?text=Guangzhou+0305",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["玫瑰花瓣", "粤语念白", "春日暖风"]
             },
             {
@@ -1333,9 +1345,9 @@
                 date: "2026.03.08",
                 season: "春",
                 weather: "多云",
-                venue: "深圳 ・ 滨海艺术中心",
+                venue: "深圳 ・ BO LIVE",
                 poster: "https://placehold.co/600x800/1a2a1a/D4AF37?text=Shenzhen+0308",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["现代编排", "滨海光影", "复古新声"]
             },
             {
@@ -1344,9 +1356,9 @@
                 date: "2026.03.14",
                 season: "春",
                 weather: "晴",
-                venue: "杭州 ・ 西湖文化剧场",
+                venue: "杭州 ・ Live Shop Uni由你现场",
                 poster: "https://placehold.co/600x800/1a2e1a/D4AF37?text=Hangzhou+0314",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["西湖春色", "江南韵味", "光影交织"]
             },
             {
@@ -1355,9 +1367,9 @@
                 date: "2026.03.21",
                 season: "春",
                 weather: "雨",
-                venue: "长沙 ・ 梅溪湖大剧院",
+                venue: "长沙 ・ 达丰空间",
                 poster: "https://placehold.co/600x800/1a1515/D4AF37?text=Changsha+0321",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["春雨和声", "湘江夜话", "热烈诗意"]
             },
             {
@@ -1366,9 +1378,9 @@
                 date: "2026.04.06",
                 season: "春",
                 weather: "多云",
-                venue: "南京 ・ 江苏大剧院",
+                venue: "南京 ・ 稻香演绎中心",
                 poster: "https://placehold.co/600x800/1e1a1a/D4AF37?text=Nanjing+0406",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["梧桐新绿", "古都回响", "时光信笺"]
             },
             {
@@ -1377,9 +1389,9 @@
                 date: "2026.04.11",
                 season: "春",
                 weather: "雨",
-                venue: "成都 ・ 锦江剧场",
+                venue: "成都 ・ 东区超现场",
                 poster: "https://placehold.co/600x800/221528/D4AF37?text=Chengdu+0411",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
                 highlights: ["手风琴重奏", "春雨瓦檐", "寄语纸飞机"]
             },
             {
@@ -1388,9 +1400,20 @@
                 date: "2026.07.05",
                 season: "夏",
                 weather: "晴",
-                venue: "郑州 ・ 河南艺术中心",
+                venue: "郑州 ・ 7LIVEHOUSE+",
                 poster: "https://placehold.co/600x800/2a1a0a/D4AF37?text=Zhengzhou+0705",
-                status: "售罄 SOLD OUT",
+                status: "已结束",
+                highlights: ["盛夏炽热", "中原回响", "金色光芒"]
+            },
+            {
+                id: "260724",
+                city: "温州",
+                date: "2026.07.24",
+                season: "夏",
+                weather: "",
+                venue: "温州 ・ SEELAB",
+                poster: "https://placehold.co/600x800/2a1a0a/D4AF37?text=Wenzhou+0724",
+                status: "已结束",
                 highlights: ["盛夏炽热", "中原回响", "金色光芒"]
             },
             {
@@ -1399,9 +1422,20 @@
                 date: "2026.07.26",
                 season: "夏",
                 weather: "",
-                venue: "西安 ・ 易俗大剧院",
+                venue: "西安 ・ 西演SPACE·塞斯拾陆",
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
-                status: "售罄 SOLD OUT",
+                status: "待开演",
+                highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
+            },
+            {
+                id: "260816",
+                city: "合肥",
+                date: "2026.08.16",
+                season: "夏",
+                weather: "",
+                venue: "合肥",
+                poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
+                status: "待开演",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
             },
             {
@@ -1410,9 +1444,9 @@
                 date: "2026.08.30",
                 season: "秋",
                 weather: "",
-                venue: "沈阳 ・ 盛京大剧院",
+                venue: "沈阳 ",
                 poster: "https://placehold.co/600x800/1a1a2a/D4AF37?text=Shenyang+0830",
-                status: "售罄 SOLD OUT",
+                status: "待开演",
                 highlights: ["初秋凉风", "工业诗意", "深情演绎"]
             },
             {
@@ -1421,9 +1455,31 @@
                 date: "2026.09.11",
                 season: "秋",
                 weather: "",
-                venue: "武汉 ・ 琴台大剧院",
+                venue: "武汉",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
-                status: "售罄 SOLD OUT",
+                status: "待开演",
+                highlights: ["收官之夜", "江城余晖", "四季终章"]
+            },
+            {
+                id: "JN",
+                city: "济南",
+                date: "coming soon",
+                season: "秋",
+                weather: "",
+                venue: "济南",
+                poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Jinan",
+                status: "待开演",
+                highlights: ["收官之夜", "江城余晖", "四季终章"]
+            },
+            {
+                id: "NC",
+                city: "南昌",
+                date: "coming soon",
+                season: "秋",
+                weather: "",
+                venue: "南昌",
+                poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Nanchang",
+                status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"]
             }
         ];
