@@ -532,43 +532,40 @@
         <!-- ============================================== -->
         <!-- AREA 3: GRAND CINEMA (豪华影厅 - 巡演城市档案)     -->
         <!-- ============================================== -->
-        <section id="grand-cinema" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
-            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
-                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+        <section id="grand-cinema" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.png');">
+            <!-- Transparent header -->
+            <div class="flex justify-between items-center mb-3 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase backdrop-blur-sm">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif">🎬 豪华大影厅</h2>
-                    <p class="text-[9px] text-retro-gold uppercase font-mono">Screening Stops</p>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">🎬 豪华大影厅</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow">Screening Stops</p>
                 </div>
             </div>
 
-            <!-- Projector Screen and Carousel Interface -->
-            <div class="flex-1 flex flex-col justify-between items-center bg-[#070304] border border-retro-gold/30 rounded p-4 relative overflow-y-auto">
+            <!-- Center-aligned card area, transparent to show bg -->
+            <div class="flex-1 flex flex-col items-center justify-center relative">
 
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-72 bg-gradient-to-b from-retro-gold/10 via-transparent to-transparent blur-3xl pointer-events-none"></div>
+                <!-- Dynamic Projector Screen Card - 90% width, centered -->
+                <div id="projectorScreen" class="w-[90%] max-w-lg bg-black/80 backdrop-blur-md border-[3px] border-retro-gold/50 rounded-xl shadow-2xl relative overflow-hidden flex items-center justify-center">
 
-                <!-- Dynamic Projector Screen Area -->
-                <div id="projectorScreen" class="w-full max-w-2xl bg-black border-[4px] border-retro-darkwood rounded shadow-2xl relative overflow-hidden flex items-center justify-center">
+                    <div class="absolute inset-0 crt-scanline pointer-events-none opacity-20 z-10"></div>
 
-                    <div class="absolute inset-0 crt-scanline pointer-events-none opacity-30 z-10"></div>
-
-                    <!-- Dynamic Film Poster image or text -->
-                    <div class="w-full bg-[#120708] flex flex-col md:flex-row min-h-[300px]">
+                    <div class="w-full bg-[#120708]/90 flex flex-col md:flex-row min-h-[280px]">
                         <!-- Film Poster image -->
-                        <div class="w-full md:w-2/5 aspect-[4/3] md:aspect-auto relative overflow-hidden bg-black flex items-center justify-center">
+                        <div class="w-full md:w-2/5 relative overflow-hidden bg-black flex items-center justify-center">
                             <img id="screenPosterImage" src="https://placehold.co/600x800/221115/D4AF37?text=Red+Glow" alt="城市海报" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
-                            <!-- Marquee badge -->
-                            <div class="absolute top-2 left-2 bg-retro-burgundy/90 border border-retro-gold px-1.5 py-0.5 rounded text-[8px] text-retro-gold tracking-widest font-mono uppercase" id="screenBadge">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+                            <div class="absolute top-2 left-2 bg-retro-burgundy/90 border border-retro-gold px-2 py-0.5 rounded text-[9px] text-retro-gold tracking-widest font-mono uppercase" id="screenBadge">
                                 SOLD OUT
                             </div>
                         </div>
 
-                        <!-- Film narrative/details -->
-                        <div class="w-full md:w-3/5 p-4 flex flex-col justify-between text-left bg-gradient-to-b from-[#250f13] to-[#0d0507]">
+                        <!-- Film details -->
+                        <div class="w-full md:w-3/5 p-4 flex flex-col justify-between text-left bg-gradient-to-b from-[#250f13]/90 to-[#0d0507]/90">
                             <div class="space-y-2">
-                                <div class="flex items-center gap-1.5 text-retro-gold font-mono text-[9px]">
+                                <div class="flex flex-wrap items-center gap-1.5 text-retro-gold font-mono text-[10px]">
                                     <i class="fa-regular fa-calendar-days text-retro-neonred"></i>
                                     <span id="screenDate">2026.04.18</span>
                                     <span class="mx-1">|</span>
@@ -580,23 +577,21 @@
                                 </h3>
                             </div>
 
-                            <!-- Highlights section -->
                             <div class="mt-3 border-t border-retro-gold/15 pt-2 space-y-1.5">
                                 <div class="text-[8px] text-retro-gold font-mono uppercase tracking-widest">
-                                    演出特设歌单 / 高光 HIGHLIGHTS
+                                    高光 HIGHLIGHTS
                                 </div>
                                 <div class="flex flex-wrap gap-1.5" id="screenHighlights">
-                                    <!-- Dynamic elements -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Swipe Indicator -->
-                <div class="w-full max-w-md mt-4 text-center">
-                    <div class="text-[9px] text-retro-gold tracking-widest uppercase font-mono mb-0.5">↑ 上下滑动切换 ↑</div>
-                    <div class="font-bold text-xs tracking-wider text-white">
+                <!-- Swipe indicator -->
+                <div class="mt-4 text-center">
+                    <div class="text-[9px] text-retro-gold/70 tracking-widest uppercase font-mono mb-0.5 drop-shadow">↑ 上下滑动切换 ↑</div>
+                    <div class="font-bold text-xs tracking-wider text-white drop-shadow">
                         <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> :
                         <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
                     </div>
@@ -677,7 +672,7 @@
                             </div>
                         </div>
 
-                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">演员排练</h4>
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">演员排练室</h4>
                     </div>
 
                     <!-- Door 2: Director's Lounge -->
@@ -727,7 +722,7 @@
                             </div>
                         </div>
 
-                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">导演休息</h4>
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">导演休息室</h4>
                     </div>
 
                     <!-- Door 3: Screenwriter's Studio -->
@@ -777,7 +772,7 @@
                             </div>
                         </div>
 
-                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">编剧工作</h4>
+                        <h4 class="text-retro-gold text-[10px] font-bold mt-2.5 tracking-wider font-serif">编剧工作室</h4>
                     </div>
 
                 </div>
@@ -2217,11 +2212,14 @@
             renderProjectorStop();
         }
 
-        // Touch swipe for projector screen
+        // Touch swipe + mouse wheel for projector screen
         (function initProjectorSwipe() {
             let touchStartY = 0;
+            let wheelAccumulator = 0;
+            let wheelTimer = null;
             const el = document.getElementById('projectorScreen');
             if (!el) return;
+            // Touch
             el.addEventListener('touchstart', function(e) {
                 touchStartY = e.touches[0].clientY;
             }, { passive: true });
@@ -2231,6 +2229,17 @@
                     changeShowcaseStop(dy > 0 ? -1 : 1);
                 }
             });
+            // Mouse wheel
+            el.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                wheelAccumulator += e.deltaY;
+                if (Math.abs(wheelAccumulator) > 80) {
+                    changeShowcaseStop(wheelAccumulator > 0 ? 1 : -1);
+                    wheelAccumulator = 0;
+                }
+                clearTimeout(wheelTimer);
+                wheelTimer = setTimeout(() => { wheelAccumulator = 0; }, 300);
+            }, { passive: false });
         })();
 
         function renderSongLyric() {
