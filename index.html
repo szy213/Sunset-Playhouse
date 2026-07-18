@@ -216,7 +216,7 @@
     </div>
 
     <!-- Main Container -->
-    <div id="appContainer" class="w-full flex-1 relative flex flex-col items-center justify-center bg-[#0d0708] overflow-hidden">
+    <div id="appContainer" class="w-full flex-1 relative flex flex-col items-center justify-center overflow-hidden">
         
         <!-- Cinematic Intro Overlayer (Simulated film start) -->
         <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.png'); background-size: cover; background-position: center;">
@@ -400,22 +400,22 @@
         <!-- ============================================== -->
         <!-- AREA 1: MAILROOM (收发室)                       -->
         <!-- ============================================== -->
-        <section id="mailroom" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
+        <section id="mailroom" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.png');">
             <!-- Nav Row -->
-            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
-                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+            <div class="flex justify-between items-center mb-3 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif">📪 红霞收发室</h2>
-                    <p class="text-[9px] text-retro-gold uppercase font-mono">Pigeonholes</p>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">📪 红霞收发室</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow">Pigeonholes</p>
                 </div>
             </div>
 
             <!-- Content Split -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
                 <!-- Left: Write message Form -->
-                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
+                <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
                         <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex items-center gap-1.5">
                             <i class="fa-solid fa-pen-nib"></i> 投递一封明信片
@@ -457,7 +457,7 @@
                 </div>
 
                 <!-- Right: Mailboxes Pigeons list -->
-                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
+                <div class="md:col-span-7 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
                     <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex justify-between items-center">
                         <span><i class="fa-solid fa-boxes-stacked"></i> 明信片架 (点击可阅读)</span>
                         <span class="text-[9px] font-mono text-gray-500">Pigeonholes</span>
@@ -473,21 +473,21 @@
         <!-- ============================================== -->
         <!-- AREA 2: MAIN LOBBY (一楼大厅 - 物料展示)         -->
         <!-- ============================================== -->
-        <section id="lobby" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
-            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
-                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+        <section id="lobby" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.png');">
+            <div class="flex justify-between items-center mb-3 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif">🖼️ 剧院一楼大厅</h2>
-                    <p class="text-[9px] text-retro-gold uppercase font-mono">Exhibition Board</p>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">🖼️ 剧院一楼大厅</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow">Exhibition Board</p>
                 </div>
             </div>
 
             <!-- Dashboard/Layout of crafts board -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
                 <!-- Submit Material Left -->
-                <div class="md:col-span-4 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
+                <div class="md:col-span-4 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
                         <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex items-center gap-1.5 uppercase">
                             <i class="fa-solid fa-file-arrow-up"></i> 登记饭制物料
@@ -517,7 +517,7 @@
                 </div>
 
                 <!-- Showcase Board Right -->
-                <div class="md:col-span-8 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
+                <div class="md:col-span-8 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
                     <div class="flex justify-between items-center border-b border-retro-gold/20 pb-1.5 mb-3">
                         <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-clipboard-list"></i> 大厅物料交流栏</span>
                     </div>
@@ -603,19 +603,19 @@
         <!-- ============================================== -->
         <!-- AREA 4: BUSINESS DEPARTMENT (业务部 - 3大分支)  -->
         <!-- ============================================== -->
-        <section id="business-dept" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
-            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
-                <button id="deptBackBtn" onclick="handleDeptBack()" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+        <section id="business-dept" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.png');">
+            <div class="flex justify-between items-center mb-3 pb-2">
+                <button id="deptBackBtn" onclick="handleDeptBack()" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif" id="deptTitleText">🏢 剧院业务部</h2>
-                    <p class="text-[9px] text-retro-gold uppercase font-mono" id="deptSubText">Internal Wing</p>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg" id="deptTitleText">🏢 剧院业务部</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow" id="deptSubText">Internal Wing</p>
                 </div>
             </div>
 
             <!-- ================= SUB-VIEW 0: THREE DOORS HALLWAY ================= -->
-            <div id="deptHallway" class="flex-1 flex flex-col justify-center items-center relative p-4 bg-[#180e10] border border-retro-gold/30 rounded overflow-y-auto">
+            <div id="deptHallway" class="flex-1 flex flex-col justify-center items-center relative p-4 bg-[#180e10]/80 backdrop-blur-sm border border-retro-gold/30 rounded overflow-y-auto">
                 <p class="text-[10px] md:text-xs text-retro-gold tracking-wider text-center max-w-md mb-4 leading-relaxed">
                     长廊里的壁灯昏黄，三扇挂着黄铜门牌的厚重木门静静合拢。
                 </p>
@@ -624,7 +624,7 @@
                 <div class="grid grid-cols-3 gap-3 w-full max-w-lg">
                     
                     <!-- Door 1: Rehearsal Room -->
-                    <div onclick="enterSubDept('rehearsal')" class="group relative flex flex-col items-center bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                    <div onclick="enterSubDept('rehearsal')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
                             REHEARSAL • 101
@@ -676,7 +676,7 @@
                     </div>
 
                     <!-- Door 2: Director's Lounge -->
-                    <div onclick="enterSubDept('director')" class="group relative flex flex-col items-center bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                    <div onclick="enterSubDept('director')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
                             DIRECTOR • 102
@@ -726,7 +726,7 @@
                     </div>
 
                     <!-- Door 3: Screenwriter's Studio -->
-                    <div onclick="enterSubDept('writer')" class="group relative flex flex-col items-center bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+                    <div onclick="enterSubDept('writer')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
                             WRITER • 103
@@ -781,7 +781,7 @@
             <!-- ================= SUB-VIEW 1: REHEARSAL ROOM (演员排练室) ================= -->
             <div id="subDeptRehearsal" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
                 <!-- Music Player left -->
-                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
+                <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
                     
                     <div class="space-y-1">
                         <span class="px-1.5 py-0.5 bg-retro-gold text-black font-mono text-[8px] rounded font-bold uppercase">
@@ -838,7 +838,7 @@
                 </div>
 
                 <!-- Lyric board right -->
-                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-between overflow-hidden">
+                <div class="md:col-span-7 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-between overflow-hidden">
                     <div class="border-b border-retro-gold/15 pb-2 mb-3 flex justify-between items-center">
                         <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-paragraph"></i> 歌词纸笺</span>
                     </div>
@@ -859,7 +859,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 2: DIRECTOR'S LOUNGE (导演休息室) ================= -->
-            <div id="subDeptDirector" class="hidden flex-1 flex flex-col gap-3 overflow-y-auto bg-[#140b0d] border border-retro-gold/30 rounded p-4">
+            <div id="subDeptDirector" class="hidden flex-1 flex flex-col gap-3 overflow-y-auto bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4">
                 <div class="border-b border-retro-gold/15 pb-1.5 mb-2 flex justify-between items-center">
                     <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-video"></i> 官方纪录影像</span>
                 </div>
@@ -867,7 +867,7 @@
                 <!-- CRT Video Showcase Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     
-                    <a href="https://www.bilibili.com/video/BV1f5411L7vj" target="_blank" class="group relative bg-retro-darkwood border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
+                    <a href="https://www.bilibili.com/video/BV1f5411L7vj" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
                             <img src="https://placehold.co/640x360/310b10/D4AF37?text=Blueberry+Nights" alt="蓝莓夜MV" class="w-full h-full object-cover">
@@ -883,7 +883,7 @@
                         </div>
                     </a>
 
-                    <a href="https://www.bilibili.com/video/BV1Lg4y1q7zQ" target="_blank" class="group relative bg-retro-darkwood border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
+                    <a href="https://www.bilibili.com/video/BV1Lg4y1q7zQ" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
                             <img src="https://placehold.co/640x360/1a2130/D4AF37?text=Red+Glow+Concert+Live" alt="上海巡演现场" class="w-full h-full object-cover">
@@ -899,7 +899,7 @@
                         </div>
                     </a>
 
-                    <a href="https://www.bilibili.com/video/BV1R5411Y75f" target="_blank" class="group relative bg-retro-darkwood border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
+                    <a href="https://www.bilibili.com/video/BV1R5411Y75f" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
                             <img src="https://placehold.co/640x360/141020/D4AF37?text=Interview+with+Jingfei" alt="采访" class="w-full h-full object-cover">
@@ -922,7 +922,7 @@
             <div id="subDeptWriter" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
                 
                 <!-- Cassette Deck Left -->
-                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
+                <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
                     <div class="space-y-0.5">
                         <span class="text-retro-gold text-[8px] font-mono tracking-widest uppercase">
                             🎙️ CASSETTE PLAYER
@@ -937,7 +937,7 @@
                 </div>
 
                 <!-- Podcast List Right -->
-                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
+                <div class="md:col-span-7 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
                     <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-2 mb-3">
                         <i class="fa-solid fa-microphone"></i> 巡演播客收录
                     </h3>
@@ -945,7 +945,7 @@
                     <!-- List of podcasts -->
                     <div class="space-y-3 text-xs">
                         
-                        <div class="bg-retro-darkwood border border-retro-gold/20 p-3 rounded">
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded">
                             <div class="flex justify-between items-start mb-1">
                                 <span class="text-retro-gold font-bold font-serif text-xs">【泡泡骚电台】NO.34</span>
                                 <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">2024.11</span>
@@ -961,7 +961,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-retro-darkwood border border-retro-gold/20 p-3 rounded">
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded">
                             <div class="flex justify-between items-start mb-1">
                                 <span class="text-retro-gold font-bold font-serif text-xs">【大内密谈】舞台戏剧与音乐叙事</span>
                                 <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">2025.02</span>
@@ -986,21 +986,21 @@
         <!-- ============================================== -->
         <!-- AREA 5: BOX OFFICE (售票处 - 打卡与纪念票生成)   -->
         <!-- ============================================== -->
-        <section id="box-office" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden">
-            <div class="flex justify-between items-center mb-3 border-b border-retro-gold/30 pb-2">
-                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-retro-darkwood border border-retro-gold text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
+        <section id="box-office" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.png');">
+            <div class="flex justify-between items-center mb-3 pb-2">
+                <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif">🎫 影剧院售票处</h2>
-                    <p class="text-[9px] text-retro-gold uppercase font-mono">Box Office</p>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">🎫 影剧院售票处</h2>
+                    <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow">Box Office</p>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
                 
                 <!-- Left: Profile & Check-in check -->
-                <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-start space-y-4">
+                <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-start space-y-4">
                     <!-- User profile registration -->
                     <div class="bg-black/50 border border-retro-gold/20 p-3 rounded text-xs space-y-2">
                         <div class="flex items-center gap-1.5 text-retro-gold font-bold">
@@ -1025,7 +1025,7 @@
                         </div>
 
                         <!-- Statistics badge & Timer -->
-                        <div class="bg-[#1a0f11] border border-retro-gold/20 p-3 rounded space-y-1.5 text-xs">
+                        <div class="bg-[#1a0f11]/70 backdrop-blur-sm border border-retro-gold/20 p-3 rounded space-y-1.5 text-xs">
                             <div class="flex justify-between">
                                 <span class="text-gray-400">已打卡城市数:</span>
                                 <span class="font-bold font-mono text-retro-gold" id="ticketCountLabel">0 / 5</span>
@@ -1045,7 +1045,7 @@
                         </div>
 
                         <!-- Achievements Wall (New Feature) -->
-                        <div class="bg-[#1a0f11] border border-retro-gold/20 p-3 rounded space-y-2">
+                        <div class="bg-[#1a0f11]/70 backdrop-blur-sm border border-retro-gold/20 p-3 rounded space-y-2">
                             <div class="flex justify-between items-center text-retro-gold font-bold">
                                 <span class="text-[10px] sm:text-[11px] flex items-center gap-1">
                                     <i class="fa-solid fa-trophy text-retro-gold animate-pulse"></i> 红霞荣誉馆
@@ -1065,7 +1065,7 @@
                 </div>
 
                 <!-- Right: China Map SVG (Touch area enlarged for mobile) -->
-                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-between items-center relative overflow-hidden">
+                <div class="md:col-span-7 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-between items-center relative overflow-hidden">
                     
                     <div class="w-full flex-1 flex flex-col justify-center items-center min-h-[250px] md:min-h-0">
                         <div id="mapContainer" class="w-full h-full flex flex-col justify-center items-center relative">
@@ -2009,7 +2009,7 @@
                 else if (mail.stamp === "stamp-cherry") stampIcon = "🍒";
 
                 const item = document.createElement('div');
-                item.className = "bg-retro-darkwood border border-retro-gold/20 p-3 rounded relative cursor-pointer active:scale-95 transition-all flex flex-col justify-between";
+                item.className = "bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded relative cursor-pointer active:scale-95 transition-all flex flex-col justify-between";
                 item.onclick = () => showLetterModal(mail);
 
                 item.innerHTML = `
@@ -2092,7 +2092,7 @@
 
             crafts.slice().reverse().forEach(craft => {
                 const item = document.createElement('div');
-                item.className = "bg-retro-darkwood border border-retro-gold/20 rounded overflow-hidden flex flex-col justify-between p-2.5 space-y-2";
+                item.className = "bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 rounded overflow-hidden flex flex-col justify-between p-2.5 space-y-2";
 
                 const imgSrc = craft.img || `https://placehold.co/400x300/271114/D4AF37?text=%E9%A5%AD%E5%88%B6%E7%89%A9%E6%96%99`;
 
