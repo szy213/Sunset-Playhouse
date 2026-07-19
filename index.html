@@ -160,6 +160,26 @@
             animation: neon-flicker 4s infinite;
             display: inline-block;
         }
+
+        /* ===== 3D Display Cabinet Depth Effect ===== */
+        /* Back wall - radial gradient simulates depth toward the rear of the cabinet */
+        .shelf-cabinet {
+            background: radial-gradient(ellipse at 50% 35%, #4a2518 0%, #1f0e0a 60%, #0d0402 100%);
+        }
+        /* Depth overlay - multi-layer shadows for cabinet interior */
+        .shelf-depth {
+            background:
+                /* Left & right side walls */
+                linear-gradient(to right, rgba(0,0,0,0.65) 0%, transparent 18%, transparent 82%, rgba(0,0,0,0.65) 100%),
+                /* Top shelf overhang shadow */
+                linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 15%),
+                /* Bottom floor / base shadow */
+                linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 45%),
+                /* Corner vignette for depth */
+                radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,0.45) 100%);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="bg-black text-gray-200 h-full overflow-hidden font-serif selection:bg-retro-burgundy selection:text-retro-gold relative flex flex-col">
@@ -306,7 +326,7 @@
                                     <i class="fa-solid fa-envelope-open-text text-retro-neonred"></i> 收发室
                                 </h3>
                                 <p class="text-[9px] sm:text-[11px] text-gray-400 mt-0.5 sm:mt-1 leading-snug sm:leading-relaxed">
-                                    寄投您的明信片与红霞呓语，查阅保管箱中的回响。
+                                    寄投您的明信片，查阅保管箱。
                                 </p>
                             </div>
                             <div class="mt-1 sm:mt-2 text-[8px] sm:text-[9px] text-retro-gold font-mono tracking-wider flex items-center gap-1 group-hover:underline">
@@ -619,24 +639,24 @@
                 <div class="md:col-span-4 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
                         <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex items-center gap-1.5 uppercase">
-                            <i class="fa-solid fa-file-arrow-up"></i> 登记饭制物料
+                            <i class="fa-solid fa-file-arrow-up"></i> 登记物料
                         </h3>
                         <form id="merchForm" onsubmit="handleSendMerch(event)" class="space-y-3 text-xs">
                             <div>
                                 <label class="block text-gray-400 mb-1">制作者昵称:</label>
-                                <input type="text" id="merchAuthor" required placeholder="如: 拾荒歌姬" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                                <input type="text" id="merchAuthor" required placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
                             </div>
                             <div>
-                                <label class="block text-gray-400 mb-1">物料名称 / 媒介形式:</label>
-                                <input type="text" id="merchTitle" required placeholder="如: 《红霞》自制海报A款" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                                <label class="block text-gray-400 mb-1">物料名称 :</label>
+                                <input type="text" id="merchTitle" required placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
                             </div>
                             <div>
                                 <label class="block text-gray-400 mb-1">物料图片链接 (可空):</label>
-                                <input type="url" id="merchImgUrl" placeholder="https://..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-mono">
+                                <input type="url" id="merchImgUrl" placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-mono">
                             </div>
                             <div>
                                 <label class="block text-gray-400 mb-1">领取方式及物料简述:</label>
-                                <textarea id="merchDesc" required rows="2" placeholder="在场外红玫瑰打卡板附近发放手幅，凭票根免费领取..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif"></textarea>
+                                <textarea id="merchDesc" required rows="2" placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif"></textarea>
                             </div>
                             <button type="submit" class="w-full py-2 bg-retro-burgundy hover:bg-retro-gold hover:text-black text-retro-gold text-[10px] font-bold rounded uppercase active:scale-95 transition-all">
                                 <i class="fa-solid fa-stamp"></i> 贴上布告板
@@ -682,8 +702,8 @@
                             <!-- Card 1 -->
                             <!-- TODO: 将 href="#" 替换为实际跳转链接 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case1 1.png" alt="纪念帆布包" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -694,8 +714,8 @@
                             <!-- Card 2 -->
                             <!-- TODO: 将 href="#" 替换为实际跳转链接 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case1 2.png" alt="纪念贴纸组" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -706,8 +726,8 @@
                             <!-- Card 3 -->
                             <!-- TODO: 将 href="#" 替换为实际跳转链接 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case1 3.png" alt="猩红logo棒球帽" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -718,8 +738,8 @@
                             <!-- Card 4 -->
                             <!-- TODO: 将 href="#" 替换为实际跳转链接 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case1 4.png" alt="红霞影剧院slogan棒球帽" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -730,8 +750,8 @@
                             <!-- Card 5 -->
                             <!-- TODO: 将 href="#" 替换为实际跳转链接 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case1 5.png" alt="猩红纪念T恤" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -742,8 +762,8 @@
                             <!-- Card 6 -->
                             <!-- TODO: 将 href="#" 替换为实际跳转链接 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case1 6.png" alt="红霞影剧院纪念T恤" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -767,8 +787,8 @@
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                             <!-- Card 7 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case2 1.png" alt="气剧·行至天光" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -778,8 +798,8 @@
                             </a>
                             <!-- Card 8 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case2 2.png" alt="气剧·重返扉页" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -789,8 +809,8 @@
                             </a>
                             <!-- Card 9 -->
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case2 3.png" alt="甚至日光·褪色幻想" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -811,8 +831,8 @@
                         <div class="grid grid-cols-2 gap-3">
                             <!-- Card 10 -->
                             <a href="https://xhslink.com/m/AxHYXdKp5Eo" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case3 1.png" alt="巡演纪念定制笔" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -822,8 +842,8 @@
                             </a>
                             <!-- Card 11 -->
                             <a href="https://xhslink.com/m/6v0hKTO3lqV" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
-                                <div class="aspect-[1/1] bg-[#2a100b] flex items-center justify-center relative overflow-hidden">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                                <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 shelf-depth z-10"></div>
                                     <img src="images/souvenir/case3 2.png" alt="巡演联动款定制笔记本" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
@@ -894,11 +914,11 @@
                                 </h3>
                             </div>
 
-                            <div class="mt-3 border-t border-retro-gold/15 pt-2 space-y-1.5">
+                            <div class="mt-3 border-t border-retro-gold/15 pt-2 space-y-1.5" id="screenMoodArea">
                                 <div class="text-[8px] text-retro-gold font-mono uppercase tracking-widest">
-                                    高光 HIGHLIGHTS
+                                    用三个词形容这个夜晚
                                 </div>
-                                <div class="flex flex-wrap gap-1.5" id="screenHighlights">
+                                <div class="flex gap-1.5" id="screenMoodWords">
                                 </div>
                             </div>
 
@@ -2468,7 +2488,8 @@
             hasPlayedMusic: false,
             hasSentPostcard: false,
             hasPostedCraft: false,
-            unlockedAchievements: []
+            unlockedAchievements: [],
+            stopMoods: {}
         };
 
         // ==============================================
@@ -2568,28 +2589,44 @@
             const nickname = document.getElementById('regNickname').value.trim();
             const account  = document.getElementById('regAccount').value.trim();
             const password = document.getElementById('regPassword').value;
+            const email = account + '@hongxia.internal';
 
             try {
-                const { data, error } = await supabaseClient.rpc('register_user', {
-                    p_account: account, p_password: password, p_nickname: nickname
+                const { data, error } = await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            nickname: nickname,
+                            account: account,
+                            role: role
+                        }
+                    }
                 });
                 if (error) throw error;
-                if (!data || data.length === 0) throw new Error('Registration failed');
-                const user = Array.isArray(data) ? data[0] : data;
+                if (!data.user) throw new Error('Registration failed');
+                const user = data.user;
                 let avatarUrl = null;
                 const fileInput = document.getElementById('avatarFileInput');
                 if (fileInput && fileInput.files && fileInput.files.length > 0) {
                     try {
                         const webpBlob = await convertToWebP(fileInput.files[0]);
                         avatarUrl = await uploadAvatar(webpBlob, user.id);
-                        await supabaseClient.rpc('update_profile', {
-                            p_user_id: user.id, p_nickname: nickname, p_avatar_url: avatarUrl
+                        await supabaseClient.auth.updateUser({
+                            data: { nickname: nickname, account: account, role: role, avatar_url: avatarUrl }
                         });
                     } catch (uploadErr) {
                         console.warn('[Auth] Avatar upload failed:', uploadErr);
                     }
                 }
-                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: avatarUrl, createdAt: user.created_at, userRole: role });
+                setSession({
+                    userId: user.id,
+                    nickname: nickname,
+                    account: account,
+                    avatarUrl: avatarUrl,
+                    createdAt: user.created_at,
+                    userRole: role
+                });
                 localStorage.setItem('hongxia_role_' + account, role);
                 localStorage.setItem('hongxia_last_account', account);
                 const roleLabel = role === 'host' ? '主（理）人' : '观众';
@@ -2617,23 +2654,33 @@
             const password = document.getElementById('loginPassword').value;
             if (!account)  { showRetroMessage('请输入账号'); return; }
             if (!password) { showRetroMessage('请输入密码'); return; }
+            const email = account + '@hongxia.internal';
             try {
-                const { data, error } = await supabaseClient.rpc('login_user', {
-                    p_account: account, p_password: password
+                const { data, error } = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
                 });
                 if (error) throw error;
-                if (!data || data.length === 0) throw new Error('Invalid credentials');
-                const user = Array.isArray(data) ? data[0] : data;
-                const savedRole = localStorage.getItem('hongxia_role_' + user.account) || 'audience';
-                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: user.avatar_url, createdAt: user.created_at, userRole: savedRole });
+                if (!data.user) throw new Error('Invalid credentials');
+                const user = data.user;
+                const meta = user.user_metadata || {};
+                const savedRole = localStorage.getItem('hongxia_role_' + meta.account) || meta.role || 'audience';
+                setSession({
+                    userId: user.id,
+                    nickname: meta.nickname || account,
+                    account: meta.account || account,
+                    avatarUrl: meta.avatar_url || null,
+                    createdAt: user.created_at,
+                    userRole: savedRole
+                });
                 localStorage.setItem('hongxia_last_account', account);
                 playShortBeep(720, 0.08);
-                showRetroMessage('欢迎回来，' + user.nickname + '！');
+                showRetroMessage('欢迎回来，' + (meta.nickname || account) + '！');
                 checkAchievements();
                 syncAuthUI();
             } catch (err) {
                 console.error('[Auth] Login error:', err);
-                if (err.message && err.message.includes('Invalid account or password')) {
+                if (err.message && err.message.includes('Invalid login credentials')) {
                     showRetroMessage('账号或密码错误');
                 } else {
                     showRetroMessage('登录失败: ' + (err.message || '未知错误'));
@@ -2656,6 +2703,7 @@
             };
             localStorage.setItem('hongxia_session', JSON.stringify(sessionData));
             loadUserCheckinData();
+            loadUserMoods();
             if (STATE.userRole === 'host') syncHostCheckins();
             updateHeaderUserDisplay();
         }
@@ -2686,6 +2734,9 @@
         }
 
         function handleLogout() {
+            if (isSupabaseReady()) {
+                supabaseClient.auth.signOut().catch(e => console.warn('[Auth] Sign out error:', e));
+            }
             STATE.isLoggedIn = false;
             STATE.userId = null;
             STATE.currentUser = '红霞漫步人';
@@ -2724,9 +2775,13 @@
                         console.warn('[Auth] Edit avatar upload failed:', uploadErr);
                     }
                 }
-                const { data, error } = await supabaseClient.rpc('update_profile', {
-                    p_user_id: STATE.userId, p_nickname: newNickname, p_avatar_url: avatarUrl
-                });
+                const updateData = {
+                    nickname: newNickname,
+                    account: STATE.currentAccount,
+                    role: STATE.userRole,
+                    avatar_url: avatarUrl
+                };
+                const { error } = await supabaseClient.auth.updateUser({ data: updateData });
                 if (error) throw error;
                 STATE.currentUser = newNickname;
                 STATE.currentAvatarUrl = avatarUrl;
@@ -2749,19 +2804,32 @@
             const sessionStr = localStorage.getItem('hongxia_session');
             if (!sessionStr) return false;
             try {
-                const session = JSON.parse(sessionStr);
-                if (!session.userId) return false;
                 if (!isSupabaseReady()) {
+                    const session = JSON.parse(sessionStr);
                     setSessionFromLocal(session);
                     return true;
                 }
-                const { data, error } = await supabaseClient.rpc('get_profile', { p_user_id: session.userId });
-                if (error || !data || data.length === 0) {
+                const { data: { session }, error } = await supabaseClient.auth.getSession();
+                if (error || !session) {
+                    // Try restoring from localStorage as fallback
+                    const localSession = JSON.parse(sessionStr);
+                    if (localSession.userId) {
+                        setSessionFromLocal(localSession);
+                        return true;
+                    }
                     localStorage.removeItem('hongxia_session');
                     return false;
                 }
-                const user = Array.isArray(data) ? data[0] : data;
-                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: user.avatar_url, createdAt: user.created_at });
+                const user = session.user;
+                const meta = user.user_metadata || {};
+                setSession({
+                    userId: user.id,
+                    nickname: meta.nickname || meta.account || '',
+                    account: meta.account || '',
+                    avatarUrl: meta.avatar_url || null,
+                    createdAt: user.created_at,
+                    userRole: meta.role || 'audience'
+                });
                 return true;
             } catch (err) {
                 console.warn('[Auth] Session validation failed, falling back to localStorage:', err);
@@ -2780,6 +2848,7 @@
             STATE.currentCreatedAt = session.createdAt || null;
             STATE.userRole = session.userRole || 'audience';
             loadUserCheckinData();
+            loadUserMoods();
             if (STATE.userRole === 'host') syncHostCheckins();
         }
 
@@ -2790,6 +2859,9 @@
             const viewed = lsGet('viewed_stops');
             if (viewed) { try { STATE.viewedStops = JSON.parse(viewed); } catch(e) { STATE.viewedStops = [0]; } }
             else { STATE.viewedStops = [0]; }
+            const moods = lsGet('stop_moods');
+            if (moods) { try { STATE.stopMoods = JSON.parse(moods); } catch(e) { STATE.stopMoods = {}; } }
+            else { STATE.stopMoods = {}; }
             STATE.hasPlayedMusic = lsGet('played_music') === 'true';
             STATE.hasSentPostcard = lsGet('sent_postcard') === 'true';
             STATE.hasPostedCraft = lsGet('posted_craft') === 'true';
@@ -2939,7 +3011,7 @@
             { id: "reg_passport", title: "红霞漫步人", desc: "在售票处成功登记专属影院护照", quote: "「在这座虚幻的电影院里，所有迟到的人都有座位。」 —《红霞》", icon: "👤" },
             { id: "read_stops", title: "放映室来客", desc: "完整浏览过5个城市的放映纪实", quote: "「放映机里不知疲倦转着的，是整个时代的红霞。」", icon: "🎬" },
             { id: "play_vinyl", title: "留声机侍者", desc: "在演员排练室里启动留声机播放现场乐曲", quote: "「留声机转动着，那些未曾开口的温柔。」 —《蓝莓夜》", icon: "🎵" },
-            { id: "send_postcard", title: "深夜寄信人", desc: "在收发室成功投递了一封明信片呓语", quote: "「把明信片投入红霞里，查收来自远方的回响。」", icon: "✉️" },
+            { id: "send_postcard", title: "春色寄情人", desc: "在收发室成功投递一封明信片", quote: "「把明信片投入红霞里，查收来自远方的回响。」", icon: "✉️" },
             { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款专属饭制周边", quote: "「物料上的每一次折痕，都是热爱发出的低鸣。」", icon: "🎨" },
             { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成五座巡演城市", quote: "「红霞退去，留下的每一站，都是漫漫星火。」", icon: "🌇" },
             { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，听到温热声浪", quote: "「在这温热的声浪里，听见胶片滚动的呼吸。」", icon: "📻" }
@@ -4291,19 +4363,43 @@
             document.getElementById('screenVersion').innerText = version;
             document.getElementById('screenTitle').innerText = stop.city + " ・ " + stop.venue.split('・')[1];
 
-            const highlightsContainer = document.getElementById('screenHighlights');
-            highlightsContainer.innerHTML = "";
-            stop.highlights.forEach(tag => {
-                const badge = document.createElement('span');
-                badge.className = "text-[9px] px-1.5 py-0.5 bg-retro-burgundy border border-retro-gold/35 text-retro-gold rounded font-serif";
-                badge.innerText = tag;
-                highlightsContainer.appendChild(badge);
-            });
+            // Mood words: show only if checked in
+            const moodArea = document.getElementById('screenMoodArea');
+            const moodWords = document.getElementById('screenMoodWords');
+            const isChecked = STATE.checkedCities.includes(STATE.currentShowcaseStop);
+            if (moodArea && moodWords) {
+                if (isChecked) {
+                    moodArea.classList.remove('hidden');
+                    const moodKey = STOP_MOOD_KEY(stop.id);
+                    const saved = (STATE.stopMoods && STATE.stopMoods[moodKey]) || null;
+                    const hasWords = saved && Array.isArray(saved) && saved.some(w => w !== '');
+                    moodWords.innerHTML = '';
+                    if (hasWords) {
+                        // Display as badge tags (SOLD OUT style), click to edit
+                        for (let i = 0; i < 3; i++) {
+                            const badge = document.createElement('span');
+                            badge.className = 'px-2 py-0.5 bg-retro-burgundy/70 border border-retro-gold/35 rounded text-[9px] text-retro-gold tracking-widest font-mono cursor-pointer hover:border-retro-gold/70 transition-colors';
+                            badge.innerText = saved[i] || '';
+                            badge.dataset.moodIndex = i;
+                            badge.onclick = function() { switchMoodToInput(this, stop.id, i, saved); };
+                            moodWords.appendChild(badge);
+                        }
+                    } else {
+                        // Show three empty inputs
+                        for (let i = 0; i < 3; i++) {
+                            const input = createMoodInput(i, '');
+                            moodWords.appendChild(input);
+                        }
+                    }
+                } else {
+                    moodArea.classList.add('hidden');
+                    moodWords.innerHTML = '';
+                }
+            }
 
             // Update check-in button state
             const checkinBtn = document.getElementById('screenCheckinBtn');
             if (checkinBtn) {
-                const isChecked = STATE.checkedCities.includes(STATE.currentShowcaseStop);
                 if (stop.status === '已结束') {
                     checkinBtn.innerText = isChecked ? '✓ 我在现场' : '我在现场';
                     checkinBtn.className = isChecked
@@ -4598,6 +4694,120 @@
             checkAchievements();
         }
 
+        function STOP_MOOD_KEY(stopId) {
+            return 'mood_' + stopId;
+        }
+
+        function createMoodInput(index, value) {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.maxLength = 10;
+            input.dataset.moodIndex = index;
+            input.value = value || '';
+            input.placeholder = '...';
+            input.className = 'w-20 px-2 py-1 bg-retro-burgundy/70 border border-retro-gold/35 rounded text-[9px] text-retro-gold placeholder-gray-600 focus:outline-none focus:border-retro-gold/70 font-serif text-center tracking-widest';
+            input.onblur = saveMoodForCurrentStop;
+            input.onkeydown = function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.blur(); // triggers onblur → save
+                }
+            };
+            return input;
+        }
+
+        function switchMoodToInput(badge, stopId, index, saved) {
+            const input = createMoodInput(index, saved[index] || '');
+            badge.replaceWith(input);
+            input.focus();
+        }
+
+        async function saveMoodForCurrentStop() {
+            if (STATE.currentShowcaseStop == null) return;
+            const stop = TOUR_STOPS[STATE.currentShowcaseStop];
+            const key = STOP_MOOD_KEY(stop.id);
+            // Start from existing saved words, then overlay current input values
+            const words = (STATE.stopMoods[key] && Array.isArray(STATE.stopMoods[key]))
+                ? [...STATE.stopMoods[key]] : ['', '', ''];
+            const inputs = document.querySelectorAll('#screenMoodWords input');
+            inputs.forEach(inp => {
+                const idx = parseInt(inp.dataset.moodIndex);
+                if (!isNaN(idx) && idx >= 0 && idx < 3) words[idx] = inp.value.trim();
+            });
+            const hasAny = words.some(w => w !== '');
+            if (hasAny) {
+                STATE.stopMoods[key] = words;
+            } else {
+                delete STATE.stopMoods[key];
+            }
+            // Persist to Supabase
+            if (isSupabaseReady() && STATE.isLoggedIn && STATE.userId) {
+                try {
+                    // Check if row already exists
+                    const { data: existing, error: selectErr } = await supabaseClient
+                        .from('stop_moods')
+                        .select('id')
+                        .eq('user_id', STATE.userId)
+                        .eq('stop_id', stop.id)
+                        .maybeSingle();
+                    if (selectErr) {
+                        console.error('[Mood] select failed:', selectErr);
+                        showRetroMessage('心情保存失败(查询): ' + selectErr.message);
+                    } else {
+                        let saveErr = null, saveData = null;
+                        if (existing) {
+                            const { data, error } = await supabaseClient.from('stop_moods')
+                                .update({ mood_words: words, updated_at: new Date().toISOString() })
+                                .eq('id', existing.id)
+                                .select();
+                            saveErr = error; saveData = data;
+                        } else {
+                            const { data, error } = await supabaseClient.from('stop_moods')
+                                .insert({ user_id: STATE.userId, stop_id: stop.id, mood_words: words })
+                                .select();
+                            saveErr = error; saveData = data;
+                        }
+                        if (saveErr) {
+                            console.error('[Mood] save failed:', saveErr);
+                            showRetroMessage('心情保存失败: ' + saveErr.message);
+                        } else if (!saveData || saveData.length === 0) {
+                            showRetroMessage('写入被拒绝，请执行: ALTER TABLE stop_moods DISABLE ROW LEVEL SECURITY');
+                        }
+                    }
+                } catch (e) {
+                    console.error('[Mood] Supabase save error:', e.message);
+                    showRetroMessage('心情保存异常: ' + e.message);
+                }
+            } else {
+                showRetroMessage('离线模式: 心情仅保存到本地 (ready=' + isSupabaseReady() + ' login=' + STATE.isLoggedIn + ' uid=' + !!STATE.userId + ')');
+            }
+            // localStorage fallback
+            lsSet('stop_moods', JSON.stringify(STATE.stopMoods));
+            // Re-render to switch inputs back to badges if all inputs have content
+            renderProjectorStop();
+        }
+
+        async function loadUserMoods() {
+            if (!isSupabaseReady() || !STATE.isLoggedIn || !STATE.userId) return;
+            try {
+                const { data, error } = await supabaseClient
+                    .from('stop_moods')
+                    .select('stop_id,mood_words')
+                    .eq('user_id', STATE.userId);
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    data.forEach(row => {
+                        if (row.mood_words && Array.isArray(row.mood_words) && row.mood_words.some(w => w !== '')) {
+                            STATE.stopMoods[STOP_MOOD_KEY(row.stop_id)] = row.mood_words;
+                        }
+                    });
+                    lsSet('stop_moods', JSON.stringify(STATE.stopMoods));
+                }
+            } catch (e) {
+                console.warn('[Mood] Supabase load failed, using localStorage fallback:', e.message);
+            }
+        }
+
         function toggleCheckinForCurrentStop() {
             if (!STATE.isLoggedIn) {
                 playShortBeep(300, 0.1);
@@ -4611,6 +4821,16 @@
             if (wasChecked) {
                 const index = STATE.checkedCities.indexOf(idx);
                 STATE.checkedCities.splice(index, 1);
+                // Clear mood when unchecking
+                const moodKey = STOP_MOOD_KEY(stop.id);
+                delete STATE.stopMoods[moodKey];
+                lsSet('stop_moods', JSON.stringify(STATE.stopMoods));
+                // Also delete from Supabase
+                if (isSupabaseReady() && STATE.isLoggedIn && STATE.userId) {
+                    supabaseClient.from('stop_moods').delete()
+                        .eq('user_id', STATE.userId).eq('stop_id', stop.id)
+                        .then(({ error }) => { if (error) console.warn('[Mood] Supabase delete failed:', error.message); });
+                }
                 playShortBeep(400, 0.08);
                 showRetroMessage('已取消「' + stop.city + '站」打卡。');
             } else {
