@@ -848,6 +848,12 @@
                 </div>
             </div>
 
+            <!-- Year + Month filter bar -->
+            <div class="w-[90%] max-w-lg mx-auto mb-2 space-y-1.5" id="cinemaFilterBar">
+                <div class="flex items-center gap-1.5 flex-wrap" id="cinemaYearPills"></div>
+                <div class="flex items-center gap-1 flex-wrap" id="cinemaMonthPills"></div>
+            </div>
+
             <!-- Center-aligned card area, transparent to show bg -->
             <div class="flex-1 flex flex-col items-center justify-center relative">
 
@@ -1202,61 +1208,267 @@
             </div>
 
             <!-- ================= SUB-VIEW 3: WRITER'S STUDIO (编剧工作室) ================= -->
-            <div id="subDeptWriter" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
-                
-                <!-- Cassette Deck Left -->
-                <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
-                    <div class="space-y-0.5">
-                        <span class="text-retro-gold text-[8px] font-mono tracking-widest uppercase">
-                            🎙️ CASSETTE PLAYER
-                        </span>
-                        <h3 class="text-sm font-bold text-white font-serif">声音档案馆</h3>
-                        <p class="text-[10px] text-gray-400">陈婧霏幕后访谈及故事录音带</p>
-                    </div>
+            <div id="subDeptWriter" class="hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto">
 
-                    <div class="text-[9px] text-gray-400">
-                        在这里探寻陈婧霏巡回演唱会的精神脚本
-                    </div>
-                </div>
-
-                <!-- Podcast List Right -->
-                <div class="md:col-span-7 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
+                <!-- Podcast List Full Width -->
+                <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
                     <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-2 mb-3">
-                        <i class="fa-solid fa-microphone"></i> 巡演播客收录
+                        <i class="fa-solid fa-microphone"></i> 播客收录
                     </h3>
 
                     <!-- List of podcasts -->
                     <div class="space-y-3 text-xs">
-                        
-                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded">
-                            <div class="flex justify-between items-start mb-1">
-                                <span class="text-retro-gold font-bold font-serif text-xs">【泡泡骚电台】NO.34</span>
-                                <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">2024.11</span>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
-                            <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                深入聊到旧书、王家卫美学以及如何构筑让人疗愈跳舞的"影剧院"。
-                            </p>
-                            <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                <span class="text-gray-500">时长: 54分</span>
-                                <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
-                                    小宇宙FM <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
-                                </a>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.000</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded">
-                            <div class="flex justify-between items-start mb-1">
-                                <span class="text-retro-gold font-bold font-serif text-xs">【大内密谈】舞台戏剧与音乐叙事</span>
-                                <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">2025.02</span>
+                        
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
-                            <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                聊到歌词脚本的初稿：每一首歌就是一部未上映老电影的分镜头。
-                            </p>
-                            <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                <span class="text-gray-500">时长: 78分</span>
-                                <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
-                                    网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
-                                </a>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.001-《剧透》S1E1</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    “我还是挺佩服陈婧霏的”
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 47分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.002-《剧透》S1E2</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    “把人生的空虚，酿一杯
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 43分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.003-《剧透》S1E3</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.004-《剧透》S1E4</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.005-《剧透》S1E5</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.006-《剧透》S1E6</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.007-《剧透》S1E1</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.007-《剧透》S2E1</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.008-《剧透》S2E2</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.009-《剧透》S2E3</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.010-《剧透》S2E4</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                </div>
+                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                    发专辑为什么要做一档播客？
+                                </p>
+                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                    <span class="text-gray-500">时长: 20分</span>
+                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
@@ -1320,7 +1532,7 @@
                     <!-- PROFILE CONTAINER: Authenticated View (ticket stub design) -->
                     <div id="profilePanel" class="hidden bg-black/50 border border-retro-gold/20 p-3 rounded text-xs space-y-3">
                         <div class="flex items-center gap-1.5 text-retro-gold font-bold border-b border-retro-gold/20 pb-2">
-                            <i class="fa-solid fa-ticket"></i> 红霞剧场纪念票
+                            <i class="fa-solid fa-ticket"></i> 个人信息
                         </div>
                         <div class="bg-[#faedd9] rounded border-2 border-dashed border-[#58111A] p-3 space-y-2">
                             <div class="flex items-center gap-3">
@@ -1513,14 +1725,14 @@
                             <span class="font-bold text-[#2a1317]" id="ticketStopsCount">3 / 5 城市</span>
                         </div>
                         <div>
-                            <span class="text-[8px] text-[#58111A]/60 block font-mono">SERIAL / 票根序列</span>
-                            <span class="font-bold font-mono text-retro-burgundy" id="ticketSerialNum">HX-8941-8849</span>
+                            <span class="text-[8px] text-[#58111A]/60 block font-mono">MILEAGE / 累计里程</span>
+                            <span class="font-bold font-mono text-retro-burgundy" id="ticketSerialNum">0 KM</span>
                         </div>
                     </div>
                     <!-- Seat row -->
                     <div class="text-[10px] font-serif">
-                        <span class="text-[8px] text-[#58111A]/60 block font-mono">SEAT / 专属座位</span>
-                        <span class="font-bold text-[#2a1317]" id="ticketSeatNum">6排9座</span>
+                        <span class="text-[8px] text-[#58111A]/60 block font-mono">TITLE / 荣誉称号</span>
+                        <span class="font-bold text-[#2a1317]" id="ticketSeatNum">未解锁</span>
                     </div>
 
                     <div class="pt-1">
@@ -1690,6 +1902,8 @@
             activeDeptSubView: "hallway",
             activeLobbySubView: "hallway",
             currentShowcaseStop: 0,
+            cinemaYearFilter: null,     // year filter for grand cinema
+            cinemaMonthFilter: null,    // month filter for grand cinema
             musicPlaying: false,
             currentSongIndex: 0,
             ambientPlaying: false,
@@ -2186,7 +2400,8 @@
                 venue: "北京 ・ 1919 LIVEHOUSE",
                 poster: "https://placehold.co/600x800/290c0f/D4AF37?text=Beijing+1206",
                 status: "已结束",
-                highlights: ["冬日序曲", "金色夕阳", "管弦乐团"]
+                highlights: ["冬日序曲", "金色夕阳", "管弦乐团"],
+                lat: 39.9042, lng: 116.4074
             },
             {
                 id: "251207",
@@ -2197,7 +2412,8 @@
                 venue: "北京 ・ 1919 LIVEHOUSE",
                 poster: "https://placehold.co/600x800/3a1a1a/D4AF37?text=Beijing+1207",
                 status: "已结束",
-                highlights: ["深歌变奏", "多云天幕", "双城连演"]
+                highlights: ["深歌变奏", "多云天幕", "双城连演"],
+                lat: 39.9042, lng: 116.4074
             },
             {
                 id: "251212",
@@ -2208,7 +2424,8 @@
                 venue: "上海 ・ 回响之地 Music Park",
                 poster: "https://placehold.co/600x800/151f2e/D4AF37?text=Shanghai+1212",
                 status: "已结束",
-                highlights: ["萨克斯独奏", "百乐门布景", "怀旧金曲"]
+                highlights: ["萨克斯独奏", "百乐门布景", "怀旧金曲"],
+                lat: 31.2304, lng: 121.4737
             },
             {
                 id: "260305",
@@ -2219,7 +2436,8 @@
                 venue: "广州 ・ 声音共和 LIVEHOUSE",
                 poster: "https://placehold.co/600x800/0d1f1c/D4AF37?text=Guangzhou+0305",
                 status: "已结束",
-                highlights: ["玫瑰花瓣", "粤语念白", "春日暖风"]
+                highlights: ["玫瑰花瓣", "粤语念白", "春日暖风"],
+                lat: 23.1291, lng: 113.2644
             },
             {
                 id: "260308",
@@ -2230,7 +2448,8 @@
                 venue: "深圳 ・ BO LIVE",
                 poster: "https://placehold.co/600x800/1a2a1a/D4AF37?text=Shenzhen+0308",
                 status: "已结束",
-                highlights: ["现代编排", "滨海光影", "复古新声"]
+                highlights: ["现代编排", "滨海光影", "复古新声"],
+                lat: 22.5431, lng: 114.0579
             },
             {
                 id: "260314",
@@ -2241,7 +2460,8 @@
                 venue: "杭州 ・ Live Shop Uni由你现场",
                 poster: "https://placehold.co/600x800/1a2e1a/D4AF37?text=Hangzhou+0314",
                 status: "已结束",
-                highlights: ["西湖春色", "江南韵味", "光影交织"]
+                highlights: ["西湖春色", "江南韵味", "光影交织"],
+                lat: 30.2741, lng: 120.1551
             },
             {
                 id: "260321",
@@ -2252,7 +2472,8 @@
                 venue: "长沙 ・ 达丰空间",
                 poster: "https://placehold.co/600x800/1a1515/D4AF37?text=Changsha+0321",
                 status: "已结束",
-                highlights: ["春雨和声", "湘江夜话", "热烈诗意"]
+                highlights: ["春雨和声", "湘江夜话", "热烈诗意"],
+                lat: 28.2282, lng: 112.9388
             },
             {
                 id: "260406",
@@ -2263,7 +2484,8 @@
                 venue: "南京 ・ 稻香演绎中心",
                 poster: "https://placehold.co/600x800/1e1a1a/D4AF37?text=Nanjing+0406",
                 status: "已结束",
-                highlights: ["梧桐新绿", "古都回响", "时光信笺"]
+                highlights: ["梧桐新绿", "古都回响", "时光信笺"],
+                lat: 32.0603, lng: 118.7969
             },
             {
                 id: "260411",
@@ -2274,7 +2496,8 @@
                 venue: "成都 ・ 东区超现场",
                 poster: "https://placehold.co/600x800/221528/D4AF37?text=Chengdu+0411",
                 status: "已结束",
-                highlights: ["手风琴重奏", "春雨瓦檐", "寄语纸飞机"]
+                highlights: ["手风琴重奏", "春雨瓦檐", "寄语纸飞机"],
+                lat: 30.5728, lng: 104.0668
             },
             {
                 id: "260705",
@@ -2285,7 +2508,8 @@
                 venue: "郑州 ・ 7LIVEHOUSE+",
                 poster: "https://placehold.co/600x800/2a1a0a/D4AF37?text=Zhengzhou+0705",
                 status: "已结束",
-                highlights: ["盛夏炽热", "中原回响", "金色光芒"]
+                highlights: ["盛夏炽热", "中原回响", "金色光芒"],
+                lat: 34.7466, lng: 113.6254
             },
             {
                 id: "WZ",
@@ -2296,7 +2520,8 @@
                 venue: "温州 ・ SEELAB",
                 poster: "https://placehold.co/600x800/2a1a0a/D4AF37?text=Wenzhou+0724",
                 status: "待开演",
-                highlights: ["盛夏炽热", "中原回响", "金色光芒"]
+                highlights: ["盛夏炽热", "中原回响", "金色光芒"],
+                lat: 27.9939, lng: 120.6994
             },
             {
                 id: "XA",
@@ -2307,7 +2532,8 @@
                 venue: "西安 ・ 西演SPACE·塞斯拾陆",
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
                 status: "待开演",
-                highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
+                highlights: ["手稿编年史", "终场大合唱", "演职员致敬"],
+                lat: 34.3416, lng: 108.9398
             },
             {
                 id: "HF",
@@ -2318,7 +2544,8 @@
                 venue: "合肥 ・ 场地待定",
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Hefei+0816",
                 status: "待开演",
-                highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
+                highlights: ["手稿编年史", "终场大合唱", "演职员致敬"],
+                lat: 31.8206, lng: 117.2272
             },
             {
                 id: "SY",
@@ -2329,7 +2556,8 @@
                 venue: "沈阳 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1a2a/D4AF37?text=Shenyang+0830",
                 status: "待开演",
-                highlights: ["初秋凉风", "工业诗意", "深情演绎"]
+                highlights: ["初秋凉风", "工业诗意", "深情演绎"],
+                lat: 41.8057, lng: 123.4315
             },
             {
                 id: "WH",
@@ -2340,7 +2568,8 @@
                 venue: "武汉 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
                 status: "待开演",
-                highlights: ["收官之夜", "江城余晖", "四季终章"]
+                highlights: ["收官之夜", "江城余晖", "四季终章"],
+                lat: 30.5928, lng: 114.3055
             },
             {
                 id: "JN",
@@ -2351,7 +2580,8 @@
                 venue: "济南 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Jinan",
                 status: "待开演",
-                highlights: ["收官之夜", "江城余晖", "四季终章"]
+                highlights: ["收官之夜", "江城余晖", "四季终章"],
+                lat: 36.6512, lng: 116.9947
             },
             {
                 id: "NC",
@@ -2362,7 +2592,8 @@
                 venue: "南昌 ・ 场地待定",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Nanchang",
                 status: "待开演",
-                highlights: ["收官之夜", "江城余晖", "四季终章"]
+                highlights: ["收官之夜", "江城余晖", "四季终章"],
+                lat: 28.6820, lng: 115.8582
             }
         ];
 
@@ -2652,6 +2883,7 @@
                     renderCrafts();
                 } else if (screenId === 'grand-cinema') {
                     document.getElementById('grand-cinema').style.display = 'flex';
+                    renderCinemaFilters();
                     renderProjectorStop();
                 } else if (screenId === 'business-dept') {
                     document.getElementById('business-dept').style.display = 'flex';
@@ -3269,7 +3501,127 @@
             `);
         }
 
+        // ---- Grand Cinema Year/Month Filter ----
+
+        function getAvailableCinemaYears() {
+            const years = new Set();
+            TOUR_STOPS.forEach(s => {
+                const parts = s.date.split('.');
+                if (parts.length === 3) years.add(parts[0]);
+            });
+            return Array.from(years).sort();
+        }
+
+        function getAvailableCinemaMonths(year) {
+            const months = new Set();
+            TOUR_STOPS.forEach(s => {
+                const parts = s.date.split('.');
+                if (parts.length === 3 && parts[0] === year) months.add(parseInt(parts[1]));
+            });
+            return Array.from(months).sort((a, b) => a - b);
+        }
+
+        function getFilteredCinemaStops() {
+            let indices = TOUR_STOPS.map((_, i) => i);
+            if (STATE.cinemaYearFilter) {
+                indices = indices.filter(i => {
+                    const parts = TOUR_STOPS[i].date.split('.');
+                    return parts[0] === STATE.cinemaYearFilter;
+                });
+            }
+            if (STATE.cinemaMonthFilter) {
+                indices = indices.filter(i => {
+                    const parts = TOUR_STOPS[i].date.split('.');
+                    return parseInt(parts[1]) === STATE.cinemaMonthFilter;
+                });
+            }
+            return indices;
+        }
+
+        function renderCinemaFilters() {
+            const yearContainer = document.getElementById('cinemaYearPills');
+            const monthContainer = document.getElementById('cinemaMonthPills');
+            if (!yearContainer || !monthContainer) return;
+
+            const years = getAvailableCinemaYears();
+
+            // Year pills
+            yearContainer.innerHTML = '<span class="text-[9px] text-gray-500 font-mono mr-1">年份</span>';
+            // "All" pill
+            const allYearBtn = document.createElement('button');
+            allYearBtn.type = 'button';
+            allYearBtn.onclick = () => applyCinemaYearFilter(null);
+            allYearBtn.className = STATE.cinemaYearFilter === null
+                ? 'px-2 py-0.5 rounded text-[9px] font-mono bg-retro-burgundy text-retro-gold border border-retro-gold'
+                : 'px-2 py-0.5 rounded text-[9px] font-mono bg-[#120708] text-gray-400 border border-retro-gold/30 hover:border-retro-gold';
+            allYearBtn.innerText = '全部';
+            yearContainer.appendChild(allYearBtn);
+
+            years.forEach(y => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => applyCinemaYearFilter(y);
+                btn.className = STATE.cinemaYearFilter === y
+                    ? 'px-2 py-0.5 rounded text-[9px] font-mono bg-retro-burgundy text-retro-gold border border-retro-gold'
+                    : 'px-2 py-0.5 rounded text-[9px] font-mono bg-[#120708] text-gray-400 border border-retro-gold/30 hover:border-retro-gold';
+                btn.innerText = y;
+                yearContainer.appendChild(btn);
+            });
+
+            // Month pills (only show if a year is selected)
+            if (STATE.cinemaYearFilter) {
+                monthContainer.classList.remove('hidden');
+                const months = getAvailableCinemaMonths(STATE.cinemaYearFilter);
+                monthContainer.innerHTML = '<span class="text-[9px] text-gray-500 font-mono mr-1">月份</span>';
+                // "All" pill
+                const allMonthBtn = document.createElement('button');
+                allMonthBtn.type = 'button';
+                allMonthBtn.onclick = () => applyCinemaMonthFilter(null);
+                allMonthBtn.className = STATE.cinemaMonthFilter === null
+                    ? 'px-2 py-0.5 rounded text-[9px] font-mono bg-retro-burgundy text-retro-gold border border-retro-gold'
+                    : 'px-2 py-0.5 rounded text-[9px] font-mono bg-[#120708] text-gray-400 border border-retro-gold/30 hover:border-retro-gold';
+                allMonthBtn.innerText = '全部';
+                monthContainer.appendChild(allMonthBtn);
+
+                months.forEach(m => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.onclick = () => applyCinemaMonthFilter(m);
+                    btn.className = STATE.cinemaMonthFilter === m
+                        ? 'px-2 py-0.5 rounded text-[9px] font-mono bg-retro-burgundy text-retro-gold border border-retro-gold'
+                        : 'px-2 py-0.5 rounded text-[9px] font-mono bg-[#120708] text-gray-400 border border-retro-gold/30 hover:border-retro-gold';
+                    btn.innerText = m + '月';
+                    monthContainer.appendChild(btn);
+                });
+            } else {
+                monthContainer.classList.add('hidden');
+            }
+        }
+
+        function applyCinemaYearFilter(year) {
+            STATE.cinemaYearFilter = year;
+            STATE.cinemaMonthFilter = null;
+            const filtered = getFilteredCinemaStops();
+            STATE.currentShowcaseStop = filtered.length > 0 ? filtered[0] : 0;
+            renderCinemaFilters();
+            renderProjectorStop();
+        }
+
+        function applyCinemaMonthFilter(month) {
+            STATE.cinemaMonthFilter = month;
+            const filtered = getFilteredCinemaStops();
+            STATE.currentShowcaseStop = filtered.length > 0 ? filtered[0] : 0;
+            renderCinemaFilters();
+            renderProjectorStop();
+        }
+
         function renderProjectorStop() {
+            const filtered = getFilteredCinemaStops();
+            const realIndex = filtered.length > 0 ? filtered.indexOf(STATE.currentShowcaseStop) : -1;
+            // If current stop is not in filtered list, jump to first filtered
+            if (realIndex === -1 && filtered.length > 0) {
+                STATE.currentShowcaseStop = filtered[0];
+            }
             const stop = TOUR_STOPS[STATE.currentShowcaseStop];
 
             // Record viewed stop to unlock "read_stops" achievement
@@ -3411,18 +3763,20 @@
                 }
             }
 
-            document.getElementById('carouselIndexDisplay').innerText = STATE.currentShowcaseStop + 1;
-            document.getElementById('carouselTotalDisplay').innerText = TOUR_STOPS.length;
+            const filteredPos = filtered.indexOf(STATE.currentShowcaseStop);
+            document.getElementById('carouselIndexDisplay').innerText = (filteredPos >= 0 ? filteredPos : 0) + 1;
+            document.getElementById('carouselTotalDisplay').innerText = filtered.length || TOUR_STOPS.length;
             document.getElementById('carouselCurrentCity').innerText = stop.city;
         }
 
         function changeShowcaseStop(dir) {
-            STATE.currentShowcaseStop += dir;
-            if (STATE.currentShowcaseStop < 0) {
-                STATE.currentShowcaseStop = TOUR_STOPS.length - 1;
-            } else if (STATE.currentShowcaseStop >= TOUR_STOPS.length) {
-                STATE.currentShowcaseStop = 0;
-            }
+            const filtered = getFilteredCinemaStops();
+            if (filtered.length === 0) return;
+            const currentPos = filtered.indexOf(STATE.currentShowcaseStop);
+            let newPos = (currentPos >= 0 ? currentPos : 0) + dir;
+            if (newPos < 0) newPos = filtered.length - 1;
+            else if (newPos >= filtered.length) newPos = 0;
+            STATE.currentShowcaseStop = filtered[newPos];
             playShortBeep(520, 0.05);
             renderProjectorStop();
         }
@@ -3650,6 +4004,32 @@
             syncMapDotsVisuals();
         }
 
+        function haversineKm(lat1, lng1, lat2, lng2) {
+            const R = 6371; // Earth radius in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) ** 2 +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng / 2) ** 2;
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        function calcCumulativeMileage() {
+            // Calculate cumulative distance in order of checkedCities
+            let total = 0;
+            for (let i = 1; i < STATE.checkedCities.length; i++) {
+                const prev = TOUR_STOPS[STATE.checkedCities[i - 1]];
+                const curr = TOUR_STOPS[STATE.checkedCities[i]];
+                if (prev.lat != null && prev.lng != null && curr.lat != null && curr.lng != null) {
+                    // Only count if different cities (skip same-city stops like 北京x2)
+                    if (prev.city !== curr.city) {
+                        total += haversineKm(prev.lat, prev.lng, curr.lat, curr.lng);
+                    }
+                }
+            }
+            return total;
+        }
+
         function toggleCheckinStop(idx) {
             // Host cannot uncheck any stop
             if (STATE.userRole === 'host') {
@@ -3785,12 +4165,17 @@
                 subtitleEl.className = 'text-[8px] text-[#58111A]/80 font-serif';
             }
 
-            const row = Math.floor(Math.random() * 12) + 1;
-            const col = Math.floor(Math.random() * 24) + 1;
-            document.getElementById('ticketSeatNum').innerText = `${row}排${col}座`;
+            // Honor title based on checked cities count (only finished stops)
+            const finishedCount = STATE.checkedCities.filter(idx => TOUR_STOPS[idx].status === '已结束').length;
+            let honorTitle = '未解锁';
+            if (finishedCount >= 7) honorTitle = '猩纯的红';
+            else if (finishedCount >= 5) honorTitle = '自恋咒语';
+            else if (finishedCount >= 3) honorTitle = '别处烟火';
+            else if (finishedCount >= 1) honorTitle = '孤独相认';
+            document.getElementById('ticketSeatNum').innerText = honorTitle;
 
-            const serial = `HX-${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`;
-            document.getElementById('ticketSerialNum').innerText = serial;
+            const mileage = calcCumulativeMileage();
+            document.getElementById('ticketSerialNum').innerText = mileage >= 1 ? `${Math.round(mileage).toLocaleString()} KM` : '0 KM';
 
             generateBarcode();
 
@@ -3822,7 +4207,9 @@
         }
 
         function copyTicketRawText() {
-            const summaryText = `[红霞影剧院] 我已集齐陈婧霏巡演 ${STATE.checkedCities.length} 站打卡足迹！我的纪念座位: ${document.getElementById('ticketSeatNum').innerText}。打卡序列: ${document.getElementById('ticketSerialNum').innerText}。`;
+            const mileage = calcCumulativeMileage();
+            const mileageText = mileage >= 1 ? `${Math.round(mileage).toLocaleString()} KM` : '0 KM';
+            const summaryText = `[红霞影剧院] 我已集齐陈婧霏巡演 ${STATE.checkedCities.length} 站打卡足迹！我的荣誉称号: ${document.getElementById('ticketSeatNum').innerText}。累计里程: ${mileageText}。`;
             
             const dummy = document.createElement('textarea');
             dummy.value = summaryText;
