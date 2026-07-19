@@ -792,9 +792,9 @@
 
             <!-- ================= SUB-VIEW 1: REHEARSAL ROOM (演员排练室) ================= -->
             <div id="subDeptRehearsal" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
-                <!-- Music Player left -->
+                <!-- Vinyl Player left -->
                 <div class="md:col-span-5 bg-retro-darkwood border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
-                    
+
                     <div class="space-y-1">
                         <span class="px-1.5 py-0.5 bg-retro-gold text-black font-mono text-[8px] rounded font-bold uppercase">
                             NOW REHEARSING
@@ -811,7 +811,7 @@
                             <div class="absolute inset-2 rounded-full border border-gray-900/60"></div>
                             <div class="absolute inset-4 rounded-full border border-gray-900/40"></div>
                             <div class="absolute inset-6 rounded-full border border-gray-900/20"></div>
-                            
+
                             <!-- Vinyl Center Artwork -->
                             <div class="w-12 h-12 rounded-full bg-retro-burgundy border border-retro-gold/40 flex items-center justify-center relative overflow-hidden">
                                 <div class="text-[8px] font-mono text-retro-gold text-center leading-none">
@@ -843,29 +843,48 @@
                             </button>
                         </div>
                         <div class="text-[8px] text-gray-500">
-                            * 音乐源自浏览器模拟电子唱针发声
+                            * 点击右侧歌单曲目可切换黑胶试听
                         </div>
                     </div>
 
                 </div>
 
-                <!-- Lyric board right -->
-                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-between overflow-hidden">
-                    <div class="border-b border-retro-gold/15 pb-2 mb-3 flex justify-between items-center">
-                        <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-paragraph"></i> 歌词纸笺</span>
-                    </div>
+                <!-- Setlist right -->
+                <div class="md:col-span-7 bg-[#140b0d] border border-retro-gold/30 rounded p-4 flex flex-col justify-start overflow-y-auto">
+                    <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-2 mb-3">
+                        <i class="fa-solid fa-music"></i> 排练歌单
+                    </h3>
 
-                    <!-- Lyric text scroller -->
-                    <div id="lyricScroller" class="flex-1 min-h-[120px] overflow-y-auto space-y-3 pr-1 text-center flex flex-col justify-center select-none font-serif text-xs leading-loose text-gray-400">
-                        <!-- JS Dynamic lyric line injection -->
-                    </div>
+                    <div class="space-y-4 text-xs" id="setlistContainer">
+                        <!-- PART 1 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-retro-neonred text-[10px] font-mono font-bold tracking-wider">PART 1</span>
+                                <span class="text-[9px] text-gray-500 font-serif">— 序章：蓝莓之夜 —</span>
+                                <div class="flex-1 border-b border-retro-gold/10"></div>
+                            </div>
+                            <div class="space-y-2" id="setlistPart1"></div>
+                        </div>
 
-                    <div class="mt-3 pt-2 border-t border-retro-gold/15 flex flex-wrap gap-1">
-                        <span class="text-[9px] text-gray-500">切歌：</span>
-                        <button onclick="selectSpecificSong(0)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">蓝莓夜</button>
-                        <button onclick="selectSpecificSong(1)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">生活在别处</button>
-                        <button onclick="selectSpecificSong(2)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">深歌</button>
-                        <button onclick="selectSpecificSong(3)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">红霞</button>
+                        <!-- PART 2 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-retro-neonamber text-[10px] font-mono font-bold tracking-wider">PART 2</span>
+                                <span class="text-[9px] text-gray-500 font-serif">— 中场：生活在别处 —</span>
+                                <div class="flex-1 border-b border-retro-gold/10"></div>
+                            </div>
+                            <div class="space-y-2" id="setlistPart2"></div>
+                        </div>
+
+                        <!-- PART 3 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-retro-gold text-[10px] font-mono font-bold tracking-wider">PART 3</span>
+                                <span class="text-[9px] text-gray-500 font-serif">— 终章：红霞散场 —</span>
+                                <div class="flex-1 border-b border-retro-gold/10"></div>
+                            </div>
+                            <div class="space-y-2" id="setlistPart3"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1343,8 +1362,26 @@
 
         const REHEARSAL_TRACKS = [
             {
+                title: "晚风",
+                artist: "陈婧霏",
+                part: 1,
+                duration: "4:23",
+                desc: "在夏夜的晚风里，所有的故事才刚刚开始。轻柔的弦乐如夜幕缓缓降临。",
+                lyrics: [
+                    "晚风轻拂过 褪色的海报墙",
+                    "空荡的放映厅 只剩光影在游荡",
+                    "你说这是今年夏天 最后一场电影",
+                    "散场之后 我们该去向何方",
+                    "就让晚风 替我们记住这一刻",
+                    "在所有故事结束之前 再跳一支舞吧..."
+                ]
+            },
+            {
                 title: "蓝莓夜",
                 artist: "陈婧霏",
+                part: 1,
+                duration: "4:56",
+                desc: "霓虹与孤独一同吞下，留声机转动着那些未曾开口的温柔。",
                 lyrics: [
                     "我想进入这蓝莓色的夜里",
                     "把霓虹和孤独都吞进腹中",
@@ -1355,8 +1392,26 @@
                 ]
             },
             {
+                title: "深蓝",
+                artist: "陈婧霏",
+                part: 1,
+                duration: "5:12",
+                desc: "潜入最深的海底，那里有被遗忘的梦和从未寄出的信。",
+                lyrics: [
+                    "沉入最深最深的蓝",
+                    "那里没有光 也没有答案",
+                    "只有被遗忘的梦 静静漂浮",
+                    "像一封 从未寄出的信",
+                    "在这深蓝里 我听见自己的呼吸",
+                    "原来孤独 也是一种完整的自由..."
+                ]
+            },
+            {
                 title: "生活在别处",
                 artist: "陈婧霏",
+                part: 2,
+                duration: "5:30",
+                desc: "我们总是在寻找另一个遥远的港湾，却忘记了此时此刻脚下的红色泥土。",
                 lyrics: [
                     "我们总是在寻找 另一个遥远的港湾",
                     "却忘记了 此时此刻脚下的红色泥土",
@@ -1367,8 +1422,26 @@
                 ]
             },
             {
+                title: "夏夜最后的烟火",
+                artist: "陈婧霏",
+                part: 2,
+                duration: "4:15",
+                desc: "所有灿烂终将归于寂静，但那一刻的光亮足以照亮整个青春。",
+                lyrics: [
+                    "你说想看一场 永不落幕的烟火",
+                    "在夏夜的屋顶 我们许了太多愿望",
+                    "当最后一束光 消散在夜空",
+                    "我看见你眼里 有不舍的星光",
+                    "灿烂过的 就不算遗憾",
+                    "这夏夜 是我们最好的时光..."
+                ]
+            },
+            {
                 title: "深歌",
                 artist: "陈婧霏",
+                part: 2,
+                duration: "6:02",
+                desc: "用最低沉的声线唱一首无人的歌，像黑白默片里缓缓飘落的细雨。",
                 lyrics: [
                     "用最低沉的声线 唱一首无人的歌",
                     "像黑白默片里 缓缓飘落的细雨",
@@ -1381,6 +1454,9 @@
             {
                 title: "红霞",
                 artist: "陈婧霏",
+                part: 3,
+                duration: "5:18",
+                desc: "当落日熔金铺满天际，那是影剧院亮起的最华丽的幕布。",
                 lyrics: [
                     "当落日熔金 铺满整个无边的天际",
                     "那是影剧院 亮起的最华丽的幕布",
@@ -1388,6 +1464,21 @@
                     "把眼泪 融进这烧透了的霞光里",
                     "不要流泪 这是胶片中最完美的终局",
                     "红霞散去 我们的歌仍在回荡..."
+                ]
+            },
+            {
+                title: "晚安，红霞剧院",
+                artist: "陈婧霏",
+                part: 3,
+                duration: "3:26",
+                desc: "幕布落下，灯光亮起，晚安所有的迟到者，晚安红霞剧院。",
+                lyrics: [
+                    "最后一盏灯 也要熄灭了",
+                    "散场的人群 渐渐走远了",
+                    "银幕上只剩 雪花在闪烁",
+                    "像极了我们 未完成的梦",
+                    "晚安吧 所有的迟到者",
+                    "晚安 红霞剧院 明天见..."
                 ]
             }
         ];
@@ -2108,14 +2199,43 @@
             document.getElementById('rehearsalSongTitle').innerText = track.title;
             document.getElementById('rehearsalSongArtist').innerText = `陈婧霏 ・ 巡演经典现场`;
 
-            const scroller = document.getElementById('lyricScroller');
-            scroller.innerHTML = "";
+            renderSetlist();
+        }
 
-            track.lyrics.forEach((line, i) => {
-                const p = document.createElement('p');
-                p.className = `transition-all duration-300 font-serif leading-relaxed ${i === 2 ? 'text-retro-gold text-xs font-bold' : 'text-gray-400 text-[10px]'}`;
-                p.innerText = line;
-                scroller.appendChild(p);
+        function renderSetlist() {
+            // Group tracks by part
+            const parts = {1: [], 2: [], 3: []};
+            REHEARSAL_TRACKS.forEach((track, i) => {
+                parts[track.part].push({...track, index: i});
+            });
+
+            [1, 2, 3].forEach(partNum => {
+                const container = document.getElementById(`setlistPart${partNum}`);
+                if (!container) return;
+                container.innerHTML = '';
+
+                parts[partNum].forEach((track) => {
+                    const isActive = track.index === STATE.currentSongIndex;
+                    const div = document.createElement('div');
+                    div.className = `bg-retro-darkwood border p-3 rounded cursor-pointer transition-all duration-200 active:scale-[0.98] ${
+                        isActive ? 'border-retro-gold shadow-[0_0_8px_rgba(212,175,55,0.15)]' : 'border-retro-gold/20 hover:border-retro-gold/50'
+                    }`;
+                    div.onclick = () => selectSpecificSong(track.index);
+                    div.innerHTML = `
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="text-retro-gold font-bold font-serif text-xs">${track.title}</span>
+                            <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono">${track.duration}</span>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                            ${track.desc}
+                        </p>
+                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                            <span class="text-gray-500">陈婧霏</span>
+                            ${isActive ? '<span class="text-retro-neonred"><i class="fa-solid fa-music"></i> 正在试听</span>' : '<span class="text-gray-600"><i class="fa-solid fa-play"></i> 点击试听</span>'}
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
             });
         }
 
@@ -2150,10 +2270,14 @@
                 }
 
                 const melodies = [
-                    [261.63, 293.66, 329.63, 349.23, 392.00], 
-                    [329.63, 392.00, 440.00, 523.25, 587.33], 
-                    [220.00, 261.63, 293.66, 329.63, 440.00], 
-                    [392.00, 349.23, 329.63, 293.66, 261.63]  
+                    [261.63, 293.66, 329.63, 349.23, 392.00],
+                    [329.63, 392.00, 440.00, 523.25, 587.33],
+                    [293.66, 349.23, 392.00, 440.00, 523.25],
+                    [220.00, 261.63, 293.66, 329.63, 440.00],
+                    [349.23, 392.00, 440.00, 523.25, 587.33],
+                    [392.00, 349.23, 329.63, 293.66, 261.63],
+                    [440.00, 392.00, 349.23, 329.63, 261.63],
+                    [261.63, 329.63, 392.00, 440.00, 523.25]
                 ];
 
                 const notes = melodies[STATE.currentSongIndex];

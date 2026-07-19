@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>红霞影剧院 - 陈婧霏巡演打卡纪念馆</title>
+    <!-- Favicon & Add-to-Home-Screen Icons -->
+    <link rel="icon" type="image/png" href="images/app.png">
+    <link rel="apple-touch-icon" href="images/app.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="红霞影剧院">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -1070,79 +1075,218 @@
             </div>
 
             <!-- ================= SUB-VIEW 1: REHEARSAL ROOM (演员排练室) ================= -->
-            <div id="subDeptRehearsal" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
-                <!-- Music Player left -->
-                <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between items-center text-center">
-                    
-                    <div class="space-y-1">
-                        <span class="px-1.5 py-0.5 bg-retro-gold text-black font-mono text-[8px] rounded font-bold uppercase">
-                            NOW REHEARSING
-                        </span>
-                        <h3 class="text-base font-bold text-white tracking-wide font-serif" id="rehearsalSongTitle">
-                            蓝莓夜 (Blueberry Nights)
-                        </h3>
-                        <p class="text-[10px] text-retro-gold" id="rehearsalSongArtist">陈婧霏</p>
-                    </div>
+            <div id="subDeptRehearsal" class="hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto">
 
-                    <!-- Spinning Vinyl Record (Scaled down for mobile screens) -->
-                    <div class="relative w-36 h-36 my-3 select-none">
-                        <div id="vinylDisk" class="w-full h-full rounded-full bg-black border-2 border-retro-darkwood spin-anim flex items-center justify-center relative shadow-xl">
-                            <div class="absolute inset-2 rounded-full border border-gray-900/60"></div>
-                            <div class="absolute inset-4 rounded-full border border-gray-900/40"></div>
-                            <div class="absolute inset-6 rounded-full border border-gray-900/20"></div>
-                            
-                            <!-- Vinyl Center Artwork -->
-                            <div class="w-12 h-12 rounded-full bg-retro-burgundy border border-retro-gold/40 flex items-center justify-center relative overflow-hidden">
-                                <div class="text-[8px] font-mono text-retro-gold text-center leading-none">
-                                    红霞<br>1989
+                <!-- Song List Full Width -->
+                <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
+                    <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-2 mb-3">
+                        <i class="fa-solid fa-music"></i> 排练歌单
+                    </h3>
+
+                    <div class="space-y-5 text-xs">
+
+                        <!-- PART 1 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-retro-neonred text-[10px] font-mono font-bold tracking-wider">ACT.1 Can you hear me?</span>
+                                <span class="text-[9px] text-gray-500 font-serif">— 序章 —</span>
+                                <div class="flex-1 border-b border-retro-gold/10"></div>
+                            </div>
+                            <div class="space-y-2">
+
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">红霞剧场</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《猩红》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="absolute w-2 h-2 rounded-full bg-black border border-retro-gold/20"></div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">人间指南</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《陈婧霏》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">沙漠一枝花</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《猩红》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">禁色宝利来</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《猩红》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">夏宫</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《陈婧霏》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">晕船记</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《陈婧霏》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">我的孤独认出你的孤独</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《陈婧霏》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">猩红</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《猩红》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
                             </div>
                         </div>
-                        <!-- Playing arm needle -->
-                        <div id="vinylNeedle" class="absolute top-1 right-2 w-8 h-14 origin-top-right transform rotate-12 transition-transform duration-500 pointer-events-none">
-                            <svg class="w-full h-full" viewBox="0 0 50 100" fill="none">
-                                <path d="M45,10 L15,10 L10,60 L20,85 L18,95" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="45" cy="10" r="4" fill="#800020"/>
-                            </svg>
+
+                        <!-- PART 2 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-retro-neonamber text-[10px] font-mono font-bold tracking-wider">ACT.2 So she fell,deliberately,to start over again</span>
+                                <span class="text-[9px] text-gray-500 font-serif">— 中场 —</span>
+                                <div class="flex-1 border-b border-retro-gold/10"></div>
+                            </div>
+                            <div class="space-y-2">
+
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">猩红</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《猩红》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>                                           
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Custom Player Controller -->
-                    <div class="w-full space-y-3">
-                        <div class="flex justify-center items-center gap-4">
-                            <button onclick="changeTrack(-1)" class="w-8 h-8 rounded-full border border-retro-gold text-retro-gold active:scale-90 flex items-center justify-center text-xs">
-                                <i class="fa-solid fa-backward-step"></i>
-                            </button>
-                            <button onclick="toggleMusicPlayback()" id="playPauseBtn" class="w-10 h-10 rounded-full bg-retro-gold text-black active:scale-95 flex items-center justify-center shadow">
-                                <i class="fa-solid fa-play text-sm" id="playPauseIcon"></i>
-                            </button>
-                            <button onclick="changeTrack(1)" class="w-8 h-8 rounded-full border border-retro-gold text-retro-gold active:scale-90 flex items-center justify-center text-xs">
-                                <i class="fa-solid fa-forward-step"></i>
-                            </button>
+                        <!-- PART 3 -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-retro-gold text-[10px] font-mono font-bold tracking-wider">ACT.3 Are you ready?</span>
+                                <span class="text-[9px] text-gray-500 font-serif">— 终章 —</span>
+                                <div class="flex-1 border-b border-retro-gold/10"></div>
+                            </div>
+                            <div class="space-y-2">
+
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <i class="fa-solid fa-music text-retro-gold/40 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">歌曲名称</span>
+                                            <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">0:00</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            歌曲描述或歌词摘录...
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>
+                                            <span class="text-gray-600">巡演现场版</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        
-                    </div>
 
-                </div>
-
-                <!-- Lyric board right -->
-                <div class="md:col-span-7 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-between overflow-hidden">
-                    <div class="border-b border-retro-gold/15 pb-2 mb-3 flex justify-between items-center">
-                        <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-paragraph"></i> 歌词纸笺</span>
-                    </div>
-
-                    <!-- Lyric text scroller -->
-                    <div id="lyricScroller" class="flex-1 min-h-[120px] overflow-y-auto space-y-3 pr-1 text-center flex flex-col justify-center select-none font-serif text-xs leading-loose text-gray-400">
-                        <!-- JS Dynamic lyric line injection -->
-                    </div>
-
-                    <div class="mt-3 pt-2 border-t border-retro-gold/15 flex flex-wrap gap-1">
-                        <span class="text-[9px] text-gray-500">切歌：</span>
-                        <button onclick="selectSpecificSong(0)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">蓝莓夜</button>
-                        <button onclick="selectSpecificSong(1)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">生活在别处</button>
-                        <button onclick="selectSpecificSong(2)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">深歌</button>
-                        <button onclick="selectSpecificSong(3)" class="text-[9px] px-1.5 py-0.5 bg-retro-darkwood border border-retro-gold/30 text-retro-gold rounded">红霞</button>
                     </div>
                 </div>
             </div>
@@ -1221,7 +1365,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 10.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -1233,7 +1377,7 @@
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
                                     <span class="text-gray-500">时长: 20分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <a href="https://163cn.tv/bbkMz3nR " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1244,7 +1388,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 10.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -1256,7 +1400,7 @@
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
                                     <span class="text-gray-500">时长: 47分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <a href="https://163cn.tv/bbkMCrmo" target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1265,7 +1409,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 9.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -1277,7 +1421,7 @@
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
                                     <span class="text-gray-500">时长: 43分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <a href="https://163cn.tv/bbkNbvDT" target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1286,7 +1430,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 1.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -1298,7 +1442,7 @@
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
                                     <span class="text-gray-500">时长: 39分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <a href="https://163cn.tv/bbkMGTSZ " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1307,7 +1451,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 2.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -1319,7 +1463,7 @@
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
                                     <span class="text-gray-500">时长: 62分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <a href="https://163cn.tv/bbkMRqzU" target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1328,7 +1472,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 3.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -1336,11 +1480,11 @@
                                     <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-12</span>
                                 </div>
                                 <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                    “走，去创造猩红味儿的欲望“
+                                    “走，去创造猩红味儿的欲望”
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
                                     <span class="text-gray-500">时长: 48分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <a href="https://163cn.tv/bbkNhJOG " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1349,7 +1493,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 4.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -1357,11 +1501,11 @@
                                     <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2025-01</span>
                                 </div>
                                 <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                    
+                                    “终极目标没变：把陈婧霏变成一个形容词。”
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                    <span class="text-gray-500">时长: 20分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <span class="text-gray-500">时长: 100分</span>
+                                    <a href="https://163cn.tv/bbkMRFBG " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1370,19 +1514,19 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 5.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
                                     <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.007-《剧透》S1E1</span>
-                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2025-10</span>
                                 </div>
                                 <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                    发专辑为什么要做一档播客？
+                                    “欢迎光临，祝君快乐”
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                    <span class="text-gray-500">时长: 20分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <span class="text-gray-500">时长: 7分</span>
+                                    <a href="https://163cn.tv/bbkMTLbN " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1390,40 +1534,19 @@
                         </div>
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex justify-between items-start mb-1">
-                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.007-《剧透》S2E1</span>
-                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
-                                </div>
-                                <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                    发专辑为什么要做一档播客？
-                                </p>
-                                <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                    <span class="text-gray-500">时长: 20分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
-                                        网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
-                            <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 6.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
                                     <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.008-《剧透》S2E2</span>
-                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2025-11</span>
                                 </div>
                                 <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                    发专辑为什么要做一档播客？
+                                    高能量？我装的：）showgirl修炼手册
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                    <span class="text-gray-500">时长: 20分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <span class="text-gray-500">时长: 45分</span>
+                                    <a href="https://163cn.tv/bbkM4pqz " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1432,19 +1555,19 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 5.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
                                     <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.009-《剧透》S2E3</span>
-                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2025-12</span>
                                 </div>
                                 <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                    发专辑为什么要做一档播客？
+                                    2025年了，他们坚持在音乐里用胶片机拍IMAX
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                    <span class="text-gray-500">时长: 20分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <span class="text-gray-500">时长: 47分</span>
+                                    <a href="https://163cn.tv/bbkMV9yi " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
@@ -1453,24 +1576,26 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="images/covers/podcast.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="images/covers/podcast 8.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
-                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.010-《剧透》S2E4</span>
-                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2024-10</span>
+                                    <span class="text-retro-gold font-bold font-serif text-xs">【陈婧，霏】NO.010-S2E4</span>
+                                    <span class="bg-retro-burgundy px-1 py-0.5 rounded text-[8px] text-retro-gold font-mono shrink-0 ml-1">2026-01</span>
                                 </div>
                                 <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
-                                    发专辑为什么要做一档播客？
+                                    非传统“三角关系”ft.梁文哲&任彬
                                 </p>
                                 <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
-                                    <span class="text-gray-500">时长: 20分</span>
-                                    <a href="https://www.xiaoyuzhoufm.com/" target="_blank" class="text-retro-neonred">
+                                    <span class="text-gray-500">时长: 85分</span>
+                                    <a href="https://163cn.tv/bbkM6xZ5 " target="_blank" class="text-retro-neonred">
                                         网易云音乐 <i class="fa-solid fa-up-right-from-square text-[8px]"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
+
+                    
 
                     </div>
                 </div>
@@ -2988,7 +3113,6 @@
                 deptTitleText.innerText = " 演员排练室";
                 deptSubText.innerText = "RM 101 - Rehearsal Studio";
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出排练室`;
-                renderSongLyric();
             } else if (subId === 'director') {
                 document.getElementById('subDeptDirector').style.display = 'flex';
                 deptTitleText.innerText = "🎬 导演休息室";
@@ -3812,19 +3936,7 @@
         })();
 
         function renderSongLyric() {
-            const track = REHEARSAL_TRACKS[STATE.currentSongIndex];
-            document.getElementById('rehearsalSongTitle').innerText = track.title;
-            document.getElementById('rehearsalSongArtist').innerText = `陈婧霏 ・ 巡演经典现场`;
-
-            const scroller = document.getElementById('lyricScroller');
-            scroller.innerHTML = "";
-
-            track.lyrics.forEach((line, i) => {
-                const p = document.createElement('p');
-                p.className = `transition-all duration-300 font-serif leading-relaxed ${i === 2 ? 'text-retro-gold text-xs font-bold' : 'text-gray-400 text-[10px]'}`;
-                p.innerText = line;
-                scroller.appendChild(p);
-            });
+            // Static song list design — no dynamic rendering needed
         }
 
         function toggleMusicPlayback() {
