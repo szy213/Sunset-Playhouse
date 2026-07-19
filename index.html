@@ -318,6 +318,253 @@
         .comment-input:focus {
             border-color: rgba(212,175,55,0.5);
         }
+
+        /* Notification styles */
+        .notif-item {
+            padding: 6px 8px;
+            border-radius: 2px;
+            border-bottom: 1px solid rgba(212,175,55,0.06);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .notif-item:hover { background: rgba(212,175,55,0.06); }
+        .notif-item.unread { border-left: 2px solid #FF3131; }
+        .notif-item .notif-icon { font-size: 11px; }
+
+        /* Image gallery in postcard cards */
+        .mail-gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 4px;
+            margin-top: 6px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .mail-gallery::-webkit-scrollbar { height: 3px; }
+        .mail-gallery::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+        .mail-gallery::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.3); border-radius: 2px; }
+        .mail-gallery img {
+            scroll-snap-align: start;
+            height: 160px;
+            width: auto;
+            min-width: 120px;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 2px;
+            border: 1px solid rgba(212,175,55,0.2);
+            background: rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+        .mail-gallery-dots {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            margin-top: 4px;
+        }
+        .mail-gallery-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(212,175,55,0.3);
+            transition: background 0.2s;
+        }
+        .mail-gallery-dot.active {
+            background: #D4AF37;
+        }
+
+        /* Modal image gallery */
+        .modal-gallery {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-gallery img {
+            max-height: 40vh;
+            width: 100%;
+            object-fit: contain;
+            border-radius: 2px;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+        .modal-gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(212,175,55,0.3);
+            color: #D4AF37;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 12px;
+            cursor: pointer;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+        .modal-gallery-arrow:hover { background: rgba(128,0,32,0.8); }
+        .modal-gallery-arrow.left { left: 4px; }
+        .modal-gallery-arrow.right { right: 4px; }
+
+        /* Multi-image preview in form */
+        .mail-preview-row {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+        .mail-preview-item {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .mail-preview-item img {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid rgba(212,175,55,0.25);
+        }
+        .mail-preview-remove {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #FF3131;
+            color: white;
+            font-size: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Intro page link buttons */
+        .intro-link-btn {
+            background: none;
+            border: none;
+            color: #D4AF37;
+            font-family: 'Noto Serif SC', 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            padding: 6px 16px;
+            display: inline-block;
+            animation: neon-flicker 4s infinite;
+            transition: all 0.3s;
+            text-shadow: 0 0 6px rgba(212,175,55,0.4);
+        }
+        .intro-link-btn:hover {
+            text-shadow: 0 0 12px rgba(212,175,55,0.8), 0 0 24px rgba(212,175,55,0.4);
+            color: #FFD700;
+        }
+
+        /* Parchment scroll modal */
+        .parchment-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(0,0,0,0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .parchment-scroll {
+            background: linear-gradient(135deg, #f5e6c8 0%, #ede0c0 15%, #f2e3c6 30%, #e8d8b0 50%, #f0e0c0 70%, #e6d4aa 85%, #f4e4c4 100%);
+            border: 3px solid #8b6914;
+            border-radius: 4px;
+            box-shadow:
+                0 0 0 8px rgba(139,105,20,0.08),
+                0 0 0 16px rgba(139,105,20,0.04),
+                0 10px 40px rgba(0,0,0,0.6),
+                inset 0 0 60px rgba(139,105,20,0.08);
+            max-width: 420px;
+            width: 100%;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 32px 28px;
+            position: relative;
+            font-family: 'Noto Serif SC', 'STSong', serif;
+            color: #3d2817;
+            font-size: 13px;
+            line-height: 2;
+        }
+        .parchment-scroll::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 20px; right: 20px;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(139,105,20,0.15) 3px, rgba(139,105,20,0.15) 5px);
+        }
+        .parchment-scroll::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 20px; right: 20px;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(139,105,20,0.15) 3px, rgba(139,105,20,0.15) 5px);
+        }
+        .parchment-scroll h3 {
+            font-size: 16px;
+            text-align: center;
+            color: #5c3d1a;
+            margin-bottom: 16px;
+            letter-spacing: 0.15em;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(139,105,20,0.2);
+            padding-bottom: 10px;
+        }
+        .parchment-scroll p {
+            text-indent: 2em;
+            margin-bottom: 8px;
+        }
+        .parchment-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #8b6914;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .parchment-close:hover { opacity: 1; }
+
+        /* Parchment open animation */
+        @keyframes parchment-reveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.85) translateY(20px);
+                filter: blur(4px);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.02) translateY(-2px);
+                filter: blur(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0);
+            }
+        }
+        .parchment-scroll.animate-in {
+            animation: parchment-reveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes parchment-overlay-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .parchment-overlay {
+            animation: parchment-overlay-in 0.3s ease forwards;
+        }
     </style>
 </head>
 <body class="bg-black text-gray-200 h-full overflow-hidden font-serif selection:bg-retro-burgundy selection:text-retro-gold relative flex flex-col">
@@ -399,8 +646,13 @@
         <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.png'); background-size: cover; background-position: center;">
             <div class="absolute bottom-[35%] left-1/2 -translate-x-1/2 text-center">
                 <button onclick="startImmersiveExperience()" class="text-lg font-bold tracking-[0.3em] active:scale-95 transition-all duration-300 animate-neon-flicker">
-                    <i class="fa-solid fa-ticket"></i> 进入
+                    <i class="fa-solid fa-ticket"></i> 进入影剧院
                 </button>
+            </div>
+            <div class="absolute bottom-[24%] left-1/2 -translate-x-1/2 text-center flex flex-col items-center gap-1">
+                <button onclick="showChangelog()" class="intro-link-btn">更新日志</button>
+                <button onclick="showAuthorNote()" class="intro-link-btn">作者说明</button>
+                <button onclick="showCredits()" class="intro-link-btn">致谢</button>
             </div>
         </div>
 
@@ -417,6 +669,22 @@
                 </div>
             </div>
             <div class="flex items-center gap-2">
+                <div class="relative">
+                    <button type="button" id="notifBellBtn" onclick="toggleNotificationPanel()" class="hidden relative px-2 py-1 bg-black/40 border border-retro-gold/30 text-retro-gold text-xs rounded active:scale-95 transition-all font-mono" title="消息提醒">
+                        <i class="fa-regular fa-bell"></i>
+                        <span id="notifBadge" class="hidden absolute -top-1.5 -right-1.5 bg-retro-neonred text-white text-[7px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                    </button>
+                    <!-- Notification dropdown -->
+                    <div id="notifPanel" class="hidden absolute right-0 top-full mt-1 w-64 max-h-64 overflow-y-auto bg-retro-darkwood/98 backdrop-blur-sm border border-retro-gold/40 rounded shadow-2xl z-50 p-2">
+                        <div class="flex justify-between items-center border-b border-retro-gold/15 pb-1.5 mb-1.5">
+                            <span class="text-retro-gold text-[10px] font-bold font-mono"><i class="fa-regular fa-bell"></i> 消息提醒</span>
+                            <button onclick="event.stopPropagation(); markAllNotificationsRead()" class="text-[8px] text-gray-500 hover:text-retro-gold font-mono uppercase">全部已读</button>
+                        </div>
+                        <div id="notifList" class="text-[10px] space-y-1">
+                            <p class="text-gray-600 text-center py-4 text-[9px]">暂无消息</p>
+                        </div>
+                    </div>
+                </div>
                 <button type="button" id="headerLogoutBtn" onclick="handleLogout()" class="hidden px-2 py-1 bg-black/40 border border-retro-gold/30 text-retro-gold text-[9px] rounded active:scale-95 transition-all font-mono">
                     <i class="fa-solid fa-right-from-bracket"></i> 退出
                 </button>
@@ -610,21 +878,20 @@
                             </button>
                         </div>
                         <form id="mailForm" onsubmit="handleSendMail(event)" class="space-y-3 text-xs">
-                            <!-- Image upload -->
+                            <!-- Image upload (multi) -->
                             <div>
-                                <label class="block text-gray-400 mb-1">附上一张图片 (可选):</label>
+                                <label class="block text-gray-400 mb-1">附上图片 (最多6张, 可选):</label>
                                 <div class="flex items-center gap-2">
                                     <label for="mailImage" class="px-3 py-2 bg-[#140b0d] border border-retro-gold/40 rounded text-retro-gold text-[11px] cursor-pointer hover:bg-retro-burgundy/40 active:scale-95 transition-all inline-flex items-center gap-1.5">
                                         <i class="fa-solid fa-image"></i> 选择图片
                                     </label>
-                                    <input type="file" id="mailImage" accept="image/*" class="hidden" onchange="previewMailImage(event)">
+                                    <input type="file" id="mailImage" accept="image/*" multiple class="hidden" onchange="previewMailImage(event)">
                                     <button type="button" id="clearMailImage" class="hidden px-2 py-2 text-[10px] text-gray-500 hover:text-retro-neonred transition-all" onclick="clearMailImage()">
-                                        <i class="fa-solid fa-xmark"></i>
+                                        <i class="fa-solid fa-xmark"></i> 清除全部
                                     </button>
+                                    <span id="mailImageCount" class="hidden text-[9px] text-gray-500 font-mono"></span>
                                 </div>
-                                <div id="mailImagePreview" class="hidden mt-2 relative inline-block">
-                                    <img id="mailImageThumb" src="" alt="预览" class="w-20 h-20 object-cover rounded border border-retro-gold/30">
-                                </div>
+                                <div id="mailImagePreview" class="hidden mt-2 mail-preview-row"></div>
                             </div>
                             <div>
                                 <label class="block text-gray-400 mb-1">正文内容:</label>
@@ -2229,7 +2496,7 @@
                     <div id="authPanel" class="bg-black/50 border border-retro-gold/20 p-3 rounded text-xs space-y-2">
                         <div class="flex border-b border-retro-gold/20 mb-2">
                             <button type="button" id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-1.5 text-[11px] font-bold text-retro-gold border-b-2 border-retro-neonred transition-all">登入 Login</button>
-                            <button type="button" id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-1.5 text-[11px] font-bold text-gray-500 border-b-2 border-transparent transition-all">登记 Register</button>
+                            <button type="button" id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-1.5 text-[11px] font-bold text-gray-500 border-b-2 border-transparent transition-all">购票 Register</button>
                         </div>
 
                         <!-- Login Form -->
@@ -3120,6 +3387,164 @@
                 updateHeaderUserDisplay();
             }
             syncMailLoginNote();
+            if (STATE.isLoggedIn) {
+                document.getElementById('notifBellBtn').classList.remove('hidden');
+                loadNotifications();
+            } else {
+                document.getElementById('notifBellBtn').classList.add('hidden');
+            }
+        }
+
+        // ==============================================
+        // NOTIFICATION SYSTEM
+        // ==============================================
+
+        async function createNotification(recipientId, type, actorName, targetId, content) {
+            if (!isSupabaseReady() || !recipientId || recipientId === STATE.userId) return;
+            const notif = {
+                id: Date.now(),
+                recipient_id: recipientId,
+                actor_name: actorName || STATE.currentUser,
+                type: type,
+                target_id: targetId,
+                content: content || '',
+                read: false
+            };
+            try {
+                await supabaseClient.from('notifications').insert(notif);
+            } catch(e) {
+                console.warn('[Notif] Insert failed:', e.message);
+                // Fallback to localStorage
+                const store = getNotifStore();
+                store.push(notif);
+                saveNotifStore(store);
+            }
+        }
+
+        function getNotifStore() {
+            try { return JSON.parse(localStorage.getItem('hongxia_notifications')) || []; }
+            catch(e) { return []; }
+        }
+
+        function saveNotifStore(store) {
+            localStorage.setItem('hongxia_notifications', JSON.stringify(store));
+        }
+
+        async function loadNotifications() {
+            if (!STATE.isLoggedIn) return;
+            let notifs = [];
+            if (isSupabaseReady()) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('notifications')
+                        .select('*')
+                        .eq('recipient_id', STATE.userId)
+                        .order('created_at', { ascending: false })
+                        .limit(50);
+                    if (!error && data) notifs = data;
+                } catch(e) { console.warn('[Notif] Load failed:', e.message); }
+            }
+            // Merge with localStorage
+            const localStore = getNotifStore().filter(n => n.recipient_id === STATE.userId);
+            const existingIds = new Set(notifs.map(n => n.id));
+            localStore.forEach(n => { if (!existingIds.has(n.id)) notifs.push(n); });
+            notifs.sort((a, b) => b.id - a.id);
+
+            const unreadCount = notifs.filter(n => !n.read).length;
+            const badge = document.getElementById('notifBadge');
+            if (badge) {
+                if (unreadCount > 0) {
+                    badge.classList.remove('hidden');
+                    badge.textContent = unreadCount > 99 ? '99+' : unreadCount;
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+            renderNotifList(notifs);
+        }
+
+        function renderNotifList(notifs) {
+            const list = document.getElementById('notifList');
+            if (!list) return;
+            if (notifs.length === 0) {
+                list.innerHTML = '<p class="text-gray-600 text-center py-4 text-[9px]">暂无消息</p>';
+                return;
+            }
+            const iconMap = {
+                like_postcard: '<i class="fa-solid fa-heart text-retro-neonred notif-icon"></i>',
+                comment_postcard: '<i class="fa-solid fa-comment text-retro-gold notif-icon"></i>',
+                like_craft: '<i class="fa-solid fa-heart text-retro-neonred notif-icon"></i>',
+                comment_craft: '<i class="fa-solid fa-comment text-retro-gold notif-icon"></i>'
+            };
+            const typeLabel = {
+                like_postcard: '赞了你的明信片',
+                comment_postcard: '评论了你的明信片',
+                like_craft: '赞了你的物料',
+                comment_craft: '评论了你的物料'
+            };
+            list.innerHTML = notifs.slice(0, 30).map(n => `
+                <div class="notif-item ${n.read ? '' : 'unread'}" onclick="event.stopPropagation(); markNotifRead(${n.id}, '${n.type}', ${n.target_id})">
+                    <div class="flex items-start gap-2">
+                        <span class="mt-0.5">${iconMap[n.type] || '<i class="fa-solid fa-circle text-gray-500 text-[8px]"></i>'}</span>
+                        <div class="flex-1 min-w-0">
+                            <span class="text-retro-gold font-bold">${escapeHtml(n.actor_name || '匿名')}</span>
+                            <span class="text-gray-400">${typeLabel[n.type] || '与你互动'}</span>
+                            ${n.content ? `<p class="text-gray-500 text-[9px] truncate mt-0.5">"${escapeHtml(n.content)}"</p>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleNotificationPanel() {
+            const panel = document.getElementById('notifPanel');
+            if (!panel) return;
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                loadNotifications();
+            }
+        }
+
+        async function markNotifRead(notifId, type, targetId) {
+            // Mark as read in Supabase
+            if (isSupabaseReady()) {
+                try {
+                    await supabaseClient.from('notifications').update({ read: true }).eq('id', notifId);
+                } catch(e) {}
+            }
+            // Mark in localStorage
+            const store = getNotifStore();
+            const idx = store.findIndex(n => n.id === notifId);
+            if (idx !== -1) { store[idx].read = true; saveNotifStore(store); }
+
+            loadNotifications();
+            // Navigate to the relevant content based on type
+            if (type.startsWith('like_') || type.startsWith('comment_')) {
+                if (type.includes('craft')) {
+                    // Navigate to lobby → materials
+                    if (STATE.activeScreen !== 'lobby') {
+                        navigateTo('lobby');
+                        setTimeout(() => showLobbySubView('materials'), 400);
+                    } else {
+                        showLobbySubView('materials');
+                    }
+                } else {
+                    navigateTo('mailroom');
+                }
+            }
+            toggleNotificationPanel();
+        }
+
+        async function markAllNotificationsRead() {
+            if (isSupabaseReady()) {
+                try {
+                    await supabaseClient.from('notifications').update({ read: true }).eq('recipient_id', STATE.userId);
+                } catch(e) {}
+            }
+            const store = getNotifStore();
+            store.forEach(n => { if (n.recipient_id === STATE.userId) n.read = true; });
+            saveNotifStore(store);
+            loadNotifications();
         }
 
         function syncMailLoginNote() {
@@ -3825,17 +4250,17 @@
                 document.getElementById('subDeptDirector').style.display = 'flex';
                 deptTitleText.innerText = "🎬 导演休息室";
                 deptSubText.innerText = "RM 101 - Director's Lounge";
-                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出休息室`;
+                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 离开休息室`;
             } else if (subId === 'writer') {
                 document.getElementById('subDeptWriter').style.display = 'grid';
                 deptTitleText.innerText = " 编剧工作室";
                 deptSubText.innerText = "RM 102 - Writer's Studio";
-                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出工作室`;
+                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 离开工作室`;
             }else if (subId === 'rehearsal') {
                 document.getElementById('subDeptRehearsal').style.display = 'grid';
                 deptTitleText.innerText = " 演员排练室";
                 deptSubText.innerText = "RM 103 - Actor‘s Rehearsal";
-                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出排练室`;
+                deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 离开排练室`;
             } 
         }
 
@@ -3874,6 +4299,51 @@
                 showDeptSubView(subId);
                 playShortBeep(600, 0.05);
             }
+        }
+
+        function openParchmentModal(title, contentHtml) {
+            const overlay = document.createElement('div');
+            overlay.className = 'parchment-overlay';
+            overlay.innerHTML = `
+                <div class="parchment-scroll">
+                    <button class="parchment-close" onclick="this.closest('.parchment-overlay').remove()">✕</button>
+                    <h3>${title}</h3>
+                    <div class="parchment-body">${contentHtml}</div>
+                </div>`;
+            overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+            document.body.appendChild(overlay);
+            // Trigger animation on next frame
+            requestAnimationFrame(() => {
+                overlay.querySelector('.parchment-scroll').classList.add('animate-in');
+            });
+        }
+
+        function showChangelog() {
+            openParchmentModal('更新日志', `
+                <p><b>2025.07</b> — 红霞影剧院正式上线。收发室、物料交换角、纪念品商店、大影院、业务部五大区域开放。</p>
+            `);
+        }
+
+        function showAuthorNote() {
+            openParchmentModal('作者说明', `
+                <p>本站仅用作个人学习和兴趣项目，不涉及任何商业用途。</p>
+                <p>全站音视频素材版权均</p>
+                <p>这里没有商业目的，只是一个粉丝用代码搭建的角落，把巡演打卡、物料交换、明信片投递，都装进一座虚拟的老式影剧院里。</p>
+                <p>谨以此作献给我少女时代的英雌主义陈婧霏，你说只要相信，我也能改写自己的人生。</p>
+                <p>项目构建于 2026 年夏天。</p>
+                <p style="text-align:right;text-indent:0;margin-top:16px;">—— 家有猫小帅</p>
+            `);
+        }
+
+        function showCredits() {
+            openParchmentModal('致谢', `
+                <p>感谢陈婧霏和她的音乐，给予了这座影剧院灵魂。</p>
+                <p>感谢每一站巡演现场的灯光、歌声与掌声，这些瞬间构成了红霞影剧院最珍贵的砖瓦。</p>
+                <p>感谢所有分享物料、投递明信片的观众朋友们，你们让这座剧院真正活了起来。</p>               
+                <p>感谢每位使用与支持的朋友</p>              
+                <p>谢谢红霞影剧院，谢谢陈婧霏</p>              
+                
+            `);
         }
 
         function startImmersiveExperience() {
@@ -3972,6 +4442,12 @@
             if (widget && dropdown && !widget.contains(event.target)) {
                 dropdown.classList.add('hidden');
                 dropdown.classList.remove('flex');
+            }
+            // Close notification panel on outside click
+            const notifBell = document.getElementById('notifBellBtn');
+            const notifPanel = document.getElementById('notifPanel');
+            if (notifBell && notifPanel && !notifBell.contains(event.target) && !notifPanel.contains(event.target)) {
+                notifPanel.classList.add('hidden');
             }
         });
 
@@ -4303,7 +4779,19 @@
                         <p class="text-[11px] text-gray-300 leading-relaxed font-serif line-clamp-3">
                             ${escapeHtml(mail.content)}
                         </p>
-                        ${mail.image_url ? `<img src="${escapeHtml(mail.image_url)}" class="postcard-thumb" alt="附件图片" loading="lazy">` : ''}
+                        ${(() => {
+                            const imgs = getMailImages(mail);
+                            if (imgs.length === 0) return '';
+                            if (imgs.length === 1) {
+                                return `<img src="${escapeHtml(imgs[0])}" class="postcard-thumb" alt="附件图片" loading="lazy">`;
+                            }
+                            return `<div class="mail-gallery" id="gallery-${mail.id}">
+                                ${imgs.map((url, i) => `<img src="${escapeHtml(url)}" alt="图片${i+1}" loading="lazy" onclick="event.stopPropagation(); showImageGallery(${JSON.stringify(imgs).replace(/"/g, '&quot;')}, ${i})">`).join('')}
+                            </div>
+                            <div class="mail-gallery-dots" id="gallery-dots-${mail.id}">
+                                ${imgs.map((_, i) => `<div class="mail-gallery-dot${i === 0 ? ' active' : ''}"></div>`).join('')}
+                            </div>`;
+                        })()}
                     </div>
                     <!-- Action bar -->
                     <div class="flex items-center gap-3 px-3 pb-2 border-t border-retro-gold/10 pt-1.5">
@@ -4334,6 +4822,18 @@
 
             // Load like states from cloud/localStorage asynchronously
             refreshAllLikeStates(mails);
+
+            // Attach scroll listeners for gallery dot indicators
+            mails.forEach(mail => {
+                const gallery = document.getElementById(`gallery-${mail.id}`);
+                const dots = document.getElementById(`gallery-dots-${mail.id}`);
+                if (!gallery || !dots) return;
+                const dotEls = dots.querySelectorAll('.mail-gallery-dot');
+                gallery.addEventListener('scroll', () => {
+                    const idx = Math.round(gallery.scrollLeft / (gallery.scrollWidth / dotEls.length));
+                    dotEls.forEach((d, i) => d.classList.toggle('active', i === Math.min(idx, dotEls.length - 1)));
+                });
+            });
         }
 
         // ==============================================
@@ -4456,6 +4956,12 @@
                 } catch(e) {
                     console.warn('[Likes] Supabase sync failed:', e.message);
                 }
+            }
+
+            // Notify postcard owner
+            if (!currentlyLiked) {
+                const mail = _mailCache[postcardId];
+                if (mail) createNotification(mail.user_id, 'like_postcard', STATE.currentUser, postcardId, '');
             }
         }
 
@@ -4583,6 +5089,11 @@
             }
 
             input.value = '';
+
+            // Notify postcard owner
+            const mail = _mailCache[postcardId];
+            if (mail) createNotification(mail.user_id, 'comment_postcard', STATE.currentUser, postcardId, content);
+
             // Refresh comment list and count
             const comments = await loadComments(postcardId);
             renderCommentList(postcardId, comments);
@@ -4622,28 +5133,32 @@
             const content = document.getElementById('mailBody').value.trim();
             if (!content) return;
 
-            // Handle image upload
-            const imageFile = document.getElementById('mailImage').files[0];
-            let imageUrl = null;
+            // Handle multi-image upload
+            const imageFiles = _mailPreviewFiles.length > 0 ? _mailPreviewFiles : [];
+            let imageUrls = [];
             let imageError = null;
 
-            if (imageFile && STATE.isLoggedIn && isSupabaseReady()) {
+            if (imageFiles.length > 0 && STATE.isLoggedIn && isSupabaseReady()) {
                 const submitBtn = document.querySelector('#mailForm button[type="submit"]');
                 const originalHtml = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<span class="upload-spinner"></span> 上传中...';
+                submitBtn.innerHTML = '<span class="upload-spinner"></span> 上传中 (0/' + imageFiles.length + ')...';
                 submitBtn.disabled = true;
 
-                try {
-                    const webpBlob = await convertToWebP(imageFile, 1000);
-                    imageUrl = await uploadPostcardImage(webpBlob, STATE.userId);
-                } catch (uploadErr) {
-                    imageError = uploadErr.message;
-                    console.warn('[Mail] Image upload failed:', uploadErr);
+                for (let i = 0; i < imageFiles.length; i++) {
+                    submitBtn.innerHTML = '<span class="upload-spinner"></span> 上传中 (' + (i + 1) + '/' + imageFiles.length + ')...';
+                    try {
+                        const webpBlob = await convertToWebP(imageFiles[i], 1000);
+                        const url = await uploadPostcardImage(webpBlob, STATE.userId);
+                        imageUrls.push(url);
+                    } catch (uploadErr) {
+                        console.warn('[Mail] Image ' + i + ' upload failed:', uploadErr);
+                        imageError = (imageError ? imageError + '; ' : '') + uploadErr.message;
+                    }
                 }
 
                 submitBtn.innerHTML = originalHtml;
                 submitBtn.disabled = false;
-            } else if (imageFile && !STATE.isLoggedIn) {
+            } else if (imageFiles.length > 0 && !STATE.isLoggedIn) {
                 imageError = '需要登录才能上传图片';
             }
 
@@ -4653,7 +5168,8 @@
                 user_id: STATE.isLoggedIn ? STATE.userId : null,
                 sender: sender,
                 content: content,
-                image_url: imageUrl,
+                image_url: imageUrls.length > 0 ? imageUrls[0] : null,
+                image_urls: imageUrls.length > 0 ? JSON.stringify(imageUrls) : null,
                 date: dateStr
             };
 
@@ -4670,6 +5186,7 @@
                             sender: newMail.sender,
                             content: newMail.content,
                             image_url: newMail.image_url,
+                            image_urls: newMail.image_urls,
                             date: newMail.date
                         })
                         .select();
@@ -4723,13 +5240,20 @@
 
         function showLetterModal(mail) {
             const isOwn = STATE.isLoggedIn && mail.user_id === STATE.userId;
+            const images = getMailImages(mail);
 
-            const imageHtml = mail.image_url
-                ? `<div class="mt-2 cursor-pointer" onclick="enlargeImage('${escapeHtml(mail.image_url)}')">
-                       <img src="${escapeHtml(mail.image_url)}" class="w-full max-h-48 object-contain rounded border border-retro-gold/20" alt="明信片图片">
+            let imageHtml = '';
+            if (images.length === 1) {
+                imageHtml = `<div class="mt-2 cursor-pointer" onclick="enlargeImage('${escapeHtml(images[0])}')">
+                       <img src="${escapeHtml(images[0])}" class="w-full max-h-48 object-contain rounded border border-retro-gold/20" alt="明信片图片">
                        <p class="text-[8px] text-gray-500 text-center mt-1 font-mono">点击查看大图</p>
-                   </div>`
-                : '';
+                   </div>`;
+            } else if (images.length > 1) {
+                imageHtml = `<div class="mt-2 cursor-pointer" onclick="showImageGallery(${JSON.stringify(images).replace(/"/g, '&quot;')}, 0)">
+                       <img src="${escapeHtml(images[0])}" class="w-full max-h-48 object-contain rounded border border-retro-gold/20" alt="明信片图片">
+                       <p class="text-[8px] text-gray-500 text-center mt-1 font-mono">共${images.length}张图片 — 点击浏览全部</p>
+                   </div>`;
+            }
 
             showRetroMessage(`
                 <div class="text-left space-y-3">
@@ -4752,21 +5276,67 @@
             `);
         }
 
+        let _mailPreviewFiles = []; // Store selected files for multi-upload
+
         function previewMailImage(event) {
-            const file = event.target.files[0];
-            if (!file) return;
+            const files = Array.from(event.target.files);
+            if (files.length === 0) return;
+            // Limit to 6
+            const selected = files.slice(0, 6);
+            _mailPreviewFiles = selected;
+
             const preview = document.getElementById('mailImagePreview');
-            const thumb = document.getElementById('mailImageThumb');
             const clearBtn = document.getElementById('clearMailImage');
-            thumb.src = URL.createObjectURL(file);
+            const countEl = document.getElementById('mailImageCount');
+
+            preview.innerHTML = selected.map((file, i) => {
+                const url = URL.createObjectURL(file);
+                return `<div class="mail-preview-item">
+                    <img src="${url}" alt="预览${i+1}">
+                    <button class="mail-preview-remove" onclick="event.stopPropagation(); removeMailPreview(${i})" title="移除">×</button>
+                </div>`;
+            }).join('');
+
             preview.classList.remove('hidden');
             clearBtn.classList.remove('hidden');
+            if (countEl) {
+                countEl.classList.remove('hidden');
+                countEl.textContent = `${selected.length}/6`;
+            }
+        }
+
+        function removeMailPreview(index) {
+            _mailPreviewFiles.splice(index, 1);
+            const preview = document.getElementById('mailImagePreview');
+            const countEl = document.getElementById('mailImageCount');
+            const clearBtn = document.getElementById('clearMailImage');
+
+            preview.innerHTML = _mailPreviewFiles.map((file, i) => {
+                const url = URL.createObjectURL(file);
+                return `<div class="mail-preview-item">
+                    <img src="${url}" alt="预览${i+1}">
+                    <button class="mail-preview-remove" onclick="event.stopPropagation(); removeMailPreview(${i})" title="移除">×</button>
+                </div>`;
+            }).join('');
+
+            if (_mailPreviewFiles.length === 0) {
+                preview.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+                if (countEl) countEl.classList.add('hidden');
+                document.getElementById('mailImage').value = '';
+            } else if (countEl) {
+                countEl.textContent = `${_mailPreviewFiles.length}/6`;
+            }
         }
 
         function clearMailImage() {
+            _mailPreviewFiles = [];
             document.getElementById('mailImage').value = '';
             document.getElementById('mailImagePreview').classList.add('hidden');
+            document.getElementById('mailImagePreview').innerHTML = '';
             document.getElementById('clearMailImage').classList.add('hidden');
+            const countEl = document.getElementById('mailImageCount');
+            if (countEl) countEl.classList.add('hidden');
         }
 
         function enlargeImage(url) {
@@ -4779,6 +5349,75 @@
             `;
             overlay.onclick = () => overlay.remove();
             document.body.appendChild(overlay);
+        }
+
+        function showImageGallery(images, startIndex) {
+            startIndex = startIndex || 0;
+            closeRetroMessage();
+            const overlay = document.createElement('div');
+            overlay.className = 'postcard-image-overlay';
+            overlay.style.display = 'flex';
+            overlay.style.flexDirection = 'column';
+            overlay.style.alignItems = 'center';
+            overlay.style.justifyContent = 'center';
+            overlay.style.gap = '8px';
+
+            let currentIdx = startIndex;
+
+            function renderGallery() {
+                overlay.innerHTML = `
+                    <div class="modal-gallery" style="width:90vw;max-width:500px;">
+                        ${images.length > 1 ? `<button class="modal-gallery-arrow left" id="gal-arrow-left"><i class="fa-solid fa-chevron-left"></i></button>` : ''}
+                        <img src="${escapeHtml(images[currentIdx])}" alt="图片${currentIdx+1}" style="width:100%;">
+                        ${images.length > 1 ? `<button class="modal-gallery-arrow right" id="gal-arrow-right"><i class="fa-solid fa-chevron-right"></i></button>` : ''}
+                    </div>
+                    ${images.length > 1 ? `<div class="mail-gallery-dots">${images.map((_, i) => `<div class="mail-gallery-dot${i === currentIdx ? ' active' : ''}"></div>`).join('')}</div>` : ''}
+                    <span class="close-hint" style="margin-top:8px;">[ 点击空白处关闭 / CLICK TO CLOSE ]</span>
+                `;
+
+                if (images.length > 1) {
+                    overlay.querySelector('#gal-arrow-left').onclick = (e) => {
+                        e.stopPropagation();
+                        currentIdx = (currentIdx - 1 + images.length) % images.length;
+                        renderGallery();
+                    };
+                    overlay.querySelector('#gal-arrow-right').onclick = (e) => {
+                        e.stopPropagation();
+                        currentIdx = (currentIdx + 1) % images.length;
+                        renderGallery();
+                    };
+                }
+            }
+
+            renderGallery();
+            overlay.onclick = (e) => {
+                if (e.target === overlay) overlay.remove();
+            };
+            document.body.appendChild(overlay);
+
+            // Keyboard navigation
+            const keyHandler = (e) => {
+                if (e.key === 'ArrowLeft' && images.length > 1) {
+                    currentIdx = (currentIdx - 1 + images.length) % images.length;
+                    renderGallery();
+                } else if (e.key === 'ArrowRight' && images.length > 1) {
+                    currentIdx = (currentIdx + 1) % images.length;
+                    renderGallery();
+                } else if (e.key === 'Escape') {
+                    overlay.remove();
+                    document.removeEventListener('keydown', keyHandler);
+                }
+            };
+            document.addEventListener('keydown', keyHandler);
+            overlay.addEventListener('remove', () => document.removeEventListener('keydown', keyHandler));
+        }
+
+        function getMailImages(mail) {
+            if (mail.image_urls) {
+                try { return JSON.parse(mail.image_urls); } catch(e) { return []; }
+            }
+            if (mail.image_url) return [mail.image_url];
+            return [];
         }
 
         async function deletePostcard(mailId) {
@@ -5126,6 +5765,12 @@
                     }
                 } catch(e) { console.warn('[Craft Likes] Sync failed:', e.message); }
             }
+
+            // Notify craft owner
+            if (!currentlyLiked) {
+                const craft = _craftCache[craftId];
+                if (craft) createNotification(craft.user_id, 'like_craft', STATE.currentUser, craftId, '');
+            }
         }
 
         // ==============================================
@@ -5227,6 +5872,11 @@
             }
 
             input.value = '';
+
+            // Notify craft owner
+            const craft = _craftCache[craftId];
+            if (craft) createNotification(craft.user_id, 'comment_craft', STATE.currentUser, craftId, content);
+
             const comments = await loadCraftComments(craftId);
             renderCraftCommentList(craftId, comments);
             const countEl = document.getElementById(`craft-comment-count-${craftId}`);
