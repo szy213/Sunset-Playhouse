@@ -180,6 +180,144 @@
             box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
             pointer-events: none;
         }
+
+        /* Postcard image enlarge overlay */
+        .postcard-image-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 130;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-out;
+            padding: 20px;
+        }
+        .postcard-image-overlay img {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+            border: 2px solid rgba(212,175,55,0.4);
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(212,175,55,0.15);
+        }
+        .postcard-image-overlay .close-hint {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            color: #D4AF37;
+            font-size: 10px;
+            font-family: 'Share Tech Mono', monospace;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* Delete button on postcard cards */
+        .postcard-delete-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(128,0,32,0.7);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 2px;
+            color: #D4AF37;
+            font-size: 9px;
+            cursor: pointer;
+            transition: all 0.15s;
+            z-index: 5;
+        }
+        .postcard-delete-btn:hover {
+            background: #FF3131;
+            color: white;
+            border-color: #FF3131;
+        }
+
+        /* Image thumbnail in postcard card */
+        .postcard-thumb {
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            border-radius: 2px;
+            border: 1px solid rgba(212,175,55,0.2);
+            margin-top: 6px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        /* Upload spinner */
+        .upload-spinner {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(212,175,55,0.3);
+            border-top-color: #D4AF37;
+            border-radius: 50%;
+            animation: spin-retro 0.8s linear infinite;
+        }
+        @keyframes spin-retro {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Postcard action bar */
+        .postcard-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            padding: 4px 8px;
+            background: transparent;
+            border: 1px solid rgba(212,175,55,0.15);
+            border-radius: 3px;
+            color: #888;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .postcard-action-btn:hover {
+            border-color: rgba(212,175,55,0.4);
+            color: #D4AF37;
+        }
+        .postcard-action-btn.liked {
+            color: #FF3131;
+            border-color: rgba(255,49,49,0.4);
+            background: rgba(255,49,49,0.1);
+        }
+        .postcard-action-btn.liked:hover {
+            color: #ff5c5c;
+        }
+
+        /* Comment section */
+        .comments-panel {
+            border-top: 1px solid rgba(212,175,55,0.15);
+            background: rgba(0,0,0,0.2);
+            border-radius: 0 0 4px 4px;
+        }
+        .comment-item {
+            border-bottom: 1px solid rgba(212,175,55,0.08);
+            padding: 6px 0;
+        }
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+        .comment-input {
+            width: 100%;
+            background: rgba(20,11,13,0.8);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 2px;
+            padding: 6px 8px;
+            color: #D4AF37;
+            font-size: 11px;
+            font-family: serif;
+            resize: none;
+            outline: none;
+        }
+        .comment-input:focus {
+            border-color: rgba(212,175,55,0.5);
+        }
     </style>
 </head>
 <body class="bg-black text-gray-200 h-full overflow-hidden font-serif selection:bg-retro-burgundy selection:text-retro-gold relative flex flex-col">
@@ -375,7 +513,7 @@
                                     🎬 豪华大影厅
                                 </h3>
                                 <p class="text-[9px] sm:text-[11px] text-gray-300 leading-snug sm:leading-relaxed font-serif">
-                                    放映巡演专属纪实。收录全国各场演出的绝美现场画卷、曲目亮点与独家海报。
+                                    放映巡演专属纪实。收录红霞影剧院全国主题巡演。
                                 </p>
                             </div>
 
@@ -420,11 +558,12 @@
                                     <i class="fa-solid fa-briefcase text-retro-neonred"></i> 业务部
                                 </h3>
                                 <p class="text-[9px] sm:text-[11px] text-gray-400 mt-0.5 sm:mt-1 leading-snug sm:leading-relaxed">
-                                    演员排练、官方影像与深夜播客深度归档。
+                                    巡演歌单、官方影像与主理人播客深度归档。
                                 </p>
                             </div>
                             <div class="mt-1 sm:mt-2 text-[8px] sm:text-[9px] text-retro-gold font-mono tracking-wider flex items-center gap-1 group-hover:underline">
-                                进入深廊 <i class="fa-solid fa-arrow-right text-[7px]"></i>
+                                进入走廊
+                                 <i class="fa-solid fa-arrow-right text-[7px]"></i>
                             </div>
                         </div>
 
@@ -458,41 +597,38 @@
             </div>
 
             <!-- Content Split -->
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-y-auto">
-                <!-- Left: Write message Form -->
-                <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 flex-1 overflow-hidden">
+                <!-- Left: Write message Form (hidden by default) -->
+                <div id="mailFormPanel" class="hidden md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
-                        <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex items-center gap-1.5">
-                            <i class="fa-solid fa-pen-nib"></i> 投递一封明信片
-                        </h3>
+                        <div class="flex items-center justify-between border-b border-retro-gold/20 pb-1.5 mb-3">
+                            <h3 class="text-retro-gold text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-pen-nib"></i> 投递一封明信片
+                            </h3>
+                            <button onclick="hideMailForm()" class="text-gray-500 hover:text-retro-neonred text-xs transition-all">
+                                <i class="fa-solid fa-xmark"></i> 收起
+                            </button>
+                        </div>
                         <form id="mailForm" onsubmit="handleSendMail(event)" class="space-y-3 text-xs">
+                            <!-- Image upload -->
                             <div>
-                                <label class="block text-gray-400 mb-1">观众化名 / 寄件人:</label>
-                                <input type="text" id="mailSender" required placeholder="例如: 坐在六排九座的流浪汉" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
-                            </div>
-                            <div>
-                                <label class="block text-gray-400 mb-1">选择纪念邮票:</label>
-                                <div class="grid grid-cols-3 gap-2">
-                                    <label class="border border-retro-gold/30 rounded p-1.5 text-center cursor-pointer block hover:bg-retro-burgundy/40" id="stamp1Label">
-                                        <input type="radio" name="stamp" value="stamp-hxia" checked class="hidden">
-                                        <div class="text-base">🌇</div>
-                                        <div class="text-[8px] mt-0.5 text-retro-gold">红霞歌女</div>
+                                <label class="block text-gray-400 mb-1">附上一张图片 (可选):</label>
+                                <div class="flex items-center gap-2">
+                                    <label for="mailImage" class="px-3 py-2 bg-[#140b0d] border border-retro-gold/40 rounded text-retro-gold text-[11px] cursor-pointer hover:bg-retro-burgundy/40 active:scale-95 transition-all inline-flex items-center gap-1.5">
+                                        <i class="fa-solid fa-image"></i> 选择图片
                                     </label>
-                                    <label class="border border-retro-gold/30 rounded p-1.5 text-center cursor-pointer block hover:bg-retro-burgundy/40" id="stamp2Label">
-                                        <input type="radio" name="stamp" value="stamp-film" class="hidden">
-                                        <div class="text-base">🎞️</div>
-                                        <div class="text-[8px] mt-0.5 text-retro-gold">胶片显影</div>
-                                    </label>
-                                    <label class="border border-retro-gold/30 rounded p-1.5 text-center cursor-pointer block hover:bg-retro-burgundy/40" id="stamp3Label">
-                                        <input type="radio" name="stamp" value="stamp-cherry" class="hidden">
-                                        <div class="text-base">🍒</div>
-                                        <div class="text-[8px] mt-0.5 text-retro-gold">蓝莓夜</div>
-                                    </label>
+                                    <input type="file" id="mailImage" accept="image/*" class="hidden" onchange="previewMailImage(event)">
+                                    <button type="button" id="clearMailImage" class="hidden px-2 py-2 text-[10px] text-gray-500 hover:text-retro-neonred transition-all" onclick="clearMailImage()">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div id="mailImagePreview" class="hidden mt-2 relative inline-block">
+                                    <img id="mailImageThumb" src="" alt="预览" class="w-20 h-20 object-cover rounded border border-retro-gold/30">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-gray-400 mb-1">红霞呓语 (限150字):</label>
-                                <textarea id="mailBody" required rows="3" placeholder="谢谢妳在红霞里收留了那些不肯天亮的灵魂..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif leading-relaxed"></textarea>
+                                <label class="block text-gray-400 mb-1">正文内容:</label>
+                                <textarea id="mailBody" required rows="3" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif leading-relaxed"></textarea>
                             </div>
                             <button type="submit" class="w-full py-2 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold hover:text-white border border-retro-gold rounded font-bold uppercase text-[10px] active:scale-95 transition-all">
                                 <i class="fa-solid fa-paper-plane"></i> 投放至信箱
@@ -501,14 +637,31 @@
                     </div>
                 </div>
 
-                <!-- Right: Mailboxes Pigeons list -->
-                <div class="md:col-span-7 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
+                <!-- Right: Mailboxes Pigeons list (full-width by default) -->
+                <div id="mailRackPanel" class="md:col-span-12 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col flex-1 overflow-hidden">
                     <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex justify-between items-center">
                         <span><i class="fa-solid fa-boxes-stacked"></i> 明信片架 (点击可阅读)</span>
-                        <span class="text-[9px] font-mono text-gray-500">Pigeonholes</span>
+                        <div class="flex items-center gap-3">
+                            <button onclick="showMailForm()" class="px-3 py-1 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold hover:text-white border border-retro-gold rounded font-bold uppercase text-[10px] active:scale-95 transition-all">
+                                <i class="fa-solid fa-pen-nib"></i> 投递
+                            </button>
+                            
+                        </div>
                     </h3>
-                    
-                    <div id="pigeonholeContainer" class="flex-1 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-3 pr-1">
+
+                    <!-- Filter & Sort bar -->
+                    <div class="flex items-center justify-between mb-2 pb-1.5 border-b border-retro-gold/10">
+                        <button id="myPostsFilter" onclick="toggleMyPostsFilter()" class="text-[9px] font-mono uppercase px-2 py-1 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30">
+                            <i class="fa-solid fa-user"></i> 我的帖子
+                        </button>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[9px] text-gray-500 font-mono">排序:</span>
+                            <button onclick="setMailSort('time')" id="sort-time" class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10">按时间</button>
+                            <button onclick="setMailSort('likes')" id="sort-likes" class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30">按点赞</button>
+                        </div>
+                    </div>
+
+                    <div id="pigeonholeContainer" class="flex-1 overflow-y-auto flex flex-col gap-3 pr-1">
                         <!-- JS dynamic letters injection -->
                     </div>
                 </div>
@@ -547,9 +700,6 @@
 
                         <!-- Door Frame & Portal -->
                         <div class="w-16 sm:w-20 h-32 sm:h-36 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
-                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
-                            </div>
 
                             <!-- Door Leaf -->
                             <div id="door-leaf-lobby-materials" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
@@ -561,15 +711,7 @@
                                     <i class="fa-solid fa-palette text-xs sm:text-sm text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
                                 </div>
 
-                                <!-- Recessed Wood Moldings -->
-                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
-                                    <div class="w-full h-6 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[8px] text-retro-gold/40 select-none">
-                                        🎨
-                                    </div>
-                                    <div class="w-full h-8 rounded border border-black/40 bg-[#2d1114] door-panel relative">
-                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
-                                    </div>
-                                </div>
+                                
 
                                 <!-- Brass Handle -->
                                 <div class="absolute top-[52%] right-1.5 flex flex-col items-center z-20">
@@ -593,9 +735,6 @@
 
                         <!-- Door Frame & Portal -->
                         <div class="w-16 sm:w-20 h-32 sm:h-36 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
-                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
-                            </div>
 
                             <!-- Door Leaf -->
                             <div id="door-leaf-lobby-shop" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
@@ -607,15 +746,7 @@
                                     <i class="fa-solid fa-gift text-xs sm:text-sm text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
                                 </div>
 
-                                <!-- Recessed Wood Moldings -->
-                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
-                                    <div class="w-full h-6 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[8px] text-retro-gold/40 select-none">
-                                        🛍️
-                                    </div>
-                                    <div class="w-full h-8 rounded border border-black/40 bg-[#2d1114] door-panel relative">
-                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
-                                    </div>
-                                </div>
+                                
 
                                 <!-- Brass Handle -->
                                 <div class="absolute top-[52%] right-1.5 flex flex-col items-center z-20">
@@ -634,44 +765,79 @@
             </div>
 
             <!-- ================= SUB-VIEW 1: MATERIALS CORNER (物料角落) ================= -->
-            <div id="lobbyMaterials" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-y-auto">
-                <!-- Submit Material Left -->
-                <div class="md:col-span-4 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
+            <div id="lobbyMaterials" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-hidden">
+                <!-- Left: Submit Form (hidden by default) -->
+                <div id="craftFormPanel" class="hidden md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
-                        <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex items-center gap-1.5 uppercase">
-                            <i class="fa-solid fa-file-arrow-up"></i> 登记物料
-                        </h3>
+                        <div class="flex items-center justify-between border-b border-retro-gold/20 pb-1.5 mb-3">
+                            <h3 class="text-retro-gold text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-arrow-up"></i> 登记物料
+                            </h3>
+                            <button onclick="hideCraftForm()" class="text-gray-500 hover:text-retro-neonred text-xs transition-all">
+                                <i class="fa-solid fa-xmark"></i> 收起
+                            </button>
+                        </div>
                         <form id="merchForm" onsubmit="handleSendMerch(event)" class="space-y-3 text-xs">
                             <div>
                                 <label class="block text-gray-400 mb-1">制作者昵称:</label>
-                                <input type="text" id="merchAuthor" required placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                                <input type="text" id="merchAuthor" required class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
                             </div>
                             <div>
-                                <label class="block text-gray-400 mb-1">物料名称 :</label>
-                                <input type="text" id="merchTitle" required placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                                <label class="block text-gray-400 mb-1">物料名称:</label>
+                                <input type="text" id="merchTitle" required class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            </div>
+                            <!-- Image upload -->
+                            <div>
+                                <label class="block text-gray-400 mb-1">物料图片 (可选):</label>
+                                <div class="flex items-center gap-2">
+                                    <label for="merchImage" class="px-3 py-2 bg-[#140b0d] border border-retro-gold/40 rounded text-retro-gold text-[11px] cursor-pointer hover:bg-retro-burgundy/40 active:scale-95 transition-all inline-flex items-center gap-1.5">
+                                        <i class="fa-solid fa-image"></i> 选择图片
+                                    </label>
+                                    <input type="file" id="merchImage" accept="image/*" class="hidden" onchange="previewCraftImage(event)">
+                                    <button type="button" id="clearCraftImage" class="hidden px-2 py-2 text-[10px] text-gray-500 hover:text-retro-neonred transition-all" onclick="clearCraftImage()">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div id="craftImagePreview" class="hidden mt-2 relative inline-block">
+                                    <img id="craftImageThumb" src="" alt="预览" class="w-20 h-20 object-cover rounded border border-retro-gold/30">
+                                </div>
                             </div>
                             <div>
-                                <label class="block text-gray-400 mb-1">物料图片链接 (可空):</label>
-                                <input type="url" id="merchImgUrl" placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-mono">
+                                <label class="block text-gray-400 mb-1">物料描述 (领取方式等):</label>
+                                <textarea id="merchDesc" required rows="3" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif leading-relaxed"></textarea>
                             </div>
-                            <div>
-                                <label class="block text-gray-400 mb-1">领取方式及物料简述:</label>
-                                <textarea id="merchDesc" required rows="2" placeholder="" class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif"></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-2 bg-retro-burgundy hover:bg-retro-gold hover:text-black text-retro-gold text-[10px] font-bold rounded uppercase active:scale-95 transition-all">
+                            <button type="submit" class="w-full py-2 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold hover:text-white border border-retro-gold rounded font-bold uppercase text-[10px] active:scale-95 transition-all">
                                 <i class="fa-solid fa-stamp"></i> 贴上布告板
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <!-- Showcase Board Right -->
-                <div class="md:col-span-8 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col h-[40vh] md:h-auto overflow-hidden">
-                    <div class="flex justify-between items-center border-b border-retro-gold/20 pb-1.5 mb-3">
-                        <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-clipboard-list"></i> 大厅物料交流栏</span>
+                <!-- Right: Crafts Rack (full-width by default) -->
+                <div id="craftRackPanel" class="md:col-span-12 bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col flex-1 overflow-hidden">
+                    <h3 class="text-retro-gold text-xs font-bold border-b border-retro-gold/20 pb-1.5 mb-3 flex justify-between items-center">
+                        <span><i class="fa-solid fa-clipboard-list"></i> 大厅物料交流栏</span>
+                        <div class="flex items-center gap-3">
+                            <button onclick="showCraftForm()" class="px-3 py-1 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold hover:text-white border border-retro-gold rounded font-bold uppercase text-[10px] active:scale-95 transition-all">
+                                <i class="fa-solid fa-file-arrow-up"></i> 登记
+                            </button>
+                            <span class="text-[9px] font-mono text-gray-500">Fan-Made</span>
+                        </div>
+                    </h3>
+
+                    <!-- Filter & Sort bar -->
+                    <div class="flex items-center justify-between mb-2 pb-1.5 border-b border-retro-gold/10">
+                        <button id="craftMyFilter" onclick="toggleCraftMyFilter()" class="text-[9px] font-mono uppercase px-2 py-1 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30">
+                            <i class="fa-solid fa-user"></i> 我的物料
+                        </button>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[9px] text-gray-500 font-mono">排序:</span>
+                            <button onclick="setCraftSort('time')" id="craft-sort-time" class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10">按时间</button>
+                            <button onclick="setCraftSort('likes')" id="craft-sort-likes" class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30">按点赞</button>
+                        </div>
                     </div>
 
-                    <div id="craftsContainer" class="flex-1 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pr-1">
+                    <div id="craftsContainer" class="flex-1 overflow-y-auto flex flex-col gap-3 pr-1">
                         <!-- JS dynamic insertion of crafts -->
                     </div>
                 </div>
@@ -978,10 +1144,6 @@
                         
                         <!-- 3D Door Frame & Portal -->
                         <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#3a1518] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]">
-                            <!-- Glow Behind Door (Room interior lighting) -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
-                            </div>
 
                             <!-- Detailed Door Leaf -->
                             <div id="door-leaf-director" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
@@ -1019,10 +1181,6 @@
                         
                         <!-- 3D Door Frame & Portal -->
                         <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#3a1518] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]">
-                            <!-- Glow Behind Door (Room interior lighting) -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
-                            </div>
 
                             <!-- Detailed Door Leaf -->
                             <div id="door-leaf-writer" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
@@ -1059,10 +1217,6 @@
                         
                         <!-- 3D Door Frame & Portal -->
                         <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#3a1518] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]">
-                            <!-- Glow Behind Door (Room interior lighting) -->
-                            <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
-                                <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
-                            </div>
 
                             <!-- Detailed Door Leaf (the physical door swinging open) -->
                             <div id="door-leaf-rehearsal" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
@@ -1258,7 +1412,7 @@
                         <!-- PART 2 -->
                         <div>
                             <div class="flex items-center gap-2 mb-2">
-                                <span class="text-retro-neonamber text-[10px] font-mono font-bold tracking-wider">ACT.2 So she fell,deliberately,to start over again</span>
+                                <span class="text-retro-neonred text-[10px] font-mono font-bold tracking-wider">ACT.2 So she fell,deliberately,to start over again</span>
                                 <span class="text-[9px] text-gray-500 font-serif">— 中场 —</span>
                                 <div class="flex-1 border-b border-retro-gold/10"></div>
                             </div>
@@ -1540,7 +1694,7 @@
                         <!-- PART 3 -->
                         <div>
                             <div class="flex items-center gap-2 mb-2">
-                                <span class="text-retro-gold text-[10px] font-mono font-bold tracking-wider">ACT.3 Are you ready?</span>
+                                <span class="text-retro-neonred text-[10px] font-mono font-bold tracking-wider">ACT.3 Are you ready?</span>
                                 <span class="text-[9px] text-gray-500 font-serif">— 终章 —</span>
                                 <div class="flex-1 border-b border-retro-gold/10"></div>
                             </div>
@@ -2155,7 +2309,7 @@
                             <div class="h-[1px] bg-retro-gold/15 my-2"></div>
                             <!-- Countdown placeholder -->
                             <div class="text-[9px] font-mono text-center">
-                                <span class="text-gray-500 uppercase">红霞剧院下轮开盘倒计时:</span>
+                                <span class="text-gray-500 uppercase">下次见面还有:</span>
                                 <div id="countdownTimer" class="text-retro-neonred font-bold text-xs mt-1 flicker-anim">
                                     00天 12小时 34分 56秒
                                 </div>
@@ -2163,7 +2317,7 @@
                             <div class="h-[1px] bg-retro-gold/10 my-2"></div>
                             <!-- Count-up placeholder -->
                             <div class="text-[9px] font-mono text-center">
-                                <span class="text-gray-500 uppercase">上次落幕已过:</span>
+                                <span class="text-gray-500 uppercase">上次见面已过:</span>
                                 <div id="countupTimer" class="text-retro-gold font-bold text-xs mt-1">
                                     0天 0小时 0分 0秒
                                 </div>
@@ -2276,7 +2430,7 @@
                     
                     <div class="flex justify-between items-start">
                         <div>
-                            <span class="text-[8px] font-mono tracking-widest uppercase text-retro-burgundy/60">EST. 1989 / MEMORIAL TICKET</span>
+                            <span class="text-[8px] font-mono tracking-widest uppercase text-retro-burgundy/60">EST. 1219 / MEMORIAL TICKET</span>
                             <h4 id="ticketTitle" class="text-lg font-black tracking-widest font-serif text-retro-burgundy leading-tight">红霞影剧院</h4>
                             <p id="ticketSubtitle" class="text-[8px] text-[#58111A]/80 font-serif">陈婧霏「红霞影剧院」巡回打卡纪念</p>
                         </div>
@@ -2324,7 +2478,7 @@
                     <div class="text-left space-y-0.5">
                         <span class="text-[8px] text-[#58111A]/60 block font-mono">STUB COUPON</span>
                         <div class="text-sm font-bold font-serif text-retro-burgundy tracking-wide">
-                            红霞再现
+                            You can change the script anytime you want
                         </div>
                         <span class="text-[8px] text-[#58111A]/60 block font-mono" id="ticketPrintDate">DATE: 2026/07/17</span>
                     </div>
@@ -2509,11 +2663,18 @@
             localStorage.removeItem(lsKey(key));
         }
 
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
         // ==============================================
         // AUTH FUNCTIONS
         // ==============================================
 
-        function convertToWebP(file) {
+        function convertToWebP(file, maxSize = 200) {
             return new Promise((resolve, reject) => {
                 if (!file || !file.type.startsWith('image/')) {
                     return reject(new Error('Not an image file'));
@@ -2522,10 +2683,9 @@
                 const url = URL.createObjectURL(file);
                 img.onload = function() {
                     URL.revokeObjectURL(url);
-                    const MAX_SIZE = 200;
                     let w = img.naturalWidth, h = img.naturalHeight;
-                    if (w > MAX_SIZE || h > MAX_SIZE) {
-                        const ratio = Math.min(MAX_SIZE / w, MAX_SIZE / h);
+                    if (w > maxSize || h > maxSize) {
+                        const ratio = Math.min(maxSize / w, maxSize / h);
                         w = Math.round(w * ratio);
                         h = Math.round(h * ratio);
                     }
@@ -2558,6 +2718,22 @@
                 });
             if (error) throw new Error('Upload failed: ' + error.message);
             const { data: urlData } = supabaseClient.storage.from('avatars').getPublicUrl(fileName);
+            return urlData.publicUrl;
+        }
+
+        async function uploadPostcardImage(blob, userId) {
+            const mimeType = blob.type || 'image/webp';
+            const ext = mimeType === 'image/webp' ? 'webp' : (mimeType.split('/')[1] || 'jpg');
+            const fileName = `postcard_${userId}_${Date.now()}.${ext}`;
+            const { data, error } = await supabaseClient.storage
+                .from('postcards')
+                .upload(fileName, blob, {
+                    contentType: mimeType,
+                    cacheControl: '3600',
+                    upsert: false
+                });
+            if (error) throw new Error('Upload failed: ' + error.message);
+            const { data: urlData } = supabaseClient.storage.from('postcards').getPublicUrl(fileName);
             return urlData.publicUrl;
         }
 
@@ -2874,6 +3050,28 @@
         // UI SYNC FUNCTIONS
         // ==============================================
 
+        async function loadPostcards() {
+            if (!isSupabaseReady() || !STATE.isLoggedIn || !STATE.userId) {
+                return JSON.parse(localStorage.getItem('hongxia_mails')) || [];
+            }
+            try {
+                const { data, error } = await supabaseClient
+                    .from('postcards')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    // Sync to localStorage as cache
+                    localStorage.setItem('hongxia_mails', JSON.stringify(data));
+                    return data;
+                }
+                // Supabase OK but empty — fall back to localStorage
+            } catch (e) {
+                console.warn('[Mail] Supabase load failed, using localStorage fallback:', e.message);
+            }
+            return JSON.parse(localStorage.getItem('hongxia_mails')) || [];
+        }
+
         function syncAuthUI() {
             const authPanel = document.getElementById('authPanel');
             const profilePanel = document.getElementById('profilePanel');
@@ -2920,6 +3118,14 @@
                     if (loginInput) loginInput.value = lastAccount;
                 }
                 updateHeaderUserDisplay();
+            }
+            syncMailLoginNote();
+        }
+
+        function syncMailLoginNote() {
+            const note = document.getElementById('mailLoginNote');
+            if (note) {
+                note.classList.toggle('hidden', STATE.isLoggedIn);
             }
         }
 
@@ -3364,10 +3570,12 @@
 
         function initInteractiveDBs() {
             if (!localStorage.getItem('hongxia_mails')) {
-                localStorage.setItem('hongxia_mails', JSON.stringify(SEEDED_MAILS));
+                localStorage.setItem('hongxia_mails', JSON.stringify([]));
             }
-            if (!localStorage.getItem('hongxia_crafts')) {
-                localStorage.setItem('hongxia_crafts', JSON.stringify(SEEDED_CRAFTS));
+            // One-time clear of old seeded crafts
+            if (!localStorage.getItem('hongxia_crafts_cleared')) {
+                localStorage.setItem('hongxia_crafts', JSON.stringify([]));
+                localStorage.setItem('hongxia_crafts_cleared', '1');
             }
         }
 
@@ -3503,6 +3711,7 @@
                     syncMapDotsVisuals();
                 } else if (screenId === 'mailroom') {
                     document.getElementById('mailroom').style.display = 'flex';
+                    hideMailForm();
                     renderPigeonholes();
                 } else if (screenId === 'lobby') {
                     document.getElementById('lobby').style.display = 'flex';
@@ -3563,6 +3772,8 @@
                 lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回主图`;
             } else if (subId === 'materials') {
                 document.getElementById('lobbyMaterials').style.display = 'grid';
+                hideCraftForm();
+                renderCrafts();
                 lobbyTitleText.innerText = '🎨 物料交换角';
                 lobbySubText.innerText = 'Fan-Made Corner';
                 lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回大厅`;
@@ -3954,55 +4165,529 @@
             STATE.ambientPlaying = false;
         }
 
-        function renderPigeonholes() {
+        function showMailForm() {
+            document.getElementById('mailFormPanel').classList.remove('hidden');
+            document.getElementById('mailRackPanel').classList.remove('md:col-span-12');
+            document.getElementById('mailRackPanel').classList.add('md:col-span-7');
+        }
+
+        function hideMailForm() {
+            document.getElementById('mailFormPanel').classList.add('hidden');
+            document.getElementById('mailRackPanel').classList.remove('md:col-span-7');
+            document.getElementById('mailRackPanel').classList.add('md:col-span-12');
+        }
+
+        let _mailCache = {};
+        let _mailSortMode = 'time';   // 'time' | 'likes'
+        let _mailFilterMine = false;
+
+        function openMailModal(mailId) {
+            const mail = _mailCache[mailId];
+            if (mail) showLetterModal(mail);
+        }
+
+        function setMailSort(mode) {
+            _mailSortMode = mode;
+            // Update button styles
+            const timeBtn = document.getElementById('sort-time');
+            const likesBtn = document.getElementById('sort-likes');
+            if (timeBtn && likesBtn) {
+                if (mode === 'time') {
+                    timeBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10';
+                    likesBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30';
+                } else {
+                    likesBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10';
+                    timeBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30';
+                }
+            }
+            renderPigeonholes();
+        }
+
+        function toggleMyPostsFilter() {
+            if (!STATE.isLoggedIn) {
+                showRetroMessage('请先登录再筛选自己的帖子');
+                return;
+            }
+            _mailFilterMine = !_mailFilterMine;
+            const btn = document.getElementById('myPostsFilter');
+            if (btn) {
+                if (_mailFilterMine) {
+                    btn.className = 'text-[9px] font-mono uppercase px-2 py-1 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10';
+                } else {
+                    btn.className = 'text-[9px] font-mono uppercase px-2 py-1 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30';
+                }
+            }
+            renderPigeonholes();
+        }
+
+        async function renderPigeonholes() {
             const container = document.getElementById('pigeonholeContainer');
             container.innerHTML = "";
-            const mails = JSON.parse(localStorage.getItem('hongxia_mails')) || SEEDED_MAILS;
+            let mails = await loadPostcards();
 
-            mails.slice().reverse().forEach(mail => {
-                let stampIcon = "🌇";
-                if (mail.stamp === "stamp-film") stampIcon = "🎞️";
-                else if (mail.stamp === "stamp-cherry") stampIcon = "🍒";
+            // Apply filter
+            if (_mailFilterMine && STATE.isLoggedIn && STATE.userId) {
+                mails = mails.filter(m => m.user_id === STATE.userId);
+            }
 
+            // Apply sorting
+            if (_mailSortMode === 'likes') {
+                // Need like counts — do a quick load
+                const localStore = getLikesStore();
+                if (STATE.isLoggedIn && isSupabaseReady()) {
+                    try {
+                        const postcardIds = mails.map(m => m.id);
+                        const { data } = await supabaseClient
+                            .from('postcard_likes')
+                            .select('postcard_id')
+                            .in('postcard_id', postcardIds);
+                        const cloudCounts = {};
+                        if (data) data.forEach(r => { cloudCounts[r.postcard_id] = (cloudCounts[r.postcard_id] || 0) + 1; });
+                        mails.forEach(m => {
+                            const localCount = (localStore[m.id] || []).length;
+                            const cloudCount = cloudCounts[m.id] || 0;
+                            m._likeCount = Math.max(localCount, cloudCount);
+                        });
+                    } catch(e) {
+                        mails.forEach(m => { m._likeCount = (localStore[m.id] || []).length; });
+                    }
+                } else {
+                    mails.forEach(m => { m._likeCount = (localStore[m.id] || []).length; });
+                }
+                mails.sort((a, b) => (b._likeCount || 0) - (a._likeCount || 0));
+            } else {
+                // Sort by time — use id (timestamp) descending
+                mails.sort((a, b) => b.id - a.id);
+            }
+
+            _mailCache = {};
+            mails.forEach(m => { _mailCache[m.id] = m; });
+
+            if (mails.length === 0) {
+                const emptyMsg = _mailFilterMine ? '你还没有投递过明信片' : '明信片架空空如也...';
+                const emptyHint = _mailFilterMine ? '点击上方「投递」按钮写下第一封吧' : '点击上方「投递」按钮留下第一封明信片';
+                container.innerHTML = `
+                    <div class="text-center text-gray-600 py-12 font-serif">
+                        <i class="fa-solid fa-inbox text-2xl mb-2 block"></i>
+                        <p class="text-xs">${emptyMsg}</p>
+                        <p class="text-[10px] mt-1">${emptyHint}</p>
+                    </div>`;
+                return;
+            }
+
+            mails.forEach(mail => {
                 const item = document.createElement('div');
-                item.className = "bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded relative cursor-pointer active:scale-95 transition-all flex flex-col justify-between";
-                item.onclick = () => showLetterModal(mail);
+                item.className = "bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 rounded flex flex-col";
+                item.id = `postcard-${mail.id}`;
+
+                const isOwn = STATE.isLoggedIn && mail.user_id === STATE.userId;
+                const likeCount = (mail._likeCount != null) ? mail._likeCount : ((mail.like_count != null) ? mail.like_count : 0);
+                const commentCount = (mail.comment_count != null) ? mail.comment_count : 0;
+                const likedIcon = mail.liked_by_me ? 'fa-solid' : 'fa-regular';
+                const likedClass = mail.liked_by_me ? 'liked' : '';
 
                 item.innerHTML = `
-                    <div class="flex justify-between items-start mb-1.5">
-                        <div class="space-y-0.5">
-                            <span class="text-[8px] text-gray-500 font-mono">${mail.date}</span>
-                            <h4 class="text-xs font-bold text-retro-gold font-serif">${mail.sender}</h4>
+                    <!-- Clickable card body -->
+                    <div class="p-3 cursor-pointer active:scale-[0.99] transition-all" onclick="event.stopPropagation(); openMailModal(${mail.id})">
+                        <div class="flex justify-between items-start mb-1.5">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] text-gray-500 font-mono">${escapeHtml(mail.date)}</span>
+                                <h4 class="text-xs font-bold text-retro-gold font-serif">${escapeHtml(mail.sender)}</h4>
+                            </div>
+                            ${isOwn ? `
+                                <button class="text-gray-600 hover:text-retro-neonred text-[10px] transition-all px-1.5 py-0.5" onclick="event.stopPropagation(); deletePostcard(${mail.id})" title="删除">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            ` : ''}
                         </div>
-                        <span class="text-base">${stampIcon}</span>
+                        <p class="text-[11px] text-gray-300 leading-relaxed font-serif line-clamp-3">
+                            ${escapeHtml(mail.content)}
+                        </p>
+                        ${mail.image_url ? `<img src="${escapeHtml(mail.image_url)}" class="postcard-thumb" alt="附件图片" loading="lazy">` : ''}
                     </div>
-                    <p class="text-[11px] text-gray-300 leading-relaxed font-serif line-clamp-2">
-                        ${mail.content}
-                    </p>
+                    <!-- Action bar -->
+                    <div class="flex items-center gap-3 px-3 pb-2 border-t border-retro-gold/10 pt-1.5">
+                        <button class="postcard-action-btn ${likedClass}" onclick="event.stopPropagation(); toggleLike(${mail.id})" id="like-btn-${mail.id}">
+                            <i class="${likedIcon} fa-heart"></i> <span id="like-count-${mail.id}">${likeCount}</span>
+                        </button>
+                        <button class="postcard-action-btn" onclick="event.stopPropagation(); toggleComments(${mail.id})" id="comment-btn-${mail.id}">
+                            <i class="fa-regular fa-comment"></i> <span id="comment-count-${mail.id}">${commentCount}</span>
+                        </button>
+                    </div>
+                    <!-- Comments panel (hidden by default) -->
+                    <div id="comments-panel-${mail.id}" class="comments-panel hidden px-3 py-2">
+                        <div id="comments-list-${mail.id}" class="text-[10px] space-y-1 mb-2 max-h-32 overflow-y-auto"></div>
+                        ${STATE.isLoggedIn ? `
+                            <div class="flex gap-1.5">
+                                <textarea id="comment-input-${mail.id}" rows="1" placeholder="写下评论..." class="comment-input flex-1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();submitComment(${mail.id})}"></textarea>
+                                <button onclick="event.stopPropagation(); submitComment(${mail.id})" class="px-2 py-1 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold text-[9px] rounded border border-retro-gold/30 active:scale-95 transition-all font-mono uppercase">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        ` : `
+                            <p class="text-[9px] text-gray-600 text-center">请登录后评论</p>
+                        `}
+                    </div>
                 `;
                 container.appendChild(item);
             });
+
+            // Load like states from cloud/localStorage asynchronously
+            refreshAllLikeStates(mails);
         }
 
-        function handleSendMail(e) {
+        // ==============================================
+        // POSTCARD LIKES
+        // ==============================================
+
+        function getLikesStore() {
+            try {
+                return JSON.parse(localStorage.getItem('hongxia_postcard_likes')) || {};
+            } catch(e) { return {}; }
+        }
+
+        function saveLikesStore(store) {
+            localStorage.setItem('hongxia_postcard_likes', JSON.stringify(store));
+        }
+
+        async function refreshAllLikeStates(mails) {
+            // Load all like states in one pass
+            const localStore = getLikesStore();
+            const currentUserId = STATE.isLoggedIn ? STATE.userId : null;
+
+            // Try Supabase first
+            let cloudLikes = {};
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    const postcardIds = mails.map(m => m.id);
+                    const { data, error } = await supabaseClient
+                        .from('postcard_likes')
+                        .select('postcard_id, user_id')
+                        .in('postcard_id', postcardIds);
+                    if (!error && data) {
+                        data.forEach(row => {
+                            if (!cloudLikes[row.postcard_id]) cloudLikes[row.postcard_id] = [];
+                            cloudLikes[row.postcard_id].push(row.user_id);
+                        });
+                    }
+                } catch(e) {
+                    console.warn('[Likes] Supabase load failed, using localStorage:', e.message);
+                }
+            }
+
+            // Merge cloud + local
+            const merged = {};
+            mails.forEach(mail => {
+                const cloudSet = new Set(cloudLikes[mail.id] || []);
+                const localSet = new Set(localStore[mail.id] || []);
+                const all = new Set([...cloudSet, ...localSet]);
+                merged[mail.id] = [...all];
+            });
+
+            // Update UI for each card
+            mails.forEach(mail => {
+                const likers = merged[mail.id] || [];
+                const count = likers.length;
+                const likedByMe = currentUserId && likers.includes(currentUserId);
+
+                const countEl = document.getElementById(`like-count-${mail.id}`);
+                const btnEl = document.getElementById(`like-btn-${mail.id}`);
+                if (countEl) countEl.textContent = count;
+                if (btnEl) {
+                    const icon = btnEl.querySelector('i');
+                    if (likedByMe) {
+                        btnEl.classList.add('liked');
+                        if (icon) { icon.classList.remove('fa-regular'); icon.classList.add('fa-solid'); }
+                    } else {
+                        btnEl.classList.remove('liked');
+                        if (icon) { icon.classList.remove('fa-solid'); icon.classList.add('fa-regular'); }
+                    }
+                }
+            });
+        }
+
+        async function toggleLike(postcardId) {
+            if (!STATE.isLoggedIn || !STATE.userId) {
+                showRetroMessage('请先登录再点赞 ❤️');
+                return;
+            }
+
+            const btnEl = document.getElementById(`like-btn-${postcardId}`);
+            const countEl = document.getElementById(`like-count-${postcardId}`);
+            const store = getLikesStore();
+            if (!store[postcardId]) store[postcardId] = [];
+
+            const idx = store[postcardId].indexOf(STATE.userId);
+            const currentlyLiked = idx !== -1;
+
+            // Optimistic UI update
+            let newCount = parseInt(countEl.textContent) || 0;
+            if (currentlyLiked) {
+                store[postcardId].splice(idx, 1);
+                newCount = Math.max(0, newCount - 1);
+                btnEl.classList.remove('liked');
+                const icon = btnEl.querySelector('i');
+                if (icon) { icon.classList.remove('fa-solid'); icon.classList.add('fa-regular'); }
+            } else {
+                store[postcardId].push(STATE.userId);
+                newCount += 1;
+                btnEl.classList.add('liked');
+                const icon = btnEl.querySelector('i');
+                if (icon) { icon.classList.remove('fa-regular'); icon.classList.add('fa-solid'); }
+            }
+            countEl.textContent = newCount;
+            saveLikesStore(store);
+            playShortBeep(currentlyLiked ? 400 : 880, 0.08);
+
+            // Sync to Supabase
+            if (isSupabaseReady()) {
+                try {
+                    if (currentlyLiked) {
+                        await supabaseClient
+                            .from('postcard_likes')
+                            .delete()
+                            .eq('postcard_id', postcardId)
+                            .eq('user_id', STATE.userId);
+                    } else {
+                        await supabaseClient
+                            .from('postcard_likes')
+                            .insert({ postcard_id: postcardId, user_id: STATE.userId });
+                    }
+                } catch(e) {
+                    console.warn('[Likes] Supabase sync failed:', e.message);
+                }
+            }
+        }
+
+        // ==============================================
+        // POSTCARD COMMENTS
+        // ==============================================
+
+        function getCommentsStore() {
+            try {
+                return JSON.parse(localStorage.getItem('hongxia_postcard_comments')) || [];
+            } catch(e) { return []; }
+        }
+
+        function saveCommentsStore(store) {
+            localStorage.setItem('hongxia_postcard_comments', JSON.stringify(store));
+        }
+
+        async function loadComments(postcardId) {
+            let comments = [];
+            // Try Supabase first
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('postcard_comments')
+                        .select('*')
+                        .eq('postcard_id', postcardId)
+                        .order('created_at', { ascending: true });
+                    if (!error && data) {
+                        comments = data.map(c => ({
+                            id: c.id,
+                            postcard_id: c.postcard_id,
+                            user_id: c.user_id,
+                            sender: c.sender,
+                            content: c.content,
+                            date: c.created_at ? new Date(c.created_at).toLocaleDateString('zh-CN') : ''
+                        }));
+                    }
+                } catch(e) {
+                    console.warn('[Comments] Supabase load failed:', e.message);
+                }
+            }
+            // Fallback to localStorage
+            if (comments.length === 0) {
+                const store = getCommentsStore();
+                comments = store.filter(c => c.postcard_id === postcardId);
+            }
+            return comments;
+        }
+
+        async function toggleComments(postcardId) {
+            const panel = document.getElementById(`comments-panel-${postcardId}`);
+            if (!panel) return;
+
+            const isHidden = panel.classList.contains('hidden');
+            if (isHidden) {
+                panel.classList.remove('hidden');
+                const comments = await loadComments(postcardId);
+                renderCommentList(postcardId, comments);
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+
+        function renderCommentList(postcardId, comments) {
+            const listEl = document.getElementById(`comments-list-${postcardId}`);
+            if (!listEl) return;
+            if (comments.length === 0) {
+                listEl.innerHTML = '<p class="text-gray-600 text-[9px] italic">暂无评论，来写第一条吧</p>';
+                return;
+            }
+            listEl.innerHTML = comments.map(c => {
+                const isOwn = STATE.isLoggedIn && c.user_id === STATE.userId;
+                return `
+                    <div class="comment-item">
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-retro-gold font-bold text-[10px]">${escapeHtml(c.sender)}</span>
+                            <span class="text-[8px] text-gray-600 font-mono">${c.date || ''}</span>
+                        </div>
+                        <p class="text-gray-300 text-[10px] leading-relaxed mt-0.5">${escapeHtml(c.content)}</p>
+                        ${isOwn ? `<button class="text-[8px] text-gray-600 hover:text-retro-neonred mt-0.5" onclick="event.stopPropagation(); deleteComment(${c.id}, ${postcardId})">删除</button>` : ''}
+                    </div>`;
+            }).join('');
+        }
+
+        async function submitComment(postcardId) {
+            if (!STATE.isLoggedIn) {
+                showRetroMessage('请先登录再评论 💬');
+                return;
+            }
+            const input = document.getElementById(`comment-input-${postcardId}`);
+            if (!input) return;
+            const content = input.value.trim();
+            if (!content) return;
+
+            const newComment = {
+                id: Date.now(),
+                postcard_id: postcardId,
+                user_id: STATE.userId,
+                sender: STATE.currentUser,
+                content: content,
+                date: new Date().toLocaleDateString('zh-CN')
+            };
+
+            // Save to localStorage
+            const store = getCommentsStore();
+            store.push(newComment);
+            saveCommentsStore(store);
+
+            // Save to Supabase
+            if (isSupabaseReady()) {
+                try {
+                    const { error } = await supabaseClient
+                        .from('postcard_comments')
+                        .insert({
+                            id: newComment.id,
+                            postcard_id: newComment.postcard_id,
+                            user_id: newComment.user_id,
+                            sender: newComment.sender,
+                            content: newComment.content
+                        });
+                    if (error) console.warn('[Comments] Supabase insert failed:', error.message);
+                } catch(e) {
+                    console.warn('[Comments] Supabase sync failed:', e.message);
+                }
+            }
+
+            input.value = '';
+            // Refresh comment list and count
+            const comments = await loadComments(postcardId);
+            renderCommentList(postcardId, comments);
+            const countEl = document.getElementById(`comment-count-${postcardId}`);
+            if (countEl) countEl.textContent = comments.length;
+            playShortBeep(880, 0.08);
+        }
+
+        async function deleteComment(commentId, postcardId) {
+            if (!confirm('删除这条评论？')) return;
+            // Remove from localStorage
+            const store = getCommentsStore();
+            const filtered = store.filter(c => c.id !== commentId);
+            saveCommentsStore(filtered);
+
+            // Remove from Supabase
+            if (isSupabaseReady()) {
+                try {
+                    await supabaseClient.from('postcard_comments').delete().eq('id', commentId);
+                } catch(e) {
+                    console.warn('[Comments] Supabase delete failed:', e.message);
+                }
+            }
+
+            // Refresh UI
+            const comments = await loadComments(postcardId);
+            renderCommentList(postcardId, comments);
+            const countEl = document.getElementById(`comment-count-${postcardId}`);
+            if (countEl) countEl.textContent = comments.length;
+        }
+
+        async function handleSendMail(e) {
             e.preventDefault();
-            const sender = document.getElementById('mailSender').value.trim();
-            const stamp = document.querySelector('input[name="stamp"]:checked').value;
+
+            // Auto-use logged-in user's nickname
+            const sender = STATE.isLoggedIn ? STATE.currentUser : '匿名观众';
             const content = document.getElementById('mailBody').value.trim();
+            if (!content) return;
 
-            if (!sender || !content) return;
+            // Handle image upload
+            const imageFile = document.getElementById('mailImage').files[0];
+            let imageUrl = null;
+            let imageError = null;
 
-            const mails = JSON.parse(localStorage.getItem('hongxia_mails')) || SEEDED_MAILS;
+            if (imageFile && STATE.isLoggedIn && isSupabaseReady()) {
+                const submitBtn = document.querySelector('#mailForm button[type="submit"]');
+                const originalHtml = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="upload-spinner"></span> 上传中...';
+                submitBtn.disabled = true;
+
+                try {
+                    const webpBlob = await convertToWebP(imageFile, 1000);
+                    imageUrl = await uploadPostcardImage(webpBlob, STATE.userId);
+                } catch (uploadErr) {
+                    imageError = uploadErr.message;
+                    console.warn('[Mail] Image upload failed:', uploadErr);
+                }
+
+                submitBtn.innerHTML = originalHtml;
+                submitBtn.disabled = false;
+            } else if (imageFile && !STATE.isLoggedIn) {
+                imageError = '需要登录才能上传图片';
+            }
+
             const dateStr = new Date().toLocaleDateString('zh-CN');
-
             const newMail = {
                 id: Date.now(),
+                user_id: STATE.isLoggedIn ? STATE.userId : null,
                 sender: sender,
-                stamp: stamp,
                 content: content,
+                image_url: imageUrl,
                 date: dateStr
             };
 
+            let cloudError = null;
+
+            // Persist to Supabase if logged in
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    const { data: insertedData, error } = await supabaseClient
+                        .from('postcards')
+                        .insert({
+                            id: newMail.id,
+                            user_id: newMail.user_id,
+                            sender: newMail.sender,
+                            content: newMail.content,
+                            image_url: newMail.image_url,
+                            date: newMail.date
+                        })
+                        .select();
+                    if (error) {
+                        console.error('[Mail] Supabase insert failed:', JSON.stringify(error));
+                        cloudError = error.message || JSON.stringify(error);
+                    } else if (!insertedData || insertedData.length === 0) {
+                        console.warn('[Mail] Supabase insert returned no data — possible RLS block');
+                        cloudError = '写入被拒绝，请检查 RLS 策略';
+                    }
+                } catch (e) {
+                    console.error('[Mail] Supabase insert error:', e);
+                    cloudError = e.message;
+                }
+            }
+
+            // Always save to localStorage as fallback
+            const mails = JSON.parse(localStorage.getItem('hongxia_mails')) || [];
             mails.push(newMail);
             localStorage.setItem('hongxia_mails', JSON.stringify(mails));
 
@@ -4012,116 +4697,718 @@
                 lsSet('sent_postcard', 'true');
             }
 
-            document.getElementById('mailForm').reset();
+            // Reset form: clear textarea and image preview
+            document.getElementById('mailBody').value = '';
+            clearMailImage();
             playShortBeep(880, 0.1);
 
-            renderPigeonholes();
-            showRetroMessage(`💌 明信片投递成功！已挂至收发室的保管架上。`);
+            await renderPigeonholes();
+            hideMailForm();
+
+            let finalMsg = '';
+            if (cloudError || imageError) {
+                finalMsg = '⚠️ 明信片已保存至本地';
+                if (cloudError) {
+                    finalMsg += `<br><br>云端同步失败：${cloudError}<br>请在 Supabase SQL Editor 中执行：<br><code style="font-size:10px">ALTER TABLE postcards DISABLE ROW LEVEL SECURITY;</code>`;
+                }
+                if (imageError) {
+                    finalMsg += `<br><br>图片上传失败：${imageError}<br>请在 Supabase Dashboard → Storage → postcards 桶中，添加 INSERT 策略允许已认证用户上传。`;
+                }
+                showRetroMessage(finalMsg);
+            } else {
+                showRetroMessage('💌 明信片投递成功！');
+            }
             checkAchievements();
         }
 
         function showLetterModal(mail) {
-            let stampIcon = "🌇";
-            if (mail.stamp === "stamp-film") stampIcon = "🎞️";
-            else if (mail.stamp === "stamp-cherry") stampIcon = "🍒";
+            const isOwn = STATE.isLoggedIn && mail.user_id === STATE.userId;
+
+            const imageHtml = mail.image_url
+                ? `<div class="mt-2 cursor-pointer" onclick="enlargeImage('${escapeHtml(mail.image_url)}')">
+                       <img src="${escapeHtml(mail.image_url)}" class="w-full max-h-48 object-contain rounded border border-retro-gold/20" alt="明信片图片">
+                       <p class="text-[8px] text-gray-500 text-center mt-1 font-mono">点击查看大图</p>
+                   </div>`
+                : '';
 
             showRetroMessage(`
                 <div class="text-left space-y-3">
                     <div class="flex justify-between items-start border-b border-retro-gold/20 pb-1.5">
                         <div>
                             <span class="text-[8px] text-gray-500 font-mono">${mail.date}</span>
-                            <div class="text-xs font-bold text-retro-gold">寄信人: ${mail.sender}</div>
+                            <div class="text-xs font-bold text-retro-gold">寄信人: ${escapeHtml(mail.sender)}</div>
                         </div>
-                        <span class="text-base">${stampIcon}</span>
+                        ${isOwn ? `
+                            <button class="px-2 py-0.5 bg-retro-burgundy border border-retro-gold/30 text-retro-gold text-[9px] rounded hover:bg-retro-neonred hover:text-white transition-all" onclick="closeRetroMessage(); deletePostcard(${mail.id})">
+                                <i class="fa-solid fa-trash"></i> 删除
+                            </button>
+                        ` : ''}
                     </div>
                     <p class="text-[11px] text-gray-200 leading-relaxed font-serif whitespace-pre-wrap">
-                        ${mail.content}
+                        ${escapeHtml(mail.content)}
                     </p>
+                    ${imageHtml}
                 </div>
             `);
         }
 
-        function renderCrafts() {
+        function previewMailImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const preview = document.getElementById('mailImagePreview');
+            const thumb = document.getElementById('mailImageThumb');
+            const clearBtn = document.getElementById('clearMailImage');
+            thumb.src = URL.createObjectURL(file);
+            preview.classList.remove('hidden');
+            clearBtn.classList.remove('hidden');
+        }
+
+        function clearMailImage() {
+            document.getElementById('mailImage').value = '';
+            document.getElementById('mailImagePreview').classList.add('hidden');
+            document.getElementById('clearMailImage').classList.add('hidden');
+        }
+
+        function enlargeImage(url) {
+            closeRetroMessage();
+            const overlay = document.createElement('div');
+            overlay.className = 'postcard-image-overlay';
+            overlay.innerHTML = `
+                <img src="${escapeHtml(url)}" alt="大图">
+                <span class="close-hint">[ 点击任意处关闭 / CLICK TO CLOSE ]</span>
+            `;
+            overlay.onclick = () => overlay.remove();
+            document.body.appendChild(overlay);
+        }
+
+        async function deletePostcard(mailId) {
+            if (!confirm('确定删除这张明信片吗？')) return;
+
+            // Delete from Supabase if logged in
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    const { error } = await supabaseClient
+                        .from('postcards')
+                        .delete()
+                        .eq('id', mailId)
+                        .eq('user_id', STATE.userId);
+                    if (error) {
+                        console.error('[Mail] Supabase delete failed:', error);
+                        showRetroMessage('云端删除失败: ' + error.message);
+                        return;
+                    }
+                } catch (e) {
+                    console.error('[Mail] Supabase delete error:', e);
+                    showRetroMessage('删除异常: ' + e.message);
+                    return;
+                }
+            }
+
+            // Remove from localStorage
+            const mails = JSON.parse(localStorage.getItem('hongxia_mails')) || [];
+            const filtered = mails.filter(m => m.id !== mailId);
+            localStorage.setItem('hongxia_mails', JSON.stringify(filtered));
+
+            playShortBeep(400, 0.08);
+            showRetroMessage('🗑️ 明信片已删除');
+            await renderPigeonholes();
+        }
+
+        // ==============================================
+        // CRAFT FORM TOGGLE
+        // ==============================================
+
+        function showCraftForm() {
+            document.getElementById('craftFormPanel').classList.remove('hidden');
+            document.getElementById('craftRackPanel').classList.remove('md:col-span-12');
+            document.getElementById('craftRackPanel').classList.add('md:col-span-7');
+            // Auto-fill author from logged-in user
+            if (STATE.isLoggedIn && STATE.currentUser) {
+                document.getElementById('merchAuthor').value = STATE.currentUser;
+            }
+        }
+
+        function hideCraftForm() {
+            document.getElementById('craftFormPanel').classList.add('hidden');
+            document.getElementById('craftRackPanel').classList.remove('md:col-span-7');
+            document.getElementById('craftRackPanel').classList.add('md:col-span-12');
+        }
+
+        // ==============================================
+        // CRAFT SORT & FILTER
+        // ==============================================
+
+        let _craftSortMode = 'time';
+        let _craftFilterMine = false;
+
+        function setCraftSort(mode) {
+            _craftSortMode = mode;
+            const timeBtn = document.getElementById('craft-sort-time');
+            const likesBtn = document.getElementById('craft-sort-likes');
+            if (timeBtn && likesBtn) {
+                if (mode === 'time') {
+                    timeBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10';
+                    likesBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30';
+                } else {
+                    likesBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10';
+                    timeBtn.className = 'text-[9px] font-mono uppercase px-1.5 py-0.5 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30';
+                }
+            }
+            renderCrafts();
+        }
+
+        function toggleCraftMyFilter() {
+            if (!STATE.isLoggedIn) {
+                showRetroMessage('请先登录再筛选自己的物料');
+                return;
+            }
+            _craftFilterMine = !_craftFilterMine;
+            const btn = document.getElementById('craftMyFilter');
+            if (btn) {
+                if (_craftFilterMine) {
+                    btn.className = 'text-[9px] font-mono uppercase px-2 py-1 rounded border transition-all text-retro-gold border-retro-gold/40 bg-retro-gold/10';
+                } else {
+                    btn.className = 'text-[9px] font-mono uppercase px-2 py-1 rounded border transition-all text-gray-500 border-retro-gold/15 hover:text-retro-gold hover:border-retro-gold/30';
+                }
+            }
+            renderCrafts();
+        }
+
+        // ==============================================
+        // CRAFT DATA LOADING
+        // ==============================================
+
+        async function loadCrafts() {
+            if (!isSupabaseReady() || !STATE.isLoggedIn || !STATE.userId) {
+                try {
+                    return JSON.parse(localStorage.getItem('hongxia_crafts')) || [];
+                } catch(e) { return []; }
+            }
+            try {
+                const { data, error } = await supabaseClient
+                    .from('crafts')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    localStorage.setItem('hongxia_crafts', JSON.stringify(data));
+                    return data;
+                }
+            } catch(e) {
+                console.warn('[Crafts] Supabase load failed, using localStorage:', e.message);
+            }
+            try { return JSON.parse(localStorage.getItem('hongxia_crafts')) || []; }
+            catch(e) { return []; }
+        }
+
+        // ==============================================
+        // CRAFT RENDERING
+        // ==============================================
+
+        let _craftCache = {};
+
+        function openCraftModal(craftId) {
+            const craft = _craftCache[craftId];
+            if (craft) viewCraftDetails(craft.author, craft.title, craft.desc, craft.img || '');
+        }
+
+        async function renderCrafts() {
             const container = document.getElementById('craftsContainer');
             container.innerHTML = "";
-            const crafts = JSON.parse(localStorage.getItem('hongxia_crafts')) || SEEDED_CRAFTS;
+            let crafts = await loadCrafts();
 
-            crafts.slice().reverse().forEach(craft => {
+            // Apply filter
+            if (_craftFilterMine && STATE.isLoggedIn && STATE.userId) {
+                crafts = crafts.filter(c => c.user_id === STATE.userId);
+            }
+
+            // Apply sorting
+            if (_craftSortMode === 'likes') {
+                const localStore = getCraftLikesStore();
+                if (STATE.isLoggedIn && isSupabaseReady()) {
+                    try {
+                        const craftIds = crafts.map(c => c.id);
+                        const { data } = await supabaseClient
+                            .from('craft_likes')
+                            .select('craft_id')
+                            .in('craft_id', craftIds);
+                        const cloudCounts = {};
+                        if (data) data.forEach(r => { cloudCounts[r.craft_id] = (cloudCounts[r.craft_id] || 0) + 1; });
+                        crafts.forEach(c => {
+                            const localCount = (localStore[c.id] || []).length;
+                            c._likeCount = Math.max(localCount, cloudCounts[c.id] || 0);
+                        });
+                    } catch(e) {
+                        crafts.forEach(c => { c._likeCount = (localStore[c.id] || []).length; });
+                    }
+                } else {
+                    crafts.forEach(c => { c._likeCount = (localStore[c.id] || []).length; });
+                }
+                crafts.sort((a, b) => (b._likeCount || 0) - (a._likeCount || 0));
+            } else {
+                crafts.sort((a, b) => b.id - a.id);
+            }
+
+            _craftCache = {};
+            crafts.forEach(c => { _craftCache[c.id] = c; });
+
+            if (crafts.length === 0) {
+                const emptyMsg = _craftFilterMine ? '你还没有登记过物料' : '布告板上空空如也...';
+                const emptyHint = _craftFilterMine ? '点击上方「登记」按钮发布第一个物料吧' : '点击上方「登记」按钮发布第一个物料吧';
+                container.innerHTML = `
+                    <div class="text-center text-gray-600 py-12 font-serif">
+                        <i class="fa-solid fa-inbox text-2xl mb-2 block"></i>
+                        <p class="text-xs">${emptyMsg}</p>
+                        <p class="text-[10px] mt-1">${emptyHint}</p>
+                    </div>`;
+                return;
+            }
+
+            crafts.forEach(craft => {
                 const item = document.createElement('div');
-                item.className = "bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 rounded overflow-hidden flex flex-col justify-between p-2.5 space-y-2";
+                item.className = "bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 rounded flex flex-col";
+                item.id = `craft-${craft.id}`;
 
-                const imgSrc = craft.img || `https://placehold.co/400x300/271114/D4AF37?text=%E9%A5%AD%E5%88%B6%E7%89%A9%E6%96%99`;
+                const isOwn = STATE.isLoggedIn && craft.user_id === STATE.userId;
+                const likeCount = (craft._likeCount != null) ? craft._likeCount : 0;
+                const commentCount = (craft.comment_count != null) ? craft.comment_count : 0;
+                const imgSrc = craft.img || '';
 
                 item.innerHTML = `
-                    <div class="relative aspect-video w-full bg-black rounded overflow-hidden">
-                        <img src="${imgSrc}" alt="${craft.title}" class="w-full h-full object-cover">
-                        <div class="absolute bottom-1 left-1 bg-retro-burgundy/80 border border-retro-gold text-retro-gold text-[8px] px-1 py-0.5 rounded font-mono">
-                            BY: ${craft.author}
+                    <!-- Clickable card body -->
+                    <div class="p-3 cursor-pointer active:scale-[0.99] transition-all" onclick="event.stopPropagation(); openCraftModal(${craft.id})">
+                        <div class="flex justify-between items-start mb-1.5">
+                            <div class="space-y-0.5 flex-1">
+                                <h4 class="text-xs font-bold text-retro-gold font-serif">${escapeHtml(craft.title || '未命名物料')}</h4>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[9px] text-gray-500 font-mono">BY: ${escapeHtml(craft.author || '匿名')}</span>
+                                    ${craft.date ? `<span class="text-[8px] text-gray-600 font-mono">${escapeHtml(craft.date)}</span>` : ''}
+                                </div>
+                            </div>
+                            ${isOwn ? `
+                                <button class="text-gray-600 hover:text-retro-neonred text-[10px] transition-all px-1.5 py-0.5" onclick="event.stopPropagation(); deleteCraft(${craft.id})" title="删除">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            ` : ''}
                         </div>
-                    </div>
-                    <div class="space-y-0.5">
-                        <h4 class="text-white text-xs font-bold font-serif line-clamp-1">${craft.title}</h4>
-                        <p class="text-[10px] text-gray-400 leading-normal font-serif line-clamp-2">
-                            ${craft.desc}
+                        <p class="text-[11px] text-gray-300 leading-relaxed font-serif line-clamp-3">
+                            ${escapeHtml(craft.desc || '')}
                         </p>
+                        ${imgSrc ? `<img src="${escapeHtml(imgSrc)}" class="postcard-thumb" alt="物料图片" loading="lazy">` : ''}
                     </div>
-                    <button onclick="viewCraftDetails('${craft.author}', '${craft.title}', '${craft.desc}', '${imgSrc}')" class="w-full py-1 bg-[#140b0d] border border-retro-gold/20 text-retro-gold text-[9px] font-bold rounded active:scale-95 transition-all">
-                        查看完整布告说明
-                    </button>
+                    <!-- Action bar -->
+                    <div class="flex items-center gap-3 px-3 pb-2 border-t border-retro-gold/10 pt-1.5">
+                        <button class="postcard-action-btn" onclick="event.stopPropagation(); toggleCraftLike(${craft.id})" id="craft-like-btn-${craft.id}">
+                            <i class="fa-regular fa-heart"></i> <span id="craft-like-count-${craft.id}">${likeCount}</span>
+                        </button>
+                        <button class="postcard-action-btn" onclick="event.stopPropagation(); toggleCraftComments(${craft.id})" id="craft-comment-btn-${craft.id}">
+                            <i class="fa-regular fa-comment"></i> <span id="craft-comment-count-${craft.id}">${commentCount}</span>
+                        </button>
+                    </div>
+                    <!-- Comments panel (hidden by default) -->
+                    <div id="craft-comments-panel-${craft.id}" class="comments-panel hidden px-3 py-2">
+                        <div id="craft-comments-list-${craft.id}" class="text-[10px] space-y-1 mb-2 max-h-32 overflow-y-auto"></div>
+                        ${STATE.isLoggedIn ? `
+                            <div class="flex gap-1.5">
+                                <textarea id="craft-comment-input-${craft.id}" rows="1" placeholder="写下评论..." class="comment-input flex-1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();submitCraftComment(${craft.id})}"></textarea>
+                                <button onclick="event.stopPropagation(); submitCraftComment(${craft.id})" class="px-2 py-1 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold text-[9px] rounded border border-retro-gold/30 active:scale-95 transition-all font-mono uppercase">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        ` : `
+                            <p class="text-[9px] text-gray-600 text-center">请登录后评论</p>
+                        `}
+                    </div>
                 `;
                 container.appendChild(item);
             });
+
+            refreshCraftLikeStates(crafts);
         }
 
-        function handleSendMerch(e) {
+        // ==============================================
+        // CRAFT LIKES
+        // ==============================================
+
+        function getCraftLikesStore() {
+            try {
+                return JSON.parse(localStorage.getItem('hongxia_craft_likes')) || {};
+            } catch(e) { return {}; }
+        }
+
+        function saveCraftLikesStore(store) {
+            localStorage.setItem('hongxia_craft_likes', JSON.stringify(store));
+        }
+
+        async function refreshCraftLikeStates(crafts) {
+            const localStore = getCraftLikesStore();
+            const currentUserId = STATE.isLoggedIn ? STATE.userId : null;
+            let cloudLikes = {};
+
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    const craftIds = crafts.map(c => c.id);
+                    const { data, error } = await supabaseClient
+                        .from('craft_likes')
+                        .select('craft_id, user_id')
+                        .in('craft_id', craftIds);
+                    if (!error && data) {
+                        data.forEach(row => {
+                            if (!cloudLikes[row.craft_id]) cloudLikes[row.craft_id] = [];
+                            cloudLikes[row.craft_id].push(row.user_id);
+                        });
+                    }
+                } catch(e) {
+                    console.warn('[Craft Likes] Supabase load failed:', e.message);
+                }
+            }
+
+            crafts.forEach(craft => {
+                const cloudSet = new Set(cloudLikes[craft.id] || []);
+                const localSet = new Set(localStore[craft.id] || []);
+                const all = new Set([...cloudSet, ...localSet]);
+                const count = all.size;
+                const likedByMe = currentUserId && all.has(currentUserId);
+
+                const countEl = document.getElementById(`craft-like-count-${craft.id}`);
+                const btnEl = document.getElementById(`craft-like-btn-${craft.id}`);
+                if (countEl) countEl.textContent = count;
+                if (btnEl) {
+                    const icon = btnEl.querySelector('i');
+                    if (likedByMe) {
+                        btnEl.classList.add('liked');
+                        if (icon) { icon.classList.remove('fa-regular'); icon.classList.add('fa-solid'); }
+                    } else {
+                        btnEl.classList.remove('liked');
+                        if (icon) { icon.classList.remove('fa-solid'); icon.classList.add('fa-regular'); }
+                    }
+                }
+            });
+        }
+
+        async function toggleCraftLike(craftId) {
+            if (!STATE.isLoggedIn || !STATE.userId) {
+                showRetroMessage('请先登录再点赞');
+                return;
+            }
+            const btnEl = document.getElementById(`craft-like-btn-${craftId}`);
+            const countEl = document.getElementById(`craft-like-count-${craftId}`);
+            const store = getCraftLikesStore();
+            if (!store[craftId]) store[craftId] = [];
+
+            const idx = store[craftId].indexOf(STATE.userId);
+            const currentlyLiked = idx !== -1;
+            let newCount = parseInt(countEl.textContent) || 0;
+
+            if (currentlyLiked) {
+                store[craftId].splice(idx, 1);
+                newCount = Math.max(0, newCount - 1);
+                btnEl.classList.remove('liked');
+                const icon = btnEl.querySelector('i');
+                if (icon) { icon.classList.remove('fa-solid'); icon.classList.add('fa-regular'); }
+            } else {
+                store[craftId].push(STATE.userId);
+                newCount += 1;
+                btnEl.classList.add('liked');
+                const icon = btnEl.querySelector('i');
+                if (icon) { icon.classList.remove('fa-regular'); icon.classList.add('fa-solid'); }
+            }
+            countEl.textContent = newCount;
+            saveCraftLikesStore(store);
+            playShortBeep(currentlyLiked ? 400 : 880, 0.08);
+
+            if (isSupabaseReady()) {
+                try {
+                    if (currentlyLiked) {
+                        await supabaseClient.from('craft_likes').delete().eq('craft_id', craftId).eq('user_id', STATE.userId);
+                    } else {
+                        await supabaseClient.from('craft_likes').insert({ craft_id: craftId, user_id: STATE.userId });
+                    }
+                } catch(e) { console.warn('[Craft Likes] Sync failed:', e.message); }
+            }
+        }
+
+        // ==============================================
+        // CRAFT COMMENTS
+        // ==============================================
+
+        function getCraftCommentsStore() {
+            try { return JSON.parse(localStorage.getItem('hongxia_craft_comments')) || []; }
+            catch(e) { return []; }
+        }
+
+        function saveCraftCommentsStore(store) {
+            localStorage.setItem('hongxia_craft_comments', JSON.stringify(store));
+        }
+
+        async function loadCraftComments(craftId) {
+            let comments = [];
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('craft_comments')
+                        .select('*')
+                        .eq('craft_id', craftId)
+                        .order('created_at', { ascending: true });
+                    if (!error && data) {
+                        comments = data.map(c => ({
+                            id: c.id, craft_id: c.craft_id, user_id: c.user_id,
+                            sender: c.sender, content: c.content,
+                            date: c.created_at ? new Date(c.created_at).toLocaleDateString('zh-CN') : ''
+                        }));
+                    }
+                } catch(e) { console.warn('[Craft Comments] Load failed:', e.message); }
+            }
+            if (comments.length === 0) {
+                const store = getCraftCommentsStore();
+                comments = store.filter(c => c.craft_id === craftId);
+            }
+            return comments;
+        }
+
+        async function toggleCraftComments(craftId) {
+            const panel = document.getElementById(`craft-comments-panel-${craftId}`);
+            if (!panel) return;
+            const isHidden = panel.classList.contains('hidden');
+            if (isHidden) {
+                panel.classList.remove('hidden');
+                const comments = await loadCraftComments(craftId);
+                renderCraftCommentList(craftId, comments);
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+
+        function renderCraftCommentList(craftId, comments) {
+            const listEl = document.getElementById(`craft-comments-list-${craftId}`);
+            if (!listEl) return;
+            if (comments.length === 0) {
+                listEl.innerHTML = '<p class="text-gray-600 text-[9px] italic">暂无评论，来写第一条吧</p>';
+                return;
+            }
+            listEl.innerHTML = comments.map(c => {
+                const isOwn = STATE.isLoggedIn && c.user_id === STATE.userId;
+                return `
+                    <div class="comment-item">
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-retro-gold font-bold text-[10px]">${escapeHtml(c.sender)}</span>
+                            <span class="text-[8px] text-gray-600 font-mono">${c.date || ''}</span>
+                        </div>
+                        <p class="text-gray-300 text-[10px] leading-relaxed mt-0.5">${escapeHtml(c.content)}</p>
+                        ${isOwn ? `<button class="text-[8px] text-gray-600 hover:text-retro-neonred mt-0.5" onclick="event.stopPropagation(); deleteCraftComment(${c.id}, ${craftId})">删除</button>` : ''}
+                    </div>`;
+            }).join('');
+        }
+
+        async function submitCraftComment(craftId) {
+            if (!STATE.isLoggedIn) { showRetroMessage('请先登录再评论'); return; }
+            const input = document.getElementById(`craft-comment-input-${craftId}`);
+            if (!input) return;
+            const content = input.value.trim();
+            if (!content) return;
+
+            const newComment = {
+                id: Date.now(), craft_id: craftId, user_id: STATE.userId,
+                sender: STATE.currentUser, content: content,
+                date: new Date().toLocaleDateString('zh-CN')
+            };
+
+            const store = getCraftCommentsStore();
+            store.push(newComment);
+            saveCraftCommentsStore(store);
+
+            if (isSupabaseReady()) {
+                try {
+                    await supabaseClient.from('craft_comments').insert({
+                        id: newComment.id, craft_id: newComment.craft_id,
+                        user_id: newComment.user_id, sender: newComment.sender, content: newComment.content
+                    });
+                } catch(e) { console.warn('[Craft Comments] Insert failed:', e.message); }
+            }
+
+            input.value = '';
+            const comments = await loadCraftComments(craftId);
+            renderCraftCommentList(craftId, comments);
+            const countEl = document.getElementById(`craft-comment-count-${craftId}`);
+            if (countEl) countEl.textContent = comments.length;
+            playShortBeep(880, 0.08);
+        }
+
+        async function deleteCraftComment(commentId, craftId) {
+            if (!confirm('删除这条评论？')) return;
+            const store = getCraftCommentsStore();
+            saveCraftCommentsStore(store.filter(c => c.id !== commentId));
+            if (isSupabaseReady()) {
+                try { await supabaseClient.from('craft_comments').delete().eq('id', commentId); }
+                catch(e) { console.warn('[Craft Comments] Delete failed:', e.message); }
+            }
+            const comments = await loadCraftComments(craftId);
+            renderCraftCommentList(craftId, comments);
+            const countEl = document.getElementById(`craft-comment-count-${craftId}`);
+            if (countEl) countEl.textContent = comments.length;
+        }
+
+        async function deleteCraft(craftId) {
+            if (!confirm('确定删除这个物料吗？')) return;
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    await supabaseClient.from('crafts').delete().eq('id', craftId).eq('user_id', STATE.userId);
+                } catch(e) { console.warn('[Craft] Delete failed:', e.message); }
+            }
+            const crafts = JSON.parse(localStorage.getItem('hongxia_crafts')) || [];
+            localStorage.setItem('hongxia_crafts', JSON.stringify(crafts.filter(c => c.id !== craftId)));
+            renderCrafts();
+            showRetroMessage('物料已删除');
+        }
+
+        // ==============================================
+        // CRAFT SUBMISSION
+        // ==============================================
+
+        function previewCraftImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const preview = document.getElementById('craftImagePreview');
+            const thumb = document.getElementById('craftImageThumb');
+            const clearBtn = document.getElementById('clearCraftImage');
+            thumb.src = URL.createObjectURL(file);
+            preview.classList.remove('hidden');
+            clearBtn.classList.remove('hidden');
+        }
+
+        function clearCraftImage() {
+            document.getElementById('merchImage').value = '';
+            document.getElementById('craftImagePreview').classList.add('hidden');
+            document.getElementById('clearCraftImage').classList.add('hidden');
+        }
+
+        async function uploadCraftImage(blob, userId) {
+            const mimeType = blob.type || 'image/webp';
+            const ext = mimeType === 'image/webp' ? 'webp' : (mimeType.split('/')[1] || 'jpg');
+            const fileName = `craft_${userId}_${Date.now()}.${ext}`;
+            const { data, error } = await supabaseClient.storage
+                .from('postcards')
+                .upload(fileName, blob, {
+                    contentType: mimeType,
+                    cacheControl: '3600',
+                    upsert: false
+                });
+            if (error) throw new Error('Upload failed: ' + error.message);
+            const { data: urlData } = supabaseClient.storage.from('postcards').getPublicUrl(fileName);
+            return urlData.publicUrl;
+        }
+
+        async function handleSendMerch(e) {
             e.preventDefault();
             const author = document.getElementById('merchAuthor').value.trim();
             const title = document.getElementById('merchTitle').value.trim();
-            const imgUrl = document.getElementById('merchImgUrl').value.trim();
             const desc = document.getElementById('merchDesc').value.trim();
 
             if (!author || !title || !desc) return;
 
-            const crafts = JSON.parse(localStorage.getItem('hongxia_crafts')) || SEEDED_CRAFTS;
+            // Handle image upload
+            const imageFile = document.getElementById('merchImage').files[0];
+            let imageUrl = null;
+            let imageError = null;
 
+            if (imageFile && STATE.isLoggedIn && isSupabaseReady()) {
+                const submitBtn = document.querySelector('#merchForm button[type="submit"]');
+                const originalHtml = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span class="upload-spinner"></span> 上传中...';
+                submitBtn.disabled = true;
+
+                try {
+                    const webpBlob = await convertToWebP(imageFile, 1000);
+                    imageUrl = await uploadCraftImage(webpBlob, STATE.userId);
+                } catch (uploadErr) {
+                    imageError = uploadErr.message;
+                    console.warn('[Craft] Image upload failed:', uploadErr);
+                }
+
+                submitBtn.innerHTML = originalHtml;
+                submitBtn.disabled = false;
+            } else if (imageFile && !STATE.isLoggedIn) {
+                imageError = '需要登录才能上传图片';
+            }
+
+            const dateStr = new Date().toLocaleDateString('zh-CN');
             const newCraft = {
                 id: Date.now(),
+                user_id: STATE.isLoggedIn ? STATE.userId : null,
                 author: author,
                 title: title,
-                img: imgUrl,
-                desc: desc
+                img: imageUrl,
+                desc: desc,
+                date: dateStr
             };
 
+            let cloudError = null;
+            if (STATE.isLoggedIn && isSupabaseReady()) {
+                try {
+                    const { data: insertedData, error } = await supabaseClient
+                        .from('crafts')
+                        .insert({
+                            id: newCraft.id, user_id: newCraft.user_id,
+                            author: newCraft.author, title: newCraft.title,
+                            img: newCraft.img, desc: newCraft.desc, date: newCraft.date
+                        })
+                        .select();
+                    if (error) {
+                        console.error('[Craft] Supabase insert failed:', JSON.stringify(error));
+                        cloudError = error.message || JSON.stringify(error);
+                    } else if (!insertedData || insertedData.length === 0) {
+                        cloudError = '写入被拒绝，请检查 RLS 策略';
+                    }
+                } catch(e) {
+                    console.error('[Craft] Supabase insert error:', e);
+                    cloudError = e.message;
+                }
+            }
+
+            // Always save to localStorage as fallback
+            const crafts = JSON.parse(localStorage.getItem('hongxia_crafts')) || [];
             crafts.push(newCraft);
             localStorage.setItem('hongxia_crafts', JSON.stringify(crafts));
 
-            // Record craft posted achievement
             if (!STATE.hasPostedCraft) {
                 STATE.hasPostedCraft = true;
                 lsSet('posted_craft', 'true');
             }
 
             document.getElementById('merchForm').reset();
+            clearCraftImage();
             playShortBeep(700, 0.1);
 
-            renderCrafts();
-            showRetroMessage(`🎨 登记成功！已为您挂到一楼布告栏。`);
+            await renderCrafts();
+            hideCraftForm();
+
+            if (cloudError || imageError) {
+                let msg = '⚠️ 物料已保存至本地';
+                if (cloudError) msg += `<br><br>云端同步失败：${cloudError}`;
+                if (imageError) msg += `<br><br>图片上传失败：${imageError}`;
+                showRetroMessage(msg);
+            } else {
+                showRetroMessage('🎨 登记成功！已为您挂到一楼布告栏。');
+            }
             checkAchievements();
         }
 
         function viewCraftDetails(author, title, desc, img) {
+            const imgHtml = img
+                ? `<div class="relative w-full bg-black rounded overflow-hidden border border-retro-gold/15">
+                       <img src="${escapeHtml(img)}" class="w-full max-h-48 object-contain" alt="${escapeHtml(title)}">
+                   </div>`
+                : '';
             showRetroMessage(`
                 <div class="text-left space-y-3">
-                    <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-retro-gold/15">
-                        <img src="${img}" alt="${title}" class="w-full h-full object-cover">
-                    </div>
+                    ${imgHtml}
                     <div>
-                        <h4 class="text-xs font-bold text-white font-serif">${title}</h4>
-                        <span class="text-[10px] text-gray-400 font-serif">制作者: ${author}</span>
+                        <h4 class="text-xs font-bold text-white font-serif">${escapeHtml(title)}</h4>
+                        <span class="text-[10px] text-gray-400 font-serif">制作者: ${escapeHtml(author)}</span>
                     </div>
                     <div class="h-[1px] bg-retro-gold/15"></div>
-                    <p class="text-[11px] text-gray-300 leading-relaxed font-serif">
-                        ${desc}
+                    <p class="text-[11px] text-gray-300 leading-relaxed font-serif whitespace-pre-wrap">
+                        ${escapeHtml(desc)}
                     </p>
                 </div>
             `);
