@@ -12,7 +12,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Noto+Serif+SC:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- Custom Retro Themes and Layout Config -->
     <script>
         tailwind.config = {
@@ -114,7 +116,7 @@
             perspective: 800px;
         }
         .door-frame-bg {
-            background: radial-gradient(circle at center, #421115 0%, #0d0405 100%);
+            background: radial-gradient(circle at center, #8b6914 0%, #3a2020 100%);
         }
         .door-leaf {
             transform-origin: left center;
@@ -124,7 +126,7 @@
         }
         .door-leaf.open {
             transform: rotateY(-115deg);
-            box-shadow: 12px 0 24px rgba(0, 0, 0, 0.8);
+            box-shadow: 12px 0 24px rgba(0, 0, 0, 0.3);
         }
         .door-glass {
             background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.03) 100%);
@@ -234,14 +236,27 @@
         <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.png'); background-size: cover; background-position: center;">
             <div class="absolute bottom-[35%] left-1/2 -translate-x-1/2 text-center">
                 <button onclick="startImmersiveExperience()" class="text-lg font-bold tracking-[0.3em] active:scale-95 transition-all duration-300 animate-neon-flicker">
-                    <i class="fa-solid fa-ticket"></i> 进入剧院
+                    <i class="fa-solid fa-ticket"></i> 进入
                 </button>
             </div>
         </div>
 
+        <!-- Page Transition Overlay -->
+        <div id="transitionOverlay" class="fixed inset-0 z-[200] bg-black pointer-events-none" style="opacity: 0; transition: opacity 0.3s ease;"></div>
+
         <!-- TOP STATUS MARQUEE -->
         <header id="theaterHeader" class="hidden w-full bg-retro-darkwood/95 border-b border-retro-gold/40 py-2.5 px-4 z-40 relative flex justify-between items-center gap-2">
             <div class="flex items-center gap-3">
+                <div id="headerAvatar" class="w-8 h-8 rounded-full bg-retro-burgundy border border-retro-gold/60 flex items-center justify-center text-white text-xs font-bold font-serif overflow-hidden">霏</div>
+                <div class="flex flex-col">
+                    <span id="headerUserName" class="text-retro-gold text-xs font-bold font-serif">未登录</span>
+                    <span id="headerUserAccount" class="text-gray-500 text-[9px] font-mono"></span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button type="button" id="headerLogoutBtn" onclick="handleLogout()" class="hidden px-2 py-1 bg-black/40 border border-retro-gold/30 text-retro-gold text-[9px] rounded active:scale-95 transition-all font-mono">
+                    <i class="fa-solid fa-right-from-bracket"></i> 退出
+                </button>
             </div>
         </header>
 
@@ -264,8 +279,8 @@
                     
                     <div class="flex justify-center gap-1 my-0.5">
                         <span class="w-1.5 h-1.5 rounded-full bg-retro-neonred animate-ping"></span>
-                        <span class="text-xl sm:text-3xl font-display font-black text-retro-gold tracking-wider animate-neon-flicker" style="text-shadow: 0 0 4px #D4AF37, 0 0 8px #b8860b;">
-                            红霞影剧院
+                        <span onclick="navigateTo('intro')" class="cursor-pointer text-xl sm:text-3xl font-display font-black text-retro-gold tracking-wider animate-neon-flicker hover:scale-105 transition-transform" style="text-shadow: 0 0 4px #D4AF37, 0 0 8px #b8860b;">
+                            影剧院大门
                         </span>
                     </div>
                 </div>
@@ -506,7 +521,7 @@
                     <div onclick="enterLobbyRoom('materials')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            MATERIALS • A01
+                            MATERIALS • 101
                         </div>
 
                         <!-- Door Frame & Portal -->
@@ -552,7 +567,7 @@
                     <div onclick="enterLobbyRoom('shop')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            SHOP • A02
+                            SHOP • 102
                         </div>
 
                         <!-- Door Frame & Portal -->
@@ -924,16 +939,16 @@
                     <div onclick="enterSubDept('director')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            DIRECTOR • 101
+                            DIRECTOR • 201
                         </div>
                         
                         <!-- 3D Door Frame & Portal -->
-                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#3a1518] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]">
                             <!-- Glow Behind Door (Room interior lighting) -->
                             <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
                                 <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
                             </div>
-                            
+
                             <!-- Detailed Door Leaf -->
                             <div id="door-leaf-director" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
                                 <!-- Top Arch Glass Window -->
@@ -945,17 +960,8 @@
                                     <i class="fa-solid fa-video text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
                                 </div>
                                 
-                                <!-- Recessed Wood Moldings -->
-                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
-                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
-                                        📽️
-                                    </div>
-                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
-                                        <!-- Brass Kick Plate at bottom of door -->
-                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
-                                    </div>
-                                </div>
-
+                                
+                                
                                 <!-- Polished Brass Handle / Doorknob with keyhole -->
                                 <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
                                     <!-- Backplate -->
@@ -974,16 +980,16 @@
                     <div onclick="enterSubDept('writer')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            WRITER • 102
+                            WRITER • 202
                         </div>
                         
                         <!-- 3D Door Frame & Portal -->
-                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#3a1518] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]">
                             <!-- Glow Behind Door (Room interior lighting) -->
                             <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
                                 <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
                             </div>
-                            
+
                             <!-- Detailed Door Leaf -->
                             <div id="door-leaf-writer" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
                                 <!-- Top Arch Glass Window -->
@@ -995,16 +1001,7 @@
                                     <i class="fa-solid fa-microphone-lines text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
                                 </div>
                                 
-                                <!-- Recessed Wood Moldings -->
-                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
-                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
-                                        ✍️
-                                    </div>
-                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
-                                        <!-- Brass Kick Plate at bottom of door -->
-                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
-                                    </div>
-                                </div>
+                                
 
                                 <!-- Polished Brass Handle / Doorknob with keyhole -->
                                 <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
@@ -1023,16 +1020,16 @@
                     <div onclick="enterSubDept('rehearsal')" class="group relative flex flex-col items-center bg-[#1c0d0f]/70 backdrop-blur-sm border border-retro-gold/20 hover:border-retro-gold/80 p-2.5 sm:p-3 rounded-lg cursor-pointer transition-all duration-300 door-perspective overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
                         <!-- Top Brass Plate header -->
                         <div class="w-full text-center bg-gradient-to-b from-[#b8952b] to-[#7c6218] text-black font-bold font-mono text-[7px] py-0.5 rounded shadow-inner truncate tracking-widest uppercase">
-                            ACTOR • 103
+                            ACTOR • 203
                         </div>
                         
                         <!-- 3D Door Frame & Portal -->
-                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#120708] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.9)]">
+                        <div class="w-14 sm:w-16 h-28 sm:h-32 bg-[#3a1518] border-2 border-retro-gold/40 rounded-t-lg mt-3.5 relative overflow-hidden flex items-center justify-center door-frame-bg shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]">
                             <!-- Glow Behind Door (Room interior lighting) -->
                             <div class="absolute inset-0 bg-gradient-to-t from-retro-gold/40 via-retro-gold/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center">
                                 <div class="w-3 h-3 rounded-full bg-retro-gold/70 blur-xs animate-pulse"></div>
                             </div>
-                            
+
                             <!-- Detailed Door Leaf (the physical door swinging open) -->
                             <div id="door-leaf-rehearsal" class="door-leaf absolute inset-0 bg-gradient-to-b from-[#401a1e] to-[#220c0f] border-t-2 border-r border-l border-retro-gold/20 rounded-t-md p-1 flex flex-col justify-between items-center z-10 shadow-[2px_2px_10px_rgba(0,0,0,0.6)]">
                                 <!-- Top Arch Glass Window -->
@@ -1044,18 +1041,7 @@
                                     <i class="fa-solid fa-music text-[10px] sm:text-xs text-retro-gold/50 group-hover:text-retro-gold transition-colors duration-300 z-10"></i>
                                 </div>
                                 
-                                <!-- Recessed Wood Moldings -->
-                                <div class="w-full flex-1 mt-1.5 flex flex-col gap-1 px-0.5">
-                                    <!-- Mid wood panel -->
-                                    <div class="w-full h-5 rounded border border-black/40 bg-[#2d1114] door-panel flex items-center justify-center text-[7px] text-retro-gold/40 select-none">
-                                        🎬
-                                    </div>
-                                    <!-- Lower wood panel -->
-                                    <div class="w-full h-7 rounded border border-black/40 bg-[#2d1114] door-panel relative">
-                                        <!-- Brass Kick Plate at bottom of door -->
-                                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-retro-gold to-[#8f711c] border-t border-black/20 rounded-b"></div>
-                                    </div>
-                                </div>
+                                
 
                                 <!-- Polished Brass Handle / Doorknob with keyhole -->
                                 <div class="absolute top-[52%] right-1 sm:right-1.5 flex flex-col items-center z-20">
@@ -1126,9 +1112,7 @@
                                 <i class="fa-solid fa-forward-step"></i>
                             </button>
                         </div>
-                        <div class="text-[8px] text-gray-500">
-                            * 音乐源自浏览器模拟电子唱针发声
-                        </div>
+                        
                     </div>
 
                 </div>
@@ -1297,17 +1281,63 @@
                 
                 <!-- Left: Profile & Check-in check -->
                 <div class="md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-start space-y-4">
-                    <!-- User profile registration -->
-                    <div class="bg-black/50 border border-retro-gold/20 p-3 rounded text-xs space-y-2">
-                        <div class="flex items-center gap-1.5 text-retro-gold font-bold">
-                            <i class="fa-solid fa-address-card"></i> 登记打卡影院护照
+                    <!-- PROFILE CONTAINER: Unauthenticated View -->
+                    <div id="authPanel" class="bg-black/50 border border-retro-gold/20 p-3 rounded text-xs space-y-2">
+                        <div class="flex border-b border-retro-gold/20 mb-2">
+                            <button type="button" id="tabLogin" onclick="switchAuthTab('login')" class="flex-1 py-1.5 text-[11px] font-bold text-retro-gold border-b-2 border-retro-neonred transition-all">登入 Login</button>
+                            <button type="button" id="tabRegister" onclick="switchAuthTab('register')" class="flex-1 py-1.5 text-[11px] font-bold text-gray-500 border-b-2 border-transparent transition-all">登记 Register</button>
                         </div>
-                        <div class="flex gap-2">
-                            <input type="text" id="usernameInput" placeholder="输入您的观众代号/昵称" class="flex-1 bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
-                            <button onclick="saveUserProfile()" class="px-3 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all">
-                                确定
-                            </button>
+
+                        <!-- Login Form -->
+                        <div id="formLogin" class="space-y-2">
+                            <input type="text" id="loginAccount" placeholder="账号" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            <input type="password" id="loginPassword" placeholder="密码" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            <button type="button" onclick="handleLogin()" class="w-full py-1.5 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all font-bold">登录</button>
                         </div>
+
+                        <!-- Register Form (hidden by default) -->
+                        <div id="formRegister" class="hidden space-y-2">
+                            <input type="text" id="regNickname" placeholder="昵称（观众代号）" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            <input type="text" id="regAccount" placeholder="账号（英文或数字，登录用）" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-mono">
+                            <input type="password" id="regPassword" placeholder="密码（至少4位）" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            <!-- Avatar preview -->
+                            <div class="flex items-center gap-2 pt-1">
+                                <div id="regAvatarPreview" class="w-10 h-10 rounded-full bg-retro-burgundy border border-retro-gold/40 flex items-center justify-center text-white font-bold font-serif text-base shrink-0">霏</div>
+                                <label for="avatarFileInput" class="cursor-pointer text-[10px] text-retro-gold underline hover:text-retro-neonred transition-colors">
+                                    <i class="fa-solid fa-camera"></i> 上传头像（可选）
+                                </label>
+                                <input type="file" id="avatarFileInput" accept="image/*" onchange="previewAvatarFile()" class="hidden">
+                            </div>
+                            <button type="button" onclick="handleRegister()" class="w-full py-1.5 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all font-bold">注册登记</button>
+                        </div>
+                    </div>
+
+                    <!-- PROFILE CONTAINER: Authenticated View (ticket stub design) -->
+                    <div id="profilePanel" class="hidden bg-black/50 border border-retro-gold/20 p-3 rounded text-xs space-y-3">
+                        <div class="flex items-center gap-1.5 text-retro-gold font-bold border-b border-retro-gold/20 pb-2">
+                            <i class="fa-solid fa-ticket"></i> 红霞剧场纪念票
+                        </div>
+                        <div class="bg-[#faedd9] rounded border-2 border-dashed border-[#58111A] p-3 space-y-2">
+                            <div class="flex items-center gap-3">
+                                <div id="profileAvatar" class="w-12 h-12 rounded-full bg-retro-burgundy border-2 border-retro-gold flex items-center justify-center text-white font-bold font-serif text-xl overflow-hidden shrink-0">霏</div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center gap-1">
+                                        <span id="profileNickname" class="text-[#2a1317] font-bold font-serif text-sm truncate">---</span>
+                                        <span class="text-[7px] bg-retro-burgundy text-retro-gold px-1 py-0.5 rounded font-mono uppercase shrink-0">ADMIT ONE</span>
+                                    </div>
+                                    <div class="text-[8px] text-[#58111A]/60 font-mono mt-0.5">
+                                        ACCOUNT: <span id="profileAccount">---</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center pt-1 border-t border-[#58111A]/20">
+                                <span class="text-[7px] text-[#58111A]/50 font-mono uppercase">MEMBER SINCE</span>
+                                <span id="profileCreatedAt" class="text-[8px] text-[#58111A]/70 font-mono">---</span>
+                            </div>
+                        </div>
+                        <button type="button" onclick="showEditProfileModal()" class="w-full py-1.5 border border-retro-gold/40 text-retro-gold text-[10px] rounded active:scale-95 transition-all flex items-center justify-center gap-1 hover:bg-retro-burgundy/40">
+                            <i class="fa-solid fa-pen-to-square"></i> 修改昵称或头像
+                        </button>
                     </div>
 
                     <!-- Tour Stop checklist and Achievement counts -->
@@ -1525,13 +1555,43 @@
     <!-- ============================================== -->
     <div id="retroMessageModal" class="hidden fixed inset-0 bg-black/80 z-[120] flex items-center justify-center p-4">
         <div class="w-full max-w-xs bg-[#1a0f11] border border-retro-gold p-4 rounded shadow-2xl relative text-center space-y-3">
-            <div class="text-retro-gold text-[10px] font-mono uppercase tracking-widest">红霞通知 MESSAGE</div>
+            <div class="text-retro-gold text-[10px] font-mono uppercase tracking-widest">通知 MESSAGE</div>
             <p id="retroMessageText" class="text-xs text-white font-serif leading-relaxed px-2">
                 通知内容
             </p>
             <button onclick="closeRetroMessage()" class="px-5 py-1 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all">
-                好的 OK
+                OK
             </button>
+        </div>
+    </div>
+
+    <!-- EDIT PROFILE MODAL -->
+    <div id="editProfileModal" class="hidden fixed inset-0 bg-black/90 z-[130] flex items-center justify-center p-4">
+        <div class="w-full max-w-xs bg-[#1a0f11] border border-retro-gold p-4 rounded shadow-2xl relative space-y-3">
+            <button type="button" onclick="closeEditProfileModal()" class="absolute top-3 right-3 text-retro-gold hover:text-white text-base">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-retro-gold text-[10px] font-mono uppercase tracking-widest text-center">编辑资料 EDIT</div>
+
+            <div class="space-y-2.5">
+                <div class="flex items-center gap-3 justify-center">
+                    <div id="editAvatarPreview" class="w-14 h-14 rounded-full bg-retro-burgundy border-2 border-retro-gold flex items-center justify-center text-white font-bold font-serif text-2xl overflow-hidden">霏</div>
+                </div>
+                <label for="editAvatarInput" class="cursor-pointer block text-center text-[10px] text-retro-gold underline hover:text-retro-neonred transition-colors">
+                    <i class="fa-solid fa-camera"></i> 更换头像（自动转 WebP）
+                </label>
+                <input type="file" id="editAvatarInput" accept="image/*" onchange="previewEditAvatar()" class="hidden">
+
+                <input type="text" id="editNickname" placeholder="昵称" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-sm focus:outline-none focus:border-retro-neonred font-serif">
+
+                <div class="text-[9px] text-gray-500 text-center">
+                    账号不可修改: <span id="editAccountDisplay" class="text-retro-gold font-mono"></span>
+                </div>
+
+                <button type="button" onclick="handleUpdateProfile()" class="w-full py-2 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all font-bold">
+                    保存更改
+                </button>
+            </div>
         </div>
     </div>
 
@@ -1539,10 +1599,43 @@
     <!-- APPLICATION JAVASCRIPT STATE & LOGIC            -->
     <!-- ============================================== -->
     <script>
+        // ==============================================
+        // SUPABASE CLIENT INITIALIZATION
+        // ==============================================
+        const SUPABASE_URL = 'https://entrskyaiverbrookvcx.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_sM_9QvuN874njfz07CLKsw_Ij1X2EQS';
+        let supabaseClient = null;
+
+        (function initSupabase() {
+            if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            } else {
+                console.error('[Auth] Supabase SDK not loaded. Auth disabled.');
+            }
+        })();
+
+        function isSupabaseReady() {
+            return supabaseClient !== null;
+        }
+
+        function getDefaultAvatarChar(nickname) {
+            return (nickname && nickname.trim()) ? nickname.trim()[0] : '霏';
+        }
+
+        // ==============================================
         // App Core State
+        // ==============================================
         const STATE = {
-            currentUser: "红霞漫步人",
-            checkedCities: [0, 1, 2], // Default check-ins
+            // Auth
+            isLoggedIn: false,
+            userId: null,
+            currentUser: "红霞漫步人",     // nickname
+            currentAccount: "",            // account name for login
+            currentAvatarUrl: null,        // avatar URL from Supabase Storage
+            currentCreatedAt: null,        // registration date
+
+            // Check-in data
+            checkedCities: [0, 1, 2],
             activeScreen: "intro",
             activeDeptSubView: "hallway",
             activeLobbySubView: "hallway",
@@ -1552,12 +1645,409 @@
             ambientPlaying: false,
             currentBgmIndex: 0,
             bgmPlaying: false,
-            viewedStops: [0], // Start with first stop viewed
+            viewedStops: [0],
             hasPlayedMusic: false,
             hasSentPostcard: false,
             hasPostedCraft: false,
             unlockedAchievements: []
         };
+
+        // ==============================================
+        // Scoped localStorage helpers (per-account)
+        // ==============================================
+        function lsKey(baseKey) {
+            const acct = STATE.currentAccount || 'default';
+            return `hongxia_${acct}_${baseKey}`;
+        }
+        function lsGet(key) {
+            return localStorage.getItem(lsKey(key));
+        }
+        function lsSet(key, value) {
+            localStorage.setItem(lsKey(key), value);
+        }
+        function lsRemove(key) {
+            localStorage.removeItem(lsKey(key));
+        }
+
+        // ==============================================
+        // AUTH FUNCTIONS
+        // ==============================================
+
+        function convertToWebP(file) {
+            return new Promise((resolve, reject) => {
+                if (!file || !file.type.startsWith('image/')) {
+                    return reject(new Error('Not an image file'));
+                }
+                const img = new Image();
+                const url = URL.createObjectURL(file);
+                img.onload = function() {
+                    URL.revokeObjectURL(url);
+                    const MAX_SIZE = 200;
+                    let w = img.naturalWidth, h = img.naturalHeight;
+                    if (w > MAX_SIZE || h > MAX_SIZE) {
+                        const ratio = Math.min(MAX_SIZE / w, MAX_SIZE / h);
+                        w = Math.round(w * ratio);
+                        h = Math.round(h * ratio);
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, w, h);
+                    canvas.toBlob((blob) => {
+                        if (blob) resolve(blob);
+                        else reject(new Error('Canvas toBlob returned null'));
+                    }, 'image/webp', 0.8);
+                };
+                img.onerror = function() {
+                    URL.revokeObjectURL(url);
+                    reject(new Error('Failed to load image'));
+                };
+                img.src = url;
+            });
+        }
+
+        async function uploadAvatar(webpBlob, userId) {
+            const fileName = `${userId}_${Date.now()}.webp`;
+            const { data, error } = await supabaseClient.storage
+                .from('avatars')
+                .upload(fileName, webpBlob, {
+                    contentType: 'image/webp',
+                    cacheControl: '3600',
+                    upsert: false
+                });
+            if (error) throw new Error('Upload failed: ' + error.message);
+            const { data: urlData } = supabaseClient.storage.from('avatars').getPublicUrl(fileName);
+            return urlData.publicUrl;
+        }
+
+        async function handleRegister() {
+            if (!isSupabaseReady()) { showRetroMessage('系统连接失败，请稍后重试'); return; }
+            const nickname = document.getElementById('regNickname').value.trim();
+            const account  = document.getElementById('regAccount').value.trim();
+            const password = document.getElementById('regPassword').value;
+            if (!nickname) { showRetroMessage('请输入昵称'); return; }
+            if (!account)  { showRetroMessage('请输入账号'); return; }
+            if (!password || password.length < 4) { showRetroMessage('密码至少4位'); return; }
+            if (!/^[a-zA-Z0-9_]{3,30}$/.test(account)) {
+                showRetroMessage('账号只支持英文、数字、下划线，3-30位'); return;
+            }
+            try {
+                const { data, error } = await supabaseClient.rpc('register_user', {
+                    p_account: account, p_password: password, p_nickname: nickname
+                });
+                if (error) throw error;
+                if (!data || data.length === 0) throw new Error('Registration failed');
+                const user = Array.isArray(data) ? data[0] : data;
+                let avatarUrl = null;
+                const fileInput = document.getElementById('avatarFileInput');
+                if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                    try {
+                        const webpBlob = await convertToWebP(fileInput.files[0]);
+                        avatarUrl = await uploadAvatar(webpBlob, user.id);
+                        await supabaseClient.rpc('update_profile', {
+                            p_user_id: user.id, p_nickname: nickname, p_avatar_url: avatarUrl
+                        });
+                    } catch (uploadErr) {
+                        console.warn('[Auth] Avatar upload failed:', uploadErr);
+                    }
+                }
+                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: avatarUrl, createdAt: user.created_at });
+                localStorage.setItem('hongxia_last_account', account);
+                playShortBeep(720, 0.08);
+                showRetroMessage('登记成功！欢迎，' + nickname + '。');
+                checkAchievements();
+                syncAuthUI();
+            } catch (err) {
+                console.error('[Auth] Register error:', err);
+                if (err.message && err.message.includes('already exists')) {
+                    showRetroMessage('该账号已被注册，请更换账号');
+                } else {
+                    showRetroMessage('注册失败: ' + (err.message || '未知错误'));
+                }
+            }
+        }
+
+        async function handleLogin() {
+            if (!isSupabaseReady()) { showRetroMessage('系统连接失败，请稍后重试'); return; }
+            const account  = document.getElementById('loginAccount').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            if (!account)  { showRetroMessage('请输入账号'); return; }
+            if (!password) { showRetroMessage('请输入密码'); return; }
+            try {
+                const { data, error } = await supabaseClient.rpc('login_user', {
+                    p_account: account, p_password: password
+                });
+                if (error) throw error;
+                if (!data || data.length === 0) throw new Error('Invalid credentials');
+                const user = Array.isArray(data) ? data[0] : data;
+                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: user.avatar_url, createdAt: user.created_at });
+                localStorage.setItem('hongxia_last_account', account);
+                playShortBeep(720, 0.08);
+                showRetroMessage('欢迎回来，' + user.nickname + '！');
+                checkAchievements();
+                syncAuthUI();
+            } catch (err) {
+                console.error('[Auth] Login error:', err);
+                if (err.message && err.message.includes('Invalid account or password')) {
+                    showRetroMessage('账号或密码错误');
+                } else {
+                    showRetroMessage('登录失败: ' + (err.message || '未知错误'));
+                }
+            }
+        }
+
+        function setSession(userData) {
+            STATE.isLoggedIn = true;
+            STATE.userId = userData.userId;
+            STATE.currentUser = userData.nickname;
+            STATE.currentAccount = userData.account;
+            STATE.currentAvatarUrl = userData.avatarUrl;
+            STATE.currentCreatedAt = userData.createdAt;
+            const sessionData = {
+                userId: userData.userId, nickname: userData.nickname,
+                account: userData.account, avatarUrl: userData.avatarUrl,
+                createdAt: userData.createdAt
+            };
+            localStorage.setItem('hongxia_session', JSON.stringify(sessionData));
+            loadUserCheckinData();
+            updateHeaderUserDisplay();
+        }
+
+        function handleLogout() {
+            STATE.isLoggedIn = false;
+            STATE.userId = null;
+            STATE.currentUser = '红霞漫步人';
+            STATE.currentAccount = '';
+            STATE.currentAvatarUrl = null;
+            STATE.currentCreatedAt = null;
+            localStorage.removeItem('hongxia_session');
+            STATE.checkedCities = [0, 1, 2];
+            STATE.unlockedAchievements = [];
+            STATE.viewedStops = [0];
+            STATE.hasPlayedMusic = false;
+            STATE.hasSentPostcard = false;
+            STATE.hasPostedCraft = false;
+            playShortBeep(400, 0.08);
+            showRetroMessage('已退出登录，数据已保存到本地。');
+            syncAuthUI();
+            syncChecklistVisuals();
+            syncMapDotsVisuals();
+            checkAchievements();
+            updateHeaderUserDisplay();
+        }
+
+        async function handleUpdateProfile() {
+            if (!isSupabaseReady() || !STATE.isLoggedIn) return;
+            const newNickname = document.getElementById('editNickname').value.trim();
+            if (!newNickname) { showRetroMessage('昵称不能为空'); return; }
+            try {
+                let avatarUrl = STATE.currentAvatarUrl;
+                const fileInput = document.getElementById('editAvatarInput');
+                if (fileInput && fileInput.files && fileInput.files.length > 0) {
+                    try {
+                        const webpBlob = await convertToWebP(fileInput.files[0]);
+                        avatarUrl = await uploadAvatar(webpBlob, STATE.userId);
+                    } catch (uploadErr) {
+                        console.warn('[Auth] Edit avatar upload failed:', uploadErr);
+                    }
+                }
+                const { data, error } = await supabaseClient.rpc('update_profile', {
+                    p_user_id: STATE.userId, p_nickname: newNickname, p_avatar_url: avatarUrl
+                });
+                if (error) throw error;
+                STATE.currentUser = newNickname;
+                STATE.currentAvatarUrl = avatarUrl;
+                const sessionData = JSON.parse(localStorage.getItem('hongxia_session') || '{}');
+                sessionData.nickname = newNickname;
+                sessionData.avatarUrl = avatarUrl;
+                localStorage.setItem('hongxia_session', JSON.stringify(sessionData));
+                updateHeaderUserDisplay();
+                syncAuthUI();
+                closeEditProfileModal();
+                playShortBeep(720, 0.08);
+                showRetroMessage('资料更新成功！');
+            } catch (err) {
+                console.error('[Auth] Update profile error:', err);
+                showRetroMessage('更新失败: ' + (err.message || '未知错误'));
+            }
+        }
+
+        async function validateSession() {
+            const sessionStr = localStorage.getItem('hongxia_session');
+            if (!sessionStr) return false;
+            try {
+                const session = JSON.parse(sessionStr);
+                if (!session.userId) return false;
+                if (!isSupabaseReady()) {
+                    setSessionFromLocal(session);
+                    return true;
+                }
+                const { data, error } = await supabaseClient.rpc('get_profile', { p_user_id: session.userId });
+                if (error || !data || data.length === 0) {
+                    localStorage.removeItem('hongxia_session');
+                    return false;
+                }
+                const user = Array.isArray(data) ? data[0] : data;
+                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: user.avatar_url, createdAt: user.created_at });
+                return true;
+            } catch (err) {
+                console.warn('[Auth] Session validation failed, falling back to localStorage:', err);
+                const session = JSON.parse(sessionStr);
+                setSessionFromLocal(session);
+                return false;
+            }
+        }
+
+        function setSessionFromLocal(session) {
+            STATE.isLoggedIn = true;
+            STATE.userId = session.userId;
+            STATE.currentUser = session.nickname || '红霞漫步人';
+            STATE.currentAccount = session.account || '';
+            STATE.currentAvatarUrl = session.avatarUrl || null;
+            STATE.currentCreatedAt = session.createdAt || null;
+            loadUserCheckinData();
+        }
+
+        function loadUserCheckinData() {
+            if (!STATE.currentAccount) return;
+            const checks = lsGet('checks');
+            if (checks) { try { STATE.checkedCities = JSON.parse(checks); } catch(e) { STATE.checkedCities = [0,1,2]; } }
+            const viewed = lsGet('viewed_stops');
+            if (viewed) { try { STATE.viewedStops = JSON.parse(viewed); } catch(e) { STATE.viewedStops = [0]; } }
+            else { STATE.viewedStops = [0]; }
+            STATE.hasPlayedMusic = lsGet('played_music') === 'true';
+            STATE.hasSentPostcard = lsGet('sent_postcard') === 'true';
+            STATE.hasPostedCraft = lsGet('posted_craft') === 'true';
+            const ach = lsGet('achievements');
+            if (ach) { try { STATE.unlockedAchievements = JSON.parse(ach); } catch(e) { STATE.unlockedAchievements = []; } }
+            else { STATE.unlockedAchievements = []; }
+        }
+
+        // ==============================================
+        // UI SYNC FUNCTIONS
+        // ==============================================
+
+        function syncAuthUI() {
+            const authPanel = document.getElementById('authPanel');
+            const profilePanel = document.getElementById('profilePanel');
+            const logoutBtn = document.getElementById('headerLogoutBtn');
+            const headerAccount = document.getElementById('headerUserAccount');
+
+            if (STATE.isLoggedIn) {
+                if (authPanel) authPanel.classList.add('hidden');
+                if (profilePanel) profilePanel.classList.remove('hidden');
+                if (logoutBtn) logoutBtn.classList.remove('hidden');
+                if (headerAccount) headerAccount.innerText = '@' + STATE.currentAccount;
+
+                const nickEl = document.getElementById('profileNickname');
+                const acctEl = document.getElementById('profileAccount');
+                const avatarEl = document.getElementById('profileAvatar');
+                const createdEl = document.getElementById('profileCreatedAt');
+                if (nickEl) nickEl.innerText = STATE.currentUser;
+                if (acctEl) acctEl.innerText = STATE.currentAccount;
+                if (createdEl && STATE.currentCreatedAt) {
+                    createdEl.innerText = new Date(STATE.currentCreatedAt).toLocaleDateString('zh-CN');
+                }
+                const avatarChar = getDefaultAvatarChar(STATE.currentUser);
+                if (avatarEl) {
+                    if (STATE.currentAvatarUrl) {
+                        avatarEl.style.backgroundImage = 'url(' + STATE.currentAvatarUrl + ')';
+                        avatarEl.style.backgroundSize = 'cover';
+                        avatarEl.style.backgroundPosition = 'center';
+                        avatarEl.innerText = '';
+                    } else {
+                        avatarEl.style.backgroundImage = '';
+                        avatarEl.innerText = avatarChar;
+                    }
+                }
+            } else {
+                if (authPanel) authPanel.classList.remove('hidden');
+                if (profilePanel) profilePanel.classList.add('hidden');
+                if (logoutBtn) logoutBtn.classList.add('hidden');
+                if (headerAccount) headerAccount.innerText = '';
+                switchAuthTab('login');
+                const lastAccount = localStorage.getItem('hongxia_last_account');
+                if (lastAccount) {
+                    const loginInput = document.getElementById('loginAccount');
+                    if (loginInput) loginInput.value = lastAccount;
+                }
+            }
+        }
+
+        function switchAuthTab(tab) {
+            const tabLogin = document.getElementById('tabLogin');
+            const tabRegister = document.getElementById('tabRegister');
+            const formLogin = document.getElementById('formLogin');
+            const formRegister = document.getElementById('formRegister');
+            if (tab === 'login') {
+                tabLogin.className = 'flex-1 py-1.5 text-[11px] font-bold text-retro-gold border-b-2 border-retro-neonred transition-all';
+                tabRegister.className = 'flex-1 py-1.5 text-[11px] font-bold text-gray-500 border-b-2 border-transparent transition-all';
+                formLogin.classList.remove('hidden');
+                formRegister.classList.add('hidden');
+            } else {
+                tabRegister.className = 'flex-1 py-1.5 text-[11px] font-bold text-retro-gold border-b-2 border-retro-neonred transition-all';
+                tabLogin.className = 'flex-1 py-1.5 text-[11px] font-bold text-gray-500 border-b-2 border-transparent transition-all';
+                formRegister.classList.remove('hidden');
+                formLogin.classList.add('hidden');
+            }
+        }
+
+        function previewAvatarFile() {
+            const fileInput = document.getElementById('avatarFileInput');
+            const preview = document.getElementById('regAvatarPreview');
+            if (!fileInput.files || !fileInput.files[0] || !preview) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.style.backgroundImage = 'url(' + e.target.result + ')';
+                preview.style.backgroundSize = 'cover';
+                preview.style.backgroundPosition = 'center';
+                preview.innerText = '';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function previewEditAvatar() {
+            const fileInput = document.getElementById('editAvatarInput');
+            const preview = document.getElementById('editAvatarPreview');
+            if (!fileInput.files || !fileInput.files[0] || !preview) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.style.backgroundImage = 'url(' + e.target.result + ')';
+                preview.style.backgroundSize = 'cover';
+                preview.style.backgroundPosition = 'center';
+                preview.innerText = '';
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function showEditProfileModal() {
+            const mod = document.getElementById('editProfileModal');
+            const nickInput = document.getElementById('editNickname');
+            const avatarPrev = document.getElementById('editAvatarPreview');
+            const acctDisplay = document.getElementById('editAccountDisplay');
+            if (nickInput) nickInput.value = STATE.currentUser;
+            if (acctDisplay) acctDisplay.innerText = STATE.currentAccount;
+            if (avatarPrev) {
+                if (STATE.currentAvatarUrl) {
+                    avatarPrev.style.backgroundImage = 'url(' + STATE.currentAvatarUrl + ')';
+                    avatarPrev.style.backgroundSize = 'cover';
+                    avatarPrev.style.backgroundPosition = 'center';
+                    avatarPrev.innerText = '';
+                } else {
+                    avatarPrev.style.backgroundImage = '';
+                    avatarPrev.innerText = getDefaultAvatarChar(STATE.currentUser);
+                }
+            }
+            const fileInput = document.getElementById('editAvatarInput');
+            if (fileInput) fileInput.value = '';
+            if (mod) mod.classList.remove('hidden');
+        }
+
+        function closeEditProfileModal() {
+            const mod = document.getElementById('editProfileModal');
+            if (mod) mod.classList.add('hidden');
+        }
 
         const BGM_LIST = [
             { name: "红霞剧场", file: "bgm/bgm1.mp3" },
@@ -1719,7 +2209,7 @@
                 season: "夏",
                 weather: "",
                 venue: "合肥 ・ 场地待定",
-                poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
+                poster: "https://placehold.co/600x800/181615/D4AF37?text=Hefei+0816",
                 status: "待开演",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"]
             },
@@ -1820,24 +2310,27 @@
             }
         ];
 
-        const SEEDED_MAILS = [
-            { id: 1, sender: "胶片收集癖", stamp: "stamp-film", content: "陈婧霏北京站的红海亮起的一瞬间，我好像真的回到了黑白默片的年代，那种美太震撼了，感谢你给我的梦。", date: "2026/07/15" },
-            { id: 2, sender: "深陷蓝莓夜", stamp: "stamp-cherry", content: "上海站兰心大戏院的萨克斯吹得我心碎。感觉自己就是王家卫镜头里那个在走廊尽头等人的孤独角色。", date: "2026/07/16" },
-            { id: 3, sender: "流浪玫瑰", stamp: "stamp-hxia", content: "今晚在红霞影剧院里，我哭得像个小孩。感觉所有的疲惫 and 伪装都被你的声音轻轻拂去了。谢谢你婧霏！", date: "2026/07/17" }
-        ];
+        
 
-        const SEEDED_CRAFTS = [
-            { id: 1, author: "星海手作社", title: "复古红手幅 - 迟到者皆有座", desc: "在广州站场外发放，烫金字体，高克重卡纸。现场凭票根领完即止。", img: "" },
-            { id: 2, author: "电影院幽灵", title: "胶片风打卡自制画报", desc: "上海站专供。融入老唱片和红霞色彩，可用于现场合影打卡。附赠迷你玫瑰贴纸。", img: "" }
-        ];
+        
 
         let audioCtx = null;
         let ambientOsc = null;
         let musicOsc = null;
 
-        window.onload = function() {
-            // Load user state from local storage if available
-            const savedUser = localStorage.getItem('hongxia_username');
+        window.onload = async function() {
+            // First, try to restore session from Supabase
+            await validateSession();
+
+            // Load check-in data for user (scoped by account)
+            if (STATE.isLoggedIn) {
+                loadUserCheckinData();
+            }
+
+            // Fallback: legacy localStorage values if not logged in
+            if (!STATE.isLoggedIn) {
+                // Load user state from local storage if available
+                const savedUser = localStorage.getItem('hongxia_username');
             if (savedUser) {
                 STATE.currentUser = savedUser;
                 const usernameInput = document.getElementById('usernameInput');
@@ -1882,12 +2375,14 @@
             } else {
                 STATE.unlockedAchievements = [];
             }
+            } // end if (!STATE.isLoggedIn)
 
             initInteractiveDBs();
             setInterval(updateClock, 1000);
             setInterval(updateTourCountdown, 1000);
             updateTourCountdown();
 
+            syncAuthUI();
             syncMapDotsVisuals();
             syncChecklistVisuals();
             renderPigeonholes();
@@ -1936,37 +2431,56 @@
         }
 
         function navigateTo(screenId) {
-            document.getElementById('mainMapScreen').style.display = 'none';
-            document.getElementById('mailroom').style.display = 'none';
-            document.getElementById('lobby').style.display = 'none';
-            document.getElementById('grand-cinema').style.display = 'none';
-            document.getElementById('business-dept').style.display = 'none';
-            const boxOfficeEl = document.getElementById('box-office');
-            if (boxOfficeEl) boxOfficeEl.style.display = 'none';
+            const overlay = document.getElementById('transitionOverlay');
 
-            STATE.activeScreen = screenId;
+            // Phase 1: fade to black
+            overlay.style.opacity = '1';
 
-            if (screenId === 'main-map') {
-                document.getElementById('mainMapScreen').style.display = 'flex';
-                syncMapDotsVisuals();
-            } else if (screenId === 'mailroom') {
-                document.getElementById('mailroom').style.display = 'flex';
-                renderPigeonholes();
-            } else if (screenId === 'lobby') {
-                document.getElementById('lobby').style.display = 'flex';
-                showLobbySubView('hallway');
-                renderCrafts();
-            } else if (screenId === 'grand-cinema') {
-                document.getElementById('grand-cinema').style.display = 'flex';
-                renderProjectorStop();
-            } else if (screenId === 'business-dept') {
-                document.getElementById('business-dept').style.display = 'flex';
-                showDeptSubView('hallway');
-            } else if (screenId === 'box-office') {
-                if (boxOfficeEl) boxOfficeEl.style.display = 'flex';
-                syncChecklistVisuals();
-                syncMapDotsVisuals();
-            }
+            setTimeout(() => {
+                // Phase 2: swap screens behind the black overlay
+                document.getElementById('mainMapScreen').style.display = 'none';
+                document.getElementById('mailroom').style.display = 'none';
+                document.getElementById('lobby').style.display = 'none';
+                document.getElementById('grand-cinema').style.display = 'none';
+                document.getElementById('business-dept').style.display = 'none';
+                const boxOfficeEl = document.getElementById('box-office');
+                if (boxOfficeEl) boxOfficeEl.style.display = 'none';
+
+                STATE.activeScreen = screenId;
+
+                if (screenId === 'intro') {
+                    const introEl = document.getElementById('introScreen');
+                    introEl.style.display = '';
+                    introEl.style.opacity = '1';
+                    document.getElementById('theaterHeader').style.display = 'none';
+                } else if (screenId === 'main-map') {
+                    document.getElementById('mainMapScreen').style.display = 'flex';
+                    document.getElementById('theaterHeader').style.display = 'flex';
+                    syncMapDotsVisuals();
+                } else if (screenId === 'mailroom') {
+                    document.getElementById('mailroom').style.display = 'flex';
+                    renderPigeonholes();
+                } else if (screenId === 'lobby') {
+                    document.getElementById('lobby').style.display = 'flex';
+                    showLobbySubView('hallway');
+                    renderCrafts();
+                } else if (screenId === 'grand-cinema') {
+                    document.getElementById('grand-cinema').style.display = 'flex';
+                    renderProjectorStop();
+                } else if (screenId === 'business-dept') {
+                    document.getElementById('business-dept').style.display = 'flex';
+                    showDeptSubView('hallway');
+                } else if (screenId === 'box-office') {
+                    if (boxOfficeEl) boxOfficeEl.style.display = 'flex';
+                    syncChecklistVisuals();
+                    syncMapDotsVisuals();
+                }
+
+                // Phase 3: fade in from black
+                setTimeout(() => {
+                    overlay.style.opacity = '0';
+                }, 50);
+            }, 300);
         }
 
         function handleDeptBack() {
@@ -2053,7 +2567,7 @@
                 stopMusic();
             } else if (subId === 'rehearsal') {
                 document.getElementById('subDeptRehearsal').style.display = 'grid';
-                deptTitleText.innerText = "🎙️ 演员排练室";
+                deptTitleText.innerText = " 演员排练室";
                 deptSubText.innerText = "RM 101 - Rehearsal Studio";
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出排练`;
                 renderSongLyric();
@@ -2064,7 +2578,7 @@
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出休息`;
             } else if (subId === 'writer') {
                 document.getElementById('subDeptWriter').style.display = 'grid';
-                deptTitleText.innerText = "✍️ 编剧工作室";
+                deptTitleText.innerText = " 编剧工作室";
                 deptSubText.innerText = "RM 103 - Writer's Room";
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 走出工作室`;
             }
@@ -2451,7 +2965,7 @@
             // Record postcard sent achievement
             if (!STATE.hasSentPostcard) {
                 STATE.hasSentPostcard = true;
-                localStorage.setItem('hongxia_sent_postcard', 'true');
+                lsSet('sent_postcard', 'true');
             }
 
             document.getElementById('mailForm').reset();
@@ -2540,7 +3054,7 @@
             // Record craft posted achievement
             if (!STATE.hasPostedCraft) {
                 STATE.hasPostedCraft = true;
-                localStorage.setItem('hongxia_posted_craft', 'true');
+                lsSet('posted_craft', 'true');
             }
 
             document.getElementById('merchForm').reset();
@@ -2575,7 +3089,7 @@
             // Record viewed stop to unlock "read_stops" achievement
             if (STATE.viewedStops && !STATE.viewedStops.includes(STATE.currentShowcaseStop)) {
                 STATE.viewedStops.push(STATE.currentShowcaseStop);
-                localStorage.setItem('hongxia_viewed_stops', JSON.stringify(STATE.viewedStops));
+                lsSet('viewed_stops', JSON.stringify(STATE.viewedStops));
                 checkAchievements();
             }
 
@@ -2782,7 +3296,7 @@
                 // Record play state for "play_vinyl" achievement
                 if (!STATE.hasPlayedMusic) {
                     STATE.hasPlayedMusic = true;
-                    localStorage.setItem('hongxia_played_music', 'true');
+                    lsSet('played_music', 'true');
                     checkAchievements();
                 }
 
@@ -2930,7 +3444,7 @@
                 STATE.checkedCities.push(idx);
             }
             playShortBeep(620, 0.05);
-            localStorage.setItem('hongxia_checks', JSON.stringify(STATE.checkedCities));
+            lsSet('checks', JSON.stringify(STATE.checkedCities));
             syncChecklistVisuals();
             syncMapDotsVisuals();
             checkAchievements();
@@ -2948,27 +3462,41 @@
             );
         }
 
+        // Legacy: redirects to register tab since we now use Supabase auth
         function saveUserProfile() {
-            const raw = document.getElementById('usernameInput').value.trim();
-            if (!raw) return;
-
-            STATE.currentUser = raw;
-            localStorage.setItem('hongxia_username', raw);
-            updateHeaderUserDisplay();
+            switchAuthTab('register');
             playShortBeep(720, 0.08);
-
-            showRetroMessage(`👤 护照登记完毕，代号: ${raw}`);
+            showRetroMessage('请在右侧「登记 Register」标签下填写完整资料进行注册。');
             checkAchievements();
         }
 
         function updateHeaderUserDisplay() {
             const userEl = document.getElementById('headerUserName');
-            if (userEl) userEl.innerText = STATE.currentUser;
+            const acctEl = document.getElementById('headerUserAccount');
+            const avatarEl = document.getElementById('headerAvatar');
+            const logoutBtn = document.getElementById('headerLogoutBtn');
+            if (userEl) userEl.innerText = STATE.isLoggedIn ? STATE.currentUser : '未登录';
+            if (acctEl) acctEl.innerText = STATE.isLoggedIn ? '@' + STATE.currentAccount : '';
+            if (avatarEl) {
+                const avatarChar = getDefaultAvatarChar(STATE.currentUser);
+                if (STATE.isLoggedIn && STATE.currentAvatarUrl) {
+                    avatarEl.style.backgroundImage = 'url(' + STATE.currentAvatarUrl + ')';
+                    avatarEl.style.backgroundSize = 'cover';
+                    avatarEl.style.backgroundPosition = 'center';
+                    avatarEl.innerText = '';
+                } else {
+                    avatarEl.style.backgroundImage = '';
+                    avatarEl.innerText = avatarChar;
+                }
+            }
+            if (logoutBtn) {
+                logoutBtn.classList.toggle('hidden', !STATE.isLoggedIn);
+            }
         }
 
         function triggerTicketGeneration() {
-            if (!STATE.currentUser || STATE.currentUser === "未检票观众" || STATE.currentUser === "红霞漫步人") {
-                showRetroMessage(`⚠️ 打印纪念票根前，请先在「打卡影院护照」处保存您的昵称。`);
+            if (!STATE.isLoggedIn) {
+                showRetroMessage('请先登录后再打印纪念票根。');
                 return;
             }
 
@@ -3041,7 +3569,7 @@
             let unlockedAny = false;
             
             // 1. Passport (Registered and name has changed from default)
-            const hasReg = STATE.currentUser && STATE.currentUser !== "未检票观众" && STATE.currentUser !== "红霞漫步人" && STATE.currentUser.trim() !== "";
+            const hasReg = STATE.isLoggedIn && STATE.currentUser && STATE.currentUser.trim() !== '';
             if (hasReg) {
                 unlockedAny = unlockedAny || unlockSingle("reg_passport");
             }
@@ -3086,7 +3614,7 @@
             }
             if (!STATE.unlockedAchievements.includes(id)) {
                 STATE.unlockedAchievements.push(id);
-                localStorage.setItem('hongxia_achievements', JSON.stringify(STATE.unlockedAchievements));
+                lsSet('achievements', JSON.stringify(STATE.unlockedAchievements));
                 
                 const achievement = ACHIEVEMENTS.find(a => a.id === id);
                 if (achievement) {
