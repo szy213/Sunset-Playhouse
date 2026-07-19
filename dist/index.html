@@ -2273,8 +2273,10 @@
                 container.appendChild(card);
             });
 
-            const count = STATE.checkedCities.length;
-            document.getElementById('ticketCountLabel').innerText = `${count} / ${TOUR_STOPS.length}`;
+            const finishedStops = TOUR_STOPS.filter(s => s.status === '已结束');
+            const totalFinished = finishedStops.length;
+            const count = STATE.checkedCities.filter(idx => TOUR_STOPS[idx].status === '已结束').length;
+            document.getElementById('ticketCountLabel').innerText = `${count} / ${totalFinished}`;
             
             let badgeTitle = "初见观众";
             if (count >= 5) badgeTitle = "🏮 影剧院终极主理人";
@@ -2335,7 +2337,8 @@
             }
 
             document.getElementById('ticketSpecName').innerText = STATE.currentUser;
-            document.getElementById('ticketStopsCount').innerText = `${STATE.checkedCities.length} / ${TOUR_STOPS.length} 城市`;
+            const finishedStops = TOUR_STOPS.filter(s => s.status === '已结束');
+            document.getElementById('ticketStopsCount').innerText = `${STATE.checkedCities.filter(idx => TOUR_STOPS[idx].status === '已结束').length} / ${finishedStops.length} 城市`;
             
             const row = Math.floor(Math.random() * 12) + 1;
             const col = Math.floor(Math.random() * 24) + 1;

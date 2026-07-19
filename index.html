@@ -409,7 +409,7 @@
 
                 <!-- Footer Signage -->
                 <div class="w-full text-center mt-1 border-t border-retro-gold/20 pt-3 flex flex-col sm:flex-row justify-between items-center gap-1 text-[10px] text-gray-500 font-mono">
-                    <div>© CHEN JINGFEI • SUNSET PLAYHOUSE</div>
+                    <div>© CHEN JINGFEI • CRIMSON PLAYHOUSE</div>
                     
                 </div>
 
@@ -467,7 +467,7 @@
                             </div>
                             <div>
                                 <label class="block text-gray-400 mb-1">红霞呓语 (限150字):</label>
-                                <textarea id="mailBody" required rows="3" placeholder="谢谢你在红霞里收留了那些不肯天亮的灵魂..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif leading-relaxed"></textarea>
+                                <textarea id="mailBody" required rows="3" placeholder="谢谢妳在红霞里收留了那些不肯天亮的灵魂..." class="w-full bg-[#140b0d] border border-retro-gold/40 rounded p-2 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif leading-relaxed"></textarea>
                             </div>
                             <button type="submit" class="w-full py-2 bg-retro-burgundy hover:bg-retro-neonred text-retro-gold hover:text-white border border-retro-gold rounded font-bold uppercase text-[10px] active:scale-95 transition-all">
                                 <i class="fa-solid fa-paper-plane"></i> 投放至信箱
@@ -1305,7 +1305,9 @@
                             <input type="password" id="regPassword" placeholder="密码（至少4位）" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
                             <!-- Avatar preview -->
                             <div class="flex items-center gap-2 pt-1">
-                                <div id="regAvatarPreview" class="w-10 h-10 rounded-full bg-retro-burgundy border border-retro-gold/40 flex items-center justify-center text-white font-bold font-serif text-base shrink-0">霏</div>
+                                <label for="avatarFileInput" class="cursor-pointer">
+                                    <div id="regAvatarPreview" class="w-10 h-10 rounded-full bg-retro-burgundy border border-retro-gold/40 flex items-center justify-center text-white font-bold font-serif text-base shrink-0 hover:border-retro-gold transition-colors">霏</div>
+                                </label>
                                 <label for="avatarFileInput" class="cursor-pointer text-[10px] text-retro-gold underline hover:text-retro-neonred transition-colors">
                                     <i class="fa-solid fa-camera"></i> 上传头像（可选）
                                 </label>
@@ -1369,6 +1371,14 @@
                                 <span class="text-gray-500 uppercase">红霞剧院下轮开盘倒计时:</span>
                                 <div id="countdownTimer" class="text-retro-neonred font-bold text-xs mt-1 flicker-anim">
                                     00天 12小时 34分 56秒
+                                </div>
+                            </div>
+                            <div class="h-[1px] bg-retro-gold/10 my-2"></div>
+                            <!-- Count-up placeholder -->
+                            <div class="text-[9px] font-mono text-center">
+                                <span class="text-gray-500 uppercase">上次落幕已过:</span>
+                                <div id="countupTimer" class="text-retro-gold font-bold text-xs mt-1">
+                                    0天 0小时 0分 0秒
                                 </div>
                             </div>
                         </div>
@@ -1480,8 +1490,8 @@
                     <div class="flex justify-between items-start">
                         <div>
                             <span class="text-[8px] font-mono tracking-widest uppercase text-retro-burgundy/60">EST. 1989 / MEMORIAL TICKET</span>
-                            <h4 class="text-lg font-black tracking-widest font-serif text-retro-burgundy leading-tight">红霞影剧院</h4>
-                            <p class="text-[8px] text-[#58111A]/80 font-serif">陈婧霏「红霞影剧院」巡回打卡纪念</p>
+                            <h4 id="ticketTitle" class="text-lg font-black tracking-widest font-serif text-retro-burgundy leading-tight">红霞影剧院</h4>
+                            <p id="ticketSubtitle" class="text-[8px] text-[#58111A]/80 font-serif">陈婧霏「红霞影剧院」巡回打卡纪念</p>
                         </div>
                         <span class="px-1.5 py-0.5 bg-retro-burgundy text-retro-gold font-mono text-[8px] font-bold tracking-widest uppercase rounded">
                             ADMIT ONE
@@ -1495,8 +1505,8 @@
                             <span class="font-bold text-[#2a1317]" id="ticketSpecName">陈婧霏的歌迷</span>
                         </div>
                         <div>
-                            <span class="text-[8px] text-[#58111A]/60 block font-mono">SEAT / 专属座位</span>
-                            <span class="font-bold text-[#2a1317]" id="ticketSeatNum">6排9座</span>
+                            <span class="text-[8px] text-[#58111A]/60 block font-mono">IDENTITY / 身份</span>
+                            <span class="font-bold text-[#2a1317]" id="ticketIdentity">影剧院观众</span>
                         </div>
                         <div>
                             <span class="text-[8px] text-[#58111A]/60 block font-mono">STOPS / 打卡足迹</span>
@@ -1506,6 +1516,11 @@
                             <span class="text-[8px] text-[#58111A]/60 block font-mono">SERIAL / 票根序列</span>
                             <span class="font-bold font-mono text-retro-burgundy" id="ticketSerialNum">HX-8941-8849</span>
                         </div>
+                    </div>
+                    <!-- Seat row -->
+                    <div class="text-[10px] font-serif">
+                        <span class="text-[8px] text-[#58111A]/60 block font-mono">SEAT / 专属座位</span>
+                        <span class="font-bold text-[#2a1317]" id="ticketSeatNum">6排9座</span>
                     </div>
 
                     <div class="pt-1">
@@ -1568,6 +1583,37 @@
         </div>
     </div>
 
+    <!-- IDENTITY SELECTION MODAL -->
+    <div id="identityModal" class="hidden fixed inset-0 bg-black/90 z-[125] flex items-center justify-center p-4">
+        <div class="w-full max-w-xs bg-[#1a0f11] border border-retro-gold p-5 rounded shadow-2xl relative text-center space-y-4">
+            <h3 class="text-retro-gold text-sm font-bold font-serif tracking-widest">选择妳的身份</h3>
+            <p class="text-gray-400 text-[10px]">请选择妳在红霞影剧院的身份</p>
+            <div class="space-y-2.5">
+                <button onclick="confirmHostIdentity()" class="w-full py-3 bg-retro-burgundy border border-retro-gold text-retro-gold hover:bg-retro-neonred hover:text-white font-bold text-sm rounded transition-all active:scale-95">
+                    主（理）人陈婧霏
+                </button>
+                <button onclick="finalizeRegister('audience')" class="w-full py-3 bg-[#120708] border border-retro-gold/50 text-gray-400 hover:text-retro-gold hover:border-retro-gold font-bold text-sm rounded transition-all active:scale-95">
+                    影剧院观众
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOST CONFIRMATION MODAL -->
+    <div id="hostConfirmModal" class="hidden fixed inset-0 bg-black/90 z-[130] flex items-center justify-center p-4">
+        <div class="w-full max-w-xs bg-[#1a0f11] border border-retro-gold p-5 rounded shadow-2xl relative text-center space-y-4">
+            <h3 class="text-retro-gold text-lg font-bold font-serif tracking-widest">真的吗？</h3>
+            <div class="space-y-2.5">
+                <button onclick="finalizeRegister('host')" class="w-full py-3 bg-[#120708] border border-retro-gold/50 text-gray-400 hover:text-retro-gold hover:border-retro-gold font-bold text-sm rounded transition-all active:scale-95">
+                    真的！
+                </button>
+                <button onclick="finalizeRegister('audience')" class="w-full py-3 bg-[#120708] border border-retro-gold/50 text-gray-400 hover:text-retro-gold hover:border-retro-gold font-bold text-sm rounded transition-all active:scale-95">
+                    骗你的
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- EDIT PROFILE MODAL -->
     <div id="editProfileModal" class="hidden fixed inset-0 bg-black/90 z-[130] flex items-center justify-center p-4">
         <div class="w-full max-w-xs bg-[#1a0f11] border border-retro-gold p-4 rounded shadow-2xl relative space-y-3">
@@ -1581,7 +1627,7 @@
                     <div id="editAvatarPreview" class="w-14 h-14 rounded-full bg-retro-burgundy border-2 border-retro-gold flex items-center justify-center text-white font-bold font-serif text-2xl overflow-hidden">霏</div>
                 </div>
                 <label for="editAvatarInput" class="cursor-pointer block text-center text-[10px] text-retro-gold underline hover:text-retro-neonred transition-colors">
-                    <i class="fa-solid fa-camera"></i> 更换头像（自动转 WebP）
+                    <i class="fa-solid fa-camera"></i> 更换头像
                 </label>
                 <input type="file" id="editAvatarInput" accept="image/*" onchange="previewEditAvatar()" class="hidden">
 
@@ -1622,7 +1668,7 @@
         }
 
         function getDefaultAvatarChar(nickname) {
-            return (nickname && nickname.trim()) ? nickname.trim()[0] : '霏';
+            return '霏';
         }
 
         // ==============================================
@@ -1636,6 +1682,7 @@
             currentAccount: "",            // account name for login
             currentAvatarUrl: null,        // avatar URL from Supabase Storage
             currentCreatedAt: null,        // registration date
+            userRole: 'audience',          // 'audience' or 'host'
 
             // Check-in data
             checkedCities: [0, 1, 2],
@@ -1724,7 +1771,7 @@
             return urlData.publicUrl;
         }
 
-        async function handleRegister() {
+        function handleRegister() {
             if (!isSupabaseReady()) { showRetroMessage('系统连接失败，请稍后重试'); return; }
             const nickname = document.getElementById('regNickname').value.trim();
             const account  = document.getElementById('regAccount').value.trim();
@@ -1735,6 +1782,24 @@
             if (!/^[a-zA-Z0-9_]{3,30}$/.test(account)) {
                 showRetroMessage('账号只支持英文、数字、下划线，3-30位'); return;
             }
+            // Show identity selection modal before actual registration
+            document.getElementById('identityModal').classList.remove('hidden');
+        }
+
+        function confirmHostIdentity() {
+            document.getElementById('identityModal').classList.add('hidden');
+            document.getElementById('hostConfirmModal').classList.remove('hidden');
+        }
+
+        async function finalizeRegister(role) {
+            // Hide both modals
+            document.getElementById('identityModal').classList.add('hidden');
+            document.getElementById('hostConfirmModal').classList.add('hidden');
+
+            const nickname = document.getElementById('regNickname').value.trim();
+            const account  = document.getElementById('regAccount').value.trim();
+            const password = document.getElementById('regPassword').value;
+
             try {
                 const { data, error } = await supabaseClient.rpc('register_user', {
                     p_account: account, p_password: password, p_nickname: nickname
@@ -1755,10 +1820,16 @@
                         console.warn('[Auth] Avatar upload failed:', uploadErr);
                     }
                 }
-                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: avatarUrl, createdAt: user.created_at });
+                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: avatarUrl, createdAt: user.created_at, userRole: role });
+                localStorage.setItem('hongxia_role_' + account, role);
                 localStorage.setItem('hongxia_last_account', account);
+                const roleLabel = role === 'host' ? '主（理）人' : '观众';
                 playShortBeep(720, 0.08);
-                showRetroMessage('登记成功！欢迎，' + nickname + '。');
+                if (role === 'host') {
+                    showRetroMessage('登记成功！' + roleLabel + ' ' + nickname + '<br>It\'s your play, your illusion.<br>谢谢妳来');
+                } else {
+                    showRetroMessage('登记成功！' + roleLabel + ' ' + nickname + '，欢迎光临红霞影剧院。');
+                }
                 checkAchievements();
                 syncAuthUI();
             } catch (err) {
@@ -1784,7 +1855,8 @@
                 if (error) throw error;
                 if (!data || data.length === 0) throw new Error('Invalid credentials');
                 const user = Array.isArray(data) ? data[0] : data;
-                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: user.avatar_url, createdAt: user.created_at });
+                const savedRole = localStorage.getItem('hongxia_role_' + user.account) || 'audience';
+                setSession({ userId: user.id, nickname: user.nickname, account: user.account, avatarUrl: user.avatar_url, createdAt: user.created_at, userRole: savedRole });
                 localStorage.setItem('hongxia_last_account', account);
                 playShortBeep(720, 0.08);
                 showRetroMessage('欢迎回来，' + user.nickname + '！');
@@ -1807,13 +1879,15 @@
             STATE.currentAccount = userData.account;
             STATE.currentAvatarUrl = userData.avatarUrl;
             STATE.currentCreatedAt = userData.createdAt;
+            STATE.userRole = userData.userRole || 'audience';
             const sessionData = {
                 userId: userData.userId, nickname: userData.nickname,
                 account: userData.account, avatarUrl: userData.avatarUrl,
-                createdAt: userData.createdAt
+                createdAt: userData.createdAt, userRole: userData.userRole || 'audience'
             };
             localStorage.setItem('hongxia_session', JSON.stringify(sessionData));
             loadUserCheckinData();
+            if (STATE.userRole === 'host') syncHostCheckins();
             updateHeaderUserDisplay();
         }
 
@@ -1849,6 +1923,7 @@
             STATE.currentAccount = '';
             STATE.currentAvatarUrl = null;
             STATE.currentCreatedAt = null;
+            STATE.userRole = 'audience';
             localStorage.removeItem('hongxia_session');
             STATE.checkedCities = [0, 1, 2];
             STATE.unlockedAchievements = [];
@@ -1934,7 +2009,9 @@
             STATE.currentAccount = session.account || '';
             STATE.currentAvatarUrl = session.avatarUrl || null;
             STATE.currentCreatedAt = session.createdAt || null;
+            STATE.userRole = session.userRole || 'audience';
             loadUserCheckinData();
+            if (STATE.userRole === 'host') syncHostCheckins();
         }
 
         function loadUserCheckinData() {
@@ -2095,7 +2172,7 @@
             { id: "play_vinyl", title: "留声机侍者", desc: "在演员排练室里启动留声机播放现场乐曲", quote: "「留声机转动着，那些未曾开口的温柔。」 —《蓝莓夜》", icon: "🎵" },
             { id: "send_postcard", title: "深夜寄信人", desc: "在收发室成功投递了一封明信片呓语", quote: "「把明信片投入红霞里，查收来自远方的回响。」", icon: "✉️" },
             { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款专属饭制周边", quote: "「物料上的每一次折痕，都是热爱发出的低鸣。」", icon: "🎨" },
-            { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成全部五座巡演城市", quote: "「红霞退去，留下的每一站，都是漫漫星火。」", icon: "🌇" },
+            { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成五座巡演城市", quote: "「红霞退去，留下的每一站，都是漫漫星火。」", icon: "🌇" },
             { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，听到温热声浪", quote: "「在这温热的声浪里，听见胶片滚动的呼吸。」", icon: "📻" }
         ];
 
@@ -2411,6 +2488,8 @@
             setInterval(updateClock, 1000);
             setInterval(updateTourCountdown, 1000);
             updateTourCountdown();
+            setInterval(updateTourCountup, 1000);
+            updateTourCountup();
 
             syncAuthUI();
             syncMapDotsVisuals();
@@ -2442,13 +2521,43 @@
         }
 
         function updateTourCountdown() {
-            const targetDate = new Date("December 12, 2026 19:30:00").getTime();
-            const now = new Date().getTime();
-            const difference = targetDate - now;
-
             const timerEl = document.getElementById('countdownTimer');
+
+            // Find the nearest upcoming stop that user has checked in
+            const now = new Date();
+            let nearestTarget = null;
+            let nearestStop = null;
+
+            STATE.checkedCities.forEach(idx => {
+                const stop = TOUR_STOPS[idx];
+                if (stop.status !== '待开演') return;
+
+                // Parse date like "2026.07.24", skip "coming soon"
+                const parts = stop.date.split('.');
+                if (parts.length !== 3) return;
+
+                const year = parseInt(parts[0]);
+                const month = parseInt(parts[1]) - 1;
+                const day = parseInt(parts[2]);
+                const targetDate = new Date(year, month, day, 20, 0, 0);
+
+                if (isNaN(targetDate.getTime())) return;
+
+                if (nearestTarget === null || targetDate < nearestTarget) {
+                    nearestTarget = targetDate;
+                    nearestStop = stop;
+                }
+            });
+
+            if (!nearestTarget) {
+                timerEl.innerText = '期待下一次相遇';
+                return;
+            }
+
+            const difference = nearestTarget.getTime() - now.getTime();
+
             if (difference < 0) {
-                timerEl.innerText = "红霞影院，正式营业中";
+                timerEl.innerText = '演出已开场';
                 return;
             }
 
@@ -2456,6 +2565,53 @@
             const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            timerEl.innerText = `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
+        }
+
+        function updateTourCountup() {
+            const timerEl = document.getElementById('countupTimer');
+            if (!timerEl) return;
+
+            // Find the most recent finished stop that user has checked in
+            const now = new Date();
+            let latestTarget = null;
+            let latestStop = null;
+
+            STATE.checkedCities.forEach(idx => {
+                const stop = TOUR_STOPS[idx];
+                if (stop.status !== '已结束') return;
+
+                // Parse date like "2026.07.05"
+                const parts = stop.date.split('.');
+                if (parts.length !== 3) return;
+
+                const year = parseInt(parts[0]);
+                const month = parseInt(parts[1]) - 1;
+                const day = parseInt(parts[2]);
+                const targetDate = new Date(year, month, day, 22, 0, 0);
+
+                if (isNaN(targetDate.getTime())) return;
+                // Only consider past events
+                if (targetDate > now) return;
+
+                if (latestTarget === null || targetDate > latestTarget) {
+                    latestTarget = targetDate;
+                    latestStop = stop;
+                }
+            });
+
+            if (!latestTarget) {
+                timerEl.innerText = '暂无观影记录';
+                return;
+            }
+
+            const elapsed = now.getTime() - latestTarget.getTime();
+
+            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
 
             timerEl.innerText = `${days}天 ${hours}小时 ${minutes}分 ${seconds}秒`;
         }
@@ -3471,8 +3627,10 @@
                 container.appendChild(card);
             });
 
-            const count = STATE.checkedCities.length;
-            document.getElementById('ticketCountLabel').innerText = `${count} / ${TOUR_STOPS.length}`;
+            const finishedStops = TOUR_STOPS.filter(s => s.status === '已结束');
+            const totalFinished = finishedStops.length;
+            const count = STATE.checkedCities.filter(idx => TOUR_STOPS[idx].status === '已结束').length;
+            document.getElementById('ticketCountLabel').innerText = `${count} / ${totalFinished}`;
             
             let badgeTitle = "未解锁";
             if (count >= 7) badgeTitle = "❤️‍🔥 猩纯的红";
@@ -3483,7 +3641,28 @@
             document.getElementById('ticketStatusLabel').innerText = badgeTitle;
         }
 
+        function syncHostCheckins() {
+            // Auto-check all stops for host (主理人)
+            if (STATE.userRole !== 'host') return;
+            STATE.checkedCities = TOUR_STOPS.map((_, i) => i);
+            lsSet('checks', JSON.stringify(STATE.checkedCities));
+            syncChecklistVisuals();
+            syncMapDotsVisuals();
+        }
+
         function toggleCheckinStop(idx) {
+            // Host cannot uncheck any stop
+            if (STATE.userRole === 'host') {
+                if (!STATE.checkedCities.includes(idx)) {
+                    STATE.checkedCities.push(idx);
+                    playShortBeep(620, 0.05);
+                    lsSet('checks', JSON.stringify(STATE.checkedCities));
+                    syncChecklistVisuals();
+                    syncMapDotsVisuals();
+                    checkAchievements();
+                }
+                return;
+            }
             const index = STATE.checkedCities.indexOf(idx);
             if (index > -1) {
                 STATE.checkedCities.splice(index, 1);
@@ -3581,9 +3760,31 @@
                 return;
             }
 
+            const isHost = STATE.userRole === 'host';
+            const ticketArea = document.getElementById('ticketPrintArea');
+
+            // Apply host wine-red styling
+            if (isHost) {
+                ticketArea.className = 'w-full bg-[#f2e0e3] text-[#3d1018] p-4 rounded border-2 border-dashed border-[#722F37] relative flex flex-col justify-between gap-4 overflow-hidden shadow-inner';
+            } else {
+                ticketArea.className = 'w-full bg-[#faedd9] text-retro-darkwood p-4 rounded border-2 border-dashed border-[#58111A] relative flex flex-col justify-between gap-4 overflow-hidden shadow-inner';
+            }
+
             document.getElementById('ticketSpecName').innerText = STATE.currentUser;
+            document.getElementById('ticketIdentity').innerText = isHost ? '主（理）人' : '影剧院观众';
             document.getElementById('ticketStopsCount').innerText = `${STATE.checkedCities.length} / ${TOUR_STOPS.length} 城市`;
-            
+
+            // Apply host title styling (wine red)
+            const titleEl = document.getElementById('ticketTitle');
+            const subtitleEl = document.getElementById('ticketSubtitle');
+            if (isHost) {
+                titleEl.className = 'text-lg font-black tracking-widest font-serif leading-tight text-[#722F37]';
+                subtitleEl.className = 'text-[8px] text-[#722F37]/70 font-serif';
+            } else {
+                titleEl.className = 'text-lg font-black tracking-widest font-serif text-retro-burgundy leading-tight';
+                subtitleEl.className = 'text-[8px] text-[#58111A]/80 font-serif';
+            }
+
             const row = Math.floor(Math.random() * 12) + 1;
             const col = Math.floor(Math.random() * 24) + 1;
             document.getElementById('ticketSeatNum').innerText = `${row}排${col}座`;
