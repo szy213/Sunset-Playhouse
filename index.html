@@ -416,7 +416,7 @@
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">📪 红霞收发室</h2>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">📪 收发室</h2>
                     <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow">Pigeonholes</p>
                 </div>
             </div>
@@ -488,7 +488,7 @@
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg" id="lobbyTitleText">🖼️ 剧院一楼大厅</h2>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg" id="lobbyTitleText">🖼️ 一楼大厅</h2>
                     <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow" id="lobbySubText">Grand Lobby</p>
                 </div>
             </div>
@@ -904,7 +904,7 @@
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg" id="deptTitleText">🏢 剧院业务部</h2>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg" id="deptTitleText">🏢 业务部</h2>
                     <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow" id="deptSubText">Internal Wing</p>
                 </div>
             </div>
@@ -1288,7 +1288,7 @@
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
                 </button>
                 <div class="text-right">
-                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">🎫 影剧院售票处</h2>
+                    <h2 class="text-retro-neonred text-base font-bold font-serif drop-shadow-lg">🎫 售票处</h2>
                     <p class="text-[9px] text-retro-gold uppercase font-mono drop-shadow">Box Office</p>
                 </div>
             </div>
@@ -1573,7 +1573,7 @@
             { id: "reg_passport", title: "红霞漫步人", desc: "在售票处成功登记专属影院护照", quote: "「在这座虚幻的电影院里，所有迟到的人都有座位。」 —《红霞》", icon: "👤" },
             { id: "read_stops", title: "放映室来客", desc: "完整浏览过全部5个城市的放映纪实", quote: "「放映机里不知疲倦转着的，是整个时代的红霞。」", icon: "🎬" },
             { id: "play_vinyl", title: "留声机侍者", desc: "在演员排练室里启动留声机播放现场乐曲", quote: "「留声机转动着，那些未曾开口的温柔。」 —《蓝莓夜》", icon: "🎵" },
-            { id: "send_postcard", title: "深夜寄信人", desc: "在红霞收发室成功投递了一封明信片呓语", quote: "「把明信片投入红霞里，查收来自远方的回响。」", icon: "✉️" },
+            { id: "send_postcard", title: "深夜寄信人", desc: "在收发室成功投递了一封明信片呓语", quote: "「把明信片投入红霞里，查收来自远方的回响。」", icon: "✉️" },
             { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款专属饭制周边", quote: "「物料上的每一次折痕，都是热爱发出的低鸣。」", icon: "🎨" },
             { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成全部五座巡演城市", quote: "「红霞退去，留下的每一站，都是漫漫星火。」", icon: "🌇" },
             { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，听到温热声浪", quote: "「在这温热的声浪里，听见胶片滚动的呼吸。」", icon: "📻" }
@@ -1999,7 +1999,7 @@
 
             if (subId === 'hallway') {
                 document.getElementById('lobbyHallway').style.display = 'flex';
-                lobbyTitleText.innerText = '🖼️ 剧院一楼大厅';
+                lobbyTitleText.innerText = '🖼️ 一楼大厅';
                 lobbySubText.innerText = 'Grand Lobby';
                 lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回主图`;
             } else if (subId === 'materials') {
@@ -2047,7 +2047,7 @@
 
             if (subId === 'hallway') {
                 document.getElementById('deptHallway').style.display = 'flex';
-                deptTitleText.innerText = "🏢 剧院业务部";
+                deptTitleText.innerText = "🏢 业务部";
                 deptSubText.innerText = "Internal Wing";
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回主图`;
                 stopMusic();
@@ -2600,7 +2600,7 @@
                         return;
                     }
                     const img = document.createElement('img');
-                    img.src = `images/tourpics/${stop.id} ${imgIndex}.webp`;
+                    img.src = `images/tourpics1/${stop.id} ${imgIndex}.webp`;
                     img.alt = `${stop.city} ${imgIndex}`;
                     img.className = 'w-full h-full flex-shrink-0 snap-center object-cover object-bottom';
                     img.loading = 'lazy';
