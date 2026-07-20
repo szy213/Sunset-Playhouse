@@ -418,11 +418,11 @@
             opacity: 0;
             z-index: 1;
             pointer-events: none;
+            transition: opacity 0.4s ease;
         }
-        .section-delay > * { opacity: 0; position: relative; z-index: 2; }
-        .section-delay.reveal::before { animation: sectionReveal 0.4s ease 1s forwards; }
-        .section-delay.reveal > * { animation: sectionReveal 0.4s ease 1s forwards; }
-        @keyframes sectionReveal { to { opacity: 1; } }
+        .section-delay > * { opacity: 0; position: relative; z-index: 2; transition: opacity 0.4s ease; }
+        .section-delay.revealed::before,
+        .section-delay.revealed > * { opacity: 1; }
 
         /* Multi-image preview in form */
         .mail-preview-row {
@@ -4374,9 +4374,10 @@
         function triggerSectionReveal(sectionId) {
             const section = document.getElementById(sectionId);
             if (!section) return;
-            section.classList.remove('reveal');
-            void section.offsetWidth;
-            section.classList.add('reveal');
+            section.classList.remove('revealed');
+            setTimeout(() => {
+                section.classList.add('revealed');
+            }, 1000);
         }
 
         function navigateTo(screenId) {
@@ -4389,11 +4390,15 @@
                 // Phase 2: swap screens behind the black overlay
                 document.getElementById('mainMapScreen').style.display = 'none';
                 document.getElementById('mailroom').style.display = 'none';
+                document.getElementById('mailroom').classList.remove('revealed');
                 document.getElementById('lobby').style.display = 'none';
+                document.getElementById('lobby').classList.remove('revealed');
                 document.getElementById('grand-cinema').style.display = 'none';
                 document.getElementById('business-dept').style.display = 'none';
+                document.getElementById('business-dept').classList.remove('revealed');
                 const boxOfficeEl = document.getElementById('box-office');
                 if (boxOfficeEl) boxOfficeEl.style.display = 'none';
+                if (boxOfficeEl) boxOfficeEl.classList.remove('revealed');
 
                 STATE.activeScreen = screenId;
 
