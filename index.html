@@ -4680,13 +4680,20 @@
             intro.style.transition = 'opacity 0.6s ease';
             intro.style.opacity = '0';
 
-            // Mobile: must init audio in direct response to user gesture
+            // Mobile: must play actual audio in direct response to user gesture to unlock
             initAudioContext();
             if (audioCtx && audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
             initBgmPlayer();
-            bgmAudio.play().catch(() => {}); // unlock audio for mobile
+            STATE.bgmPlaying = true;
+            STATE.currentBgmIndex = 0;
+            bgmAudio.src = BGM_LIST[0].file;
+            bgmAudio.load();
+            bgmAudio.play().catch(err => {
+                console.log("BGM autoplay blocked on mobile, tap BGM button to start.", err);
+            });
+            updateBgmUI();
 
             setTimeout(() => {
                 intro.style.display = 'none';
@@ -4694,15 +4701,6 @@
                 document.getElementById('mainMapScreen').style.display = 'flex';
                 document.getElementById('bgmPlayerWidget').style.display = 'flex';
             }, 600);
-
-            setTimeout(() => {
-                try {
-                    STATE.bgmPlaying = true;
-                    playBgm(0);
-                } catch(e) {
-                    console.log("Audio autostart blocked");
-                }
-            }, 300);
         }
 
         function initAudioContext() {
