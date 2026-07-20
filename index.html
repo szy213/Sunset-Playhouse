@@ -4689,7 +4689,14 @@
             initBgmPlayer();
             STATE.bgmPlaying = true;
             STATE.currentBgmIndex = 0;
-            bgmAudio.src = BGM_LIST[0].file;
+            const source = document.getElementById('bgmSource');
+            if (source) {
+                source.src = BGM_LIST[0].file;
+                bgmAudio.load();
+            } else {
+                bgmAudio.src = BGM_LIST[0].file;
+            }
+            bgmAudio.volume = 0.3;
             bgmAudio.play().catch(err => {
                 console.log("BGM autoplay blocked on mobile, tap BGM button to start.", err);
             });
@@ -4712,23 +4719,22 @@
         // Initialize BGM HTML5 Audio elements
         function initBgmPlayer() {
             if (!bgmAudio) {
-                // Use createElement + append to DOM for iOS Safari compatibility
-                // (new Audio() creates a detached element that iOS may block)
                 bgmAudio = document.createElement('audio');
-                bgmAudio.preload = 'auto';
+                bgmAudio.preload = 'none';
                 bgmAudio.playsInline = true;
                 bgmAudio.style.display = 'none';
+                const source = document.createElement('source');
+                source.id = 'bgmSource';
+                source.type = 'audio/mpeg';
+                bgmAudio.appendChild(source);
                 document.body.appendChild(bgmAudio);
                 bgmAudio.addEventListener('ended', function() {
                     nextBgm();
                 });
                 bgmAudio.addEventListener('error', function(e) {
                     console.log("BGM file failed to load. Playing ambient projector noise as retro fallback.", e);
-                    // Mark as fallback source type on UI
                     const dropdownSource = document.getElementById('bgmDropdownSource');
                     if (dropdownSource) dropdownSource.innerText = "备用放映声";
-
-                    // Fallback to synthetic projection room hum
                     if (STATE.bgmPlaying && !STATE.ambientPlaying) {
                         startAmbientHum();
                     }
@@ -4852,7 +4858,6 @@
         function playBgm(index) {
             initBgmPlayer();
 
-            // Handle cycle index wrapping
             if (index < 0) index = BGM_LIST.length - 1;
             if (index >= BGM_LIST.length) index = 0;
             STATE.currentBgmIndex = index;
@@ -4860,10 +4865,17 @@
             const currentTrack = BGM_LIST[index];
 
             if (STATE.bgmPlaying) {
-                // Stop any running synthetic hum first to avoid blending
                 stopAmbientHum();
 
-                bgmAudio.src = currentTrack.file;
+                // yili10th pattern: switch source -> load -> play
+                const source = document.getElementById('bgmSource');
+                if (source) {
+                    source.src = currentTrack.file;
+                    bgmAudio.load();
+                } else {
+                    bgmAudio.src = currentTrack.file;
+                }
+                bgmAudio.volume = 0.3;
 
                 bgmAudio.play()
                     .then(() => {
@@ -6542,7 +6554,6 @@
                     img.src = `images/tourpics1/${stop.id}%20${imgIndex}.webp`;
                     img.alt = `${stop.city} ${imgIndex}`;
                     img.className = 'w-full h-full flex-shrink-0 snap-center object-cover object-bottom';
-                    // Append to DOM immediately so mobile browsers start loading
                     scrollWrap.appendChild(img);
                     img.onload = () => {
                         hasLoadedAny = true;
