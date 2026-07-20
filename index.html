@@ -2855,6 +2855,49 @@
             </div>
         </section>
 
+        <!-- Visual Novel + Puzzle Overlay (shown when not logged in) -->
+        <div id="vnOverlay" class="hidden fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center">
+            <!-- Skip button -->
+            <button onclick="skipVN()" class="absolute top-4 right-4 z-10 px-3 py-1.5 border border-gray-500/50 text-gray-500 text-[10px] rounded active:scale-95 transition-all font-mono hover:border-gray-400 hover:text-gray-400">跳过 ▸</button>
+            <!-- Character sprite area -->
+            <div class="flex-1 flex items-end justify-center w-full max-w-lg px-4 pt-8">
+                <img id="vnCharacter" src="images/crimsonwitch.png" alt="Character" class="max-h-full max-w-full object-contain" style="max-height: 55vh;">
+            </div>
+            <!-- Dialog box -->
+            <div id="vnDialogBox" class="w-full max-w-lg mx-4 mb-6 bg-[#1a0f11]/95 backdrop-blur border-2 border-retro-gold/50 rounded-lg p-4 cursor-pointer transition-all hover:border-retro-gold/80" onclick="advanceVN()">
+                <div id="vnName" class="text-retro-neonred font-bold font-serif text-sm mb-2"></div>
+                <div id="vnText" class="text-retro-gold font-serif text-sm leading-relaxed min-h-[3rem]"></div>
+                <div id="vnHint" class="text-[9px] text-gray-500 text-right mt-2 font-mono hidden">点击继续 ▸</div>
+            </div>
+        </div>
+
+        <!-- Word Puzzle Overlay -->
+        <div id="puzzleOverlay" class="hidden fixed inset-0 z-[200] bg-black/95 flex flex-col items-center justify-center p-4">
+            <div class="w-full max-w-md">
+                <h2 class="text-retro-gold font-serif text-lg text-center mb-2">文字拼句</h2>
+                <p class="text-gray-400 text-[10px] text-center mb-6 font-mono">拖动词语卡片，排列成正确的句子</p>
+                <div id="puzzleSlots" class="flex flex-wrap gap-2 justify-center min-h-[60px] p-3 border-2 border-dashed border-retro-gold/30 rounded-lg mb-4"></div>
+                <div id="puzzleCards" class="flex flex-wrap gap-2 justify-center mb-6"></div>
+                <div class="flex gap-3 justify-center">
+                    <button onclick="resetPuzzle()" class="px-4 py-2 border border-retro-gold/40 text-retro-gold text-xs rounded active:scale-95 transition-all font-mono">重置</button>
+                    <button onclick="checkPuzzle()" class="px-6 py-2 bg-retro-gold text-black font-bold text-xs rounded active:scale-95 transition-all">确认</button>
+                </div>
+                <div id="puzzleFeedback" class="text-center mt-4 text-sm font-bold hidden"></div>
+            </div>
+        </div>
+
+        <!-- Puzzle End Screen -->
+        <div id="puzzleEndOverlay" class="hidden fixed inset-0 z-[200] bg-black/95 flex flex-col items-center justify-center p-4">
+            <div class="text-center">
+                <div class="text-4xl mb-4">🎬</div>
+                <h2 class="text-retro-gold font-serif text-xl mb-2">剧本在你手中</h2>
+                <p class="text-gray-400 text-xs mb-6 font-mono">The script is yours to write.</p>
+                <button onclick="closePuzzleEnd()" class="px-8 py-3 bg-retro-burgundy border-2 border-retro-gold text-retro-gold font-bold text-sm rounded active:scale-95 transition-all font-serif">
+                    进入售票处
+                </button>
+            </div>
+        </div>
+
     </div>
 
     <!-- ============================================== -->
@@ -3827,7 +3870,6 @@
             { id: "play_vinyl", title: "留声机侍者", desc: "在演员排练室里启动留声机播放现场乐曲", quote: "「留声机转动着，那些未曾开口的温柔。」 —《蓝莓夜》", icon: "🎵" },
             { id: "send_postcard", title: "春色寄情人", desc: "在收发室成功投递一封明信片", quote: "「把明信片投入红霞里，查收来自远方的回响。」", icon: "✉️" },
             { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款专属饭制周边", quote: "「物料上的每一次折痕，都是热爱发出的低鸣。」", icon: "🎨" },
-            { id: "all_stops", title: "红霞再现", desc: "在地图上打卡完成五座巡演城市", quote: "「红霞退去，留下的每一站，都是漫漫星火。」", icon: "🌇" },
             { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，听到温热声浪", quote: "「在这温热的声浪里，听见胶片滚动的呼吸。」", icon: "📻" }
         ];
 
@@ -4334,6 +4376,13 @@
                     document.getElementById('business-dept').style.display = 'flex';
                     showDeptSubView('hallway');
                 } else if (screenId === 'box-office') {
+                    if (startVisualNovel()) {
+                        // Still need to fade in from black
+                        setTimeout(() => {
+                            overlay.style.opacity = '0';
+                        }, 50);
+                        return;
+                    }
                     if (boxOfficeEl) boxOfficeEl.style.display = 'flex';
                     syncChecklistVisuals();
                     syncMapDotsVisuals();
@@ -7442,6 +7491,277 @@
                     ` : ''}
                 </div>
             `);
+        }
+        // ==============================================
+        // VISUAL NOVEL + WORD PUZZLE (售票处未登录互动)
+        // ==============================================
+        const VN_DIALOGS = [
+            { name: '???', text: '欢迎来到红霞影剧院，我是这里的主（理）人陈婧霏，你也可以尊称我为猩红女巫。' },
+            { name: '猩红女巫', text: '在这个空间，我是每一场演出的导演、编剧和演员。愿你在此也能尽情挥洒绽放，发现自己内心的力量，成为自己人生的导演、编剧和演员' },
+            { name: '猩红女巫', text: '这个世界因为我们相信而存在，这片' },
+            { name: '猩红女巫', text: '谢谢你如此有品位地来到这里，但在进入剧场之前……让我看看你是否懂得自己的力量。' },
+            { name: '猩红女巫', text: '来，试试排列这些词语，念出那句神奇的咒语吧。' }
+        ];
+        let vnIndex = 0;
+        let vnTypingTimer = null;
+        let vnTextFull = '';
+        let vnCharIndex = 0;
+        let vnTyping = false;
+
+        const PUZZLE_WORDS = ['You', 'can', 'change', 'the', 'script', 'anytime', 'you', 'want'];
+        const PUZZLE_ANSWER = 'You can change the script anytime you want';
+        let puzzleSlots = [];
+        let puzzleCards = [];
+
+        function startVisualNovel() {
+            if (STATE.isLoggedIn) return false;
+            vnIndex = 0;
+            document.getElementById('vnOverlay').classList.remove('hidden');
+            document.getElementById('box-office').style.display = 'none';
+            showVNDialog();
+            return true;
+        }
+
+        function skipVN() {
+            clearTimeout(vnTypingTimer);
+            vnTyping = false;
+            document.getElementById('vnOverlay').classList.add('hidden');
+            document.getElementById('puzzleOverlay').classList.add('hidden');
+            document.getElementById('puzzleEndOverlay').classList.add('hidden');
+            document.getElementById('box-office').style.display = 'flex';
+            syncChecklistVisuals();
+            syncMapDotsVisuals();
+        }
+
+        function showVNDialog() {
+            if (vnIndex >= VN_DIALOGS.length) {
+                endVNStartPuzzle();
+                return;
+            }
+            const dialog = VN_DIALOGS[vnIndex];
+            document.getElementById('vnName').textContent = dialog.name;
+            document.getElementById('vnText').textContent = '';
+            document.getElementById('vnHint').classList.add('hidden');
+            vnTextFull = dialog.text;
+            vnCharIndex = 0;
+            vnTyping = true;
+            clearTimeout(vnTypingTimer);
+            typeNextChar();
+        }
+
+        function typeNextChar() {
+            if (vnCharIndex < vnTextFull.length) {
+                document.getElementById('vnText').textContent += vnTextFull.charAt(vnCharIndex);
+                vnCharIndex++;
+                vnTypingTimer = setTimeout(typeNextChar, 40 + Math.random() * 30);
+            } else {
+                vnTyping = false;
+                document.getElementById('vnHint').classList.remove('hidden');
+            }
+        }
+
+        function advanceVN() {
+            if (vnTyping) {
+                // Skip typing animation, show full text
+                clearTimeout(vnTypingTimer);
+                document.getElementById('vnText').textContent = vnTextFull;
+                vnTyping = false;
+                document.getElementById('vnHint').classList.remove('hidden');
+                return;
+            }
+            vnIndex++;
+            showVNDialog();
+        }
+
+        function endVNStartPuzzle() {
+            document.getElementById('vnOverlay').classList.add('hidden');
+            document.getElementById('puzzleOverlay').classList.remove('hidden');
+            initPuzzle();
+        }
+
+        function shuffleArray(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function initPuzzle() {
+            puzzleSlots = [];
+            do {
+                puzzleCards = shuffleArray([...PUZZLE_WORDS]);
+            } while (puzzleCards.join(' ') === PUZZLE_ANSWER);
+            renderPuzzle();
+        }
+
+        // Keyboard support for visual novel
+        document.addEventListener('keydown', function(e) {
+            const vnOverlay = document.getElementById('vnOverlay');
+            if (!vnOverlay.classList.contains('hidden') && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                advanceVN();
+            }
+        });
+
+        function renderPuzzle() {
+            const slotsEl = document.getElementById('puzzleSlots');
+            const cardsEl = document.getElementById('puzzleCards');
+            document.getElementById('puzzleFeedback').classList.add('hidden');
+
+            // Render slots (empty drop zones)
+            slotsEl.innerHTML = '';
+            for (let i = 0; i < PUZZLE_WORDS.length; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'w-16 h-9 border-2 border-dashed rounded flex items-center justify-center transition-all';
+                if (puzzleSlots[i]) {
+                    slot.className += ' border-retro-gold bg-retro-burgundy/40';
+                    slot.innerHTML = `<span class="text-retro-gold font-serif text-xs font-bold">${puzzleSlots[i]}</span>`;
+                    slot.onclick = function() { moveToCards(i); };
+                    slot.style.cursor = 'pointer';
+                } else {
+                    slot.className += ' border-retro-gold/20 bg-transparent';
+                }
+                slot.dataset.slotIndex = i;
+                slot.ondragover = function(e) { e.preventDefault(); this.classList.add('border-retro-neonred'); };
+                slot.ondragleave = function(e) { this.classList.remove('border-retro-neonred'); };
+                slot.ondrop = function(e) {
+                    e.preventDefault();
+                    this.classList.remove('border-retro-neonred');
+                    const cardIndex = parseInt(e.dataTransfer.getData('text/plain'));
+                    if (!isNaN(cardIndex) && !puzzleSlots[i]) {
+                        puzzleSlots[i] = puzzleCards[cardIndex];
+                        puzzleCards.splice(cardIndex, 1);
+                        renderPuzzle();
+                    }
+                };
+                slotsEl.appendChild(slot);
+            }
+
+            // Render draggable word cards
+            cardsEl.innerHTML = '';
+            for (let i = 0; i < puzzleCards.length; i++) {
+                const card = document.createElement('div');
+                card.className = 'px-3 py-2 bg-retro-burgundy/60 border border-retro-gold/50 rounded text-retro-gold font-serif text-sm font-bold cursor-grab active:cursor-grabbing select-none transition-all hover:bg-retro-burgundy/80 hover:border-retro-gold';
+                card.textContent = puzzleCards[i];
+                card.draggable = true;
+                card.dataset.cardIndex = i;
+                card.ondragstart = function(e) {
+                    e.dataTransfer.setData('text/plain', this.dataset.cardIndex);
+                    this.style.opacity = '0.5';
+                };
+                card.ondragend = function(e) {
+                    this.style.opacity = '1';
+                };
+                // Touch support
+                card.ontouchstart = touchStartHandler;
+                card.ontouchmove = touchMoveHandler;
+                card.ontouchend = touchEndHandler;
+                cardsEl.appendChild(card);
+            }
+        }
+
+        function moveToCards(slotIndex) {
+            if (puzzleSlots[slotIndex]) {
+                puzzleCards.push(puzzleSlots[slotIndex]);
+                puzzleSlots[slotIndex] = null;
+                renderPuzzle();
+            }
+        }
+
+        // Touch drag support
+        let touchDragCard = null;
+        let touchDragIndex = -1;
+        let touchClone = null;
+        let touchStartX = 0, touchStartY = 0;
+
+        function touchStartHandler(e) {
+            touchDragCard = this;
+            touchDragIndex = parseInt(this.dataset.cardIndex);
+            const t = e.touches[0];
+            touchStartX = t.clientX;
+            touchStartY = t.clientY;
+            this.style.opacity = '0.5';
+        }
+
+        function touchMoveHandler(e) {
+            e.preventDefault();
+            if (!touchDragCard) return;
+            const t = e.touches[0];
+            if (!touchClone) {
+                touchClone = touchDragCard.cloneNode(true);
+                touchClone.style.position = 'fixed';
+                touchClone.style.zIndex = '999';
+                touchClone.style.pointerEvents = 'none';
+                touchClone.style.opacity = '0.8';
+                document.body.appendChild(touchClone);
+            }
+            touchClone.style.left = (t.clientX - 30) + 'px';
+            touchClone.style.top = (t.clientY - 20) + 'px';
+        }
+
+        function touchEndHandler(e) {
+            if (touchClone) {
+                touchClone.remove();
+                touchClone = null;
+            }
+            if (touchDragCard) {
+                touchDragCard.style.opacity = '1';
+            }
+            const t = e.changedTouches[0];
+            const target = document.elementFromPoint(t.clientX, t.clientY);
+            const slot = target ? target.closest('#puzzleSlots > div') : null;
+            if (slot && touchDragIndex >= 0) {
+                const slotIndex = parseInt(slot.dataset.slotIndex);
+                if (!puzzleSlots[slotIndex]) {
+                    puzzleSlots[slotIndex] = puzzleCards[touchDragIndex];
+                    puzzleCards.splice(touchDragIndex, 1);
+                    renderPuzzle();
+                }
+            }
+            touchDragCard = null;
+            touchDragIndex = -1;
+        }
+
+        function resetPuzzle() {
+            initPuzzle();
+        }
+
+        function checkPuzzle() {
+            const fb = document.getElementById('puzzleFeedback');
+            // Check all slots filled
+            for (let i = 0; i < PUZZLE_WORDS.length; i++) {
+                if (!puzzleSlots[i]) {
+                    fb.textContent = '请将所有词语卡片拖入上方空格中。';
+                    fb.className = 'text-center mt-4 text-sm font-bold text-retro-gold';
+                    fb.classList.remove('hidden');
+                    return;
+                }
+            }
+            const sentence = puzzleSlots.join(' ');
+            if (sentence === PUZZLE_ANSWER) {
+                fb.textContent = '✦ 完全正确！ ✦';
+                fb.className = 'text-center mt-4 text-sm font-bold text-retro-neonred';
+                fb.classList.remove('hidden');
+                playShortBeep(720, 0.1);
+                setTimeout(() => {
+                    document.getElementById('puzzleOverlay').classList.add('hidden');
+                    document.getElementById('puzzleEndOverlay').classList.remove('hidden');
+                }, 1200);
+            } else {
+                fb.textContent = '顺序不对，再试一次吧。';
+                fb.className = 'text-center mt-4 text-sm font-bold text-retro-gold';
+                fb.classList.remove('hidden');
+                playShortBeep(300, 0.1);
+            }
+        }
+
+        function closePuzzleEnd() {
+            document.getElementById('puzzleEndOverlay').classList.add('hidden');
+            document.getElementById('box-office').style.display = 'flex';
+            syncChecklistVisuals();
+            syncMapDotsVisuals();
         }
     </script>
     <canvas id="ribbonCanvas" class="fixed inset-0 pointer-events-none z-[300]"></canvas>
