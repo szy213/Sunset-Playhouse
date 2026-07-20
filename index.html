@@ -4689,7 +4689,6 @@
             STATE.bgmPlaying = true;
             STATE.currentBgmIndex = 0;
             bgmAudio.src = BGM_LIST[0].file;
-            bgmAudio.load();
             bgmAudio.play().catch(err => {
                 console.log("BGM autoplay blocked on mobile, tap BGM button to start.", err);
             });
@@ -4712,7 +4711,12 @@
         // Initialize BGM HTML5 Audio elements
         function initBgmPlayer() {
             if (!bgmAudio) {
-                bgmAudio = new Audio();
+                // Use createElement + append to DOM for iOS Safari compatibility
+                // (new Audio() creates a detached element that iOS may block)
+                bgmAudio = document.createElement('audio');
+                bgmAudio.preload = 'auto';
+                bgmAudio.style.display = 'none';
+                document.body.appendChild(bgmAudio);
                 bgmAudio.addEventListener('ended', function() {
                     nextBgm();
                 });
@@ -4721,7 +4725,7 @@
                     // Mark as fallback source type on UI
                     const dropdownSource = document.getElementById('bgmDropdownSource');
                     if (dropdownSource) dropdownSource.innerText = "备用放映声";
-                    
+
                     // Fallback to synthetic projection room hum
                     if (STATE.bgmPlaying && !STATE.ambientPlaying) {
                         startAmbientHum();
@@ -4858,7 +4862,6 @@
                 stopAmbientHum();
 
                 bgmAudio.src = currentTrack.file;
-                bgmAudio.load();
 
                 bgmAudio.play()
                     .then(() => {
