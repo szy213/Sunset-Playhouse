@@ -1326,7 +1326,7 @@
         <!-- ============================================== -->
         <!-- AREA 3: GRAND CINEMA (豪华影厅 - 巡演城市档案)     -->
         <!-- ============================================== -->
-        <section id="grand-cinema" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.webp');">
+        <section id="grand-cinema" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/theatre.webp');">
             <!-- Transparent header -->
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase backdrop-blur-sm">
@@ -2905,7 +2905,7 @@
         <!-- Visual Novel + Puzzle Overlay (shown when not logged in) -->
         <div id="vnOverlay" class="hidden fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background-image: url('images/background/ticketoffice.webp'); background-size: cover; background-position: center;">
             <!-- Skip button -->
-            <button onclick="skipVN()" class="absolute top-4 right-4 z-10 px-3 py-1.5 border border-gray-500/50 text-gray-500 text-[10px] rounded active:scale-95 transition-all font-mono hover:border-gray-400 hover:text-gray-400">跳过 ▸</button>
+            <button onclick="skipVN()" class="absolute top-4 right-4 z-10 px-4 py-2 border-2 border-retro-gold/60 text-retro-gold text-xs rounded active:scale-95 transition-all font-mono bg-black/40 hover:border-retro-gold hover:bg-black/60 hover:scale-105">跳过 ▸</button>
             <!-- Character sprite area -->
             <div class="flex-1 flex items-end justify-center w-full max-w-lg px-4 pt-8">
                 <img id="vnCharacter" src="images/crimsonwitch.webp" alt="Character" class="max-h-full max-w-full object-contain" style="max-height: 55vh;">
@@ -2914,7 +2914,8 @@
             <div id="vnDialogBox" class="w-full max-w-lg mx-4 mb-6 bg-[#1a0f11]/95 backdrop-blur border-2 border-retro-gold/50 rounded-lg p-4 cursor-pointer transition-all hover:border-retro-gold/80" onclick="advanceVN()">
                 <div id="vnName" class="text-retro-neonred font-bold font-serif text-sm mb-2"></div>
                 <div id="vnText" class="text-retro-gold font-serif text-sm leading-relaxed min-h-[3rem]"></div>
-                <div id="vnHint" class="text-[9px] text-gray-500 text-right mt-2 font-mono hidden">点击继续 ▸</div>
+                <div id="vnHint" class="text-[9px] text-gray-500 text-right mt-2 font-mono hidden">点击继续（右上角跳过） ▸</div>
+                
             </div>
         </div>
 
@@ -2933,14 +2934,12 @@
             </div>
         </div>
 
-        <!-- Puzzle End Screen -->
+        <!-- Puzzle End / Pickup Note Screen -->
         <div id="puzzleEndOverlay" class="hidden fixed inset-0 z-[200] bg-black/95 flex flex-col items-center justify-center p-4">
-            <div class="text-center">
-                <div class="text-4xl mb-4">🎬</div>
-                <h2 class="text-retro-gold font-serif text-xl mb-2">剧本在妳手中</h2>
-                <p class="text-gray-400 text-xs mb-6 font-mono">Are you ready?</p>
-                <button onclick="closePuzzleEnd()" class="px-8 py-3 bg-retro-burgundy border-2 border-retro-gold text-retro-gold font-bold text-sm rounded active:scale-95 transition-all font-serif">
-                    进入售票处
+            <div class="text-center max-w-md">
+                <p id="puzzleEndText" class="text-retro-gold font-serif text-base leading-relaxed mb-6">妳抬起头，发现猩红女巫消失了，她留下了一张纸。</p>
+                <button onclick="pickupNote()" class="px-8 py-3 bg-retro-burgundy border-2 border-retro-gold text-retro-gold font-bold text-sm rounded active:scale-95 transition-all font-serif hover:bg-retro-burgundy/80 hover:scale-105">
+                    捡起来
                 </button>
             </div>
         </div>
@@ -4393,7 +4392,7 @@
             section.classList.remove('revealed');
             setTimeout(() => {
                 section.classList.add('revealed');
-            }, 1000);
+            }, 2000);
         }
 
         function navigateTo(screenId) {
@@ -4410,6 +4409,7 @@
                 document.getElementById('lobby').style.display = 'none';
                 document.getElementById('lobby').classList.remove('revealed');
                 document.getElementById('grand-cinema').style.display = 'none';
+                document.getElementById('grand-cinema').classList.remove('revealed');
                 document.getElementById('business-dept').style.display = 'none';
                 document.getElementById('business-dept').classList.remove('revealed');
                 const boxOfficeEl = document.getElementById('box-office');
@@ -4441,6 +4441,7 @@
                     document.getElementById('grand-cinema').style.display = 'flex';
                     renderCinemaFilters();
                     renderProjectorStop();
+                    triggerSectionReveal('grand-cinema');
                 } else if (screenId === 'business-dept') {
                     document.getElementById('business-dept').style.display = 'flex';
                     showDeptSubView('hallway');
@@ -7648,7 +7649,8 @@
         // VISUAL NOVEL + WORD PUZZLE (售票处未登录互动)
         // ==============================================
         const VN_DIALOGS = [
-            { name: '???', text: '欢迎来到红霞影剧院，我是这里的主（理）人陈婧霏，妳也可以尊称我为美丽、性感、才华横溢的猩红女巫。' },
+            { name: '???', text: '', button: '妳是谁？' },
+            { name: '???', text: 'Hi，欢迎来到红霞影剧院，我是这里的主（理）人陈婧霏，妳也可以尊称我为美丽、性感、才华横溢的猩红女巫。' },            
             { name: '猩红女巫', text: '在这里，我是每一场演出的导演、编剧和演员。愿妳在此也能尽情挥洒绽放，发现内心的力量，成为自己人生的导演、编剧和演员。' },
             { name: '猩红女巫', text: '这个世界因为我们相信而存在，这座光影魔法空间也因为相信的力量而出现在这个按部就班的世界。' },
             { name: '猩红女巫', text: '谢谢妳如此有品位地来到这里，但在进入剧场之前……让我看看妳是否懂得自己的力量。' },
@@ -7695,6 +7697,13 @@
             document.getElementById('vnName').textContent = dialog.name;
             document.getElementById('vnText').textContent = '';
             document.getElementById('vnHint').classList.add('hidden');
+            if (dialog.button) {
+                // Button dialog: show a button instead of typing text
+                vnTyping = false;
+                document.getElementById('vnText').innerHTML = `<button onclick="event.stopPropagation(); advanceVN();" class="mt-2 px-6 py-2 bg-retro-burgundy border-2 border-retro-gold text-retro-gold font-bold text-sm rounded active:scale-95 transition-all font-serif hover:bg-retro-burgundy/80 hover:scale-105">${dialog.button}</button>`;
+                document.getElementById('vnHint').classList.remove('hidden');
+                return;
+            }
             vnTextFull = dialog.text;
             vnCharIndex = 0;
             vnTyping = true;
@@ -7913,7 +7922,37 @@
             }
         }
 
-        function closePuzzleEnd() {
+        function pickupNote() {
+            document.getElementById('puzzleEndOverlay').classList.add('hidden');
+            openParchmentModal('', `
+                <p>开始这趟旅程之前，我想「红霞影剧院」是场盛大的绚烂、是朦胧的梦幻、也是狂野的迷乱—— 汇集成一个独属于「陈婧霏」色彩的沉浸式的能量场。</p>
+                <p>我还想，它是一场前所未有、独一无二，打通各种感官——视觉，听觉，嗅觉，触觉，沉浸式的livehouse体验。</p>
+                <p>我的人生体验就是这场梦的剧本。因为演出的每一首词曲、每一段串场念白全部出自我手：一字一韵，都是内心所感。</p>
+                <p>\n</p>
+                <p>希望不管你找没找到「人间指南」， 「此刻是否过着渴望的人生」， 都能从「红霞影剧院」获得一些能量。</p>
+                <p>希望在这个混乱又充满可能性的时间里， “我们的时代，终于会到来。 灵感终将被灌溉， 所有感受都被善待。”</p>
+                <p>\n</p>
+                <p>“You can change the script anytime you want.”</p>
+            `);
+            // When parchment modal closes, show the "剧本在妳手中" screen
+            const check = setInterval(() => {
+                if (!document.querySelector('.parchment-overlay')) {
+                    clearInterval(check);
+                    const overlay = document.getElementById('puzzleEndOverlay');
+                    overlay.querySelector('.max-w-md').innerHTML = `
+                        <div class="text-4xl mb-4">🎬</div>
+                        <h2 class="text-retro-gold font-serif text-xl mb-2">剧本在妳手中</h2>
+                        <p class="text-gray-400 text-xs mb-6 font-mono">Are you ready?</p>
+                        <button onclick="enterBoxOffice()" class="px-8 py-3 bg-retro-burgundy border-2 border-retro-gold text-retro-gold font-bold text-sm rounded active:scale-95 transition-all font-serif hover:bg-retro-burgundy/80 hover:scale-105">
+                            进入售票处
+                        </button>
+                    `;
+                    overlay.classList.remove('hidden');
+                }
+            }, 500);
+        }
+
+        function enterBoxOffice() {
             document.getElementById('puzzleEndOverlay').classList.add('hidden');
             document.getElementById('box-office').style.display = 'flex';
             syncChecklistVisuals();
