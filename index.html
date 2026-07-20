@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>陈婧霏·红霞影剧院</title>
     <!-- Favicon & Add-to-Home-Screen Icons -->
-    <link rel="icon" type="image/png" href="images/app.png">
-    <link rel="apple-touch-icon" href="images/app.png">
+    <link rel="icon" type="image/webp" href="images/app.webp">
+    <link rel="apple-touch-icon" href="images/app.webp">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="红霞影剧院">
     <!-- Tailwind CSS -->
@@ -424,6 +424,22 @@
         .section-delay.revealed::before,
         .section-delay.revealed > * { opacity: 1; }
 
+        /* Same reveal logic for sub-views (materials corner, souvenir shop) */
+        .sub-delay { position: relative; }
+        .sub-delay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .sub-delay > * { opacity: 0; position: relative; z-index: 2; transition: opacity 0.4s ease; }
+        .sub-delay.revealed::before,
+        .sub-delay.revealed > * { opacity: 1; }
+
         /* Multi-image preview in form */
         .mail-preview-row {
             display: flex;
@@ -659,7 +675,7 @@
     <div id="appContainer" class="w-full flex-1 relative flex flex-col items-center justify-center overflow-hidden">
         
         <!-- Cinematic Intro Overlayer (Simulated film start) -->
-        <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.png'); background-size: cover; background-position: center;">
+        <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('images/background/front%20door.webp'); background-size: cover; background-position: center;">
             <div class="absolute bottom-[35%] left-1/2 -translate-x-1/2 text-center">
                 <button onclick="startImmersiveExperience()" class="text-lg font-bold tracking-[0.3em] active:scale-95 transition-all duration-300 animate-neon-flicker">
                     <i class="fa-solid fa-ticket"></i> 进入影剧院
@@ -708,7 +724,7 @@
         </header>
 
         <!-- THEATER BUILDING OVERVIEW (THE MAP VIEW) -->
-        <main id="mainMapScreen" class="hidden flex-1 min-h-0 w-full max-w-4xl mx-auto p-3 flex flex-col items-center justify-center" style="background-image: url('images/background/overheadview.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <main id="mainMapScreen" class="hidden flex-1 min-h-0 w-full max-w-4xl mx-auto p-3 flex flex-col items-center justify-center" style="background-image: url('images/background/overheadview.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             
             <div class="text-center my-2">
                 <h2 class="text-retro-gold text-base md:text-lg tracking-[0.2em] font-bold uppercase">剧院全景俯瞰图</h2>
@@ -868,7 +884,7 @@
         <!-- ============================================== -->
         <!-- AREA 1: MAILROOM (收发室)                       -->
         <!-- ============================================== -->
-        <section id="mailroom" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/mailroom.png');">
+        <section id="mailroom" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/mailroom.webp');">
             <!-- Nav Row -->
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
@@ -954,7 +970,7 @@
         <!-- ============================================== -->
         <!-- AREA 2: MAIN LOBBY (一楼大厅 - 物料角落 & 纪念品商店) -->
         <!-- ============================================== -->
-        <section id="lobby" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/lobby.png');">
+        <section id="lobby" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/lobby.webp');">
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button id="lobbyBackBtn" onclick="handleLobbyBack()" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
@@ -1048,7 +1064,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 1: MATERIALS CORNER (物料角落) ================= -->
-            <div id="lobbyMaterials" class="hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-hidden">
+            <div id="lobbyMaterials" class="sub-delay hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-hidden" style="background-image: url('images/background/material.webp'); background-size: cover; background-position: center;">
                 <!-- Left: Submit Form (hidden by default) -->
                 <div id="craftFormPanel" class="hidden md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
@@ -1127,7 +1143,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 2: SOUVENIR SHOP (纪念品商店) ================= -->
-            <div id="lobbyShop" class="hidden flex-1 overflow-y-auto bg-[#180e10]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4">
+            <div id="lobbyShop" class="sub-delay hidden flex-1 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('images/background/shop.webp'); background-size: cover; background-position: center;">
                 <div class="text-center mb-4">
                     <p class="text-[10px] text-retro-gold tracking-wider leading-relaxed">
                         点击图片可跳转线上购买链接
@@ -1153,7 +1169,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case1 1.png" alt="纪念帆布包" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case1 1.webp" alt="纪念帆布包" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">纪念帆布包</p>
@@ -1165,7 +1181,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case1 2.png" alt="纪念贴纸组" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case1 2.webp" alt="纪念贴纸组" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">纪念贴纸组</p>
@@ -1177,7 +1193,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case1 3.png" alt="猩红logo棒球帽" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case1 3.webp" alt="猩红logo棒球帽" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">猩红logo棒球帽</p>
@@ -1189,7 +1205,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case1 4.png" alt="红霞影剧院slogan棒球帽" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case1 4.webp" alt="红霞影剧院slogan棒球帽" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">红霞影剧院slogan棒球帽</p>
@@ -1201,7 +1217,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case1 5.png" alt="猩红纪念T恤" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case1 5.webp" alt="猩红纪念T恤" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">猩红纪念T恤</p>
@@ -1213,7 +1229,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case1 6.png" alt="红霞影剧院纪念T恤" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case1 6.webp" alt="红霞影剧院纪念T恤" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">红霞影剧院纪念T恤</p>
@@ -1238,7 +1254,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case2 1.png" alt="气剧·行至天光" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case2 1.webp" alt="气剧·行至天光" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">气剧·行至天光</p>
@@ -1249,7 +1265,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case2 2.png" alt="气剧·重返扉页" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case2 2.webp" alt="气剧·重返扉页" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">气剧·重返扉页</p>
@@ -1260,7 +1276,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case2 3.png" alt="甚至日光·褪色幻想" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case2 3.webp" alt="甚至日光·褪色幻想" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">甚至日光·褪色幻想</p>
@@ -1282,7 +1298,7 @@
                             <a href="https://xhslink.com/m/AxHYXdKp5Eo" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case3 1.png" alt="巡演纪念定制笔" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case3 1.webp" alt="巡演纪念定制笔" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">巡演纪念定制笔</p>
@@ -1293,7 +1309,7 @@
                             <a href="https://xhslink.com/m/6v0hKTO3lqV" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="images/souvenir/case3 2.png" alt="巡演联动款定制笔记本" class="w-full h-full object-cover">
+                                    <img src="images/souvenir/case3 2.webp" alt="巡演联动款定制笔记本" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">巡演联动款定制笔记本</p>
@@ -1310,7 +1326,7 @@
         <!-- ============================================== -->
         <!-- AREA 3: GRAND CINEMA (豪华影厅 - 巡演城市档案)     -->
         <!-- ============================================== -->
-        <section id="grand-cinema" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.png');">
+        <section id="grand-cinema" class="hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('images/background/theatre.webp');">
             <!-- Transparent header -->
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase backdrop-blur-sm">
@@ -1396,7 +1412,7 @@
         <!-- ============================================== -->
         <!-- AREA 4: BUSINESS DEPARTMENT (业务部 - 3大分支)  -->
         <!-- ============================================== -->
-        <section id="business-dept" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/corridor.png');">
+        <section id="business-dept" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/corridor.webp');">
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button id="deptBackBtn" onclick="handleDeptBack()" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
@@ -1532,7 +1548,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 1: REHEARSAL ROOM (演员排练室) ================= -->
-            <div id="subDeptRehearsal" class="hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto">
+            <div id="subDeptRehearsal" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('images/background/actor.png'); background-size: cover; background-position: center;">
 
                 <!-- Song List Full Width -->
                 <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
@@ -2180,7 +2196,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 2: DIRECTOR'S LOUNGE (导演休息室) ================= -->
-            <div id="subDeptDirector" class="hidden flex-1 flex flex-col gap-3 overflow-y-auto bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4">
+            <div id="subDeptDirector" class="sub-delay hidden flex-1 flex flex-col gap-3 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('images/background/director.png'); background-size: cover; background-position: center;">
                 <div class="border-b border-retro-gold/15 pb-1.5 mb-2 flex justify-between items-center">
                     <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-video"></i> 官方纪录影像</span>
                 </div>
@@ -2437,7 +2453,7 @@
 
 
             <!-- ================= SUB-VIEW 3: WRITER'S STUDIO (编剧工作室) ================= -->
-            <div id="subDeptWriter" class="hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto">
+            <div id="subDeptWriter" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('images/background/writer.png'); background-size: cover; background-position: center;">
 
                 <!-- Podcast List Full Width -->
                 <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
@@ -2691,7 +2707,7 @@
         <!-- ============================================== -->
         <!-- AREA 5: BOX OFFICE (售票处 - 打卡与纪念票生成)   -->
         <!-- ============================================== -->
-        <section id="box-office" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/ticketoffice.png');">
+        <section id="box-office" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('images/background/ticketoffice.webp');">
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
@@ -2887,12 +2903,12 @@
         </section>
 
         <!-- Visual Novel + Puzzle Overlay (shown when not logged in) -->
-        <div id="vnOverlay" class="hidden fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background-image: url('images/background/ticketoffice.png'); background-size: cover; background-position: center;">
+        <div id="vnOverlay" class="hidden fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background-image: url('images/background/ticketoffice.webp'); background-size: cover; background-position: center;">
             <!-- Skip button -->
             <button onclick="skipVN()" class="absolute top-4 right-4 z-10 px-3 py-1.5 border border-gray-500/50 text-gray-500 text-[10px] rounded active:scale-95 transition-all font-mono hover:border-gray-400 hover:text-gray-400">跳过 ▸</button>
             <!-- Character sprite area -->
             <div class="flex-1 flex items-end justify-center w-full max-w-lg px-4 pt-8">
-                <img id="vnCharacter" src="images/crimsonwitch.png" alt="Character" class="max-h-full max-w-full object-contain" style="max-height: 55vh;">
+                <img id="vnCharacter" src="images/crimsonwitch.webp" alt="Character" class="max-h-full max-w-full object-contain" style="max-height: 55vh;">
             </div>
             <!-- Dialog box -->
             <div id="vnDialogBox" class="w-full max-w-lg mx-4 mb-6 bg-[#1a0f11]/95 backdrop-blur border-2 border-retro-gold/50 rounded-lg p-4 cursor-pointer transition-all hover:border-retro-gold/80" onclick="advanceVN()">
@@ -4467,10 +4483,23 @@
             }
         }
 
+        function triggerSubReveal(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            el.classList.remove('revealed');
+            setTimeout(() => {
+                el.classList.add('revealed');
+            }, 1000);
+        }
+
         function showLobbySubView(subId) {
             document.getElementById('lobbyHallway').style.display = 'none';
-            document.getElementById('lobbyMaterials').style.display = 'none';
-            document.getElementById('lobbyShop').style.display = 'none';
+            const materialsEl = document.getElementById('lobbyMaterials');
+            const shopEl = document.getElementById('lobbyShop');
+            materialsEl.style.display = 'none';
+            materialsEl.classList.remove('revealed');
+            shopEl.style.display = 'none';
+            shopEl.classList.remove('revealed');
 
             STATE.activeLobbySubView = subId;
 
@@ -4484,17 +4513,19 @@
                 lobbySubText.innerText = 'Grand Lobby';
                 lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回主图`;
             } else if (subId === 'materials') {
-                document.getElementById('lobbyMaterials').style.display = 'grid';
+                materialsEl.style.display = 'grid';
                 hideCraftForm();
                 renderCrafts();
                 lobbyTitleText.innerText = '🎨 物料交换角';
                 lobbySubText.innerText = 'Fan-Made Corner';
                 lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回大厅`;
+                triggerSubReveal('lobbyMaterials');
             } else if (subId === 'shop') {
-                document.getElementById('lobbyShop').style.display = 'block';
+                shopEl.style.display = 'block';
                 lobbyTitleText.innerText = '🛍️ 纪念品商店';
                 lobbySubText.innerText = 'Souvenir Shop';
                 lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回大厅`;
+                triggerSubReveal('lobbyShop');
             }
         }
 
@@ -4518,9 +4549,15 @@
 
         function showDeptSubView(subId) {
             document.getElementById('deptHallway').style.display = 'none';
-            document.getElementById('subDeptRehearsal').style.display = 'none';
-            document.getElementById('subDeptDirector').style.display = 'none';
-            document.getElementById('subDeptWriter').style.display = 'none';
+            const rehearsalEl = document.getElementById('subDeptRehearsal');
+            const directorEl = document.getElementById('subDeptDirector');
+            const writerEl = document.getElementById('subDeptWriter');
+            rehearsalEl.style.display = 'none';
+            rehearsalEl.classList.remove('revealed');
+            directorEl.style.display = 'none';
+            directorEl.classList.remove('revealed');
+            writerEl.style.display = 'none';
+            writerEl.classList.remove('revealed');
 
             STATE.activeDeptSubView = subId;
 
@@ -4535,21 +4572,24 @@
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回主图`;
                 stopMusic();
             } else if (subId === 'director') {
-                document.getElementById('subDeptDirector').style.display = 'flex';
+                directorEl.style.display = 'flex';
                 deptTitleText.innerText = "🎬 导演休息室";
                 deptSubText.innerText = "RM 101 - Director's Lounge";
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 离开休息室`;
+                triggerSubReveal('subDeptDirector');
             } else if (subId === 'writer') {
-                document.getElementById('subDeptWriter').style.display = 'grid';
+                writerEl.style.display = 'grid';
                 deptTitleText.innerText = " 编剧工作室";
                 deptSubText.innerText = "RM 102 - Writer's Studio";
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 离开工作室`;
+                triggerSubReveal('subDeptWriter');
             }else if (subId === 'rehearsal') {
-                document.getElementById('subDeptRehearsal').style.display = 'grid';
+                rehearsalEl.style.display = 'grid';
                 deptTitleText.innerText = " 演员排练室";
-                deptSubText.innerText = "RM 103 - Actor‘s Rehearsal";
+                deptSubText.innerText = "RM 103 - Actor's Rehearsal";
                 deptBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 离开排练室`;
-            } 
+                triggerSubReveal('subDeptRehearsal');
+            }
         }
 
         // Play audio feedback for a given frequency and duration
