@@ -1347,14 +1347,23 @@
             <!-- Center-aligned card area, transparent to show bg -->
             <div class="flex-1 flex flex-col items-center justify-center relative">
 
+                <!-- Swipe indicator -->
+                <div class="mb-4 text-center">
+                    <div class="text-[9px] text-retro-gold/70 tracking-widest uppercase font-mono mb-0.5 drop-shadow">↑ 上下滑动切换 ↑</div>
+                    <div class="font-bold text-xs tracking-wider text-white drop-shadow">
+                        <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> :
+                        <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
+                    </div>
+                </div>
+
                 <!-- Dynamic Projector Screen Card - 90% width, centered -->
                 <div id="projectorScreen" class="w-[90%] max-w-lg bg-black/80 backdrop-blur-md border-[3px] border-retro-gold/50 rounded-xl shadow-2xl relative overflow-hidden flex items-center justify-center">
 
                     <div class="absolute inset-0 crt-scanline pointer-events-none opacity-20 z-10"></div>
 
-                    <div class="w-full bg-[#120708]/90 flex flex-col md:flex-row min-h-[280px]">
+                    <div class="w-full bg-[#120708]/90 flex flex-col md:flex-row min-h-[240px]">
                         <!-- Film Poster image -->
-                        <div class="w-full md:w-2/5 relative overflow-hidden bg-black flex items-center justify-center" style="min-height:280px;">
+                        <div class="w-full md:w-2/5 relative overflow-hidden bg-black flex items-center justify-center" style="min-height:240px;">
                             <div id="screenPosterContainer" class="w-full h-full"></div>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
                             <div class="absolute top-2 left-2 bg-retro-burgundy/90 border border-retro-gold px-2 py-0.5 rounded text-[9px] text-retro-gold tracking-widest font-mono uppercase" id="screenBadge">
@@ -1394,15 +1403,6 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Swipe indicator -->
-                <div class="mt-4 text-center">
-                    <div class="text-[9px] text-retro-gold/70 tracking-widest uppercase font-mono mb-0.5 drop-shadow">↑ 上下滑动切换 ↑</div>
-                    <div class="font-bold text-xs tracking-wider text-white drop-shadow">
-                        <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> :
-                        <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
                     </div>
                 </div>
 
@@ -3906,11 +3906,11 @@
         }
 
         const BGM_LIST = [
-            { name: "红霞剧场", file: "bgm/bgm1.mp3" },
-            { name: "她不再幻想", file: "bgm/bgm2.mp3" },
-            { name: "光芒", file: "bgm/bgm3.mp3" },
-            { name: "今晚", file: "bgm/bgm4.mp3" },
-            { name: "北海", file: "bgm/bgm5.mp3" }
+            { name: "红霞剧场", file: "/bgm/bgm1.mp3" },
+            { name: "她不再幻想", file: "/bgm/bgm2.mp3" },
+            { name: "光芒", file: "/bgm/bgm3.mp3" },
+            { name: "今晚", file: "/bgm/bgm4.mp3" },
+            { name: "北海", file: "/bgm/bgm5.mp3" }
         ];
 
         let bgmAudio = null;
