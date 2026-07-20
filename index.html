@@ -6554,8 +6554,6 @@
                     img.src = `images/tourpics1/${stop.id} ${imgIndex}.webp`;
                     img.alt = `${stop.city} ${imgIndex}`;
                     img.className = 'w-full h-full flex-shrink-0 snap-center object-cover object-bottom';
-                    img.loading = 'lazy';
-
                     img.onload = () => {
                         hasLoadedAny = true;
                         scrollWrap.appendChild(img);
