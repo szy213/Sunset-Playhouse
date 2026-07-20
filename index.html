@@ -3907,11 +3907,11 @@
         }
 
         const BGM_LIST = [
-            { name: "红霞剧场", file: "/bgm/bgm1.mp3" },
-            { name: "她不再幻想", file: "/bgm/bgm2.mp3" },
-            { name: "光芒", file: "/bgm/bgm3.mp3" },
-            { name: "今晚", file: "/bgm/bgm4.mp3" },
-            { name: "北海", file: "/bgm/bgm5.mp3" }
+            { name: "红霞剧场", file: "assets/bgm/bgm1.mp3" },
+            { name: "她不再幻想", file: "assets/bgm/bgm2.mp3" },
+            { name: "光芒", file: "assets/bgm/bgm3.mp3" },
+            { name: "今晚", file: "assets/bgm/bgm4.mp3" },
+            { name: "北海", file: "assets/bgm/bgm5.mp3" }
         ];
 
         let bgmAudio = null;
@@ -6551,7 +6551,7 @@
                         return;
                     }
                     const img = document.createElement('img');
-                    img.src = `tourpics1/${stop.id}%20${imgIndex}.webp`;
+                    img.src = `assets/tourpics1/${stop.id}%20${imgIndex}.webp`;
                     img.alt = `${stop.city} ${imgIndex}`;
                     img.className = 'w-full h-full flex-shrink-0 snap-center object-cover object-bottom';
                     scrollWrap.appendChild(img);
