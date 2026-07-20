@@ -3261,10 +3261,11 @@
             return urlData.publicUrl;
         }
 
-        async function uploadPostcardImage(blob, userId) {
+        // Shared image upload helper (used by both postcard & craft flows)
+        async function uploadStorageImage(blob, prefix, userId) {
             const mimeType = blob.type || 'image/webp';
             const ext = mimeType === 'image/webp' ? 'webp' : (mimeType.split('/')[1] || 'jpg');
-            const fileName = `postcard_${userId}_${Date.now()}.${ext}`;
+            const fileName = `${prefix}_${userId}_${Date.now()}.${ext}`;
             const { data, error } = await supabaseClient.storage
                 .from('postcards')
                 .upload(fileName, blob, {
@@ -5485,7 +5486,7 @@
                     submitBtn.innerHTML = '<span class="upload-spinner"></span> 上传中 (' + (i + 1) + '/' + imageFiles.length + ')...';
                     try {
                         const webpBlob = await convertToWebP(imageFiles[i], 1000);
-                        const url = await uploadPostcardImage(webpBlob, STATE.userId);
+                        const url = await uploadStorageImage(webpBlob, 'postcard', STATE.userId);
                         imageUrls.push(url);
                     } catch (uploadErr) {
                         console.warn('[Mail] Image ' + i + ' upload failed:', uploadErr);
@@ -6269,21 +6270,6 @@
             document.getElementById('clearCraftImage').classList.add('hidden');
         }
 
-        async function uploadCraftImage(blob, userId) {
-            const mimeType = blob.type || 'image/webp';
-            const ext = mimeType === 'image/webp' ? 'webp' : (mimeType.split('/')[1] || 'jpg');
-            const fileName = `craft_${userId}_${Date.now()}.${ext}`;
-            const { data, error } = await supabaseClient.storage
-                .from('postcards')
-                .upload(fileName, blob, {
-                    contentType: mimeType,
-                    cacheControl: '3600',
-                    upsert: false
-                });
-            if (error) throw new Error('Upload failed: ' + error.message);
-            const { data: urlData } = supabaseClient.storage.from('postcards').getPublicUrl(fileName);
-            return urlData.publicUrl;
-        }
 
         async function handleSendMerch(e) {
             e.preventDefault();
@@ -6306,7 +6292,7 @@
 
                 try {
                     const webpBlob = await convertToWebP(imageFile, 1000);
-                    imageUrl = await uploadCraftImage(webpBlob, STATE.userId);
+                    imageUrl = await uploadStorageImage(webpBlob, 'craft', STATE.userId);
                 } catch (uploadErr) {
                     imageError = uploadErr.message;
                     console.warn('[Craft] Image upload failed:', uploadErr);
