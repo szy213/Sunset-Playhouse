@@ -6552,14 +6552,17 @@
                     img.src = `images/tourpics1/${stop.id} ${imgIndex}.webp`;
                     img.alt = `${stop.city} ${imgIndex}`;
                     img.className = 'w-full h-full flex-shrink-0 snap-center object-cover object-bottom';
+                    // Append to DOM immediately so mobile browsers start loading
+                    scrollWrap.appendChild(img);
                     img.onload = () => {
                         hasLoadedAny = true;
-                        scrollWrap.appendChild(img);
                         imgIndex++;
                         tryLoadNext();
                     };
                     img.onerror = () => {
-                        if (!hasLoadedAny) showFallbackPoster();
+                        img.remove();
+                        imgIndex++;
+                        tryLoadNext();
                     };
                 };
 
