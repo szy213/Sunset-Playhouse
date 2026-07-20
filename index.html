@@ -1548,7 +1548,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 1: REHEARSAL ROOM (演员排练室) ================= -->
-            <div id="subDeptRehearsal" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('images/background/actor.png'); background-size: cover; background-position: center;">
+            <div id="subDeptRehearsal" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('images/background/actor.webp'); background-size: cover; background-position: center;">
 
                 <!-- Song List Full Width -->
                 <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
@@ -2196,7 +2196,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 2: DIRECTOR'S LOUNGE (导演休息室) ================= -->
-            <div id="subDeptDirector" class="sub-delay hidden flex-1 flex flex-col gap-3 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('images/background/director.png'); background-size: cover; background-position: center;">
+            <div id="subDeptDirector" class="sub-delay hidden flex-1 flex flex-col gap-3 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('images/background/director.webp'); background-size: cover; background-position: center;">
                 <div class="border-b border-retro-gold/15 pb-1.5 mb-2 flex justify-between items-center">
                     <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-video"></i> 官方纪录影像</span>
                 </div>
@@ -2453,7 +2453,7 @@
 
 
             <!-- ================= SUB-VIEW 3: WRITER'S STUDIO (编剧工作室) ================= -->
-            <div id="subDeptWriter" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('images/background/writer.png'); background-size: cover; background-position: center;">
+            <div id="subDeptWriter" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('images/background/writer.webp'); background-size: cover; background-position: center;">
 
                 <!-- Podcast List Full Width -->
                 <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
@@ -2937,7 +2937,7 @@
         <div id="puzzleEndOverlay" class="hidden fixed inset-0 z-[200] bg-black/95 flex flex-col items-center justify-center p-4">
             <div class="text-center">
                 <div class="text-4xl mb-4">🎬</div>
-                <h2 class="text-retro-gold font-serif text-xl mb-2">剧本在你手中</h2>
+                <h2 class="text-retro-gold font-serif text-xl mb-2">剧本在妳手中</h2>
                 <p class="text-gray-400 text-xs mb-6 font-mono">Are you ready?</p>
                 <button onclick="closePuzzleEnd()" class="px-8 py-3 bg-retro-burgundy border-2 border-retro-gold text-retro-gold font-bold text-sm rounded active:scale-95 transition-all font-serif">
                     进入售票处
@@ -3089,7 +3089,7 @@
                     真的！
                 </button>
                 <button onclick="finalizeRegister('audience')" class="w-full py-3 bg-[#120708] border border-retro-gold/50 text-gray-400 hover:text-retro-gold hover:border-retro-gold font-bold text-sm rounded transition-all active:scale-95">
-                    骗你的
+                    骗妳的
                 </button>
             </div>
         </div>
@@ -3755,10 +3755,10 @@
                 comment_craft: '<i class="fa-solid fa-comment text-retro-gold notif-icon"></i>'
             };
             const typeLabel = {
-                like_postcard: '赞了你的明信片',
-                comment_postcard: '评论了你的明信片',
-                like_craft: '赞了你的物料',
-                comment_craft: '评论了你的物料'
+                like_postcard: '赞了妳的明信片',
+                comment_postcard: '评论了妳的明信片',
+                like_craft: '赞了妳的物料',
+                comment_craft: '评论了妳的物料'
             };
             list.innerHTML = notifs.slice(0, 30).map(n => `
                 <div class="notif-item ${n.read ? '' : 'unread'}" onclick="event.stopPropagation(); markNotifRead(${n.id}, '${n.type}', ${n.target_id})">
@@ -3766,7 +3766,7 @@
                         <span class="mt-0.5">${iconMap[n.type] || '<i class="fa-solid fa-circle text-gray-500 text-[8px]"></i>'}</span>
                         <div class="flex-1 min-w-0">
                             <span class="text-retro-gold font-bold">${escapeHtml(n.actor_name || '匿名')}</span>
-                            <span class="text-gray-400">${typeLabel[n.type] || '与你互动'}</span>
+                            <span class="text-gray-400">${typeLabel[n.type] || '与妳互动'}</span>
                             ${n.content ? `<p class="text-gray-500 text-[9px] truncate mt-0.5">"${escapeHtml(n.content)}"</p>` : ''}
                         </div>
                     </div>
@@ -3918,8 +3918,8 @@
 
         const ACHIEVEMENTS = [
             { id: "reg_passport", title: "影剧院来客", desc: "在售票处成功登记购票", quote: "「灵感被灌溉，所有感受都被善待」", icon: "👤" },
-            { id: "read_stops", title: "剧院观影人", desc: "在豪华大影厅浏览过5个城市的放映纪实", quote: "「镜头里的你，镜头慢慢清晰」", icon: "🎬" },        
-            { id: "send_postcard", title: "春色寄情人", desc: "在收发室成功投递一封明信片", quote: "「春色悠悠不及你荡漾」", icon: "✉️" },
+            { id: "read_stops", title: "剧院观影人", desc: "在豪华大影厅浏览过5个城市的放映纪实", quote: "「镜头里的妳，镜头慢慢清晰」", icon: "🎬" },        
+            { id: "send_postcard", title: "春色寄情人", desc: "在收发室成功投递一封明信片", quote: "「春色悠悠不及妳荡漾」", icon: "✉️" },
             { id: "post_craft", title: "物料主理人", desc: "在大厅布告板上登记了一款物料", quote: "「把感性的好奇，装进行李」", icon: "🎨" },
             { id: "ambient_on", title: "放映机余音", desc: "开启放映机环境背景音，聆听红霞影剧院原声歌单", quote: "「在这温热的声浪里，听见胶片滚动的呼吸。」", icon: "📻" },
             { id: "spell_decipher", title: "咒语解密人", desc: "成功解密猩红女巫的咒语", quote: "「剧情对白角色 都是我」", icon: "🔮" }
@@ -4163,7 +4163,7 @@
         //         lyrics: [
         //             "用最低沉的声线 唱一首无人的歌",
         //             "像黑白默片里 缓缓飘落的细雨",
-        //             "你的目光是旧影院里 唯一的探照灯",
+        //             "妳的目光是旧影院里 唯一的探照灯",
         //             "穿透我胸膛中 那些堆积尘封的旧账",
         //             "让我们在歌声深处 再次沉沦",
         //             "直到微光 抚平所有的创伤..."
@@ -4648,16 +4648,16 @@
 
         function showChangelog() {
             openParchmentModal('更新日志', `
-                <p><b>2025.07</b> — 红霞影剧院正式上线。收发室、物料交换角、纪念品商店、大影院、业务部五大区域开放。</p>
+                <p><b>2025.07</b> — 红霞影剧院正式上线。收发室、一层大厅、售票处、豪华大影厅、业务部五大区域开放。</p>
             `);
         }
 
         function showAuthorNote() {
             openParchmentModal('作者说明', `
-                <p>本站仅用作个人兴趣项目，所有运营支出（域名，数据库存储，开发等）均由个人承担，不涉及任何商业用途或盈利行为,不代表官方立场。</p>
+                <p>本站仅用作个人兴趣和安利目的，所有运营支出（域名，数据库存储，开发等）均由个人承担，不涉及任何商业用途或盈利行为,不代表官方立场。</p>
                 <p>全站音视频素材版权均归属原作者及版权方所有，若本站部分素材（如插图、引用文本）涉及版权争议，烦请通过下方联系方式与作者取得联系，将在确认后第一时间配合删除或修改。微信：msjlwl8wrcwmsj/邮箱：szy2861548683@qq.com<p>              
                 <p>相关信息均为人工收集添加，如有差错或网站建设相关建议，请通过上方联系方式联系作者。</p>
-                <p>谨以此作献给我少女时代的英雌主义陈婧霏，你说只要相信，我也能改写自己的人生。</p>
+                <p>谨以此作献给我少女时代的英雌主义陈婧霏，妳说只要相信，我也能改写自己的人生。</p>
                 <p style="text-align:right;text-indent:0;margin-top:16px;">项目构建于 2026 年夏天</p>
                 <p style="text-align:right;text-indent:0;margin-top:16px;">家有猫小帅</p>
             `);
@@ -5068,7 +5068,7 @@
             mails.forEach(m => { _mailCache[m.id] = m; });
 
             if (mails.length === 0) {
-                const emptyMsg = _mailFilterMine ? '你还没有投递过明信片' : '明信片架空空如也...';
+                const emptyMsg = _mailFilterMine ? '妳还没有投递过明信片' : '明信片架空空如也...';
                 const emptyHint = _mailFilterMine ? '点击上方「投递」按钮写下第一封吧' : '点击上方「投递」按钮留下第一封明信片';
                 container.innerHTML = `
                     <div class="text-center text-gray-600 py-12 font-serif">
@@ -5920,7 +5920,7 @@
             crafts.forEach(c => { _craftCache[c.id] = c; });
 
             if (crafts.length === 0) {
-                const emptyMsg = _craftFilterMine ? '你还没有登记过物料' : '布告板上空空如也...';
+                const emptyMsg = _craftFilterMine ? '妳还没有登记过物料' : '布告板上空空如也...';
                 const emptyHint = _craftFilterMine ? '点击上方「登记」按钮发布第一个物料吧' : '点击上方「登记」按钮发布第一个物料吧';
                 container.innerHTML = `
                     <div class="text-center text-gray-600 py-12 font-serif">
@@ -7648,10 +7648,10 @@
         // VISUAL NOVEL + WORD PUZZLE (售票处未登录互动)
         // ==============================================
         const VN_DIALOGS = [
-            { name: '???', text: '欢迎来到红霞影剧院，我是这里的主（理）人陈婧霏，你也可以尊称我为美丽、性感、才华横溢的猩红女巫。' },
-            { name: '猩红女巫', text: '在这里，我是每一场演出的导演、编剧和演员。愿你在此也能尽情挥洒绽放，发现自己内心的力量，成为自己人生的导演、编剧和演员。' },
+            { name: '???', text: '欢迎来到红霞影剧院，我是这里的主（理）人陈婧霏，妳也可以尊称我为美丽、性感、才华横溢的猩红女巫。' },
+            { name: '猩红女巫', text: '在这里，我是每一场演出的导演、编剧和演员。愿妳在此也能尽情挥洒绽放，发现内心的力量，成为自己人生的导演、编剧和演员。' },
             { name: '猩红女巫', text: '这个世界因为我们相信而存在，这座光影魔法空间也因为相信的力量而出现在这个按部就班的世界。' },
-            { name: '猩红女巫', text: '谢谢你如此有品位地来到这里，但在进入剧场之前……让我看看你是否懂得自己的力量。' },
+            { name: '猩红女巫', text: '谢谢妳如此有品位地来到这里，但在进入剧场之前……让我看看妳是否懂得自己的力量。' },
             { name: '猩红女巫', text: '来，试试排列这些词语，念出那句神奇的咒语吧。' }
         ];
         let vnIndex = 0;
@@ -7918,6 +7918,7 @@
             document.getElementById('box-office').style.display = 'flex';
             syncChecklistVisuals();
             syncMapDotsVisuals();
+            triggerSectionReveal('box-office');
         }
     </script>
     <canvas id="ribbonCanvas" class="fixed inset-0 pointer-events-none z-[300]"></canvas>
