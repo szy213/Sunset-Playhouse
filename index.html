@@ -434,9 +434,9 @@
             opacity: 0;
             z-index: 1;
             pointer-events: none;
-            transition: opacity 2.5s ease;
+            transition: opacity 1s ease;
         }
-        .sub-delay > * { opacity: 0; position: relative; z-index: 2; transition: opacity 2.5s ease; }
+        .sub-delay > * { opacity: 0; position: relative; z-index: 2; transition: opacity 1s ease; }
         .sub-delay.revealed::before,
         .sub-delay.revealed > * { opacity: 1; }
 
@@ -4493,7 +4493,7 @@
             el.classList.remove('revealed');
             setTimeout(() => {
                 el.classList.add('revealed');
-            }, 500);
+            }, 2000);
         }
 
         function showLobbySubView(subId) {
