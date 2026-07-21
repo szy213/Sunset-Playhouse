@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Noto+Serif+SC:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <!-- Supabase JS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
     <!-- Custom Retro Themes and Layout Config -->
     <script>
@@ -2958,7 +2959,7 @@
 
             <div class="text-center">
                 <h3 class="text-retro-neonred text-sm font-bold font-serif tracking-widest neon-glow-red">🎟️ "红霞影剧院"入场凭证已生成</h3>
-                <p class="text-[10px] text-gray-400 mt-0.5">请长按或截图下方精致纪念票根保存</p>
+                <p class="text-[10px] text-gray-400 mt-0.5">长按票根即可保存到相册</p>
             </div>
 
             <!-- TICKET BODY (Fully restructured vertical layout for seamless mobile screen width) -->
@@ -3016,8 +3017,8 @@
                     
                     <div class="text-left space-y-0.5">
                         <span class="text-[8px] text-[#58111A]/60 block font-mono">STUB COUPON</span>
-                        <div class="text-sm font-bold font-serif text-retro-burgundy tracking-wide">
-                            You can change the script anytime you want
+                        <div class="text-sm font-bold font-serif text-retro-burgundy tracking-wide" id="ticketRouteText">
+
                         </div>
                         <span class="text-[8px] text-[#58111A]/60 block font-mono" id="ticketPrintDate">DATE: 2026/07/17</span>
                     </div>
@@ -7255,6 +7256,28 @@
             const mileage = calcCumulativeMileage();
             document.getElementById('ticketSerialNum').innerText = mileage >= 1 ? `${Math.round(mileage).toLocaleString()} KM` : '0 KM';
 
+            // Compute city travel route (sorted by date, coming-soon at end, unique consecutive cities)
+            const sortedChecked = [...STATE.checkedCities].sort((a, b) => {
+                const statusA = TOUR_STOPS[a].status;
+                const statusB = TOUR_STOPS[b].status;
+                // Coming soon cities go last
+                if (statusA === '待开演' && statusB !== '待开演') return 1;
+                if (statusA !== '待开演' && statusB === '待开演') return -1;
+                // Otherwise sort by date
+                const dateA = new Date(TOUR_STOPS[a].date.replace(/\./g, '-'));
+                const dateB = new Date(TOUR_STOPS[b].date.replace(/\./g, '-'));
+                return dateA - dateB;
+            });
+            const routeCities = [];
+            sortedChecked.forEach(idx => {
+                const city = TOUR_STOPS[idx].city;
+                if (routeCities.length === 0 || routeCities[routeCities.length - 1] !== city) {
+                    routeCities.push(city);
+                }
+            });
+            const routeText = routeCities.length > 0 ? routeCities.join(' → ') : '';
+            document.getElementById('ticketRouteText').innerText = routeText;
+
             generateBarcode();
 
             const today = new Date();
@@ -7443,10 +7466,106 @@
             document.getElementById('ticketModal').classList.add('hidden');
         }
 
+        async function saveTicketToAlbum() {
+            const ticketArea = document.getElementById('ticketPrintArea');
+            if (!ticketArea) return;
+
+            try {
+                showRetroMessage('正在生成票根图片...');
+
+                const canvas = await html2canvas(ticketArea, {
+                    backgroundColor: '#2a1317',
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                });
+
+                // Convert canvas to blob
+                canvas.toBlob(async (blob) => {
+                    if (!blob) {
+                        showRetroMessage('图片生成失败，请重试。');
+                        return;
+                    }
+
+                    const file = new File([blob], `红霞影剧院票根_${new Date().toLocaleDateString('zh-CN')}.png`, { type: 'image/png' });
+
+                    // Try Web Share API first (iOS Safari supports sharing files to Photos)
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        try {
+                            await navigator.share({
+                                files: [file],
+                                title: '红霞影剧院纪念票根',
+                            });
+                            return;
+                        } catch (shareErr) {
+                            // User cancelled share, fall through to download
+                            if (shareErr.name === 'AbortError') return;
+                        }
+                    }
+
+                    // Fallback: download the image
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `红霞影剧院票根_${new Date().toLocaleDateString('zh-CN')}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+
+                    showRetroMessage('票根已保存，请查看相册或下载目录。');
+                }, 'image/png');
+            } catch (err) {
+                console.error('saveTicketToAlbum error:', err);
+                showRetroMessage('保存失败，请截图保存。');
+            }
+        }
+
+        // Long-press handler for ticket area
+        (function initLongPress() {
+            const ticketArea = document.getElementById('ticketPrintArea');
+            if (!ticketArea) return;
+
+            let pressTimer = null;
+            const LONG_PRESS_DURATION = 600;
+
+            function clearPressTimer() {
+                if (pressTimer) {
+                    clearTimeout(pressTimer);
+                    pressTimer = null;
+                }
+            }
+
+            ticketArea.addEventListener('touchstart', (e) => {
+                pressTimer = setTimeout(() => {
+                    pressTimer = null;
+                    // Haptic feedback if available
+                    if (navigator.vibrate) navigator.vibrate(15);
+                    saveTicketToAlbum();
+                }, LONG_PRESS_DURATION);
+            }, { passive: true });
+
+            ticketArea.addEventListener('touchend', clearPressTimer);
+            ticketArea.addEventListener('touchmove', clearPressTimer);
+            ticketArea.addEventListener('touchcancel', clearPressTimer);
+
+            // Also support mouse long-press for desktop
+            ticketArea.addEventListener('mousedown', (e) => {
+                pressTimer = setTimeout(() => {
+                    pressTimer = null;
+                    saveTicketToAlbum();
+                }, LONG_PRESS_DURATION);
+            });
+
+            ticketArea.addEventListener('mouseup', clearPressTimer);
+            ticketArea.addEventListener('mouseleave', clearPressTimer);
+        })();
+
         function copyTicketRawText() {
             const mileage = calcCumulativeMileage();
             const mileageText = mileage >= 1 ? `${Math.round(mileage).toLocaleString()} KM` : '0 KM';
-            const summaryText = `[红霞影剧院] 我已集齐陈婧霏巡演 ${STATE.checkedCities.length} 站打卡足迹！我的荣誉称号: ${document.getElementById('ticketSeatNum').innerText}。累计里程: ${mileageText}。`;
+            const routeText = document.getElementById('ticketRouteText')?.innerText || '';
+            const summaryText = `[红霞影剧院] 我已集齐陈婧霏巡演 ${STATE.checkedCities.length} 站打卡足迹！打卡轨迹: ${routeText}。我的荣誉称号: ${document.getElementById('ticketSeatNum').innerText}。累计里程: ${mileageText}。`;
             
             const dummy = document.createElement('textarea');
             dummy.value = summaryText;
