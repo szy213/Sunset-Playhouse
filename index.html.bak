@@ -4524,7 +4524,7 @@
                 triggerSubReveal('lobbyMaterials');
             } else if (subId === 'shop') {
                 shopEl.style.display = 'block';
-                lobbyTitleText.innerText = '🛍️ 纪念品商店';
+                lobbyTitleText.innerText = '🎁 纪念品商店';
                 lobbySubText.innerText = 'Souvenir Shop';
                 lobbyBackBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> 返回大厅`;
                 triggerSubReveal('lobbyShop');
