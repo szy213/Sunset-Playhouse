@@ -1357,9 +1357,7 @@
             <div class="flex-1 flex flex-col items-center justify-center relative pb-20">
 
                 <!-- Dynamic Projector Screen Card - 90% width, centered -->
-                <div id="projectorScreen" class="w-[90%] max-w-lg max-h-full bg-black/80 backdrop-blur-md border-[3px] border-retro-gold/50 rounded-xl shadow-2xl relative overflow-hidden flex items-center justify-center">
-
-                    <div class="absolute inset-0 crt-scanline pointer-events-none opacity-20 z-10"></div>
+                <div id="projectorScreen" class="w-[90%] max-w-lg max-h-full bg-black/80 backdrop-blur-md border-[3px] border-retro-gold/50 rounded-xl shadow-2xl relative overflow-hidden flex items-center justify-center" style="transform:scale(0.8);">
 
                     <div class="w-full bg-[#120708]/90 flex flex-col md:flex-row min-h-[240px]">
                         <!-- Film Poster image -->
@@ -4395,7 +4393,7 @@
             section.classList.remove('revealed');
             setTimeout(() => {
                 section.classList.add('revealed');
-            }, 2000);
+            }, 1500);
         }
 
         function navigateTo(screenId) {
