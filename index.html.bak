@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>陈婧霏·红霞影剧院</title>
     <!-- Favicon & Add-to-Home-Screen Icons -->
-    <link rel="icon" type="image/webp" href="/assets/app.webp">
-    <link rel="apple-touch-icon" href="/assets/app.webp">
+    <link rel="icon" type="image/webp" href="/assets/app-CA77iUdu.webp">
+    <link rel="apple-touch-icon" href="/assets/app-CA77iUdu.webp">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="红霞影剧院">
     <!-- Tailwind CSS -->
@@ -604,15 +604,6 @@
     <!-- Vintage Noise overlay -->
     <div class="vintage-grain"></div>
 
-    <!-- Fixed Top-Center Swipe Indicator (visible only in grand-cinema) -->
-    <div id="topSwipeIndicator" class="hidden fixed top-3 left-1/2 -translate-x-1/2 z-50 text-center pointer-events-none">
-        <div class="text-[9px] text-retro-gold/70 tracking-widest uppercase font-mono mb-0.5 drop-shadow">↑ 上下滑动切换 ↑</div>
-        <div class="font-bold text-xs tracking-wider text-white drop-shadow">
-            <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> :
-            <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
-        </div>
-    </div>
-
     <!-- Global BGM Floating Audio Player (Bottom Right) -->
     <div id="bgmPlayerWidget" class="hidden fixed bottom-4 right-4 z-50 flex items-center transition-all duration-300">
         <!-- Dropdown Song List (Appears to the left of the play button when clicked) -->
@@ -684,7 +675,7 @@
     <div id="appContainer" class="w-full flex-1 relative flex flex-col items-center justify-center overflow-hidden">
         
         <!-- Cinematic Intro Overlayer (Simulated film start) -->
-        <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('/assets/front%20door.webp'); background-size: cover; background-position: center;">
+        <div id="introScreen" class="absolute inset-0 z-[100] px-4" style="background-image: url('/assets/front%20door-BgMqKWAY.webp'); background-size: cover; background-position: center;">
             <div class="absolute bottom-[32%] left-1/2 -translate-x-1/2 text-center">
                 <button onclick="startImmersiveExperience()" class="text-lg font-bold tracking-[0.3em] active:scale-95 transition-all duration-300 animate-neon-flicker">
                     <i class="fa-solid fa-ticket"></i> 进入影剧院
@@ -733,7 +724,7 @@
         </header>
 
         <!-- THEATER BUILDING OVERVIEW (THE MAP VIEW) -->
-        <main id="mainMapScreen" class="hidden flex-1 min-h-0 w-full max-w-4xl mx-auto p-3 flex flex-col items-center justify-center" style="background-image: url('/assets/overheadview.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <main id="mainMapScreen" class="hidden flex-1 min-h-0 w-full max-w-4xl mx-auto p-3 flex flex-col items-center justify-center" style="background-image: url('/assets/overheadview-BD6uGhAe.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             
             <div class="text-center my-2">
                 <h2 class="text-retro-gold text-base md:text-lg tracking-[0.2em] font-bold uppercase">剧院全景俯瞰图</h2>
@@ -893,7 +884,7 @@
         <!-- ============================================== -->
         <!-- AREA 1: MAILROOM (收发室)                       -->
         <!-- ============================================== -->
-        <section id="mailroom" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/mailroom.webp');">
+        <section id="mailroom" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/mailroom-BWPIFIj2.webp');">
             <!-- Nav Row -->
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
@@ -979,7 +970,7 @@
         <!-- ============================================== -->
         <!-- AREA 2: MAIN LOBBY (一楼大厅 - 物料角落 & 纪念品商店) -->
         <!-- ============================================== -->
-        <section id="lobby" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/lobby.webp');">
+        <section id="lobby" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/lobby-B5fF0ESK.webp');">
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button id="lobbyBackBtn" onclick="handleLobbyBack()" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
@@ -1073,7 +1064,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 1: MATERIALS CORNER (物料角落) ================= -->
-            <div id="lobbyMaterials" class="sub-delay hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-hidden" style="background-image: url('/assets/material.webp'); background-size: cover; background-position: center;">
+            <div id="lobbyMaterials" class="sub-delay hidden flex-1 grid grid-cols-1 md:grid-cols-12 gap-4 overflow-hidden" style="background-image: url('/assets/material-C2OyKwqn.webp'); background-size: cover; background-position: center;">
                 <!-- Left: Submit Form (hidden by default) -->
                 <div id="craftFormPanel" class="hidden md:col-span-5 bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/30 p-4 rounded flex flex-col justify-between">
                     <div>
@@ -1152,7 +1143,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 2: SOUVENIR SHOP (纪念品商店) ================= -->
-            <div id="lobbyShop" class="sub-delay hidden flex-1 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('/assets/shop.webp'); background-size: cover; background-position: center;">
+            <div id="lobbyShop" class="sub-delay hidden flex-1 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('/assets/shop-BaKJNdEv.webp'); background-size: cover; background-position: center;">
                 <div class="text-center mb-4">
                     <p class="text-[10px] text-retro-gold tracking-wider leading-relaxed">
                         点击图片可跳转线上购买链接
@@ -1178,7 +1169,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case1%201.webp" alt="纪念帆布包" class="w-full h-full object-cover">
+                                    <img src="/assets/case1%201-Cvb77uGJ.webp" alt="纪念帆布包" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">纪念帆布包</p>
@@ -1190,7 +1181,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case1%202.webp" alt="纪念贴纸组" class="w-full h-full object-cover">
+                                    <img src="/assets/case1%202-DPtbR3NT.webp" alt="纪念贴纸组" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">纪念贴纸组</p>
@@ -1202,7 +1193,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case1%203.webp" alt="猩红logo棒球帽" class="w-full h-full object-cover">
+                                    <img src="/assets/case1%203-Bssb3fY_.webp" alt="猩红logo棒球帽" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">猩红logo棒球帽</p>
@@ -1214,7 +1205,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case1%204.webp" alt="红霞影剧院slogan棒球帽" class="w-full h-full object-cover">
+                                    <img src="/assets/case1%204-Bobt_XNb.webp" alt="红霞影剧院slogan棒球帽" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">红霞影剧院slogan棒球帽</p>
@@ -1226,7 +1217,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case1%205.webp" alt="猩红纪念T恤" class="w-full h-full object-cover">
+                                    <img src="/assets/case1%205-X3xaQ-Gj.webp" alt="猩红纪念T恤" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">猩红纪念T恤</p>
@@ -1238,7 +1229,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz " target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case1%206.webp" alt="红霞影剧院纪念T恤" class="w-full h-full object-cover">
+                                    <img src="/assets/case1%206-Da-ZYENn.webp" alt="红霞影剧院纪念T恤" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">红霞影剧院纪念T恤</p>
@@ -1263,7 +1254,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case2%201.webp" alt="气剧·行至天光" class="w-full h-full object-cover">
+                                    <img src="/assets/case2%201-DkU-qPuh.webp" alt="气剧·行至天光" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">气剧·行至天光</p>
@@ -1274,7 +1265,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case2%202.webp" alt="气剧·重返扉页" class="w-full h-full object-cover">
+                                    <img src="/assets/case2%202-D-sO2T9I.webp" alt="气剧·重返扉页" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">气剧·重返扉页</p>
@@ -1285,7 +1276,7 @@
                             <a href="https://e.tb.cn/h.81dVxoOVp9lhfC7?tk=QNsHgsNfwXz" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case2%203.webp" alt="甚至日光·褪色幻想" class="w-full h-full object-cover">
+                                    <img src="/assets/case2%203-C59g1s9c.webp" alt="甚至日光·褪色幻想" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">甚至日光·褪色幻想</p>
@@ -1307,7 +1298,7 @@
                             <a href="https://xhslink.com/m/AxHYXdKp5Eo" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case3%201.webp" alt="巡演纪念定制笔" class="w-full h-full object-cover">
+                                    <img src="/assets/case3%201-CKiEjYuu.webp" alt="巡演纪念定制笔" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">巡演纪念定制笔</p>
@@ -1318,7 +1309,7 @@
                             <a href="https://xhslink.com/m/6v0hKTO3lqV" target="_blank" class="group/shop block bg-[#1c0d0f] border border-retro-gold/20 hover:border-retro-gold/70 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:-translate-y-0.5">
                                 <div class="aspect-[1/1] shelf-cabinet flex items-center justify-center relative overflow-hidden">
                                     <div class="absolute inset-0 shelf-depth z-10"></div>
-                                    <img src="/assets/case3%202.webp" alt="巡演联动款定制笔记本" class="w-full h-full object-cover">
+                                    <img src="/assets/case3%202-DevmM98o.webp" alt="巡演联动款定制笔记本" class="w-full h-full object-cover">
                                 </div>
                                 <div class="p-2">
                                     <p class="text-[10px] text-retro-gold font-serif truncate group-hover/shop:text-white transition-colors">巡演联动款定制笔记本</p>
@@ -1335,7 +1326,7 @@
         <!-- ============================================== -->
         <!-- AREA 3: GRAND CINEMA (豪华影厅 - 巡演城市档案)     -->
         <!-- ============================================== -->
-        <section id="grand-cinema" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/theatre.webp');">
+        <section id="grand-cinema" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/theatre-BXsEHGRJ.webp');">
             <!-- Transparent header -->
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase backdrop-blur-sm">
@@ -1354,10 +1345,19 @@
             </div>
 
             <!-- Center-aligned card area, transparent to show bg -->
-            <div class="flex-1 flex flex-col items-center justify-center relative pb-20">
+            <div class="flex-1 flex flex-col items-center justify-center relative">
+
+                <!-- Swipe indicator -->
+                <div class="mb-4 text-center">
+                    <div class="text-[9px] text-retro-gold/70 tracking-widest uppercase font-mono mb-0.5 drop-shadow">↑ 上下滑动切换 ↑</div>
+                    <div class="font-bold text-xs tracking-wider text-white drop-shadow">
+                        <span id="carouselIndexDisplay">1</span> / <span id="carouselTotalDisplay">5</span> :
+                        <span id="carouselCurrentCity" class="text-retro-neonred">北京 BEIJING</span>
+                    </div>
+                </div>
 
                 <!-- Dynamic Projector Screen Card - 90% width, centered -->
-                <div id="projectorScreen" class="w-[90%] max-w-lg max-h-full bg-black/80 backdrop-blur-md border-[3px] border-retro-gold/50 rounded-xl shadow-2xl relative overflow-hidden flex items-center justify-center">
+                <div id="projectorScreen" class="w-[90%] max-w-lg bg-black/80 backdrop-blur-md border-[3px] border-retro-gold/50 rounded-xl shadow-2xl relative overflow-hidden flex items-center justify-center">
 
                     <div class="absolute inset-0 crt-scanline pointer-events-none opacity-20 z-10"></div>
 
@@ -1412,7 +1412,7 @@
         <!-- ============================================== -->
         <!-- AREA 4: BUSINESS DEPARTMENT (业务部 - 3大分支)  -->
         <!-- ============================================== -->
-        <section id="business-dept" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/corridor.webp');">
+        <section id="business-dept" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/corridor-sg1kQLQP.webp');">
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button id="deptBackBtn" onclick="handleDeptBack()" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
@@ -1548,7 +1548,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 1: REHEARSAL ROOM (演员排练室) ================= -->
-            <div id="subDeptRehearsal" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('/assets/actor.webp'); background-size: cover; background-position: center;">
+            <div id="subDeptRehearsal" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('/assets/actor-Bx2dHluD.webp'); background-size: cover; background-position: center;">
 
                 <!-- Song List Full Width -->
                 <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
@@ -1569,7 +1569,7 @@
 
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1586,7 +1586,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1603,7 +1603,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1620,7 +1620,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1637,7 +1637,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1654,7 +1654,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1671,7 +1671,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1688,7 +1688,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1720,7 +1720,7 @@
 
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1737,7 +1737,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1754,7 +1754,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2011.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2011-DpgMc4Jc.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1771,7 +1771,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2012.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2012-PIGm3Ns8.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1788,7 +1788,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2013.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2013-YcWjXJ6l.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1804,7 +1804,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2014.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2014-CCxrzu-Z.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1820,7 +1820,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2015.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2015-CHO6blVD.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1837,7 +1837,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2017.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2017-H1Ii5qcq.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1854,7 +1854,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%203.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%203-DyGvlzic.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1871,7 +1871,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%205.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%205-xuNp6er8.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1888,7 +1888,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%205.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%205-xuNp6er8.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1905,7 +1905,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%208.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%208-DwAYkKoR.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1922,7 +1922,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%204.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%204-DxLPEUHf.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1939,7 +1939,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2016.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2016-BOElvN4b.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1955,7 +1955,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -1972,7 +1972,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2002,7 +2002,7 @@
 
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2019,7 +2019,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2036,7 +2036,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2053,7 +2053,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%209.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%209-D5rqkkV3.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2070,7 +2070,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%2010.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%2010-BV4N2eLq.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2087,7 +2087,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%206.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%206-_NBAgVgh.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2104,7 +2104,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2121,7 +2121,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2138,7 +2138,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%207.webp" alt="cover" class="w-full h-full object-cover">
+                                        <img src="/assets/song%207-DcvYtEHW.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2155,7 +2155,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%201.webp" alt="陈婧霏" class="w-full h-full object-cover">
+                                        <img src="/assets/song%201-BfQkC7IS.webp" alt="陈婧霏" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2172,7 +2172,7 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                        <img src="/assets/song%202.webp" alt="猩红" class="w-full h-full object-cover">
+                                        <img src="/assets/song%202-Dp_pbufr.webp" alt="猩红" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <div class="flex justify-between items-start mb-1">
@@ -2196,7 +2196,7 @@
             </div>
 
             <!-- ================= SUB-VIEW 2: DIRECTOR'S LOUNGE (导演休息室) ================= -->
-            <div id="subDeptDirector" class="sub-delay hidden flex-1 flex flex-col gap-3 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('/assets/director.webp'); background-size: cover; background-position: center;">
+            <div id="subDeptDirector" class="sub-delay hidden flex-1 flex flex-col gap-3 overflow-y-auto border border-retro-gold/30 rounded p-4" style="background-image: url('/assets/director-B6ldfxEz.webp'); background-size: cover; background-position: center;">
                 <div class="border-b border-retro-gold/15 pb-1.5 mb-2 flex justify-between items-center">
                     <span class="text-retro-gold text-xs font-bold"><i class="fa-solid fa-video"></i> 官方纪录影像</span>
                 </div>
@@ -2207,7 +2207,7 @@
                     <a href="https://weibo.com/2275292564/5241670938398299" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/docum%201.webp" alt="蓝莓夜MV" class="w-full h-full object-cover">
+                            <img src="/assets/docum%201-fnPs-9-i.webp" alt="蓝莓夜MV" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2223,7 +2223,7 @@
                     <a href="http://xhslink.com/o/30jhGx3gNNB" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/docum%202.webp" alt="上海巡演现场" class="w-full h-full object-cover">
+                            <img src="/assets/docum%202-Dp0e0R4G.webp" alt="上海巡演现场" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2238,7 +2238,7 @@
                     <a href="https://video.weibo.com/show?fid=1034:5243550565335050" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/docum%203.webp" alt="上海巡演现场" class="w-full h-full object-cover">
+                            <img src="/assets/docum%203-BtQLRyox.webp" alt="上海巡演现场" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2265,7 +2265,7 @@
                     <a href="http://xhslink.com/o/8hm7bL97Rmw" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%201.webp" alt="自恋咒" class="w-full h-full object-cover">
+                            <img src="/assets/MV%201-CVbIf9UU.webp" alt="自恋咒" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2281,7 +2281,7 @@
                     <a href="http://xhslink.com/o/9G9VQzMaYHN " target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%202.webp" alt="演！演！演！" class="w-full h-full object-cover">
+                            <img src="/assets/MV%202-BZp4LyBc.webp" alt="演！演！演！" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2297,7 +2297,7 @@
                     <a href="http://xhslink.com/o/4lIBezJGWuW" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%203.webp" alt="北海" class="w-full h-full object-cover">
+                            <img src="/assets/MV%203-DQ8v0dUN.webp" alt="北海" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2312,7 +2312,7 @@
                     <a href="http://xhslink.com/o/3Ynmlld8ypC" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%204.webp" alt="你是我最爱的褪色的幻想" class="w-full h-full object-cover">
+                            <img src="/assets/MV%204-Bn4D-mtT.webp" alt="你是我最爱的褪色的幻想" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2327,7 +2327,7 @@
                     <a href="http://xhslink.com/o/8TrycQdZqiO" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%205.webp" alt="最后一夜" class="w-full h-full object-cover">
+                            <img src="/assets/MV%205-QVhZ9Wxq.webp" alt="最后一夜" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2342,7 +2342,7 @@
                     <a href="http://xhslink.com/o/7A5aHnNXTUo" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%2012.webp" alt="春宵苦短，少女快前进！" class="w-full h-full object-cover">
+                            <img src="/assets/MV%2012-V2YD-Rj0.webp" alt="春宵苦短，少女快前进！" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2357,7 +2357,7 @@
                     <a href="http://xhslink.com/o/9XUDLJB66Zw" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%206.webp" alt="禁色宝丽来" class="w-full h-full object-cover">
+                            <img src="/assets/MV%206-Cq0OhA-N.webp" alt="禁色宝丽来" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2372,7 +2372,7 @@
                     <a href="http://xhslink.com/o/60FOgVSSFlt" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%207.webp" alt="红霞剧场" class="w-full h-full object-cover">
+                            <img src="/assets/MV%207-D_PnYXV_.webp" alt="红霞剧场" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2387,7 +2387,7 @@
                     <a href="http://xhslink.com/o/6PD7RKvzzRw" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%208.webp" alt="我和春天有个约会" class="w-full h-full object-cover">
+                            <img src="/assets/MV%208-Bn6TAZgw.webp" alt="我和春天有个约会" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2402,7 +2402,7 @@
                     <a href="http://xhslink.com/o/1vZCkbuMZUU " target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%209.webp" alt="红霞剧场" class="w-full h-full object-cover">
+                            <img src="/assets/MV%209-BMRXHETo.webp" alt="红霞剧场" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2417,7 +2417,7 @@
                     <a href="http://xhslink.com/o/4lFAUEd8WoC" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%2010.webp" alt="猩红" class="w-full h-full object-cover">
+                            <img src="/assets/MV%2010-g4bhZLNW.webp" alt="猩红" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2432,7 +2432,7 @@
                     <a href="http://xhslink.com/o/8OhKcY2vvIJ" target="_blank" class="group relative bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/25 rounded p-3 flex flex-col justify-between transition-all">
                         <div class="relative aspect-video w-full bg-black rounded overflow-hidden border border-gray-900">
                             <div class="absolute inset-0 crt-scanline opacity-30 z-10"></div>
-                            <img src="/assets/MV%2011.webp" alt="婧霏手作12" class="w-full h-full object-cover">
+                            <img src="/assets/MV%2011-CcBQYHpa.webp" alt="婧霏手作12" class="w-full h-full object-cover">
                             <div class="absolute inset-0 flex items-center justify-center bg-black/40">
                                 <i class="fa-regular fa-circle-play text-2xl text-retro-gold"></i>
                             </div>
@@ -2453,7 +2453,7 @@
 
 
             <!-- ================= SUB-VIEW 3: WRITER'S STUDIO (编剧工作室) ================= -->
-            <div id="subDeptWriter" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('/assets/writer.webp'); background-size: cover; background-position: center;">
+            <div id="subDeptWriter" class="sub-delay hidden flex-1 grid grid-cols-1 gap-4 overflow-y-auto" style="background-image: url('/assets/writer-CxOx8cwg.webp'); background-size: cover; background-position: center;">
 
                 <!-- Podcast List Full Width -->
                 <div class="bg-[#140b0d]/80 backdrop-blur-sm border border-retro-gold/30 rounded p-4 flex flex-col justify-start">
@@ -2466,7 +2466,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%2010.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%2010-BsdRRFJJ.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2489,7 +2489,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%2010.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%2010-BsdRRFJJ.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2510,7 +2510,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%209.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%209-DUszGiqp.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2531,7 +2531,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%201.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%201-EGyTGJn5.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2552,7 +2552,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%202.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%202-CepcsBs2.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2573,7 +2573,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%203.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%203-Doj_J7E6.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2594,7 +2594,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%204.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%204-Dbuw1oKb.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2615,7 +2615,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%205.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%205-B0r7-R3v.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2635,7 +2635,7 @@
                         </div>
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%206.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%206-CudbCmsm.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2656,7 +2656,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%205.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%205-B0r7-R3v.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2677,7 +2677,7 @@
 
                         <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                             <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
-                                <img src="/assets/podcast%208.webp" alt="Podcast" class="w-full h-full object-cover">
+                                <img src="/assets/podcast%208-Ct-eya81.webp" alt="Podcast" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex justify-between items-start mb-1">
@@ -2707,7 +2707,7 @@
         <!-- ============================================== -->
         <!-- AREA 5: BOX OFFICE (售票处 - 打卡与纪念票生成)   -->
         <!-- ============================================== -->
-        <section id="box-office" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/ticketoffice.webp');">
+        <section id="box-office" class="section-delay hidden flex-1 w-full max-w-4xl mx-auto p-3 flex flex-col overflow-hidden bg-cover bg-center" style="background-image: url('/assets/ticketoffice-BWeHJAeV.webp');">
             <div class="flex justify-between items-center mb-3 pb-2">
                 <button onclick="navigateTo('main-map')" class="px-3 py-1 bg-black/50 backdrop-blur-sm border border-retro-gold/50 text-retro-gold text-[10px] rounded active:scale-95 transition-all font-mono uppercase">
                     <i class="fa-solid fa-arrow-left"></i> 返回主图
@@ -2903,14 +2903,12 @@
         </section>
 
         <!-- Visual Novel + Puzzle Overlay (shown when not logged in) -->
-        <div id="vnOverlay" class="hidden fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background-image: url('/assets/ticketoffice.webp'); background-size: cover; background-position: center;">
+        <div id="vnOverlay" class="hidden fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background-image: url('/assets/ticketoffice-BWeHJAeV.webp'); background-size: cover; background-position: center;">
             <!-- Skip button -->
             <button onclick="skipVN()" class="absolute top-4 right-4 z-10 px-4 py-2 border-2 border-retro-gold/60 text-retro-gold text-xs rounded active:scale-95 transition-all font-mono bg-black/40 hover:border-retro-gold hover:bg-black/60 hover:scale-105">跳过 ▸</button>
             <!-- Character sprite area -->
             <div class="flex-1 flex items-end justify-center w-full max-w-lg px-4 pt-8">
-                <img id="vnCharacter" src="/assets/crimsonwitch.webp" alt="Character" class="max-h-full max-w-full object-contain" style="max-height: 55vh;">
-
-
+                <img id="vnCharacter" src="/assets/crimsonwitch-g--vIsVB.webp" alt="Character" class="max-h-full max-w-full object-contain" style="max-height: 55vh;">
             </div>
             <!-- Dialog box -->
             <div id="vnDialogBox" class="w-full max-w-lg mx-4 mb-6 bg-[#1a0f11]/95 backdrop-blur border-2 border-retro-gold/50 rounded-lg p-4 cursor-pointer transition-all hover:border-retro-gold/80" onclick="advanceVN()">
@@ -2939,7 +2937,7 @@
         <!-- Puzzle End / Pickup Note Screen -->
         <div id="puzzleEndOverlay" class="hidden fixed inset-0 z-[200] bg-black/95 flex flex-col items-center justify-center p-4">
             <div class="text-center max-w-md">
-                <p id="puzzleEndText" class="text-retro-gold font-serif text-base leading-relaxed mb-6">妳抬起头，发现猩红女巫消失了，她留下了一封信。</p>
+                <p id="puzzleEndText" class="text-retro-gold font-serif text-base leading-relaxed mb-6">妳抬起头，发现猩红女巫消失了，她留下了一张纸。</p>
                 <button onclick="pickupNote()" class="px-8 py-3 bg-retro-burgundy border-2 border-retro-gold text-retro-gold font-bold text-sm rounded active:scale-95 transition-all font-serif hover:bg-retro-burgundy/80 hover:scale-105">
                     捡起来
                 </button>
@@ -4413,7 +4411,6 @@
                 document.getElementById('lobby').classList.remove('revealed');
                 document.getElementById('grand-cinema').style.display = 'none';
                 document.getElementById('grand-cinema').classList.remove('revealed');
-                document.getElementById('topSwipeIndicator').classList.add('hidden');
                 document.getElementById('business-dept').style.display = 'none';
                 document.getElementById('business-dept').classList.remove('revealed');
                 const boxOfficeEl = document.getElementById('box-office');
@@ -4443,7 +4440,6 @@
                     triggerSectionReveal('lobby');
                 } else if (screenId === 'grand-cinema') {
                     document.getElementById('grand-cinema').style.display = 'flex';
-                    document.getElementById('topSwipeIndicator').classList.remove('hidden');
                     renderCinemaFilters();
                     renderProjectorStop();
                     triggerSectionReveal('grand-cinema');
