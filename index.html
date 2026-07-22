@@ -2737,9 +2737,15 @@
 
                         <!-- Register Form (hidden by default) -->
                         <div id="formRegister" class="hidden space-y-2">
-                            <input type="text" id="regNickname" placeholder="昵称（观众代号）" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
-                            <input type="text" id="regAccount" placeholder="账号（英文或数字，登录用）" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
-                            <input type="password" id="regPassword" placeholder="密码（至少4位）" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            <input type="text" id="regNickname" placeholder="昵称" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                            <div>
+                                <input type="text" id="regAccount" placeholder="账号" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                                <p class="text-[8px] text-gray-500 mt-0.5 font-mono">3-30位，仅支持英文、数字、下划线</p>
+                            </div>
+                            <div>
+                                <input type="password" id="regPassword" placeholder="密码" class="w-full bg-retro-darkwood border border-retro-gold/40 rounded px-2 py-1.5 text-retro-gold text-[16px] md:text-xs focus:outline-none focus:border-retro-neonred font-serif">
+                                <p class="text-[8px] text-gray-500 mt-0.5 font-mono">至少6位，建议包含字母和数字</p>
+                            </div>
                             <!-- Avatar preview -->
                             <div class="flex items-center gap-2 pt-1">
                                 <label for="avatarFileInput" class="cursor-pointer">
@@ -2750,7 +2756,7 @@
                                 </label>
                                 <input type="file" id="avatarFileInput" accept="image/*" onchange="previewAvatarFile()" class="hidden">
                             </div>
-                            <button type="button" onclick="handleRegister()" class="w-full py-1.5 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all font-bold">注册登记</button>
+                            <button type="button" onclick="handleRegister()" class="w-full py-1.5 bg-retro-burgundy border border-retro-gold text-retro-gold text-xs rounded active:scale-95 transition-all font-bold">购票注册</button>
                         </div>
                     </div>
 
@@ -3286,7 +3292,7 @@
             const password = document.getElementById('regPassword').value;
             if (!nickname) { showRetroMessage('请输入昵称'); return; }
             if (!account)  { showRetroMessage('请输入账号'); return; }
-            if (!password || password.length < 4) { showRetroMessage('密码至少4位'); return; }
+            if (!password || password.length < 6) { showRetroMessage('密码至少6位'); return; }
             if (!/^[a-zA-Z0-9_]{3,30}$/.test(account)) {
                 showRetroMessage('账号只支持英文、数字、下划线，3-30位'); return;
             }
@@ -5096,6 +5102,12 @@
                 mails.sort((a, b) => b.id - a.id);
             }
 
+            // Compute comment counts from localStorage (comment_count column doesn't exist in DB)
+            const localCommentStore = getCommentsStore();
+            mails.forEach(m => {
+                m._commentCount = localCommentStore.filter(c => String(c.postcard_id) === String(m.id)).length;
+            });
+
             _mailCache = {};
             mails.forEach(m => { _mailCache[m.id] = m; });
 
@@ -5118,7 +5130,7 @@
 
                 const isOwn = STATE.isLoggedIn && mail.user_id === STATE.userId;
                 const likeCount = (mail._likeCount != null) ? mail._likeCount : ((mail.like_count != null) ? mail.like_count : 0);
-                const commentCount = (mail.comment_count != null) ? mail.comment_count : 0;
+                const commentCount = (mail._commentCount != null) ? mail._commentCount : 0;
                 const likedIcon = mail.liked_by_me ? 'fa-solid' : 'fa-regular';
                 const likedClass = mail.liked_by_me ? 'liked' : '';
 
@@ -5354,7 +5366,7 @@
                             id: c.id,
                             postcard_id: c.postcard_id,
                             user_id: c.user_id,
-                            sender: c.sender,
+                            sender: c.author || c.sender,
                             content: c.content,
                             date: c.created_at ? new Date(c.created_at).toLocaleDateString('zh-CN') : ''
                         }));
@@ -5363,12 +5375,12 @@
                     console.warn('[Comments] Supabase load failed:', e.message);
                 }
             }
-            // Merge localStorage comments (always merge, not just when Supabase is empty)
+            // Merge localStorage comments
             const store = getCommentsStore();
-            const localComments = store.filter(c => c.postcard_id === postcardId);
-            const supabaseIds = new Set(comments.map(c => c.id));
+            const localComments = store.filter(c => String(c.postcard_id) === String(postcardId));
+            const supabaseIds = new Set(comments.map(c => String(c.id)));
             localComments.forEach(c => {
-                if (!supabaseIds.has(c.id)) comments.push(c);
+                if (!supabaseIds.has(String(c.id))) comments.push(c);
             });
             return comments;
         }
@@ -5428,9 +5440,13 @@
             };
 
             // Save to localStorage
-            const store = getCommentsStore();
-            store.push(newComment);
-            saveCommentsStore(store);
+            try {
+                const store = getCommentsStore();
+                store.push(newComment);
+                saveCommentsStore(store);
+            } catch(e) {
+                console.error('[Comments] localStorage save failed:', e);
+            }
 
             // Save to Supabase
             if (isSupabaseReady()) {
@@ -5441,7 +5457,7 @@
                             id: newComment.id,
                             postcard_id: newComment.postcard_id,
                             user_id: newComment.user_id,
-                            sender: newComment.sender,
+                            author: newComment.sender,
                             content: newComment.content
                         });
                     if (error) console.warn('[Comments] Supabase insert failed:', error.message);
@@ -5460,7 +5476,11 @@
             const comments = await loadComments(postcardId);
             renderCommentList(postcardId, comments);
             const countEl = document.getElementById(`comment-count-${postcardId}`);
-            if (countEl) countEl.textContent = comments.length;
+            if (countEl) {
+                countEl.textContent = comments.length;
+            } else {
+                console.warn('[Comments] Count element not found: comment-count-' + postcardId);
+            }
             playShortBeep(880, 0.08);
         }
 
@@ -5950,6 +5970,12 @@
                 crafts.sort((a, b) => b.id - a.id);
             }
 
+            // Compute comment counts from localStorage (comment_count column doesn't exist in DB)
+            const localCraftCommentStore = getCraftCommentsStore();
+            crafts.forEach(c => {
+                c._commentCount = localCraftCommentStore.filter(cm => String(cm.craft_id) === String(c.id)).length;
+            });
+
             _craftCache = {};
             crafts.forEach(c => { _craftCache[c.id] = c; });
 
@@ -5972,7 +5998,7 @@
 
                 const isOwn = STATE.isLoggedIn && craft.user_id === STATE.userId;
                 const likeCount = (craft._likeCount != null) ? craft._likeCount : 0;
-                const commentCount = (craft.comment_count != null) ? craft.comment_count : 0;
+                const commentCount = (craft._commentCount != null) ? craft._commentCount : 0;
                 const imgSrc = craft.img || '';
 
                 item.innerHTML = `
@@ -6160,18 +6186,18 @@
                     if (!error && data) {
                         comments = data.map(c => ({
                             id: c.id, craft_id: c.craft_id, user_id: c.user_id,
-                            sender: c.sender, content: c.content,
+                            sender: c.author || c.sender, content: c.content,
                             date: c.created_at ? new Date(c.created_at).toLocaleDateString('zh-CN') : ''
                         }));
                     }
                 } catch(e) { console.warn('[Craft Comments] Load failed:', e.message); }
             }
-            // Merge localStorage comments (always merge, not just when Supabase is empty)
+            // Merge localStorage comments
             const store = getCraftCommentsStore();
-            const localComments = store.filter(c => c.craft_id === craftId);
-            const supabaseIds = new Set(comments.map(c => c.id));
+            const localComments = store.filter(c => String(c.craft_id) === String(craftId));
+            const supabaseIds = new Set(comments.map(c => String(c.id)));
             localComments.forEach(c => {
-                if (!supabaseIds.has(c.id)) comments.push(c);
+                if (!supabaseIds.has(String(c.id))) comments.push(c);
             });
             return comments;
         }
@@ -6231,7 +6257,7 @@
                 try {
                     await supabaseClient.from('craft_comments').insert({
                         id: newComment.id, craft_id: newComment.craft_id,
-                        user_id: newComment.user_id, sender: newComment.sender, content: newComment.content
+                        user_id: newComment.user_id, author: newComment.sender, content: newComment.content
                     });
                 } catch(e) { console.warn('[Craft Comments] Insert failed:', e.message); }
             }
