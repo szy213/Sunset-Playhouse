@@ -3679,7 +3679,7 @@
         // ==============================================
 
         async function createNotification(recipientId, type, actorName, targetId, content) {
-            if (!isSupabaseReady() || !recipientId || recipientId === STATE.userId) return;
+            if (!recipientId || recipientId === STATE.userId) return;
             const notif = {
                 id: Date.now(),
                 recipient_id: recipientId,
@@ -3689,14 +3689,17 @@
                 content: content || '',
                 read: false
             };
-            try {
-                await supabaseClient.from('notifications').insert(notif);
-            } catch(e) {
-                console.warn('[Notif] Insert failed:', e.message);
-                // Fallback to localStorage
-                const store = getNotifStore();
-                store.push(notif);
-                saveNotifStore(store);
+            // Always save to localStorage first as reliable fallback
+            const store = getNotifStore();
+            store.push(notif);
+            saveNotifStore(store);
+            // Try to sync to Supabase for cross-device delivery
+            if (isSupabaseReady()) {
+                try {
+                    await supabaseClient.from('notifications').insert(notif);
+                } catch(e) {
+                    console.warn('[Notif] Supabase insert failed:', e.message);
+                }
             }
         }
 
@@ -4048,7 +4051,7 @@
                 lat: 34.7466, lng: 113.6254
             },
             {
-                id: "WZ",
+                id: "260724",
                 city: "温州",
                 date: "2026.07.24",
                 season: "夏",
@@ -4060,7 +4063,7 @@
                 lat: 27.9939, lng: 120.6994
             },
             {
-                id: "XA",
+                id: "260726",
                 city: "西安",
                 date: "2026.07.26",
                 season: "夏",
@@ -4072,60 +4075,61 @@
                 lat: 34.3416, lng: 108.9398
             },
             {
-                id: "HF",
+                id: "260814",
+                city: "济南",
+                date: "coming soon",
+                season: "秋",
+                weather: "",
+                venue: "济南 ・ Modernsky Lab",
+                poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Jinan+0814",
+                status: "待开演",
+                highlights: ["收官之夜", "江城余晖", "四季终章"],
+                lat: 36.6512, lng: 116.9947
+            },
+            {
+                id: "260816",
                 city: "合肥",
                 date: "2026.08.16",
-                season: "夏",
+                season: "秋",
                 weather: "",
-                venue: "合肥 ・ 场地待定",
+                venue: "合肥 ・ OTW·梵木艺术中心",
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Hefei+0816",
                 status: "待开演",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"],
                 lat: 31.8206, lng: 117.2272
             },
             {
-                id: "SY",
+                id: "260830",
                 city: "沈阳 ",
                 date: "2026.08.30",
                 season: "秋",
                 weather: "",
-                venue: "沈阳 ・ 场地待定",
+                venue: "沈阳 ・ 原料库VAST FACTORY",
                 poster: "https://placehold.co/600x800/1a1a2a/D4AF37?text=Shenyang+0830",
                 status: "待开演",
                 highlights: ["初秋凉风", "工业诗意", "深情演绎"],
                 lat: 41.8057, lng: 123.4315
             },
             {
-                id: "WH",
+                id: "260911",
                 city: "武汉",
                 date: "2026.09.11",
                 season: "秋",
                 weather: "",
-                venue: "武汉 ・ 场地待定",
+                venue: "武汉 ・ 不晚IN TIME LIVE",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"],
                 lat: 30.5928, lng: 114.3055
             },
+            
             {
-                id: "JN",
-                city: "济南",
-                date: "coming soon",
-                season: "秋",
-                weather: "",
-                venue: "济南 ・ 场地待定",
-                poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Jinan",
-                status: "待开演",
-                highlights: ["收官之夜", "江城余晖", "四季终章"],
-                lat: 36.6512, lng: 116.9947
-            },
-            {
-                id: "NC",
+                id: "260913",
                 city: "南昌",
-                date: "coming soon",
+                date: "2026.09.13",
                 season: "秋",
                 weather: "",
-                venue: "南昌 ・ 场地待定",
+                venue: "南昌 ・ 黑铁现场展演中心",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Nanchang",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"],
@@ -4653,7 +4657,8 @@
 
         function showChangelog() {
             openParchmentModal('更新日志', `
-                <p><b>2025.07</b> — 红霞影剧院正式上线。收发室、一层大厅、售票处、豪华影厅、业务部五大区域开放。</p>
+                <p><b>2025.07.22</b> — 消息通知bug修复</p>
+                <p><b>2025.07.21</b> — 红霞影剧院正式上线。收发室、一层大厅、售票处、豪华影厅、业务部五大区域开放。</p>
             `);
         }
 
@@ -5358,11 +5363,13 @@
                     console.warn('[Comments] Supabase load failed:', e.message);
                 }
             }
-            // Fallback to localStorage
-            if (comments.length === 0) {
-                const store = getCommentsStore();
-                comments = store.filter(c => c.postcard_id === postcardId);
-            }
+            // Merge localStorage comments (always merge, not just when Supabase is empty)
+            const store = getCommentsStore();
+            const localComments = store.filter(c => c.postcard_id === postcardId);
+            const supabaseIds = new Set(comments.map(c => c.id));
+            localComments.forEach(c => {
+                if (!supabaseIds.has(c.id)) comments.push(c);
+            });
             return comments;
         }
 
@@ -6159,10 +6166,13 @@
                     }
                 } catch(e) { console.warn('[Craft Comments] Load failed:', e.message); }
             }
-            if (comments.length === 0) {
-                const store = getCraftCommentsStore();
-                comments = store.filter(c => c.craft_id === craftId);
-            }
+            // Merge localStorage comments (always merge, not just when Supabase is empty)
+            const store = getCraftCommentsStore();
+            const localComments = store.filter(c => c.craft_id === craftId);
+            const supabaseIds = new Set(comments.map(c => c.id));
+            localComments.forEach(c => {
+                if (!supabaseIds.has(c.id)) comments.push(c);
+            });
             return comments;
         }
 
