@@ -1396,7 +1396,10 @@
                             </div>
 
                             <!-- Check-in button area -->
-                            <div class="mt-2 pt-2 border-t border-retro-gold/10 flex justify-end">
+                            <div class="mt-2 pt-2 border-t border-retro-gold/10 flex justify-end gap-2">
+                                <a id="screenBuyTicketBtn" href="#" target="_blank" class="hidden px-3 py-1.5 rounded text-[10px] font-bold font-serif transition-all active:scale-95 border border-retro-gold/30 text-retro-gold bg-retro-burgundy/60 no-underline hover:no-underline">
+                                    跳转购票
+                                </a>
                                 <button type="button" id="screenCheckinBtn" onclick="toggleCheckinForCurrentStop()" class="px-3 py-1.5 rounded text-[10px] font-bold font-serif transition-all active:scale-95 border border-retro-gold/30 text-retro-gold bg-retro-burgundy/60">
                                     我在现场
                                 </button>
@@ -4066,6 +4069,7 @@
                 poster: "https://placehold.co/600x800/2a1a0a/D4AF37?text=Wenzhou+0724",
                 status: "待开演",
                 highlights: ["盛夏炽热", "中原回响", "金色光芒"],
+                ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1061996125197",
                 lat: 27.9939, lng: 120.6994
             },
             {
@@ -4078,6 +4082,7 @@
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Xi'an+0726",
                 status: "待开演",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"],
+                ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1063539304729",
                 lat: 34.3416, lng: 108.9398
             },
             {
@@ -4090,6 +4095,7 @@
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Jinan+0814",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"],
+                ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1069244560907",
                 lat: 36.6512, lng: 116.9947
             },
             {
@@ -4102,6 +4108,7 @@
                 poster: "https://placehold.co/600x800/181615/D4AF37?text=Hefei+0816",
                 status: "待开演",
                 highlights: ["手稿编年史", "终场大合唱", "演职员致敬"],
+                ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1069417608596",
                 lat: 31.8206, lng: 117.2272
             },
             {
@@ -4114,6 +4121,7 @@
                 poster: "https://placehold.co/600x800/1a1a2a/D4AF37?text=Shenyang+0830",
                 status: "待开演",
                 highlights: ["初秋凉风", "工业诗意", "深情演绎"],
+                ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1068569249317",
                 lat: 41.8057, lng: 123.4315
             },
             {
@@ -4126,6 +4134,7 @@
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"],
+                ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1066728687129",
                 lat: 30.5928, lng: 114.3055
             },
             
@@ -4139,6 +4148,7 @@
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Nanchang",
                 status: "待开演",
                 highlights: ["收官之夜", "江城余晖", "四季终章"],
+                ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1067399558185",
                 lat: 28.6820, lng: 115.8582
             }
         ];
@@ -6676,12 +6686,12 @@
             document.getElementById('screenVersion').innerText = version;
             document.getElementById('screenTitle').innerText = stop.city + " ・ " + stop.venue.split('・')[1];
 
-            // Mood words: show only if checked in
+            // Mood words: show only if checked in (hidden for 待开演 stops)
             const moodArea = document.getElementById('screenMoodArea');
             const moodWords = document.getElementById('screenMoodWords');
             const isChecked = STATE.checkedCities.includes(STATE.currentShowcaseStop);
             if (moodArea && moodWords) {
-                if (isChecked) {
+                if (isChecked && stop.status !== '待开演') {
                     moodArea.classList.remove('hidden');
                     const moodKey = STOP_MOOD_KEY(stop.id);
                     const saved = (STATE.stopMoods && STATE.stopMoods[moodKey]) || null;
@@ -6723,6 +6733,17 @@
                     checkinBtn.className = isChecked
                         ? 'px-3 py-1.5 rounded text-[10px] font-bold font-serif transition-all active:scale-95 border border-retro-gold text-retro-neonred bg-retro-burgundy/40'
                         : 'px-3 py-1.5 rounded text-[10px] font-bold font-serif transition-all active:scale-95 border border-retro-gold/30 text-retro-gold/60 bg-retro-burgundy/30';
+                }
+            }
+
+            // Show/hide 跳转购票 button for 待开演 stops
+            const buyTicketBtn = document.getElementById('screenBuyTicketBtn');
+            if (buyTicketBtn) {
+                if (stop.status === '待开演') {
+                    buyTicketBtn.classList.remove('hidden');
+                    buyTicketBtn.href = stop.ticketUrl || '#';
+                } else {
+                    buyTicketBtn.classList.add('hidden');
                 }
             }
 
