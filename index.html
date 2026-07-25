@@ -1357,6 +1357,11 @@
             <!-- Center-aligned card area, transparent to show bg -->
             <div class="flex-1 flex flex-col items-center justify-center relative pb-20">
 
+                <!-- Left/Right swipe hint for image gallery -->
+                <div class="text-center mb-2 pointer-events-none">
+                    <div class="text-[9px] text-retro-gold/60 tracking-widest uppercase font-mono drop-shadow">← 左右滑动切换图片 →</div>
+                </div>
+
                 <!-- Dynamic Projector Screen Card - 90% width, centered -->
                 <div id="projectorScreen" class="w-[90%] max-w-lg max-h-full bg-black/80 backdrop-blur-md border-[3px] border-retro-gold/50 rounded-xl shadow-2xl relative overflow-hidden flex items-center justify-center" style="transform:scale(0.8);">
 
@@ -4693,10 +4698,10 @@
 
         function showCredits() {
             openParchmentModal('致谢', `
-                <p>设计灵感来源：红霞影剧院主（理）人陈婧霏，《红霞影剧院》同名EP及其概念图，游戏《艾迪芬奇的记忆》</p>                                                                                   
+                <p>设计灵感来源：红霞影剧院主（理）人陈婧霏，《红霞影剧院》同名EP及其概念图</p>                                                                                   
                 <p>音乐/视频/图片来源：@陈婧霏19</p>                                                                                                                                                                                  
                 <p>感谢每位使用与支持的朋友。如果能让妳感受到红霞影剧院和陈婧霏宇宙万分之一的美好，它的存在就有意义</p>                                                                             
-                <p>谢谢“红霞影剧院”主题巡演。能永远留住和她有关的记忆是我制作网站的初衷和动力，这个世界上还有如此梦幻的音乐现场真是太好啦</p>
+                <p>感谢“红霞影剧院”主题巡演。能以某种方式永远留住她是我制作网站的初衷和动力，这个世界上还有这样的音乐现场真是太好啦</p>
                 <p>谢谢陈婧霏</p>
 
             `);
@@ -7688,8 +7693,8 @@
                 unlockedAny = unlockedAny || unlockSingle("ambient_on");
             }
 
-            // 8. Solved the Scarlet Witch's spell puzzle
-            if (STATE.hasSolvedSpell) {
+            // 8. Logged in
+            if (STATE.isLoggedIn) {
                 unlockedAny = unlockedAny || unlockSingle("spell_decipher");
             }
 
