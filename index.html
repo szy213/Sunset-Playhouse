@@ -615,11 +615,15 @@
     <div id="preloaderScreen" class="fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background-color: #1F1113;">
         <div class="text-center px-8">
             <i class="fa-solid fa-clapperboard text-5xl text-retro-gold mb-6 preload-icon"></i>
-            <p class="text-retro-gold text-base font-bold tracking-[0.3em] font-serif">正在加载影剧院</p>
+            <p class="text-retro-gold text-base font-bold tracking-[0.3em] font-serif">正在加载</p>
             <div class="w-56 h-1.5 bg-black/50 border border-retro-gold/30 rounded-full mt-6 overflow-hidden">
                 <div id="preloadProgressBar" class="h-full bg-retro-gold rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
             </div>
             <p id="preloadPercent" class="text-gray-500 text-xs mt-2 font-mono">0%</p>
+            <div class="flex flex-col items-center gap-1 mt-6">
+                <button onclick="showAuthorNote()" class="intro-link-btn">作者说明</button>
+                <button onclick="showCredits()" class="intro-link-btn">致谢</button>
+            </div>
         </div>
     </div>
 
@@ -4776,6 +4780,8 @@
 
         function showChangelog() {
             openParchmentModal('更新日志', `
+                <p><b>2026.07.28</b> — 260726【西安站】更新</p>
+                <p><b>2026.07.25</b> — 260724【温州站】更新</p>
                 <p><b>2026.07.23</b> — 豪华影厅新增未开演演出【跳转购票】功能（夏日版巡演多城火热开票中，买它！！！）</p>
                 <p><b>2026.07.22</b> — 消息通知bug修复</p>
                 <p><b>2026.07.21</b> — 红霞影剧院正式上线。收发室、一层大厅、售票处、豪华影厅、业务部五大区域开放。</p>
