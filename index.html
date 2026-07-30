@@ -598,9 +598,30 @@
         .parchment-overlay {
             animation: parchment-overlay-in 0.3s ease forwards;
         }
+
+        /* Preloader */
+        @keyframes preloadPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .preload-icon {
+            animation: preloadPulse 2s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="bg-black text-gray-200 h-full overflow-hidden font-serif selection:bg-retro-burgundy selection:text-retro-gold relative flex flex-col">
+
+    <!-- Preloader Screen -->
+    <div id="preloaderScreen" class="fixed inset-0 z-[200] flex flex-col items-center justify-center" style="background-color: #1F1113;">
+        <div class="text-center px-8">
+            <i class="fa-solid fa-clapperboard text-5xl text-retro-gold mb-6 preload-icon"></i>
+            <p class="text-retro-gold text-base font-bold tracking-[0.3em] font-serif">正在加载影剧院</p>
+            <div class="w-56 h-1.5 bg-black/50 border border-retro-gold/30 rounded-full mt-6 overflow-hidden">
+                <div id="preloadProgressBar" class="h-full bg-retro-gold rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+            </div>
+            <p id="preloadPercent" class="text-gray-500 text-xs mt-2 font-mono">0%</p>
+        </div>
+    </div>
 
     <!-- Vintage Noise overlay -->
     <div class="vintage-grain"></div>
@@ -2945,6 +2966,9 @@
                     <button onclick="resetPuzzle()" class="px-4 py-2 border border-retro-gold/40 text-retro-gold text-xs rounded active:scale-95 transition-all font-mono">重置</button>
                     <button onclick="checkPuzzle()" class="px-6 py-2 bg-retro-gold text-black font-bold text-xs rounded active:scale-95 transition-all">确认</button>
                 </div>
+                <div class="flex justify-center mt-3">
+                    <button onclick="skipPuzzle()" class="text-gray-500 hover:text-gray-300 text-[10px] font-mono underline underline-offset-2 transition-colors">点击跳过</button>
+                </div>
                 <div id="puzzleFeedback" class="text-center mt-4 text-sm font-bold hidden"></div>
             </div>
         </div>
@@ -3143,6 +3167,80 @@
     <!-- APPLICATION JAVASCRIPT STATE & LOGIC            -->
     <!-- ============================================== -->
     <script>
+        // ==============================================
+        // PRELOAD ALL IMAGES BEFORE SHOWING INTRO
+        // ==============================================
+        (function preloadAllImages() {
+            // 1. Collect real <img> elements
+            var imgElements = [];
+            document.querySelectorAll('img[src]').forEach(function(img) {
+                var src = img.getAttribute('src');
+                if (src && src.indexOf('data:') !== 0) imgElements.push(img);
+            });
+
+            // 2. Collect unique background-image URLs
+            var bgUrls = {};
+            document.querySelectorAll('[style*="background-image"]').forEach(function(el) {
+                var bg = el.style.backgroundImage;
+                var match = bg.match(/url\(["']?([^"')]+)["']?\)/);
+                if (match && match[1] && match[1].indexOf('data:') !== 0) {
+                    bgUrls[match[1]] = true;
+                }
+            });
+            var bgKeys = Object.keys(bgUrls);
+
+            var totalTasks = imgElements.length + bgKeys.length;
+            var loaded = 0;
+            var finished = false;
+
+            var bar = document.getElementById('preloadProgressBar');
+            var pct = document.getElementById('preloadPercent');
+
+            function tick() {
+                if (finished) return;
+                loaded++;
+                var p = totalTasks > 0 ? Math.round((loaded / totalTasks) * 100) : 100;
+                bar.style.width = p + '%';
+                pct.textContent = p + '% (' + loaded + '/' + totalTasks + ')';
+                if (loaded >= totalTasks) finish();
+            }
+
+            function finish() {
+                if (finished) return;
+                finished = true;
+                clearTimeout(fallbackTimer);
+                var pl = document.getElementById('preloaderScreen');
+                pl.style.transition = 'opacity 0.8s ease';
+                pl.style.opacity = '0';
+                setTimeout(function() { pl.style.display = 'none'; }, 800);
+            }
+
+            // Safety fallback: never block for more than 8 seconds
+            var fallbackTimer = setTimeout(function() {
+                while (loaded < totalTasks) tick();
+            }, 8000);
+
+            if (totalTasks === 0) { finish(); return; }
+
+            // Track real <img> elements — wait for their actual load
+            imgElements.forEach(function(img) {
+                if (img.complete) {
+                    tick();
+                } else {
+                    img.addEventListener('load', tick, { once: true });
+                    img.addEventListener('error', tick, { once: true });
+                }
+            });
+
+            // Preload background-image URLs into browser cache
+            bgKeys.forEach(function(url) {
+                var preImg = new Image();
+                preImg.onload = tick;
+                preImg.onerror = tick;
+                preImg.src = url;
+            });
+        })();
+
         // ==============================================
         // SUPABASE CLIENT INITIALIZATION
         // ==============================================
@@ -8112,6 +8210,23 @@
                 fb.classList.remove('hidden');
                 playShortBeep(300, 0.1);
             }
+        }
+
+        function skipPuzzle() {
+            puzzleSlots = [...PUZZLE_WORDS];
+            puzzleCards = [];
+            renderPuzzle();
+            document.getElementById('puzzleFeedback').textContent = '✦ 已跳过 ✦';
+            document.getElementById('puzzleFeedback').className = 'text-center mt-4 text-sm font-bold text-gray-400';
+            document.getElementById('puzzleFeedback').classList.remove('hidden');
+            playShortBeep(720, 0.1);
+            STATE.hasSolvedSpell = true;
+            lsSet('solved_spell', 'true');
+            checkAchievements();
+            setTimeout(() => {
+                document.getElementById('puzzleOverlay').classList.add('hidden');
+                document.getElementById('puzzleEndOverlay').classList.remove('hidden');
+            }, 1200);
         }
 
         function pickupNote() {
