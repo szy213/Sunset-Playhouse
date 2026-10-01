@@ -1955,6 +1955,42 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <img src="/assets/song%2022.webp" alt="cover" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">WAKE ME UP WHEN SEPTEMBER ENDS</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《American Idiot》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">Green Day</span>   
+                                                                           
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <img src="/assets/song%2023.webp" alt="cover" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">人间万象</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《人间万象》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">陈婧霏</span>   
+                                            <a href="https://163cn.tv/bhD0eFaz " target="_blank" class="text-retro-neonred">♪ 试听 <i class="fa-solid fa-up-right-from-square text-[8px]"></i></a>                                   
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
                                         <img src="/assets/song%203.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
@@ -4305,10 +4341,10 @@
                 city: "武汉",
                 date: "2026.09.11",
                 season: "秋",
-                weather: "",
+                weather: "晴",
                 venue: "武汉 ・ 不晚IN TIME LIVE",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Wuhan+0911",
-                status: "待开演",
+                status: "已结束",
                 highlights: ["收官之夜", "江城余晖", "四季终章"],
                 ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1066728687129",
                 lat: 30.5928, lng: 114.3055
@@ -4319,12 +4355,25 @@
                 city: "南昌",
                 date: "2026.09.13",
                 season: "秋",
-                weather: "",
+                weather: "云",
                 venue: "南昌 ・ 黑铁现场展演中心",
                 poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Nanchang",
-                status: "待开演",
+                status: "已结束",
                 highlights: ["收官之夜", "江城余晖", "四季终章"],
                 ticketUrl: "https://m.damai.cn/shows/item.html?itemId=1067399558185",
+                lat: 28.6820, lng: 115.8582
+            },
+            {
+                id: "261107",
+                city: "天津",
+                date: "2026.11.07",
+                season: "冬",
+                weather: "",
+                venue: "天津 ・ ？？？",
+                poster: "https://placehold.co/600x800/1a1510/D4AF37?text=Tianjin",
+                status: "未开始",
+                highlights: ["收官之夜", "江城余晖", "四季终章"],
+                ticketUrl: "",
                 lat: 28.6820, lng: 115.8582
             }
         ];
@@ -4849,6 +4898,7 @@
 
         function showChangelog() {
             openParchmentModal('更新日志', `
+                <p><b>2026.10.01</b> — 260911【武汉站】260913【南昌站】更新</p>
                 <p><b>2026.09.01</b> — 260830【沈阳站】更新</p>
                 <p><b>2026.08.18</b> — 260814【济南站】260816【合肥站】更新</p>
                 <p><b>2026.07.28</b> — 260726【西安站】更新</p>
@@ -6863,7 +6913,7 @@
             document.getElementById('screenBadge').innerText = stop.status;
             document.getElementById('screenDate').innerText = stop.date;
             document.getElementById('screenSeasonWeather').innerText = stop.season + ' ・ ' + stop.weather;
-            const version = stop.id >= '260705' ? '夏日版' : '典藏版';
+            const version = stop.id >= '261107' ? '？？版' : (stop.id >= '260705' ? '夏日版' : '典藏版');
             document.getElementById('screenVersion').innerText = version;
             document.getElementById('screenTitle').innerText = stop.city + " ・ " + stop.venue.split('・')[1];
 
