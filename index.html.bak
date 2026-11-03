@@ -1891,6 +1891,24 @@
                                 </div>
                                 <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
                                     <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
+                                        <img src="/assets/song%2017-H1Ii5qcq.webp" alt="cover" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <span class="text-retro-gold font-bold font-serif text-xs">In Bloom</span>
+                                        </div>
+                                        <p class="text-gray-300 leading-relaxed font-serif text-[11px]">
+                                            《陈婧霏》
+                                        </p>
+                                        <div class="mt-2 flex justify-between items-center text-[9px] font-mono">
+                                            <span class="text-gray-500">cover Billie Eilish</span>                                           
+                                        </div>
+                                    </div>
+                                
+                                
+                                </div>
+                                <div class="bg-retro-darkwood/80 backdrop-blur-sm border border-retro-gold/20 p-3 rounded flex gap-3">
+                                    <div class="w-16 h-16 shrink-0 rounded bg-retro-burgundy/40 border border-retro-gold/30 flex items-center justify-center overflow-hidden">
                                         <img src="/assets/song%203-DyGvlzic.webp" alt="cover" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 min-w-0">
